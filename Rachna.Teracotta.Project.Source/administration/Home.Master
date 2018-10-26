@@ -1,0 +1,115 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.master.cs" Inherits="Rachna.Teracotta.Project.Source.administration.Home" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register TagPrefix="uc" TagName="ucTopMenu" Src="~/administration/uc/_topmenu.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ucLeftMenu" Src="~/administration/uc/_ucleftmenu.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ucChatMessage" Src="~/administration/uc/_chatmessage.ascx" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="icon" href="~/content/favicon.png" type="image/x-icon" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="~/content/admin/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/content/admin/css/plugins/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/content/admin/css/plugins/datatable/TableTools.css">
+    <link rel="stylesheet" href="~/content/admin/css/plugins/chosen/chosen.css">
+    <link rel="stylesheet" href="~/content/admin/css/style.css">
+    <link rel="stylesheet" href="~/content/admin/css/themes.css">
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/global") %>
+        <%: Scripts.Render("~/bundles/globalhead") %>
+    </asp:PlaceHolder>
+</head>
+<body data-layout-sidebar="fixed" data-layout-topbar="fixed">
+    <%: Scripts.Render("~/bundles/global") %>
+    <%: Scripts.Render("~/bundles/globalhead") %>
+    <form id="form1" runat="server">
+        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ToolkitScriptManager>
+        <%
+            Rachna.Teracotta.Project.Source.Models.Administrators _Administrator = null;
+            List<Rachna.Teracotta.Project.Source.Models.Invitations> _Invitations = null;
+            using (var ctx = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext())
+            {
+                _Administrator = ctx.Administrator.ToList().Where(m => m.Administrators_Id == Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString())).FirstOrDefault();
+                _Invitations = ctx.Invitation.Where(m => m.Invitation_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.InActive.ToString()).ToList();
+            }
+        %>
+        <div id="navigation">
+            <div class="container-fluid">
+                <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979" id="brand"><%=System.Configuration.ConfigurationSettings.AppSettings["AppName"].ToString() %></a>
+                <a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <uc:ucTopMenu ID="ucTopMenu" runat="server" />
+                <div class="user">
+                    <ul class="icon-nav">
+                        <li class='dropdown'>
+                            <a href="#" class='dropdown-toggle' data-toggle="dropdown">
+                                <i class="fa fa-envelope"></i>
+                                <span class="label label-lightred">New</span>
+                            </a>
+                            <ul class="dropdown-menu pull-right message-ul">
+                                <%foreach (var item in _Invitations.Take(5))
+                                    {%>
+                                <li><a href="/administration/invitation.aspx?redirecturl=admin-store-rachna-teracotta">
+                                    <div class="details">
+                                        <div class="name">
+                                            <%=item.Invitation_EmailId %>
+                                        </div>
+                                        <div class="name">Role : <%=item.Role %></div>
+                                        <div class="message" style="color: green; font-weight: bold">
+                                            Invitation Accepted..									
+                                        </div>
+                                    </div>
+                                </a>
+                                </li>
+                                <%}%>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="dropdown">
+                        <a href="#" class='dropdown-toggle' data-toggle="dropdown"><%= _Administrator.FullName %>
+                            <img src="../../<%=_Administrator.Photo %>" alt="" width="20">
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="/administration/profile.aspx?adminid=<%=_Administrator.Administrators_Id %>&redirectUrl=status-administrator-home&pageId=1234HJHJKJ*7987979">Edit profile</a>
+                            </li>
+                            <li>
+                                <a href="/administration/account.aspx?adminid=<%=_Administrator.Administrators_Id %>&redirectUrl=status-administrator-home&pageId=1234HJHJKJ*7987979">Account settings</a>
+                            </li>
+                            <li>
+                                <a href="../../../account/logout.aspx?logoutEmail=<%=_Administrator.EmailId %>&logout=100&redUrl=HGHGH786876">Sign out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="content">
+            <uc:ucLeftMenu ID="ucLeftMenu" runat="server" />
+            <div id="main">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <script src="../../content/admin/js/bootstrap.min.js"></script>
+        <script src="../../content/admin/js/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="../../content/admin/js/plugins/datatables/extensions/dataTables.tableTools.min.js"></script>
+        <script src="../../content/admin/js/plugins/datatables/extensions/dataTables.colReorder.min.js"></script>
+        <script src="../../content/admin/js/plugins/datatables/extensions/dataTables.colVis.min.js"></script>
+        <script src="../../content/admin/js/plugins/datatables/extensions/dataTables.scroller.min.js"></script>
+        <script src="../../content/admin/js/plugins/chosen/chosen.jquery.min.js"></script>
+        <script src="../../content/admin/js/eakroko.min.js"></script>
+        <script src="../../content/admin/js/application.min.js"></script>
+        <script src="../../content/admin/js/demonstration.min.js"></script>
+        <script type="text/javascript" src="../../scripts/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="../../scripts/ckeditor/adapters/jquery.js"></script>
+        <uc:ucChatMessage ID="ucChatMessage" runat="server" />
+    </form>
+</body>
+</html>

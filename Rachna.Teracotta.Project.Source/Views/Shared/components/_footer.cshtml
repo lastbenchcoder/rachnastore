@@ -1,0 +1,101 @@
+﻿@{
+    Rachna.Teracotta.Project.Source.ViewModel.FooterModel footerModel = new Rachna.Teracotta.Project.Source.ViewModel.FooterModel();
+    Rachna.Teracotta.Project.Source.ViewModel.Footer footerObject = new Rachna.Teracotta.Project.Source.ViewModel.Footer();
+    footerModel = footerObject.Get();
+}
+
+<div class="wrapper-footer clearfix">
+    <div class="container">
+        <div class="newsletter-main">
+            <div class="row">
+                <div class=" col-sm-4 sl-block">
+                    <h4>Follow us</h4>
+                    <div class="social-links">
+                        @foreach (var item in footerModel._social)
+                        {
+                            <a href="@item.Scl_Ntk_URL"><img src="../../@item.Scl_Ntk_Icon" alt="" /></a>
+                        }
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="newsletter">
+                        <label>Newsletter</label>
+                        <input type="text" name="" class="txtSubscrEmailId" value="" required>
+                        <input type="submit" class="btnSubscribe" value="SUBSCRIBE">
+                        <script type="text/javascript">
+                            $(".btnSubscribe").click(function () {
+                                var emailid = $(".txtSubscrEmailId").val();
+                                if (emailid == '') {
+                                    Messi.alert('Please Enter Email Id to subscribe.');
+                                    return false;
+                                }
+                                else {
+                                    if (/^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($(".txtSubscrEmailId").val())) {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: '/home/subscribe?emailid=' + $(".txtSubscrEmailId").val(),
+                                            success: function (data) {
+                                                Messi.alert(data);
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        Messi.alert("You have entered an invalid email address!")
+                                        return (false)
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="spacer15"></div><!-- Spacer -->
+        @if (footerModel._menu != null && footerModel._menu.Count > 0)
+        {
+            <div class="f-categories clearfix">
+                <div class="col-sm-12">
+                    <ul>
+                        @foreach (var item in footerModel._menu)
+                        {
+                            if (item.MenuType == Rachna.Teracotta.Project.Source.Entity.eMenu.Footer.ToString())
+                            {
+                                if (item.Page_Id == 1)
+                                {
+                                    <li><a href="/">Home</a></li>
+                                }
+                                else if (item.Page_Id == 2)
+                                {
+                                    <li><a href="/home/offers?id=1234&redirect-page=latest-hot-offers-from-rachna.htm">Hot Offers</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="/home/page?pageid=@item.Page_Id&redirect-url=@item.Title">@item.Title</a></li>
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="wrapper-copy">
+        <div class="container">
+            <div class="copy">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <p>© @System.Configuration.ConfigurationSettings.AppSettings["AppName"].ToString() @DateTime.Now.Year </p>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="sc-link">
+                            <a class="visa" href="#"></a>
+                            <a class="master" href="#"></a>
+                            <a class="paypal" href="#"></a>
+                            <a class="express" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "CancelOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
+<div class="wrapper-breadcrumbs clearfix">
+    <div class="container">
+        <div class="spacer30"></div><!--spacer-->
+        <div class="breadcrumbs-main clearfix">
+            <h2>Reason Order Cancel Reason</h2>
+            <ul>
+                <li><a href="/">Home</a><span class="separator">/ </span></li>
+                <li><strong>Reason for Cancellation</strong></li>
+            </ul>
+        </div>
+        <div class="spacer15"></div><!--spacer-->
+    </div>
+</div>
+<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
+<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+<div class="wrapper-main brandshop clearfix">
+    <div class="spacer15"></div><!--spacer-->
+    <div class="container">
+        <div class="inner-block">
+            <!------Main Inner-------->
+            <div class="row">
+                <div class="cart-main">
+                    <!-- Shopping Cart -->
+                    <div class="col-md-12">
+                        <div class="cart-control clearfix">
+                            <form action="/user/SubmitOrdetCancel">
+                                <table class="table total-table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="total-table-title">
+                                                <h5>Do you really want to cancel the order?</h5>
+                                                <input type="hidden" name="orderid" value="@ViewBag.orderId" />
+                                            </td>
+                                            <td>
+                                                <select id="selReason" name="reason" class="form-control">
+                                                    <option>Change in delivery address, non deliverable pincode.</option>
+                                                    <option>Recipient not available at the estimated time/day of delivery.</option>
+                                                    <option>Seller not able to entertain some request.</option>
+                                                    <option>EMI not being applied for CC payment.</option>
+                                                    <option>Cash not available for COD.</option>
+                                                    <option>Change in delayed delivery not entertained by seller.</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="total-table-title"></td>
+                                            <td>
+                                                <button type="submit" class="btnCancelOrder btn btn-custom min-width-sm">Submit</button>
+                                            </td>
+                                        </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- End Shopping Cart -->
+            </div>
+        </div>
+    </div>
+    <div class="spacer30"></div><!--spacer-->
+</div>
+<!-------------- End wrapper main -------------->
+
+

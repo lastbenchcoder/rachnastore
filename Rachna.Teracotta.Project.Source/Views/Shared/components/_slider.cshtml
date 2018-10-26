@@ -1,0 +1,17 @@
+﻿@{
+    List<Rachna.Teracotta.Project.Source.Models.Sliders> _sliders = new List<Rachna.Teracotta.Project.Source.Models.Sliders>();
+    Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext context = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext();
+    _sliders = context.Slider.ToList();
+}
+<div class="owl-carousel slider">
+    @foreach (var item in _sliders)
+    {
+        <div class="item">
+            <a href="@item.Slider_RedirectUrl"><img src="~/@item.Slider_Photo" alt="img-1" /></a>
+            <div class="caption">
+                <h3><span> @item.Slider_TItle</span></h3>
+                <a href="@item.Slider_RedirectUrl">Order Now</a>
+            </div>
+        </div>
+    }
+</div>

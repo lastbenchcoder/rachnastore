@@ -1,0 +1,229 @@
+﻿@{
+
+    List<Rachna.Teracotta.Project.Source.Models.ProductFeatures> _feature = null;
+    List<Rachna.Teracotta.Project.Source.Models.ProductFeatures> _feature1 = null;
+    List<Rachna.Teracotta.Project.Source.Models.Categories> _categories = null;
+    using (var ctx = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext())
+    {
+        _feature = ctx.ProductFeature.Where(m => m.Product_Feature_Type.ToLower() == Rachna.Teracotta.Project.Source.Entity.eProductFeature.Best.ToString()).ToList();
+        foreach (var item in _feature)
+        {
+            item.Product = ctx.Product.Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
+            item.Product.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
+        }
+
+        _feature1 = ctx.ProductFeature.Where(m => m.Product_Feature_Type.ToLower() == "our choice").ToList();
+        foreach (var item in _feature1)
+        {
+            item.Product = ctx.Product.Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
+            item.Product.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
+        }
+
+        _categories = ctx.Category.Where(m => m.Category_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.Active.ToString()).ToList();
+        foreach (var item in _categories)
+        {
+            item.SubCategory = ctx.SubCategory.Where(m => m.Category_Id == item.Category_Id && item.Category_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.Active.ToString()).ToList();
+        }
+    }
+
+    ViewBag.Title = "ProductByCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper-breadcrumbs clearfix">
+    <div class="spacer30"></div><!--spacer-->
+    <div class="container">
+        <div class="breadcrumbs-main clearfix">
+            <h2>All product by selected category</h2>
+            <ul>
+                <li><a href="/">Home</a><span class="separator">/ </span></li>
+                <li><strong>Products by category</strong></li>
+            </ul>
+        </div>
+    </div>
+    <div class="spacer15"></div><!--spacer-->
+</div>
+<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
+<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+<div class="wrapper-main brandshop clearfix">
+    <div class="spacer15"></div><!--spacer-->
+    <div class="container">
+        <div class="inner-block">
+            <!------Main Inner-------->
+            <div class="row">
+                <div class="col-md-9 col-sm-8">
+                    <div class="main-contant clearfix">
+                        <div class="contant-wrapper">
+                            <div class="products-list clearfix">
+                                <input type="hidden" id="hdSubCategory" value="@ViewBag.SubCatId" />
+                                <!-- Start Product List -->
+                                <div id="RachnaContainer"></div>
+                                <script id="RachnaTemplate" type="text/x-jQuery-tmpl">
+                                    <div class="list-control">
+                                        <div class="item clearfix">
+                                            <!-- Start Item -->
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 img-review">
+                                                <a href="/product/index?id=${Id}" style="height:150px; width:150px"><img src="../${Banner}" alt="" /></a>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 p-contant">
+                                                <h4 class="p-title">
+                                                    <a href="/product/index?id=${Id}">
+                                                        ${Title}
+                                                    </a>
+                                                </h4>
+                                                <div class="price">
+                                                    &#x20B9;${TotalPrice}
+                                                </div>                                              
+                                                <div class="pro-action">
+                                                    <div class="a-to-c">
+                                                        <a href="/cart/addtocart?id=${Id}&qty=1&size=0" class="btn">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- End Item -->
+                                    </div>
+                                </script>
+                            </div><!-- End Product List -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="side-bar clearfix">
+
+                        <!--Side Bar-->
+                        <div class="aside categories">
+                            <!--Side Categories-->
+                            <h4 class="heading">Categories</h4>
+                            <ul class="categories-main">
+                                @{
+                                    int aa = 1;
+                                    foreach (var item in _categories)
+                                    {
+                                        <li>
+                                            <a role="button" data-toggle="collapse" href="#link_@aa" aria-expanded="false" aria-controls="link1">@item.Category_Title<i class="pull-right fa fa-plus"></i></a>
+                                            @if (item.SubCategory.Count > 0)
+                                            {
+                                                <ul class="collapse" id="link_@aa">
+                                                    @foreach (var item1 in item.SubCategory)
+                                                    {
+                                                        <li><a class="hrfRachnaSubCatId" catId="@item1.SubCategory_Id" style="cursor:pointer">@item1.SubCategory_Title</a></li>
+                                                    }
+                                                </ul>
+                                            }
+                                        </li>
+                                        aa = aa + 1;
+                                    }
+                                }
+                            </ul>
+                        </div><!--End Side Categories-->
+                        <div class="aside categories">
+                            <!--Side Categories-->
+                            <h5>Price</h5>
+                            <div class="price-box">
+                                <div id="price_range"></div>
+                                <input type="number" name="min_price" id="min_price" value="10" /> - <input type="number" name="max_price" id="max_price" value="5000" min="0" max="50000" />
+                                <button type="button" class="btn grey btnFilterProducts">FILTER</button>
+                            </div>
+                        </div><!--End Side price ranges-->
+                        <div class="aside compare-product">
+                            <!-- Latest Products -->
+                            <h4 class="heading">Best Seller</h4>
+                            @if (_feature.Count > 0)
+                            {
+                                foreach (var item in _feature)
+                                {
+                                    <div class="choice-product clearfix">
+                                        <a href="/product/index?id=@item.Product.Product_Id&title=@item.Product.Product_Title">
+                                            <div class="choice-images">
+                                                @if (@item.Product.ProductBanner.Count > 0)
+                                                {
+                                                    <img src="../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="Product Image">
+                                                }
+                                            </div>
+                                            <div class="choice-text">
+                                                <p>@item.Product.Product_Title</p>
+                                                <span>&#x20B9;@item.Product.Product_Our_Price</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div><!--End Latest Products -->
+                        <div class="aside compare-product">
+                            <!-- Latest Products -->
+                            <h4 class="heading">Rachna Choice</h4>
+                            @if (_feature1.Count > 0)
+                            {
+                                foreach (var item in _feature1)
+                                {
+                                    <div class="choice-product clearfix">
+                                        <a href="/product/index?id=@item.Product.Product_Id&title=@item.Product.Product_Title">
+                                            <div class="choice-images">
+                                                @if (@item.Product.ProductBanner.Count > 0)
+                                                {
+                                                    <img src="../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="Product Image">
+                                                }
+                                            </div>
+                                            <div class="choice-text">
+                                                <p>@item.Product.Product_Title</p>
+                                                <span>&#x20B9;@item.Product.Product_Our_Price</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div><!--End Latest Products -->
+                    </div><!--End Side Bar-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="spacer30"></div><!--spacer-->
+</div>
+
+<script type="text/javascript">
+
+    $(".hrfRachnaSubCatId").click(function () {
+        $("#hdSubCategory").val("");
+        var subcatid = $(this).attr("catId");
+        $.ajax({
+            type: 'GET',
+            url: '/home/GetProductsBySubCatId',
+            data: { id: subcatid, min_price: $("#min_price").val(), max_price: $("#max_price").val() },
+            cache: false,
+            success: function (result) {
+                debugger;
+                $("#RachnaContainer").html('');
+                $("#RachnaTemplate").tmpl(result).appendTo("#RachnaContainer");
+                $("#hdSubCategory").val(subcatid);
+            }
+        });
+    });
+
+    if ($("#hdSubCategory").val() != "") {
+        $.ajax({
+            type: 'GET',
+            url: '/home/GetProductsBySubCatId',
+            data: { id: $("#hdSubCategory").val(), min_price: $("#min_price").val(), max_price: $("#max_price").val() },
+            cache: false,
+            success: function (result) {
+                $("#RachnaTemplate").tmpl(result).appendTo("#RachnaContainer");
+            }
+        });
+    }
+
+    $(".btnFilterProducts").click(function () {
+        debugger;
+        $.ajax({
+            type: 'GET',
+            url: '/home/GetProductsBySubCatId',
+            data: { id: $("#hdSubCategory").val(), min_price: $("#min_price").val(), max_price: $("#max_price").val() },
+            cache: false,
+            success: function (result) {
+                $("#RachnaContainer").html('');
+                $("#RachnaTemplate").tmpl(result).appendTo("#RachnaContainer");
+            }
+        });
+    });
+
+</script>

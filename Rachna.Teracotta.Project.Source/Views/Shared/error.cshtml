@@ -1,0 +1,119 @@
+﻿<!doctype html>
+<html dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="EShop" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>@ViewBag.Title</title>
+    <link rel="icon" href="../../appfiles/frontend/favicon.png" type="image/x-icon" />
+    <link href="../../appfiles/frontend/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/swiper.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/overright.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/colors.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/js/messi.min.css" rel="stylesheet" />
+    <link href="../../appfiles/frontend/css/easy-responsive-tabs.css" rel="stylesheet" />
+    <link href="../../appfiles/frontend/css/flexslider.css" rel="stylesheet" />
+</head>
+<body class="light">
+
+    <script src="../../appfiles/frontend/js/jquery.js" type="text/javascript"></script>
+
+    <!--------------Start wrapper-------------->
+    <div id="wrapper" class="clearfix">
+        <!--------------Header-------------->
+        <header id="header">
+            <div class="header-wrapper">
+                <div class="container clearfix">
+                    <!-- logo -->
+                    <div class="logo">
+                        <h1 class="clearfix">
+                            <a href="/">
+                                <img src="../content/logo.png" alt="logo" />
+                            </a>
+                        </h1>
+                    </div>
+                    <!--End logo -->
+                </div>
+            </div>
+            <div class="navigation">
+                <!-- Start navigation -->
+                <div class="container">
+                    <nav class="main-nav">
+                        <div class="reponsive-menu">
+                            <a id="responsive-btn" href="#">
+                                <!-- Responsive nav button -->
+                                <span class="responsive-btn-icon">
+                                    <span class="responsive-btn-block"></span>
+                                    <span class="responsive-btn-block"></span>
+                                    <span class="responsive-btn-block last"></span>
+                                </span>
+                                <span class="responsive-btn-text">Menu</span>
+                            </a><!--End responsive nav button -->
+                            <div id="responsive-menu-container">
+
+                            </div><!-- End responsive menu container -->
+                        </div>
+                        <ul class="menu clearfix">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/home/contact?id=1234&redirect-page=online-store-contact-us-rachna.htm">Contact Us</a></li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div><!-- End navigation -->
+        </header>
+        <!--------------End header-------------->
+        <!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+        <div class="wrapper-main brandshop clearfix">
+            <div class="container">
+                <div class="inner-block">
+                    <!------Main Inner-------->
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            <div class="spacer100"></div><!--spacer-->
+            <div class="spacer30"></div>
+            <!--XXXXXXXXXX-- Brand Wrapper --XXXXXXXXXX-->
+            <!-------------- Brand wrapper -------------->
+            <!-------------- Footer -------------->
+            <div class="wrapper-footer clearfix">
+                <div class="wrapper-copy">
+                    <div class="container">
+                        <div class="copy">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <p>© 2017 Rachna's Store. All Rights Reserved. </p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="sc-link">
+                                        <a class="visa" href="#"></a>
+                                        <a class="master" href="#"></a>
+                                        <a class="paypal" href="#"></a>
+                                        <a class="express" href="#"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-------------- End footer -------------->
+        </div>
+        <!-------------- End wrapper main -------------->
+    </div>
+    <!-------------- End wrapper -------------->
+    <!-------------- Java script -------------->
+    <script src="../../appfiles/frontend/js/bootstrap.js" type="text/javascript"></script>
+    <script src="../../appfiles/frontend/js/owl.carousel.js" type="text/javascript"></script>
+    <script src="../../appfiles/frontend/js/main.js" type="text/javascript"></script>
+    <script src="../../Scripts/messi.min.js"></script>
+</body>
+</html>

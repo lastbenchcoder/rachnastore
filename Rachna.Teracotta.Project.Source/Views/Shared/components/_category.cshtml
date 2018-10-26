@@ -1,0 +1,37 @@
+﻿@{
+    List<Rachna.Teracotta.Project.Source.Models.Categories> _categories = new List<Rachna.Teracotta.Project.Source.Models.Categories>();
+    Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext context = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext();
+    _categories = context.Category.Include("Admin").ToList();
+}
+
+<div class="category-contant">
+    <h4 class="heading">Categories<i class="pull-right fa fa-angle-down"></i></h4>
+    <a id="categories" class="mobile-categories" href="#"><span class="all_categories">Categories</span><i class="pull-right fa fa-angle-right"></i></a>
+    <ul id="category-menu">
+        @foreach (var item in _categories)
+        {
+            <li>
+                <a href="#">@item.Category_Title<i class="pull-right fa fa-angle-right"></i></a>
+                <div class="side-sub-menu">
+                    <!--Singel column-->
+                    <ul class="clearfix">
+                        <li class="col-md-12">
+                            <div class="row">
+                                <ul class="clearfix col-md-12">
+                                    @if (item.SubCategory != null)
+                                    {
+                                        <li><h5>@item.Category_Title</h5></li>
+                                        foreach (var item1 in item.SubCategory)
+                                        {
+                                            <li><a class="aBtnSelectCategory" hvalue="@item1.SubCategory_Id" style="cursor:pointer">@item1.SubCategory_Title</a></li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        }
+    </ul>
+</div>

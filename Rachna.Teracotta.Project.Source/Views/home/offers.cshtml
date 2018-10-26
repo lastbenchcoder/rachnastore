@@ -1,0 +1,105 @@
+﻿@{
+
+    List<Rachna.Teracotta.Project.Source.Models.Offers> Offers = null;
+    using (var ctx = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext())
+    {
+        Offers = ctx.Offers.ToList();
+    }
+
+    ViewBag.Title = "Rachna Teracotta Offers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper-breadcrumbs clearfix">
+    <div class="spacer30"></div><!--spacer-->
+    <div class="container">
+        <div class="breadcrumbs-main clearfix">
+            <h2>Rachna Teracotta Offers</h2>
+            <ul>
+                <li><a href="/">Home</a><span class="separator">/ </span></li>
+                <li><strong>Rachna Teracotta Offers</strong></li>
+            </ul>
+        </div>
+    </div>
+    <div class="spacer15"></div><!--spacer-->
+</div>
+<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
+<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+<div class="wrapper-main brandshop clearfix">
+    <div class="spacer15"></div><!--spacer-->
+    <div class="container">
+        <div class="inner-block">
+            <!------Main Inner-------->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="main-contant clearfix">
+                        <div class="contant-wrapper">
+                            <div class="image-category">
+                                <img src="../content/offer.png" alt="offers" />
+                            </div>
+                            <div class="products-grid clearfix">
+                                <!-- Start Product List -->
+                                <div class="row">
+                                    <div class="item-block clearfix">
+                                        <div class="grid-control clearfix">
+                                            <!-- Start Product List -->
+                                            @{
+                                                if (Offers != null && Offers.Count > 0)
+                                                {
+                                                    foreach (var item in Offers)
+                                                    {
+                                                        <div class="product-item">
+                                                            <ul class="products-row">
+                                                                <li class="image-block">
+                                                                    <a href="#"><span><img src="../@item.Offer_Banner" alt="" /></span></a>
+                                                                    <a class="add-to-cart" href="#">Offer Detail</a>
+                                                                </li>
+                                                                <li class="products-details">
+                                                                    <a href="/product/index?id=${Id}">
+                                                                        @item.Offer_Title
+                                                                    </a>
+                                                                    @if (item.Offer_Description.Length > 30)
+                                                                    {
+                                                                        <span>
+                                                                            @Html.Raw(item.Offer_Description.Substring(0, 30).ToString())
+                                                                            <br />
+                                                                            <strong>Offer Code :&nbsp;&nbsp;</strong> @item.Offer_Code.ToUpper()
+                                                                        </span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span>
+                                                                            @Html.Raw(item.Offer_Description.ToString())
+                                                                            <br />
+                                                                            <strong>Offer Code :&nbsp;&nbsp;</strong> @item.Offer_Code.ToUpper()
+                                                                        </span>
+                                                                    }
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <div style="text-align:center">
+                                                        <h5 style="color:red">
+                                                            No Offers found yet.
+                                                        </h5>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer30"></div><!--spacer-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="spacer30"></div><!--spacer-->
+</div>

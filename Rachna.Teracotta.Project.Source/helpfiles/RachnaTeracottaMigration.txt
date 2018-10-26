@@ -1,0 +1,182 @@
+﻿You simply need to do as the error message states: use Code First Migrations.
+
+1. Enable code migrations by opening the package console window in VS (TOOLS->NuGet Package Manager->Package Manager Console)
+2. Run the command "Enable-Migrations" there
+3. Assuming you don't need to change anything in the context, run "Add-Migration X" with X being whatever name you want to give this migration
+Then simply run "Update-Database"
+
+
+Student stud;
+//1. Get student from DB
+using (var ctx = new SchoolDBEntities())
+{
+    stud = ctx.Students.Where(s => s.StudentName == "New Student1").FirstOrDefault<Student>();
+}
+
+//2. change student name in disconnected mode (out of ctx scope)
+if (stud != null)
+{
+    stud.StudentName = "Updated Student1";
+}
+
+//save modified entity using new Context
+using (var dbCtx = new SchoolDBEntities())
+{
+    //3. Mark entity as modified
+    dbCtx.Entry(stud).State = System.Data.Entity.EntityState.Modified;     
+        
+    //4. call SaveChanges
+    dbCtx.SaveChanges();
+}
+
+Automated Migration
+Automated Migration was first introduced in Entity framework 4.3. In automated migration you don't need to process database migration manually in the code file. For example, for each change you will also need to change in your domain classes. But with automated migration you just have to run a command in Package Manager Console to get done this.
+
+Let’s take a look at the following step-by-step process of automated migration.
+
+When you use Code First approach, you don't have a database for you application.
+
+In this example we will be starting with our 3 basic classes such as Student, Course and Enrollment as shown in the following code.
+
+public class Enrollment {
+   public int EnrollmentID { get; set; }
+   public int CourseID { get; set; }
+   public int StudentID { get; set; }
+   public Grade? Grade { get; set; }
+	
+   public virtual Course Course { get; set; }
+   public virtual Student Student { get; set; }
+
+}
+
+public class Student {
+   public int ID { get; set; }
+   public string LastName { get; set; }
+   public string FirstMidName { get; set; }
+   public DateTime EnrollmentDate { get; set; }
+	
+   public virtual ICollection<Enrollment> Enrollments { get; set; }
+
+}
+
+public class Course {
+   public int CourseID { get; set; }
+   public string Title { get; set; }
+   [Index]
+   public int Credits { get; set; }
+	
+   public virtual ICollection<Enrollment> Enrollments { get; set; }
+
+}
+Following is the context class.
+
+public class MyContext : DbContext {
+   public MyContext() : base("MyContextDB") {}
+   public virtual DbSet<Course> Courses { get; set; }
+   public virtual DbSet<Enrollment> Enrollments { get; set; }
+   public virtual DbSet<Student> Students { get; set; }
+}
+Before running the application, you need to enable automated migration.
+
+Step 1 − Open Package Manger Console from Tools → NuGet Package Manger → Package Manger Console.
+
+Step 2 − To enable automated migration run the following command in Package Manager Console.
+
+PM> enable-migrations -EnableAutomaticMigrations:$true
+
+DBCC CHECKIDENT ('[articles]', RESEED, 0);
+GO
+
+Delete from sliders
+DBCC CHECKIDENT ('[sliders]', RESEED, 0);
+GO
+Delete from ads
+DBCC CHECKIDENT ('[ads]', RESEED, 0);
+GO
+Delete from subscriptions
+DBCC CHECKIDENT ('[subscriptions]', RESEED, 0);
+GO
+Delete from carts
+DBCC CHECKIDENT ('[carts]', RESEED, 0);
+GO
+Delete from CustomerAddres
+DBCC CHECKIDENT ('[CustomerAddres]', RESEED, 0);
+GO
+Delete from Customers
+DBCC CHECKIDENT ('[Customers]', RESEED, 0);
+GO
+Delete from Invitations
+DBCC CHECKIDENT ('[Invitations]', RESEED, 0);
+GO
+Delete from orders
+DBCC CHECKIDENT ('[orders]', RESEED, 0);
+GO
+Delete from ProductBanners
+DBCC CHECKIDENT ('[ProductBanners]', RESEED, 0);
+GO
+Delete from ProductEights
+DBCC CHECKIDENT ('[ProductEights]', RESEED, 0);
+GO
+Delete from ProductFeatures
+DBCC CHECKIDENT ('[ProductFeatures]', RESEED, 0);
+GO
+Delete from Products
+DBCC CHECKIDENT ('[Products]', RESEED, 0);
+GO
+Delete from SubCategories
+DBCC CHECKIDENT ('[SubCategories]', RESEED, 0);
+GO
+Delete from Categories
+DBCC CHECKIDENT ('[Categories]', RESEED, 0);
+GO
+Delete from Administrators
+DBCC CHECKIDENT ('[Administrators]', RESEED, 0);
+GO
+Delete from Stores
+DBCC CHECKIDENT ('[Stores]', RESEED, 0);
+GO
+
+
+ //Stream strm = imgInp.PostedFile.InputStream;
+                //using (var image = System.Drawing.Image.FromStream(strm))
+                //{
+                //    int newWidth = 1024; // New Width of Image in Pixel  
+                //    int newHeight = 840; // New Height of Image in Pixel  
+                //    var thumbImg = new Bitmap(newWidth, newHeight);
+                //    var thumbGraph = Graphics.FromImage(thumbImg);
+                //    thumbGraph.CompositingQuality = CompositingQuality.HighQuality;
+                //    thumbGraph.SmoothingMode = SmoothingMode.HighQuality;
+                //    thumbGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                //    var imgRectangle = new Rectangle(0, 0, newWidth, newHeight);
+                //    thumbGraph.DrawImage(image, imgRectangle);
+                //    // Save the file  
+                //    string targetPath = folderPath + Id + "_" + imgInp.FileName;
+                //    thumbImg.Save(targetPath, image.RawFormat);
+
+                //}
+
+
+                    /*
+                        Request.ApplicationPath :   /virtual_dir
+                        Request.CurrentExecutionFilePath :  /virtual_dir/webapp/page.aspx
+                        Request.FilePath :  /virtual_dir/webapp/page.aspx
+                        Request.Path :  /virtual_dir/webapp/page.aspx
+                        Request.PhysicalApplicationPath :   d:\Inetpub\wwwroot\virtual_dir\
+                        Request.QueryString :   /virtual_dir/webapp/page.aspx?q=qvalue
+                        Request.Url.AbsolutePath :  /virtual_dir/webapp/page.aspx
+                        Request.Url.AbsoluteUri :   http://localhost:2000/virtual_dir/webapp/page.aspx?q=qvalue
+                        Request.Url.Host :  localhost
+                        Request.Url.Authority : localhost:80
+                        Request.Url.LocalPath : /virtual_dir/webapp/page.aspx
+                        Request.Url.PathAndQuery :  /virtual_dir/webapp/page.aspx?q=qvalue
+                        Request.Url.Port :  80
+                        Request.Url.Query : ?q=qvalue
+                        Request.Url.Scheme :    http
+                        Request.Url.Segments :  /
+                    */
+                    //string url = HttpContext.Current.Request.Url.AbsoluteUri;
+                    // http://localhost:1302/TESTERS/Default6.aspx
+                    //string path = HttpContext.Current.Request.Url.AbsolutePath;
+                    // /TESTERS/Default6.aspx
+                    //string host = HttpContext.Current.Request.Url.Host;
+                    // localhost

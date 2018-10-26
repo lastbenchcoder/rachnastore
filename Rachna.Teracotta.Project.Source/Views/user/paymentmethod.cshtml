@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "Payment Method";
+    Layout = "~/Views/Shared/_layout.cshtml";
+    Rachna.Teracotta.Project.Source.Models.Customers _customer = new Rachna.Teracotta.Project.Source.Models.Customers();
+    List<Rachna.Teracotta.Project.Source.Models.PaymentMethod> _paymentMethod = new List<Rachna.Teracotta.Project.Source.Models.PaymentMethod>();
+    if (Session["UserKey"] != null)
+    {
+        using (var ctx = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext())
+        {
+            _customer = ctx.Customer.ToList().Where(m => m.Customer_Id == Convert.ToInt32(Session["UserKey"].ToString())).FirstOrDefault();
+            if (_customer != null)
+            {
+                _customer.CustomerAddress = ctx.CustomerAddres.Where(m => m.Customer_Id == _customer.Customer_Id).ToList();
+            }
+
+            _paymentMethod = ctx.PaymentMethod.ToList();
+        }
+    }
+}
+<script type="text/javascript">
+    var addressId = 0;
+    var paymentType = 0;
+</script>
+<!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
+<div class="wrapper-breadcrumbs clearfix">
+    <div class="container">
+        <div class="spacer30"></div><!--spacer-->
+        <div class="breadcrumbs-main clearfix">
+            <h2>Submit Order</h2>
+            <ul>
+                <li><a href="/">Home</a><span class="separator">/ </span></li>
+                <li><strong>Submit Your Order</strong></li>
+            </ul>
+        </div>
+        <div class="spacer15"></div><!--spacer-->
+    </div>
+</div>
+<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
+<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+<div class="wrapper-main brandshop clearfix">
+    <div class="spacer15"></div><!--spacer-->
+    <div class="container">
+        <div class="inner-block">
+            <!------Main Inner-------->
+            <div class="row">
+                <form>
+
+                    <div class="cart-main">
+                        <!-- Shopping Cart -->
+                        <div class="col-md-12">
+                            <div class="cart-control clearfix">
+                                <label id="addressId" name="addressId"></label>
+                                <table class="table total-table">
+                                    <tbody>
+                                        @foreach (var item in _customer.CustomerAddress)
+                                        {
+                                            <tr>
+                                                <td class="total-table-title">
+                                                    <h5>select any one of address to deliever the products.</h5>
+                                                </td>
+                                                <td>
+                                                    <input type="radio" class="rdioAddress" valueCurrent="@item.CustomerAddress_Id" name="addressdefault" required />Deliver to this address
+
+                                                    <br />
+                                                    <strong>@item.Customer_AddressLine1</strong>
+                                                    <strong>@item.Customer_AddressLine2</strong>
+                                                    <p>@item.CustomerAddress_LandMark</p>
+                                                    <p>City @item.CustomerAddress_City State @item.CustomerAddress_State</p>
+                                                    <p>Country @item.CustomerAddress_Country - @item.CustomerAddress_ZipCode</p>
+                                                </td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td class="total-table-title">
+                                                <h5>Select Payment Method and complete your order.</h5>
+                                                <p>Only one payment method is available currently. Please select that and submit, we deliver the product to you and pay the amount at the time of delivery.</p>
+                                            </td>
+                                            <td>
+                                                @foreach (var item in _paymentMethod)
+                                                {
+                                                    if (item.Status != Rachna.Teracotta.Project.Source.Entity.eStatus.InActive.ToString())
+                                                    {
+                                                        <input type="radio" valueCurrent="@item.Payment_Method_Id" class="selPaymentType" name="paymentType" required style="cursor:pointer" /> @item.Title
+                                                        <br />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" valueCurrent="@item.Payment_Method_Id" class="selPaymentType" name="paymentType" disabled /> @item.Title
+                                                        <br />
+                                                    }
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="total-table-title"></td>
+                                            <td>
+                                                @if (_customer.CustomerAddress.Count > 0)
+                                                {
+                                                    <input type="submit" value="Submit Order" class="btn btn-add-cart btnSubmitOrder" />
+                                                }
+                                                else
+                                                {
+                                                    <p style="color:red;font-weight:bold">At lease one address is required to process your order. Please add the address in My Account Section.</p>
+                                                }
+                                            </td>
+                                        </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- End Shopping Cart -->
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="spacer30"></div><!--spacer-->
+</div>
+<!-------------- End wrapper main -------------->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".rdioAddress").click(function () {
+            addressId = $(this).attr("valueCurrent");
+        });
+
+        $(".selPaymentType").click(function () {
+            paymentType = $(this).attr("valueCurrent");
+        });
+
+        $(".btnSubmitOrder").click(function (e) {
+            debugger;
+            var test = 0;
+            if (addressId == test) {
+                Messi.alert("Please select atleast one address to process your order.!")
+                return false;
+            }
+            if (paymentType == test) {
+                Messi.alert("Please select atleast one payment method to process your order.!")
+                return false;
+            }
+            else {
+                $.blockUI();
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/user/SubmitOrder",
+                    data: { addressId: addressId, paymentType: paymentType },
+                    success: function (result) {
+                        $.unblockUI();
+                        window.location = "/user/message";
+                    }
+                });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,123 @@
+﻿@model Rachna.Teracotta.Project.Source.Models.Customers
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="spacer30"></div><!--spacer-->
+<!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
+<div class="wrapper-breadcrumbs clearfix">
+    <div class="container">
+        <div class="breadcrumbs-main clearfix">
+            <h2>Login / Sign In  </h2>
+            <ul>
+                <li><a href="#">Home</a><span class="separator">/ </span></li>
+                <li><strong>Login</strong></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
+<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+<div class="wrapper-main brandshop clearfix">
+    <div class="spacer30"></div><!--spacer-->
+    <div class="container">
+        <div class="inner-block">
+            <!------Main Inner-------->
+            <div class="row">
+                <div class="sign-main">
+                    <!-- Start Sign -->
+                    <div class="sign-details clearfix">
+                        <!-- Start Form -->
+                        <div class="col-sm-6 contact-form">
+                            <div class="sign-block">
+                                <h4>Login</h4>
+                                <p class="mb15">
+                                    @if (ViewBag.Message != null)
+                                    {
+                                        <label style="color:red;font-weight:bold">@ViewBag.Message</label>
+                                    }
+                                </p>
+                                <form action="/user/loginuser">
+                                    <ul>
+                                        <li class="form-group">
+                                            <label for="CustomerId">Email Address <span>*</span></label>
+                                            <input type="text" id="CustomerId" class="form-control" required name="Customers_EmailId" value="@Model.Customers_EmailId">
+                                        </li>
+                                        <li class="form-group">
+                                            <label for="Password">Password <span>*</span></label>
+                                            <input type="password" id="Password" class="form-control" required name="Customers_Password">
+                                        </li>
+                                        <li class="form-group">
+                                            <label><input type="radio" value="" />Remember me!<span>*</span></label>
+                                            <a class="pull-right" href="#">Forgot your Password?</a>
+                                        </li>
+                                        <li>
+                                            <button type="submit" class="btnLoginCustomer btn">Login</button>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 contact-form">
+                            <div class="new-account">
+                                <div class="sign-block">
+                                    <h4>Create new account</h4>
+                                    <form action="/user/signup/">
+                                        <ul>
+                                            <li class="form-group">
+                                                <label for="FirstName">Full Name<span>*</span></label>
+                                                <input type="text" id="FirstName" class="form-control" name="Customers_FullName" value="@Model.Customers_FullName" required>
+                                            </li><!-- End .form-group -->
+                                            <li class="form-group">
+                                                <label for="EmailId">EmailId<span>*</span></label>
+                                                <input type="email" id="EmailId" class="form-control" name="Customers_EmailId" value="@Model.Customers_EmailId" required>
+                                            </li><!-- End .form-group -->
+                                            <li class="form-group">
+                                                <label for="Phone">Phone<span>*</span></label>
+                                                <input type="number" id="Phone" class="form-control" name="Customers_Phone" value="@Model.Customers_Phone" required>
+                                            </li><!-- End .form-group -->
+                                            <li class="form-group">
+                                                <label for="password">Password<span>*</span></label>
+                                                <input type="password" id="password" class="form-control" name="Customers_Password" required>
+                                            </li><!-- End .form-group -->
+                                            <li class="form-group">
+                                                <label for="confirm_password">Confirm Password<span>*</span></label>
+                                                <input type="password" id="confirm_password" class="form-control" name="ConfirmPassword" required>
+                                            </li><!-- End .form-group -->
+
+                                            <li>
+                                                <button type="submit" class="btnLoginCustomer btn">REGISTER</button>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Form -->
+                </div><!-- End Sign -->
+            </div>
+        </div>
+    </div>
+    <div class="spacer30"></div><!--spacer-->
+</div>
+<!-------------- End wrapper main -------------->
+
+<script type="text/javascript">
+    var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
+

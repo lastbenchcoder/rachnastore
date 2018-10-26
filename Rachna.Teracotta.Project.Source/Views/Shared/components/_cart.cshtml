@@ -1,0 +1,60 @@
+﻿@model List<Rachna.Teracotta.Project.Source.Models.Carts>
+@{
+    int totalitems = 0;
+    decimal totalcartprice = 0;
+
+    if (Model.Count > 0)
+    {
+        totalitems = Model.Count;
+        foreach (var item in Model)
+        {
+            totalcartprice = totalcartprice + item.Cart_Price;
+        }
+    }
+}
+<div class="cart">
+    <!--Start Cart-->
+    <a href="#">
+        <i class="fa fa-shopping-cart dropdown-toggle" data-toggle="dropdown"></i>
+        <span class="cart-block pull-right">
+            <span class="cart-num">@totalitems</span>
+        </span>
+    </a>
+    @if (totalitems != 0)
+    {
+        <div class="dropdown-menu">
+            <p>@totalitems item(s) in your cart - @totalcartprice</p>
+            @foreach (var items in Model)
+            {
+                <div class="product clearfix">
+                    <a href="/cart/deletecart/@items.Product_Id"><i class="fa fa-close"></i></a>
+                    <figure class="product-images">
+                        <a href="/product/index?id=@items.Product_Id">
+                            <img src="../../@items.Product_Banner" alt="" />
+                        </a>
+                    </figure>
+                    <div class="product-detail">
+                        <h5 class="product-name">
+                            <a href="/product/index?id=@items.Product_Id">@items.Product_Title</a>
+                        </h5>
+                        <div class="product-rate">
+                            <span>&#x20B9;@items.Product_Price</span>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="clearfix">
+                <ul class="pull-left action-info">
+                    <li>
+                        Total:
+                        <span>&#x20B9;@totalcartprice</span>
+                    </li>
+                </ul>
+                <ul class="pull-right action-btn">
+                    <li><a href="/user/index">Cart</a></li>
+                    <li><a href="/user/checkout">Checkout</a></li>
+                </ul>
+            </div>
+        </div>
+    }
+</div>

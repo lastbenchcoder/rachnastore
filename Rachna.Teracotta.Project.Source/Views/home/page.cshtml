@@ -1,0 +1,54 @@
+﻿@{
+    int pageid = Convert.ToInt32(Request.QueryString["pageid"].ToString());
+    Rachna.Teracotta.Project.Source.Models.Pages Pages = null;
+    Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext context = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext();
+    Pages = context.Pages.Where(m => m.Page_Id == pageid).FirstOrDefault();
+
+    ViewBag.Title = Pages.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="spacer30"></div><!--spacer-->
+<!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
+<div class="wrapper-breadcrumbs clearfix">
+    <div class="container">
+        <div class="breadcrumbs-main clearfix">
+            <h2>@Pages.Title</h2>
+            <ul>
+                <li><a href="/">Home</a><span class="separator">/ </span></li>
+                <li><strong>@Pages.Title</strong></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
+<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+<div class="wrapper-main brandshop clearfix">
+    <div class="spacer15"></div><!--spacer-->
+    <div class="container">
+        <div class="inner-block">
+            <!------Main Inner-------->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="main-contant clearfix">
+                        <div class="contant-wrapper">
+                            <div class="products-grid clearfix">
+                                <!-- Start Product List -->
+                                <div class="row">
+                                    <div class="item-block clearfix">
+                                        <div class="grid-control clearfix">
+                                            @Html.Raw(Pages.Description)
+                                        </div><!-- End Contact -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="spacer30"></div><!--spacer-->
+                            <!--XXXXXXXXXX-- Brand Wrapper --XXXXXXXXXX-->
+                        </div>
+                        <!-------------- End wrapper main -------------->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

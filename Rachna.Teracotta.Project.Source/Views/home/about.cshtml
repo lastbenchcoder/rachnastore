@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="spacer30"></div><!--spacer-->
+<!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
+<div class="wrapper-breadcrumbs clearfix">
+    <div class="container">
+        <div class="breadcrumbs-main clearfix">
+            <h2>Contact</h2>
+            <ul>
+                <li><a href="index.html">Home</a><span class="separator">/ </span></li>
+                <li><strong>Contact</strong></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
+<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+<div class="wrapper-main brandshop clearfix">
+    <div class="spacer30"></div><!--spacer-->
+    <div class="container">
+        <div class="inner-block">
+            <!------Main Inner-------->
+            <div class="row">
+                <div class="contact-main">
+                    <!-- Start Contact -->
+                    <div class="contact-map">
+                        <!-- Map -->
+                        <div class="map-overlay" onClick="style.pointerEvents='none'"></div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15133.760643322661!2d73.92035285189331!3d18.50900111863735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1f2951b63d3%3A0x40fe6fb1890e4b11!2sSTW+Services+LLP!5e0!3m2!1sen!2sin!4v1472128818254" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div><!-- End Map -->
+                    <div class="contact-details clearfix">
+                        <!-- Start Form -->
+                        <div class="col-sm-9 contact-form">
+                            <div class="col-sm-4">
+                                <label for="name">Name<span>*</span></label>
+                                <input type="text" id="name" class="form-control" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="email">Email Address<span>*</span></label>
+                                <input type="email" id="email" class="form-control" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="title">Title<span>*</span></label>
+                                <input type="text" id="title" class="form-control" />
+                            </div>
+                            <div class="col-sm-12">
+                                <label for="msg">Your Comments <span>*</span></label>
+                                <textarea id="msg" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="col-sm-12">
+                                <a class="btn" href="#">Submit</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 contact-info">
+                            <address>
+                                <ul>
+                                    <li class="add"><i class="fa fa-home"></i><p>404, Pentagon 1, Magarpatta Zip Code- 411028.</p></li>
+                                    <li class="mail"><i class="fa fa-envelope"></i><p> support@stw-store.com</p></li>
+                                    <li><i class="fa fa-phone"></i><p>+000 0000 00</p></li>
+                                </ul>
+                            </address>
+                        </div>
+                    </div><!-- End Form -->
+                </div><!-- End Contact -->
+            </div>
+        </div>
+    </div>
+    <div class="spacer30"></div><!--spacer-->
+    <!--XXXXXXXXXX-- Brand Wrapper --XXXXXXXXXX-->
+</div>
+<!-------------- End wrapper main -------------->
+

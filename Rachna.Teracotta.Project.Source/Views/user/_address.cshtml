@@ -1,0 +1,48 @@
+﻿<form action="/user/addaddress/">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New Address</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group col-xs-6">
+                    <label for="FirstName">Address Line 1<span>*</span></label>
+                    <input type="text" class="form-control" required name="Customer_AddressLine1" />
+                </div>
+                <div class="form-group col-xs-6">
+                    <label for="LastName">Address Line 2<span>*</span></label>
+                    <input type="text" class="form-control" name="Customer_AddressLine2" />
+                </div><!-- End .form-group -->
+                <div class="form-group col-xs-6">
+                    <label for="EmailId">LandMark<span>*</span></label>
+                    <input type="text" class="form-control" required name="CustomerAddress_LandMark" />
+                </div><!-- End .form-group -->
+                <div class="form-group col-xs-6">
+                    <label for="Phone">City<span>*</span></label>
+                    <input type="text" class="form-control" required name="CustomerAddress_City" />
+                </div><!-- End .form-group -->
+                <div class="form-group col-xs-6">
+                    <label for="password">State<span>*</span></label>
+                    <input type="text" class="form-control" required name="CustomerAddress_State" />
+                </div><!-- End .form-group -->
+                <div class="form-group col-xs-6">
+                    <label for="confirm_password">Country<span>*</span></label>
+                    <input type="text" class="form-control" required name="Customer_AddressLine1" />
+                </div><!-- End .form-group -->
+                <div class="form-group col-xs-6">
+                    <label for="confirm_password">ZipCode<span>*</span></label>
+                    <input type="number" class="form-control" required name="CustomerAddress_ZipCode" />
+                </div><!-- End .form-group -->
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" value="Submit" class="btn" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

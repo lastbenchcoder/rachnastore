@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "My Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Rachna.Teracotta.Project.Source.Models.Order _orders = null;
+
+    using (var ctx = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext())
+    {
+        _orders = ctx.Orders.Include("OrderHistory").Include("PaymentMethod").ToList()
+            .Where(m => m.Order_Id == Convert.ToInt32(Request.QueryString["OrderId"].ToString())).FirstOrDefault();
+    }
+}
+
+<!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
+<div class="wrapper-breadcrumbs clearfix">
+    <div class="container">
+        <div class="spacer30"></div><!--spacer-->
+        <div class="breadcrumbs-main clearfix">
+            <h2>My Order</h2>
+            <ul>
+                <li><a href="/">Home</a><span class="separator">/ </span></li>
+                <li><strong>My Orders</strong></li>
+            </ul>
+        </div>
+        <div class="spacer15"></div><!--spacer-->
+    </div>
+</div>
+<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
+<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+<div class="wrapper-main brandshop clearfix">
+    <div class="spacer15"></div><!--spacer-->
+    <div class="container">
+        <div>
+            <table class="table total-table">
+                <tbody>
+                    <tr>
+                        <td class="total-table-title">&nbsp;</td>
+
+                        <td>
+                            <strong>Product :</strong>@_orders.Product_Title
+                            <br />
+                            <img src="../@_orders.Product_Banner" style="width:100px;height:auto" />
+                            <br />
+                            <strong>Ordered Date :</strong> @_orders.Order_Date.ToString("D")
+                            <br />
+                            <strong>Phone Number :</strong> Delivery expected by @_orders.Order_Delievery_Date.ToString("D")
+                            <br />
+                            <strong>Selected Payment Mode : </strong> @_orders.PaymentMethod.Title
+                            <br />
+                            @if (_orders.Order_Status == "Placed" || _orders.Order_Status == "Approved" || _orders.Order_Status == "Shipped" || _orders.Order_Status == "Dispatched")
+                            {
+                                <a href="/user/cancelorder?orderId=@_orders.Order_Id" class="btn btn-primary">Cancel Order</a>
+                            }
+                        </td>
+                    </tr>
+            </table>
+        </div>
+        <div class="inner-block">
+            <!------Main Inner-------->
+            <div class="row">
+                <div class="cart-main">
+                    <!-- Shopping Cart -->
+                    <div class="col-md-12">
+                        <div class="cart-control clearfix">
+                            <table class="table cart-table">
+                                <thead>
+                                    <tr>
+                                        <th class="table-title">Detail</th>
+                                        <th class="table-title">Status</th>
+                                        <th class="table-title">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in _orders.OrderHistory)
+                                    {
+                                        <tr>
+                                            <td class="product-code">@item.OrderHistory_Description</td>
+                                            <td class="product-code">@item.OrderHistory_Status</td>
+                                            <td>
+                                                <div class="custom-quantity-input">
+                                                    <span>@item.OrderHistory_CreatedDate.ToString("D")</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- End Shopping Cart -->
+            </div>
+        </div>
+    </div>
+    <div class="spacer30"></div><!--spacer-->
+</div>
+<!-------------- End wrapper main -------------->

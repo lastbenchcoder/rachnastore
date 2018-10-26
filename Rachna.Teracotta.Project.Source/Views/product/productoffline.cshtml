@@ -1,0 +1,419 @@
+﻿@{
+    Rachna.Teracotta.Project.Source.ViewModel.ProductPageModel ProductPageModel = new Rachna.Teracotta.Project.Source.ViewModel.ProductPageModel();
+    Rachna.Teracotta.Project.Source.ViewModel.ProductModel ProductModel = ProductPageModel.GetProductPageDataOffline(Convert.ToInt32(ViewBag.ArticleId));
+    ViewBag.Title = ProductModel.Product.Product_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
+<div class="wrapper-breadcrumbs clearfix">
+    <div class="container">
+        <div class="spacer30"></div><!--spacer-->
+        <div class="breadcrumbs-main clearfix">
+            <h2>@ProductModel.Product.Product_Title</h2>
+            <marquee><h4 style="color:red">[You are In Offline Mode]</h4></marquee>
+            <ul>
+                <li><a href="/">Home</a><span class="separator">/ </span></li>
+                <li><a href="#"> Categories </a><span class="separator">/ </span></li>
+                <li><a href="#"> All Categories </a><span class="separator">/ </span></li>
+                <li><strong>@ProductModel.Product.SubCategory.SubCategory_Title</strong></li>
+            </ul>
+        </div>
+        <div class="spacer15"></div><!--spacer-->
+    </div>
+</div>
+<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
+<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+<div class="wrapper-main brandshop clearfix">
+    <div class="spacer15"></div><!--spacer-->
+    <div class="container">
+        <div class="inner-block">
+            <!------Main Inner-------->
+            <div class="row">
+                <div class="col-md-9 col-sm-8">
+                    <div class="main-contant xs-spacer20 clearfix">
+                        <div class="contant-wrapper">
+                            <div class="details-view">
+                                <form action="/cart/addtocart">
+                                    <input type="hidden" id="hdnPrdId" name="id" value="@ProductModel.Product.Product_Id" />
+                                    <!-- Start Product Details -->
+                                    <div class="clearfix">
+                                        <div class="product-img">
+                                            <!-- Product Images -->
+                                            <div id="info-img">
+                                                @if (@ProductModel.Product.Product_Discount > 0)
+                                                {
+                                                <span class="pro offer">@Math.Round(ProductModel.Product.Product_Discount)% off</span>
+                                                }
+                                                <div class="grid images_3_of_2">
+                                                    <div class="flexslider">
+
+                                                        <ul class="slides">
+                                                            @foreach (var item in @ProductModel.Product.ProductBanner)
+                                                            {
+                                                            <li data-thumb="../@item.Product_Banner_Photo">
+                                                                <div class="thumb-image"> <img src="../@item.Product_Banner_Photo" data-imagezoom="true" class="img-responsive"> </div>
+                                                            </li>
+                                                            }
+                                                        </ul>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- End Product Images -->
+                                        <div class="product-info">
+                                            <h3>@ProductModel.Product.Product_Title</h3>
+                                            <div class="price-box">
+                                                <p class="old-price"><span>&#x20B9;@ProductModel.Product.Product_Mkt_Price</span></p>
+                                                <p class="new-price"><span>&#x20B9;@(ProductModel.Product.Product_Our_Price)</span></p>
+                                            </div>
+                                            @if (@ProductModel.Product.Product_Qty > 0)
+                                            {
+                                            <span class="product_stock" style="color:green;font-weight:bold;margin-top:10px">Available in stock</span>
+                                            }
+                                            else
+                                            {
+                                            <span class="product_stock" style="color:red;font-weight:bold;margin-top:10px">Out Of stock</span>
+                                            }
+                                            <div class="description">
+                                                <div class="dvDisplayPinCode" style="display:none">
+                                                    <label class="lblMessagePinCode" style="font-weight:bold;color:blue"></label>
+                                                </div>
+                                                <input type="text" value="Enter pincode" class="txtSearchZipCide" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter pincode';}" required="">
+                                                <input type="button" value="Check" class="btn btn-info btnSearchPinCode" />
+                                                <script type="text/javascript">
+                                                    $(document).ready(function () {
+                                                        $('.btnSearchPinCode').click(function () {
+                                                            var value = $('.txtSearchZipCide').val();
+                                                            if (value != "Enter pincode") {
+                                                                $.ajax({
+                                                                    type: "POST",
+                                                                    url: '/product/checkzipcode?zip=@ProductModel.Product.Product_Avail_ZipCode&selzip=' + $('.txtSearchZipCide').val(),
+                                                                    success: function (data) {
+                                                                        $(".lblMessagePinCode").css("color", "blue");
+                                                                        $(".dvDisplayPinCode").css('display', 'block');
+                                                                        $(".lblMessagePinCode").text(data);
+                                                                        //new Messi(data, { title: 'Product Availability' }); // show response from the php script.
+                                                                    }
+                                                                });
+                                                                return false; // prevent the button click from happening
+                                                            }
+                                                            else {
+                                                                $(".dvDisplayPinCode").css('display', 'block');
+                                                                $(".lblMessagePinCode").css("color", "red");
+                                                                $(".lblMessagePinCode").text("Please enter the zipcode.");
+                                                                return false; // prevent the button click from happening
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+                                            </div>
+                                            <div class="product_review clearfix">
+                                                <ul class="review_text">
+                                                    <li>
+                                                        <h5>
+                                                            Product will be delivered in @(@ProductModel.Product.Product_Delivery_Time - 1) to @ProductModel.Product.Product_Delivery_Time business days.
+                                                        </h5>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="row">
+                                                @if (ProductModel.Product.Product_Has_Size)
+                                                {
+                                                <div class="col-sm-4 xs-spacer20">
+                                                    <div class="qty_wrap">
+                                                        <label for="prod_qty">Size:</label>
+                                                        <select name="size" class="form-control">
+                                                            @{
+                                                            string[] values = ProductModel.Product.Product_Size.Split(',');
+                                                            for (int i = 0; i < values.Length; i++)
+                                                            {
+                                                            <option>@values[i].Trim()</option>
+                                                            }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                }
+                                                <div class="col-sm-4 xs-spacer20">
+                                                    <div class="qty_wrap">
+                                                        <label for="prod_qty">Qty:</label>
+                                                        <select name="qty" class="form-control">
+                                                            @for (int i = 1; i <= ProductModel.Product.Product_Max_Purchase; i++)
+                                                            {
+                                                            <option>@i</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="cart-btn col-sm-4 col-xs-6">
+                                                    <button type="submit" value="Add to Cart" class="btn-add-cart custom" disabled>
+                                                        <i class="icon icon-cart"></i><span>Add To Cart</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="social-links">
+                                                <a href="#"><img src="../appfiles/frontend/images/i-1.png" alt="" /></a>
+                                                <a href="#"><img src="../appfiles/frontend/images/i-2.png" alt="" /></a>
+                                                <a href="#"><img src="../appfiles/frontend/images/i-3.png" alt="" /></a>
+                                                <a href="#"><img src="../appfiles/frontend/images/i-4.png" alt="" /></a>
+                                                <a href="#"><img src="../appfiles/frontend/images/i-5.png" alt="" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div><!-- End Product Details -->
+                            <div class="spacer30"></div><!--spacer-->
+                            <div class="tab-panel clearfix">
+                                <!-- Tab -->
+                                <!-- Tabs Nav -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+                                    <li role="presentation"><a href="#specification" aria-controls="specification" role="tab" data-toggle="tab">Specification</a></li>
+                                    <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Comments</a></li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div id="description" class="tab-pane active fade in" role="tabpanel">
+                                        <div>
+                                            @Html.Raw(@ProductModel.Product.Product_Description)
+                                        </div>
+                                    </div>
+                                    <div id="specification" class="tab-pane fade" role="tabpanel">
+                                        <div>
+                                            @Html.Raw(@ProductModel.Product.Product_Specification)
+                                        </div>
+                                    </div>
+                                    <div id="reviews" class="tab-pane fade" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="comment-block xs-spacer20">
+                                                    @if (ProductModel.ProdComments != null)
+                                                    {
+                                                    <h4>@ProductModel.ProdComments.Count() Review for “@ProductModel.Product.Product_Title”</h4>
+                                                    }
+                                                    else
+                                                    {
+                                                    <h4>0 Review for “@ProductModel.Product.Product_Title”</h4>
+                                                    }
+                                                    @if (ProductModel.ProdComments != null)
+                                                    {
+                                                    <ul>
+                                                        @foreach (var item in ProductModel.ProdComments)
+                                                        {
+                                                        <li>
+                                                            <img class="user-img" src="../../images/user_icon.png" alt="" />
+                                                            <div class="meta">
+                                                                <strong>@item.Customer_Name</strong>
+                                                                <time datetime="2016-06-11T11:45:00+00:00">@item.DateCreated.ToString("D")</time>
+                                                            </div>
+                                                            <div class="product_review clearfix">
+                                                                <div class="review_star">
+                                                                    <span class="stars" style="float:right">@Convert.ToDecimal(item.Rating)</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="co-desc">
+                                                                <p>@item.Description</p>
+                                                            </div>
+                                                        </li>
+                                                        }
+                                                    </ul>
+                                                    }
+                                                    else
+                                                    {
+                                                    <h5 style="color:red">No Ratings and Reviewd found.</h5>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 comment-form">
+                                                <div>
+                                                    @if (Session["UserKey"] != null)
+                                                    {
+                                                    <form action="/user/ProductComments/">
+                                                        <input type="hidden" name="ProductId" value="@ProductModel.Product.Product_Id" />
+                                                        <label>Rating<em>*</em></label>
+                                                        <select name="rating" class="form-control">
+                                                            <option>5</option>
+                                                            <option>4</option>
+                                                            <option>3</option>
+                                                            <option>2</option>
+                                                            <option>1</option>
+                                                        </select>
+                                                        <label>Summary of Your Review<em>*</em></label>
+                                                        <select name="likeunlike" class="form-control">
+                                                            <option>Like</option>
+                                                            <option>Unlike</option>
+                                                        </select>
+                                                        <label>Review<em>*</em></label>
+                                                        <textarea class="form-control" name="description" required></textarea>
+                                                        <button class="btn" type="submit">Submit Review</button>
+                                                        <input type="hidden" name="CustomerId" value="@Session["UserKey"].ToString()" />
+                                                    </form>
+                                                    }
+                                                    else
+                                                    {
+                                                    <h5 style="color:red">You should be login to comment this product.</h5>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="spacer30"></div><!--spacer-->
+                            <div class="upsell clearfix">
+                                <h4 class="heading">Related Products</h4>
+                                <div class="owl-carousel upsell-products">
+                                    @foreach (var item in ProductModel.RelatedProducts)
+                                    {
+                                    <div class="product-item">
+                                        <ul class="products-row">
+                                            <li class="image-block">
+                                                @if (@item.ProductBanner.Count > 0)
+                                                {
+                                                <a href="/product/productoffline?id=@item.Product_Id&title=@item.Product_Title">
+                                                    <img src="../@item.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="Product Image">
+                                                </a>
+                                                }                                               
+                                                <div class="a-link">
+                                                    <a class="l-1" href="#"><i class="fa fa-shopping-bag"></i></a>
+                                                    <a class="l-2" href="#"><i class="fa fa-heart"></i></a>
+                                                    <a class="l-3" href="#"><i class="fa fa-exchange"></i></a>
+                                                    <a class="l-4" href="#"><i class="fa fa-search"></i></a>
+                                                </div>
+                                            </li>
+                                            <li class="products-details">
+                                                <a href="/product/productoffline?id=@item.Product_Id&title=@item.Product_Title">
+                                                    @item.Product_Title
+                                                </a>
+                                                <span>&#x20B9;@item.Product_Our_Price</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="side-bar clearfix">
+
+                        <!--Side Bar-->
+                        <div class="aside categories">
+                            <!--Side Categories-->
+                            <h4 class="heading">Categories</h4>
+                            <ul class="categories-main">
+                                @{
+                                int aa = 1;
+                                foreach (var item in ProductModel.Categories)
+                                {
+                                <li>
+                                    <a role="button" data-toggle="collapse" href="#link_@aa" aria-expanded="false" aria-controls="link1">@item.Category_Title<i class="pull-right fa fa-plus"></i></a>
+                                    @if (item.SubCategory.Count > 0)
+                                    {
+                                    <ul class="collapse" id="link_@aa">
+                                        @foreach (var item1 in item.SubCategory)
+                                        {
+                                        <li><a href="/home/productbycategory?subcatid=@item1.SubCategory_Id&subcategory-url=rachna-teracotta.htm">@item1.SubCategory_Title</a></li>
+                                        }
+                                    </ul>
+                                    }
+                                </li>
+                                aa = aa + 1;
+                                }
+                                }
+                            </ul>
+                        </div><!--End Side Categories-->
+                        <div class="aside compare-product">
+                            <!-- Latest Products -->
+                            <h4 class="heading">Best Seller</h4>
+                            @if (ProductModel.ProductFeatures.Count > 0)
+                            {
+                            foreach (var item in ProductModel.ProductFeatures)
+                            {
+                            <div class="choice-product clearfix">
+                                <a href="/product/index?id=@item.Product.Product_Id&title=@item.Product.Product_Title">
+                                    <div class="choice-images">
+                                        @if (@item.Product.ProductBanner.Count > 0)
+                                        {
+                                        <img src="../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="Product Image">
+                                        }
+                                    </div>
+                                    <div class="choice-text">
+                                        <p>@item.Product.Product_Title</p>
+                                        <span>&#x20B9;@item.Product.Product_Our_Price</span>
+                                    </div>
+                                </a>
+                            </div>
+                            }
+                            }
+                        </div><!--End Latest Products -->
+                        <div class="aside compare-product">
+                            <!-- Latest Products -->
+                            <h4 class="heading">Rachna Choice</h4>
+                            @if (ProductModel.ProductFeatures2.Count > 0)
+                            {
+                            foreach (var item in ProductModel.ProductFeatures2)
+                            {
+                            <div class="choice-product clearfix">
+                                <a href="/product/index?id=@item.Product.Product_Id&title=@item.Product.Product_Title">
+                                    <div class="choice-images">
+                                        @if (@item.Product.ProductBanner.Count > 0)
+                                        {
+                                        <img src="../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="Product Image">
+                                        }
+                                    </div>
+                                    <div class="choice-text">
+                                        <p>@item.Product</p>
+                                        <span>&#x20B9;@item.Product.Product_Our_Price</span>
+                                    </div>
+                                </a>
+                            </div>
+                            }
+                            }
+                        </div><!--End Latest Products -->
+                    </div><!--End Side Bar-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="spacer30"></div><!--spacer-->
+</div>
+<!-------------- End wrapper main -------------->
+<!-- script for responsive tabs -->
+<script>
+    $(document).ready(function () {
+        $('#horizontalTab').easyResponsiveTabs({
+            type: 'default', //Types: default, vertical, accordion
+            width: 'auto', //auto or any width like 600px
+            fit: true,   // 100% fit in a container
+            closed: 'accordion', // Start closed if in accordion view
+            activate: function (event) { // Callback function if tab is switched
+                var $tab = $(this);
+                var $info = $('#tabInfo');
+                var $name = $('span', $info);
+                $name.text($tab.text());
+                $info.show();
+            }
+        });
+        $('#verticalTab').easyResponsiveTabs({
+            type: 'vertical',
+            width: 'auto',
+            fit: true
+        });
+    });
+</script>
+<!-- FlexSlider -->
+<script>
+    // Can also be used with $(document).ready()
+    $(window).load(function () {
+        $('.flexslider').flexslider({
+            animation: "slide",
+            controlNav: "thumbnails"
+        });
+    });
+</script>
+<!-- //FlexSlider-->

@@ -1,0 +1,13 @@
+ASP.NET Validation of viewstate MAC failed
+
+It could be that IIS recycled your app and therefore you get new keys for the session/view state. To alleviate this, add a machine static key in the web.config.
+
+Generate a key from http://www.eggheadcafe.com/articles/GenerateMachineKey/GenerateMachineKey.aspx
+
+And place the keys in your web.config example as below
+
+<machineKey
+validationKey="56AB7132992003EE87F74AE4D9675D65EED8018D3528C0B8874905B51940DEAF6B85F1D922D19AB8F69781B2326A2F978A064708822FD8C54ED74CADF8592E17"
+decryptionKey="A69D80B92A16DFE1698DFE86D4CED630FA56D7C1661C8D05744449889B88E8DC"
+validation="SHA1" decryption="AES" />
+The <machineKey> should be put inside <system.web> section.

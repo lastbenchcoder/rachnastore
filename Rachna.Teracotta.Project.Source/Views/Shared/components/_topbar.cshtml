@@ -1,0 +1,53 @@
+﻿@{
+    Rachna.Teracotta.Project.Source.ViewModel.TopBarModel topModel = new Rachna.Teracotta.Project.Source.ViewModel.TopBarModel();
+    Rachna.Teracotta.Project.Source.ViewModel.TopBar topBarObject = new Rachna.Teracotta.Project.Source.ViewModel.TopBar();
+    topModel = topBarObject.Get();
+}
+
+<div id="top-bar">
+    <div class="container clearfix">
+        <!--Social icons-->
+        <div class="top-social-icons">
+            <ul class="clearfix">
+                @foreach (var item in topModel._social)
+                {
+                    <li><a class="i-facbook" href="@item.Scl_Ntk_URL" style="cursor:pointer"><img src="../../@item.Scl_Ntk_Icon" width="25"/></a></li>
+                }
+            </ul>
+        </div>
+        <!--End social icon-->
+        <!-- Top link -->
+        <div class="top-links clearfix fright">
+            <ul>
+                @if (Session["UserKey"] != null)
+                {
+                    <li style="color:white">
+                        Welcome @topModel._customer.Customers_FullName
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user"></i>My Account</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/account">My Account</a></li>
+                            <li>
+                                <a href="/user/orders">
+                                    <span>My Orders</span>
+                                </a>
+                            </li>
+                            <li><a href="/home/logout?id=876&redirect=logout.htm&grt=HGJHG898989JHGJG">Log Out</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#"><i class="fa fa-heart"></i>My Wishlist</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="dropdown">
+                        <a href="/user/login">Log in/Sign up</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <!-- End top link -->
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿<!doctype html>
+<html dir="ltr" lang="en-US">
+<head>
+    @Html.Partial("components/_metainfo")
+    <title>Rachna's Store - @ViewBag.Title</title>
+    <link rel="icon" href="../../content/favicon.png" type="image/x-icon" />
+    @System.Web.Optimization.Styles.Render("~/bundles/feglobal")
+    <link href="../../appfiles/frontend/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/swiper.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/overright.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/colors.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="../../appfiles/frontend/js/messi.min.css" rel="stylesheet" />
+    <link href="../../appfiles/frontend/css/easy-responsive-tabs.css" rel="stylesheet" />
+    <link href="../../appfiles/frontend/css/flexslider.css" rel="stylesheet" />
+    @System.Web.Optimization.Scripts.Render("~/bundles/javascriptfiles")
+</head>
+<body class="light">
+    <div id="wrapper" class="clearfix">
+        @{
+            Rachna.Teracotta.Project.Source.Models.UnderConstrunction underConstrunction = new Rachna.Teracotta.Project.Source.Models.UnderConstrunction();
+            Rachna.Teracotta.Project.Source.ViewModel.HomePageModelData homwModelData = new Rachna.Teracotta.Project.Source.ViewModel.HomePageModelData();
+            underConstrunction = homwModelData.PageUnderConstruction();
+            if (underConstrunction != null)
+            {
+                if (underConstrunction.UnderConst_DispInstHmpPage != "Active")
+                {
+                    @Html.Partial("components/_topbar")
+                    @Html.Partial("components/_header")
+                    @RenderBody()
+                    @Html.Partial("components/_footer")
+                }
+                else
+                {
+                    Response.Redirect("/error/inprogress");
+                }
+            }
+        }
+    </div>
+</body>
+</html>

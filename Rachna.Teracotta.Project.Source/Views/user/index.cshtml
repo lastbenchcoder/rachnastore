@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "My Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int totalitems = 0;
+    decimal totalcartprice = 0;
+    List<Rachna.Teracotta.Project.Source.Models.Carts> _cart = null;
+    Rachna.Teracotta.Project.Source.ViewModel.CartModel _cartMdl = new Rachna.Teracotta.Project.Source.ViewModel.CartModel();
+
+    _cart = _cartMdl.GetCarts();
+    totalitems = _cart.Count;
+    foreach (var item in _cart)
+    {
+        totalcartprice = totalcartprice + (item.Cart_Price);
+    }
+
+}
+
+<!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
+<div class="wrapper-breadcrumbs clearfix">
+    <div class="container">
+        <div class="spacer30"></div><!--spacer-->
+        <div class="breadcrumbs-main clearfix">
+            <h2>Shopping Cart</h2>
+            <ul>
+                <li><a href="/">Home</a><span class="separator">/ </span></li>
+                <li><strong>Shopping Cart</strong></li>
+            </ul>
+        </div>
+        <div class="spacer15"></div><!--spacer-->
+    </div>
+</div>
+<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
+<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+<div class="wrapper-main brandshop clearfix">
+    <div class="spacer15"></div><!--spacer-->
+    <div class="container">
+        <div class="inner-block">
+            <!------Main Inner-------->
+            <div class="row">
+                <div class="cart-main">
+                    <!-- Shopping Cart -->
+                    <div class="col-md-12">
+                        <div class="cart-control clearfix">
+                            @if (_cart != null)
+                            {
+                                if (_cart.Count > 0)
+                                {
+                                    <table class="table cart-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="table-title">Product Name</th>
+                                                <th class="table-title">Size</th>
+                                                <th class="table-title">Unit Price</th>
+                                                <th class="table-title">Quantity</th>
+                                                <th class="table-title">SubTotal</th>
+                                                <th><span class="close-button disabled"></span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in _cart)
+                                            {
+                                                <tr>
+                                                    <td class="product-name-col">
+                                                        <figure>
+                                                            <a href="/product/index?id=@item.Product_Id">
+                                                                <img src="../../@item.Product_Banner" alt="Product image big">
+                                                            </a>
+                                                        </figure>
+                                                        <h2 class="product-name">
+                                                            <a href="/product/index?id=@item.Product_Id">@item.Product_Title</a>
+                                                        </h2>
+                                                    </td>
+                                                    <td class="product-code">
+                                                        @if (item.Products.Product_Has_Size)
+                                                        {
+                                                            <ul>
+                                                                <li>
+                                                                    <select name="size" prdId="@item.Product_Id" class="form-control" id="selSize" style="width:100px">
+                                                                        @{
+                                                                            string[] values = item.Products.Product_Size.Split(',');
+                                                                            for (int i = 0; i < values.Length; i++)
+                                                                            {
+                                                                                <option>@values[i].Trim()</option>
+                                                                            }
+                                                                        }
+                                                                    </select>
+                                                                    <script type="text/javascript">
+                                                                        $(function () {
+                                                                            $("#selSize").val(@item.Cart_Size).attr("selected", "selected");
+                                                                        });
+
+                                                                        $('#selSize').on('change', function (e) {
+                                                                            window.location = '/user/updateqty?id=' + $(this).attr("prdId") + "&qty=0&size=" + $(this).val();
+                                                                        });
+                                                                    </script>
+                                                                </li>
+                                                            </ul>
+                                                        }
+                                                    </td>
+                                                    <td class="product-code">@item.Product_Price</td>
+                                                    <td>
+                                                        <div class="custom-quantity-input">
+                                                            <select id="selQty" prdId="@item.Product_Id" class="form-control" style="width:100px">
+                                                                <option>@item.Cart_Qty</option>
+                                                                @for (int i = 1; i <= item.Products.Product_Max_Purchase; i++)
+                                                                {
+                                                                    <option>@i</option>
+                                                                }
+                                                            </select>
+                                                            <script type="text/javascript">
+                                                                $('#selQty').on('change', function (e) {
+                                                                    window.location = '/user/updateqty?id=' + $(this).attr("prdId") + "&qty=" + $(this).val() + "&size=0";
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-total-col">
+                                                        <span class="product-price-special">@(item.Cart_Qty * item.Product_Price)</span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/user/deletecart/@item.Product_Id" class="close-button">
+                                                            <i class="fa fa-close"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <div class="spacer15"></div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label></label>
+                                        </div><!-- End .col-md-8 -->
+                                        <div class="col-md-4">
+                                            <table class="table total-table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="total-table-title">Subtotal:</td>
+                                                        <td>@totalcartprice</td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td>Total:</td>
+                                                        <td>@totalcartprice</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                            <div class="md-margin"></div><!-- space -->
+                                            <div class="text-right">
+                                                <a href="/user/checkout" class="btn btn-custom btn-lger min-width-sm">Checkout</a>
+                                            </div>
+                                        </div><!-- End .col-md-4 -->
+                                    </div><!-- End .row -->
+                                }
+                                else
+                                {
+                                    <p style="color:red">
+                                        No Carts In Your Item
+                                    </p>
+                                }
+                            }
+                            else
+                            {
+                                <p style="color:red">
+                                    No Carts In Your Item
+                                </p>
+                            }
+                        </div>
+                    </div>
+                </div><!-- End Shopping Cart -->
+            </div>
+        </div>
+    </div>
+    <div class="spacer30"></div><!--spacer-->
+</div>
+<!-------------- End wrapper main -------------->

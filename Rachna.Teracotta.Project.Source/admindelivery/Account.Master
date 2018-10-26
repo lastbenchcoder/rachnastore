@@ -1,0 +1,41 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Account.master.cs" Inherits="Rachna.Teracotta.Project.Source.admindelivery.Account" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="icon" href="~/content/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../content/admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../content/admin/css/plugins/icheck/all.css"/>
+    <link rel="stylesheet" href="../content/admin/css/style.css"/>
+    <link rel="stylesheet" href="../content/admin/css/themes.css"/>
+    <link href="~/Scripts/messi.min.css" rel="stylesheet" />
+
+    <script src="../content/admin/js/jquery.min.js"></script>
+    <script src="../content/admin/js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="../content/admin/js/plugins/validation/jquery.validate.min.js"></script>
+    <script src="../content/admin/js/plugins/validation/additional-methods.min.js"></script>
+    <script src="../content/admin/js/plugins/icheck/jquery.icheck.min.js"></script>
+    <script src="../content/admin/js/bootstrap.min.js"></script>
+    <script src="../content/admin/js/eakroko.js"></script>
+</head>
+<body class='login'>
+    <div class="wrapper">
+        <h1>
+            <a href="#">
+                <img src="../content/logo.png" alt="" class='retina-ready' />
+            </a>
+        </h1>
+        <div class="login-body">
+            <form id="form1" runat="server">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

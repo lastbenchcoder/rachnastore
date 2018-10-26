@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Online Store : Contact Us";
+
+    int canSubmitRequest = 1;
+    Rachna.Teracotta.Project.Source.Models.ContactOwner contactOwner = new Rachna.Teracotta.Project.Source.Models.ContactOwner();
+    Rachna.Teracotta.Project.Source.ViewModel.HomePageModelData homwModelData = new Rachna.Teracotta.Project.Source.ViewModel.HomePageModelData();
+    contactOwner = homwModelData.ContactUs();
+
+    if (contactOwner != null)
+    {
+        if (contactOwner.Contact_Query_Submission == "N")
+        {
+            canSubmitRequest = 0;
+        }
+    }
+
+    Layout = "~/Views/Shared/error.cshtml";
+}
+
+<div class="spacer30"></div>
+<div class="wrapper-breadcrumbs clearfix">
+    <div class="container">
+        <div class="breadcrumbs-main clearfix">
+            <h2>Contact</h2>
+            <ul>
+                <li><a href="index.html">Home</a><span class="separator">/ </span></li>
+                <li><strong>Contact</strong></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="wrapper-main brandshop clearfix">
+    <div class="spacer30"></div>
+    <div class="container">
+        <div class="inner-block">
+            <div class="row">
+                <div class="contact-main">
+                    @if (contactOwner != null)
+                    {
+                        <div class="contact-map">
+                            <div class="map-overlay" onClick="style.pointerEvents='none'"></div>
+                            <iframe src="@contactOwner.Contact_GoogleMapURL" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
+                    }
+                    <div class="contact-details clearfix">
+                        @if (canSubmitRequest == 1)
+                        {
+                        <form>
+                            <div class="col-sm-9 contact-form">
+                                <div class="col-sm-4">
+                                    <label for="name">Name<span>*</span></label>
+                                    <input type="text" id="name" class="form-control" required/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="email">Email Address<span>*</span></label>
+                                    <input type="email" id="email" class="form-control" required/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="title">Title<span>*</span></label>
+                                    <input type="text" id="title" class="form-control" required/>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="msg">Your Comments <span>*</span></label>
+                                    <textarea id="msg" class="form-control" rows="3" required></textarea>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="submit" class="btn btn-pink" value="Submit" />
+                                </div>
+                            </div>
+                        </form>
+                        }
+                        @if (contactOwner != null)
+                        {
+                            <div class="col-sm-3 contact-info">
+                                <address>
+                                    <ul>
+                                        <li class="add"><i class="fa fa-home"></i><p>@contactOwner.Contact_Address, @contactOwner.Contact_City, @contactOwner.Contact_State</p></li>
+                                        <li class="add"><i class="fa fa-address-book"></i><p>@contactOwner.Contact_ZipCode</p></li>
+                                        <li class="mail"><i class="fa fa-envelope"></i><p> @contactOwner.Contact_EmailId</p></li>
+                                        <li><i class="fa fa-phone"></i><p>+@contactOwner.Contact_Phone</p></li>
+                                        <li><i class="fa fa-fax"></i><p>+@contactOwner.Contact_Fax</p></li>
+                                    </ul>
+                                </address>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="spacer30"></div>
+</div>

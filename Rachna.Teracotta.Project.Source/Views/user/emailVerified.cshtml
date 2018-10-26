@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "emailVerified";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.Id == "100")
+{
+    <div class="wrapper-main brandshop clearfix">
+        <div class="container">
+            <div class="inner-block">
+                <!------Main Inner-------->
+                <div class="row">
+                    <div class="no-page clearfix">
+                        <!-- Start 404 -->
+                        <h3>Success</h3>
+                        <p>Your EmailId has been verified successfully.</p>
+                    </div><!-- End 404 -->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="wrapper-main brandshop clearfix">
+        <div class="container">
+            <div class="inner-block">
+                <!------Main Inner-------->
+                <div class="row">
+                    <div class="no-page clearfix">
+                        <!-- Start 404 -->
+                        <h3>We Are Sorry</h3>
+                        <p>Unable to process your request as your requet failed or expired.</p>
+                    </div><!-- End 404 -->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
