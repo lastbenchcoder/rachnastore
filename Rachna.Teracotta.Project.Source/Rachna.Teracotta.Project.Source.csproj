@@ -222,10 +222,6 @@
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\MSCaptcha.dll" />
-    <Content Include="bin\Page3.Project.Admin.dll" />
-    <Content Include="bin\Page3.Project.Admin.pdb" />
-    <Content Include="bin\Page3.Project.Entity.dll" />
-    <Content Include="bin\Page3.Project.Entity.pdb" />
     <Content Include="bin\Rachna.Teracotta.Project.Helper.dll" />
     <Content Include="bin\System.Web.Helpers.dll" />
     <Content Include="bin\System.Web.Mvc.dll" />
@@ -1892,7 +1888,6 @@
     <Content Include="administration\Home.Master" />
     <Content Include="admindelivery\Home.Master" />
     <Content Include="admindelivery\Account.Master" />
-    <Content Include="bin\Page3.Project.Admin.dll.config" />
     <Content Include="adminvendor\Home.Master" />
     <Content Include="bin\ajaxuploader4.lic" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
