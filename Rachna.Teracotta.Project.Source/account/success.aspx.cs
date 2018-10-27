@@ -40,6 +40,11 @@ namespace Rachna.Teracotta.Project.Source.account
                     lblPasswordSuccessMsg.ForeColor = System.Drawing.Color.Red;
                     lblPasswordSuccessMsg.Text = "Failed!!! Unable to process your request, your invitation may expired or deleted from admin. Please contact administrator.";
                 }
+                else if (Request.QueryString["success"].ToString() == "invitation-invalid")
+                {
+                    lblPasswordSuccessMsg.ForeColor = System.Drawing.Color.Red;
+                    lblPasswordSuccessMsg.Text = "Failed!!! Unable to process your request, your invitation request is not valid. Please contact administrator.";
+                }
             }
         }
     }

@@ -19,10 +19,10 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
-                int maxInvitationId = 1;
+                int maxInvitationId = 0;
                 if (context.Invitation.ToList().Count > 0)
                     maxInvitationId = context.Invitation.Max(m => m.Invitation_Id);
-                maxInvitationId = (maxInvitationId == 1 && context.Invitation.ToList().Count > 0) ? (maxInvitationId + 1) : maxInvitationId;
+                maxInvitationId = (maxInvitationId > 0) ? (maxInvitationId + 1) : 1;
                 invitations.Invitation_Code = "RT" + maxInvitationId + "INVTCODE" + (maxInvitationId + 1);
                 context.Invitation.Add(invitations);
                 context.SaveChanges();
@@ -54,11 +54,6 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
-                int maxInvitationId = 1;
-                if (context.Invitation.ToList().Count > 0)
-                    maxInvitationId = context.Invitation.Max(m => m.Invitation_Id);
-                maxInvitationId = (maxInvitationId == 1 && context.Invitation.ToList().Count > 0) ? (maxInvitationId + 1) : maxInvitationId;
-                invitations.Invitation_Code = "RT" + maxInvitationId + "INVTCODE" + (maxInvitationId + 1);
                 context.Entry(invitations).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
                 return invitations;

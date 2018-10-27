@@ -19,10 +19,10 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
-                int maxAdministratorsId = 1;
+                int maxAdministratorsId = 0;
                 if (context.Administrator.ToList().Count > 0)
                     maxAdministratorsId = context.Administrator.Max(m => m.Administrators_Id);
-                maxAdministratorsId = (maxAdministratorsId == 1 && context.Administrator.ToList().Count > 0) ? (maxAdministratorsId + 1) : maxAdministratorsId;
+                maxAdministratorsId = (maxAdministratorsId > 0) ? (maxAdministratorsId + 1) : 1;
                 administrators.AdminCode = "RT" + maxAdministratorsId + "ADMCODE" + (maxAdministratorsId + 1);
                 context.Administrator.Add(administrators);
                 context.SaveChanges();
@@ -54,11 +54,6 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
-                int maxAdministratorsId = 1;
-                if (context.Administrator.ToList().Count > 0)
-                    maxAdministratorsId = context.Administrator.Max(m => m.Administrators_Id);
-                maxAdministratorsId = (maxAdministratorsId == 1 && context.Administrator.ToList().Count > 0) ? (maxAdministratorsId + 1) : maxAdministratorsId;
-                administrators.AdminCode = "RT" + maxAdministratorsId + "ADMCODE" + (maxAdministratorsId + 1);
                 context.Entry(administrators).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
                 return administrators;

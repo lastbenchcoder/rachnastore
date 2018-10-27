@@ -22,7 +22,11 @@ namespace Rachna.Teracotta.Project.Source.account
             string emailid = Request.QueryString["emailid"].ToString();
 
             Invitations _invit = bInvitations.List().Where(m => m.Invitation_Code == code).FirstOrDefault();
-            if (_invit.Invitation_Status != eStatus.Active.ToString())
+            if(_invit==null)
+            {
+                Response.Redirect("/account/success.aspx?success=invitation-invalid");                
+            }
+            else if (_invit.Invitation_Status != eStatus.Active.ToString())
             {
                 Response.Redirect("/account/success.aspx?success=invitation-expired");
             }
