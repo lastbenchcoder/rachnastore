@@ -71,7 +71,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2">Advertisement Banner</label>
                             <div class="col-sm-10">
-                                <asp:Image ID="imgProduct" runat="server" ClientIDMode="Static" Width="100px" Height="100px" class="form-control" />
+                                <asp:Image ID="imgProduct" runat="server" ClientIDMode="Static" Width="50px" Height="50px" class="form-control" />
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Image !.." ControlToValidate="imgInp" ForeColor="Red" ValidationExpression="^.+(.jpg|.JPG|.gif|.GIF|.PNG|.png)$" ValidationGroup="admin"></asp:RegularExpressionValidator>
                                 <asp:FileUpload ID="imgInp" runat="server" ClientIDMode="Static" class="form-control input-sm" />
                                 <label></label>
@@ -114,7 +114,7 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>AdsCode</th>
+                                    <th>Type</th>
                                     <th>Redirect URL</th>
                                     <th>CreatedDate</th>
                                     <th>UpdatedDate</th>
@@ -130,7 +130,7 @@
                                     <td>
                                         <img src="../../<%=item.Ads_Banner_Or_Source %>" style="height: 50px; width: 50px" />
                                     </td>
-                                    <td><%=item.AdsCode %></td>
+                                    <td><%=item.Ads_Type %></td>
                                     <td><%=item.Ads_RedirectUrl %></td>
                                     <td><%=item.Ads_CreatedDate.ToString("D") %></td>
                                     <td><%=item.Ads_UpdatedDate.ToString("D") %></td>

@@ -301,6 +301,15 @@ namespace Rachna.Teracotta.Project.Source.administration.product {
         protected global::System.Web.UI.WebControls.TextBox txtZipcode;
         
         /// <summary>
+        /// txtRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRating;
+        
+        /// <summary>
         /// btnProceedToSubmit control.
         /// </summary>
         /// <remarks>

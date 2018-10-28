@@ -18,10 +18,10 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
-                int maxAdsId = 1;
+                int maxAdsId = 0;
                 if (context.Advertisement.ToList().Count > 0)
                     maxAdsId = context.Advertisement.Max(m => m.Ads_Id);
-                maxAdsId = (maxAdsId == 1 && context.Advertisement.ToList().Count > 0) ? (maxAdsId + 1) : maxAdsId;
+                maxAdsId = (maxAdsId > 0) ? (maxAdsId + 1) : 1;
                 ads.AdsCode = "RT" + maxAdsId + "ADVCODE" + (maxAdsId + 1);
                 context.Advertisement.Add(ads);
                 context.SaveChanges();

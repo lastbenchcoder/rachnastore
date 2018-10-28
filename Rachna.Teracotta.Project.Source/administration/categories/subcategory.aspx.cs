@@ -58,10 +58,10 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
                         SubCategory_Status = eStatus.Active.ToString()
                     };
 
-                    int maxAdminId = 1;
+                    int maxAdminId = 0;
                     if (context.SubCategory.ToList().Count > 0)
                         maxAdminId = context.SubCategory.Max(m => m.SubCategory_Id);
-                    maxAdminId = (maxAdminId == 1 && context.SubCategory.ToList().Count > 0) ? (maxAdminId + 1) : maxAdminId;
+                    maxAdminId = (maxAdminId > 0) ? (maxAdminId + 1) : 1;
                     SubCategories.SubCategoryCode = "SCATRACH" + maxAdminId + "TERA" + (maxAdminId + 1);
                     context.SubCategory.Add(SubCategories);
 

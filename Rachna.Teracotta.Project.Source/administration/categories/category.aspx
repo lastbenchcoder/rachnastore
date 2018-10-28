@@ -41,28 +41,64 @@
         </asp:Panel>
         <div class="row">
             <div class="col-sm-12">
-                <div class="box box-color box-bordered">
+                <div class="box box-bordered">
                     <div class="box-title">
                         <h3>
-                            <i class="fa fa-table"></i>
-                            Catrgory
-                        </h3>
+                            <i class="fa fa-th-list"></i>New Category</h3>
                     </div>
                     <div class="box-content nopadding">
-                        <div class="form-group col-lg-3" style="margin-top:10px">
-                            <label>Select Category</label>
-                        <asp:TextBox ID="txtCategory" runat="server" class="form-control input-sm" placeholder="Enter Category"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server"
-                            ErrorMessage="Enter Category title" ControlToValidate="txtCategory" ValidationGroup="admin"></asp:RequiredFieldValidator>
-                        </div>
-                        <div class="form-group col-lg-3" style="margin-top: 32px">
-                            <label>&nbsp;</label>
-                            <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
-                            <label>&nbsp;</label>
+                        <div class='form-horizontal form-striped'>
+                            <asp:HiddenField ID="HiddenField1" runat="server" />
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Title</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtCategory" runat="server" class="form-control input-sm" placeholder="Enter Category"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server"
+                                        ErrorMessage="Enter Category title" ControlToValidate="txtCategory" ValidationGroup="category"></asp:RequiredFieldValidator>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <asp:Image ID="imgArticle" runat="server" ClientIDMode="Static" Width="50px" Height="50px" class="form-control" />
+                                    <label></label>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" Display="None"
+                                        ErrorMessage="Invalid Image File Format, Should be .jpg, .JPG, .gif, .GIF, .PNG, .png, .jpeg !.."
+                                        ControlToValidate="imgInp" ForeColor="Red" ValidationExpression="^.+(.jpg|.JPG|.gif|.GIF|.PNG|.png|.jpeg)$"
+                                        ValidationGroup="category"></asp:RegularExpressionValidator>
+                                    <asp:FileUpload ID="imgInp" runat="server" ClientIDMode="Static" class="form-control input-sm" />
+                                    <label></label>
+                                    <script type="text/javascript">
+                                        function readURL(input) {
+                                            if (input.files && input.files[0]) {
+                                                var reader = new FileReader();
+
+                                                reader.onload = function (e) {
+                                                    $('#imgArticle').attr('src', e.target.result);
+                                                }
+
+                                                reader.readAsDataURL(input.files[0]);
+                                            }
+                                        }
+
+                                        $("#imgInp").change(function () {
+                                            readURL(this);
+                                        });
+                                    </script>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
+                                        ControlToValidate="imgInp" ErrorMessage="Please select store logo" ValidationGroup="admin"
+                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                                </div>
+                            </div>
+                            <div class="form-actions col-sm-offset-2 col-sm-10">
+                                <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary" ValidationGroup="category" OnClick="btnSubmit_Click" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-sm-12">
                 <div class="box box-color box-bordered">
                     <div class="box-title">
@@ -75,8 +111,8 @@
                         <table class="table table-hover table-nomargin table-bordered dataTable">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>CategoryId</th>
-                                    <th>CategoryCode</th>
                                     <th>Title</th>
                                     <th>Status</th>
                                     <th>CreatedBy</th>
@@ -91,10 +127,9 @@
                                     {
                                 %>
                                 <tr>
+                                    <td> <img src="../../<%=item.Category_Photo %>" style="height: 50px; width: 50px" /></td>
                                     <td>
                                         <%=item.Category_Id %></td>
-                                    <td>
-                                        <%=item.CategoryCode %></td>
                                     <td><%=item.Category_Title %></td>
                                     <%if (item.Category_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.Active.ToString())
                                         { %>

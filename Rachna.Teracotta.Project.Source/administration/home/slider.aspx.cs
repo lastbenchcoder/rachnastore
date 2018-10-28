@@ -57,7 +57,9 @@ namespace Rachna.Teracotta.Project.Source.administration.home
                 Sliders Slider = new Sliders()
                 {
                     Slider_Photo = "files/slider/Slider_" + imgInp.FileName,
-                    Slider_TItle = txtAltText.Text,
+                    Slider_TItle = txtTitle.Text,
+                    Slider_Description = txtDescription.Text,
+                    ButtonText = txtBtnTitle.Text,
                     Slider_RedirectUrl = txtImageUrl.Text,
                     Slider_CreatedDate = DateTime.Now,
                     Slider_UpdatedDate = DateTime.Now,
@@ -66,15 +68,19 @@ namespace Rachna.Teracotta.Project.Source.administration.home
 
                 Upload();
 
-                int maxAdminId = 1;
+                int maxSliderId = 0;
                 if (context.Slider.ToList().Count > 0)
-                    maxAdminId = context.Slider.Max(m => m.Slider_Id);
-                Slider.Slider_Code = "SLDRACH" + maxAdminId + "TERA" + (maxAdminId + 1);
+                    maxSliderId = context.Slider.Max(m => m.Slider_Id);
+                maxSliderId = (maxSliderId > 0) ? (maxSliderId + 1) : 1;
+                Slider.Slider_Code = "SLDRACH" + maxSliderId + "TERA" + (maxSliderId + 1);
                 context.Slider.Add(Slider);
                 context.SaveChanges();
 
                 txtImageUrl.Text = "";
-                txtAltText.Text = "";
+                txtTitle.Text = "";
+                txtDescription.Text = "";
+                txtBtnTitle.Text = "";
+                txtImageUrl.Text = "";
                 pnlErrorMessage.Attributes.Remove("class");
                 pnlErrorMessage.Attributes["class"] = "alert alert-success alert-dismissable";
                 pnlErrorMessage.Visible = true;

@@ -4,7 +4,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server"> 
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
@@ -194,6 +194,13 @@
                                 <label for="txtFirstName" class="control-label col-sm-2">Zip Codes</label>
                                 <div class="col-sm-10">
                                     <asp:TextBox ID="txtZipcode" runat="server" class="form-control" placeholder="Zip Code (Product Will Not Be available to these Zipcodes)"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Rating from Store</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtRating" runat="server" class="form-control" Text="0"
+                                        placeholder="Enter Number 1 to 5"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">

@@ -3,12 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-
-
-
-
-
     <%
         List<Rachna.Teracotta.Project.Source.Models.Sliders> _RequestList = null;
         Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext context = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext();
@@ -60,16 +54,33 @@
 
                     </div>
                     <div class="form-group">
-                        <label>Alt Text</label>
-                        <a href="#" data-toggle="tooltip" title="Altername text which will display on Slider"><i class="fa fa-question-circle"></i></a>
-                        <asp:TextBox ID="txtAltText" runat="server" class="form-control input-sm"></asp:TextBox>
+                        <label>Title</label>
+                        <a href="#" data-toggle="tooltip" title="Title On Slider"><i class="fa fa-question-circle"></i></a>
+                        <asp:TextBox ID="txtTitle" runat="server" class="form-control input-sm"></asp:TextBox>
+                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ForeColor="Red" runat="server" 
+                             ErrorMessage="Enter Title on slider" ControlToValidate="txtTitle" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <a href="#" data-toggle="tooltip" title="Small Description"><i class="fa fa-question-circle"></i></a>
+                        <asp:TextBox ID="txtDescription" TextMode="MultiLine" runat="server" class="form-control input-sm"></asp:TextBox>
+                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ForeColor="Red" runat="server" 
+                             ErrorMessage="Enter Small Description to your slider" ControlToValidate="txtDescription" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                    </div>
+                    <div class="form-group">
+                        <label>Button Title</label>
+                        <a href="#" data-toggle="tooltip" title="Button Title"><i class="fa fa-question-circle"></i></a>
+                        <asp:TextBox ID="txtBtnTitle" runat="server" class="form-control input-sm"></asp:TextBox>
+                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ForeColor="Red" runat="server" 
+                             ErrorMessage="Enter Button Title" ControlToValidate="txtBtnTitle" ValidationGroup="admin"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
                         <label>URL</label>
                         <a href="#" data-toggle="tooltip" title="Onclick of slider banner, URL will help to redirect to specific product or specific page."><i class="fa fa-question-circle"></i></a>
                         <asp:TextBox ID="txtImageUrl" runat="server" class="form-control input-sm"></asp:TextBox>
                         <p style="color: red">URL may be any specific Product or List of products by category page. It is must and should. If No Url please mention #(No redirection will be done). </p>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server" ErrorMessage="Enter Redirect Url" ControlToValidate="txtImageUrl" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server" 
+                            ErrorMessage="Enter Redirect Url" ControlToValidate="txtImageUrl" ValidationGroup="admin"></asp:RequiredFieldValidator>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -130,7 +141,7 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>SliderCode</th>
+                                    <th>Title</th>
                                     <th>Redirect URL</th>
                                     <th>CreatedDate</th>
                                     <th>UpdatedDate</th>
@@ -146,7 +157,7 @@
                                     <td>
                                         <img src="../../<%=item.Slider_Photo %>" style="height: 50px; width: 50px" />
                                     </td>
-                                    <td><%=item.Slider_Code %></td>
+                                    <td><%=item.Slider_TItle %></td>
                                     <td><%=item.Slider_RedirectUrl %></td>
                                     <td><%=item.Slider_CreatedDate.ToString("D") %></td>
                                     <td><%=item.Slider_UpdatedDate.ToString("D") %></td>

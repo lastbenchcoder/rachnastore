@@ -10,6 +10,18 @@ namespace Rachna.Teracotta.Project.Source
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new StyleBundle("~/bundles/stylesTheme2").Include(
+                               "~/appfiles/frontend2/style.css",
+                               "~/appfiles/frontend2/css/custom.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/scriptsTheme2").Include(
+                               "~/appfiles/frontend2/js/vendor/modernizr-3.6.0.min.js",
+                               "~/appfiles/frontend2/js/vendor/jquery-3.3.1.min.js",
+                               "~/appfiles/frontend2/js/popper.min.js",
+                               "~/appfiles/frontend2/js/bootstrap.min.js",
+                               "~/appfiles/frontend2/js/plugins.js",
+                               "~/appfiles/frontend2/js/main.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/javascriptfiles").Include(
                 "~/appfiles/frontend/js/jquery.js",
                 "~/appfiles/frontend/jquery-ui/jquery-ui.js",
@@ -33,7 +45,7 @@ namespace Rachna.Teracotta.Project.Source
                                "~/content/admin/js/plugins/nicescroll/jquery.nicescroll.min.js",
                                "~/content/admin/js/plugins/imagesLoaded/jquery.imagesloaded.min.js",
                                "~/content/admin/js/plugins/jquery-ui/jquery-ui.js",
-                               "~/content/admin/js/plugins/slimscroll/jquery.slimscroll.min.js",                               
+                               "~/content/admin/js/plugins/slimscroll/jquery.slimscroll.min.js",
                                "~/content/admin/js/plugins/bootbox/jquery.bootbox.js",
                                "~/content/admin/js/plugins/momentjs/jquery.moment.min.js",
                                "~/content/admin/js/plugins/momentjs/moment-range.min.js"));

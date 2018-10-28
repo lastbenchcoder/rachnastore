@@ -42,7 +42,9 @@ namespace Rachna.Teracotta.Project.Source.administration.home
                 int id = Convert.ToInt32(hdnSliderId.Value);
 
                 Sliders Sliders = context.Slider.Where(m => m.Slider_Id == id).FirstOrDefault();
-                Sliders.Slider_TItle = txtAltText.Text;
+                Sliders.Slider_TItle = txtTitle.Text;
+                Sliders.Slider_Description = txtDescription.Text;
+                Sliders.ButtonText = txtBtnTitle.Text;
                 Sliders.Slider_RedirectUrl = txtImageUrl.Text;
                 Sliders.Slider_UpdatedDate = DateTime.Now;
                 Sliders.Administrators_Id = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()]);
@@ -93,7 +95,9 @@ namespace Rachna.Teracotta.Project.Source.administration.home
         private void LoadSlider(int sliderId)
         {
             Sliders Sliders = context.Slider.Where(m => m.Slider_Id == sliderId).FirstOrDefault();
-            txtAltText.Text = Sliders.Slider_TItle;
+            txtTitle.Text = Sliders.Slider_TItle;
+            txtDescription.Text = Sliders.Slider_Description;
+            txtBtnTitle.Text = Sliders.ButtonText;
             txtImageUrl.Text = Sliders.Slider_RedirectUrl;
             imgBanner.ImageUrl = "../../" + Sliders.Slider_Photo;
             hdnSliderId.Value = sliderId.ToString();

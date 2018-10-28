@@ -75,6 +75,8 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
                 _cart.Cart_Status = eCartStatus.Open.ToString();
                 _cart.Product_Banner = _product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo;
                 _cart.Product_Price = _product.Product_Our_Price;
+                _cart.Shipping_Charge = _product.Product_ShippingCharge;
+                _cart.Cart_Total_Price = _cart.Cart_Price + _cart.Shipping_Charge;
                 _cart.Product_Title = _product.Product_Title;
                 _cart.Customer_Id = _customer.Customer_Id;
                 _cart.Customer_Name = _customer.Customers_FullName;
@@ -98,6 +100,8 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
                 _cart.Cart_Status = eCartStatus.Temp.ToString();
                 _cart.Product_Banner = _product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo;
                 _cart.Product_Price = _product.Product_Our_Price;
+                _cart.Shipping_Charge = _product.Product_ShippingCharge;
+                _cart.Cart_Total_Price = _cart.Cart_Price + _cart.Shipping_Charge;
                 _cart.Product_Title = _product.Product_Title;
                 _cart.Customer_Id = _customer.Customer_Id;
                 _cart.Customer_Name = _customer.Customers_FullName;

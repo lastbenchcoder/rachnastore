@@ -4,6 +4,7 @@ using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -45,20 +46,26 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
                     {
                         Category_Title = txtCategory.Text,
                         Administrators_Id = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()),
+                        Category_Photo = "files/category/" + "Category_" + imgInp.FileName,
                         Category_CreatedDate = DateTime.Now,
                         Category_UpdatedDate = DateTime.Now,
                         Category_Status = eStatus.Active.ToString()
                     };
 
 
-                    int maxAdminId = 1;
+                    int maxAdminId = 0;
                     if (context.Category.ToList().Count > 0)
                         maxAdminId = context.Category.Max(m => m.Category_Id);
-                    maxAdminId = (maxAdminId == 1 && context.Category.ToList().Count > 0) ? (maxAdminId + 1) : maxAdminId;
+                    maxAdminId = (maxAdminId > 0) ? (maxAdminId + 1) : 1;
                     Categories.CategoryCode = "CATRACH" + maxAdminId + "TERA" + (maxAdminId + 1);
                     context.Category.Add(Categories);
-
                     context.SaveChanges();
+
+                    if(Categories.Category_Id!=null || Categories.Category_Id!=0)
+                    {
+                        Upload();
+                    }
+
                     pnlErrorMessage.Attributes.Remove("class");
                     pnlErrorMessage.Attributes["class"] = "alert alert-success alert-dismissable";
                     pnlErrorMessage.Visible = true;
@@ -71,6 +78,40 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
                     pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
                     pnlErrorMessage.Visible = true;
                     lblMessage.Text = "Category cannot be created. Entered Category Name already exists in the database.";
+                }
+            }
+            catch (Exception ex)
+            {
+                pnlErrorMessage.Attributes.Remove("class");
+                pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
+                pnlErrorMessage.Visible = true;
+                lblMessage.Text = ex.Message;
+            }
+        }
+        private void Upload()
+        {
+            try
+            {
+                int iFileSize = imgInp.PostedFile.ContentLength;
+                if (iFileSize < 1048576)  // 1MB
+                {
+                    string folderPath = Server.MapPath("~/files/category/");
+                    //Check whether Directory (Folder) exists.
+                    if (!Directory.Exists(folderPath))
+                    {
+                        //If Directory (Folder) does not exists. Create it.
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    //Save the File to the Directory (Folder).
+                    imgInp.SaveAs(folderPath + Path.GetFileName("Category" + "_" + imgInp.FileName));
+                }
+                else
+                {
+                    pnlErrorMessage.Attributes.Remove("class");
+                    pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
+                    pnlErrorMessage.Visible = true;
+                    lblMessage.Text = "Oops!! Selected Category Banner should not be higher than 1MB.";
                 }
             }
             catch (Exception ex)

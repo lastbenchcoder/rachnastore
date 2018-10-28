@@ -1,0 +1,156 @@
+﻿@{
+    Rachna.Teracotta.Project.Source.ViewModel.SliderModel sliderModel = new Rachna.Teracotta.Project.Source.ViewModel.SliderModel();
+    Rachna.Teracotta.Project.Source.ViewModel.Slider headerObject = new Rachna.Teracotta.Project.Source.ViewModel.Slider();
+    sliderModel = headerObject.Get();
+}
+<div class="banners-area pb-30 bg-grey">
+    <div class="container">
+        <div class="row">
+            @if (sliderModel._categories != null && sliderModel._categories.Count > 0)
+            {
+                <div class="col-lg-3">
+                    <!-- Category Menu -->
+                    <div class="catmenu catmenu-2 mt-30">
+                        <button class="catmenu-trigger is-active">
+                            <span>Categories</span>
+                        </button>
+                        <nav class="catmenu-body">
+                            <ul>
+                                @{ int a = 0; }
+                                @{
+                                    foreach (var item in sliderModel._categories)
+                                    {
+                                        a = a + 1;
+                                        <li class="catmenu-dropdown">
+                                            @if (a == 1)
+                                            {
+                                                <a href="#"><i class="ion ion-ios-power"></i>@item.Category_Title</a>
+                                            }
+                                            else if (a == 2)
+                                            {
+                                                <a href="#"><i class="ion ion-ios-infinite"></i>@item.Category_Title</a>
+                                            }
+                                            else if (a == 3)
+                                            {
+                                                <a href="#"><i class="ion ion-ios-desktop"></i>@item.Category_Title</a>
+                                            }
+                                            else if (a == 4)
+                                            {
+                                                <a href="#"><i class="ion ion-md-watch"></i>@item.Category_Title</a>
+                                            }
+                                            else if (a == 5)
+                                            {
+                                                <a href="#"><i class="ion ion-ios-camera"></i>@item.Category_Title</a>
+                                            }
+                                            else if (a == 6)
+                                            {
+                                                <a href="#"><i class="ion ion-ios-volume-high"></i>@item.Category_Title</a>
+                                            }
+                                            else if (a == 7)
+                                            {
+                                                <a href="#"><i class="ion ion-md-headset"></i>@item.Category_Title</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#"><i class="ion ion-ios-desktop"></i>@item.Category_Title</a>
+                                            }
+
+                                            @if (item.SubCategory != null)
+                                            {
+                                                <ul class="megamenu catmenu-megamenu">
+                                                    <li>
+                                                        <a href="#">@item.Category_Title</a>
+                                                        <ul>
+                                                            @foreach (var item1 in item.SubCategory)
+                                                            {
+                                                                <li><a href="/home/productbycategory?subcatid=@item1.SubCategory_Id&subcategory-url=rachna-teracotta.htm">@item1.SubCategory_Title</a></li>
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            }
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                    <!--// Category Menu -->
+                </div>
+            }
+            @if (sliderModel._sliders != null && sliderModel._sliders.Count > 0)
+            {
+                <div class="col-lg-9">
+                    <!-- Hero Area -->
+                    <div class="herobanner herobanner-3 slider-navigation slider-dots mt-30">
+                        @foreach (var item in sliderModel._sliders)
+                        {
+                            <!-- Herobanner Single -->
+                            <div class="herobanner-single">
+                                <img src="../../@item.Slider_Photo" alt="hero image">
+                                <div class="herobanner-content">
+                                    <div class="herobanner-box">
+                                        <h4>WE ARE THE BEST</h4>
+                                    </div>
+                                    <div class="herobanner-box">
+                                        <h1>@item.Slider_TItle</h1>
+                                    </div>
+                                    <div class="herobanner-box">
+                                        <p>
+                                            @item.Slider_Description
+                                        </p>
+                                    </div>
+                                    <div class="herobanner-box">
+                                        <a href="@item.Slider_RedirectUrl" class="ho-button ho-button-white">
+                                            <i class="lnr lnr-cart"></i>
+                                            <span>@item.ButtonText</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <span class="herobanner-progress"></span>
+                            </div>
+                            <!--// Herobanner Single -->
+                        }
+                    </div>
+                    <!--// Hero Area -->
+                </div>
+            }
+            @if (sliderModel._ads != null && sliderModel._ads.Count > 0)
+            {
+                foreach (var item in sliderModel._ads)
+                {
+                    if (item.Ads_Type == "Advertisement 1")
+                    {
+                        <div class="col-md-4">
+                            <div class="imgbanner mt-30">
+                                <a href="@item.Ads_RedirectUrl">
+                                    <img src="../../@item.Ads_Banner_Or_Source" alt="banner">
+                                </a>
+                            </div>
+                        </div>
+                    }
+                    else if (item.Ads_Type == "Advertisement 2")
+                    {
+                        <div class="col-md-4">
+                            <div class="imgbanner mt-30">
+                                <a href="@item.Ads_RedirectUrl">
+                                    <img src="../../@item.Ads_Banner_Or_Source" alt="banner">
+                                </a>
+                            </div>
+                        </div>
+                    }
+                    else if (item.Ads_Type == "Advertisement 3")
+                    {
+                        <div class="col-md-4">
+                            <div class="imgbanner mt-30">
+                                <a href="@item.Ads_RedirectUrl">
+                                    <img src="../../@item.Ads_Banner_Or_Source" alt="banner">
+                                </a>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>

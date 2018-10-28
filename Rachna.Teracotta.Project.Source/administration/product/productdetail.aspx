@@ -220,6 +220,13 @@
                                     <asp:TextBox ID="txtZipcode" runat="server" class="form-control" placeholder="Zip Code (Product Will Not Be available to these Zipcodes)"></asp:TextBox>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Rating from Store</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtRating" runat="server" class="form-control" Text="0"
+                                        placeholder="Enter Number 1 to 5"></asp:TextBox>
+                                </div>
+                            </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
                                 <a href="/administration/product/productsdetailstatic.aspx?Productid=<%=hdnProductId.Value %>" class="btn btn-primary hidden-print">Cancel</a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;

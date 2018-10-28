@@ -47,6 +47,9 @@
             <li>
                 <a href="/administration/home/topeight.aspx?redirecturl=admin-slider-rachna-teracotta">Top Eight Products</a>
             </li>
+             <li>
+                <a href="/administration/home/dealoftheday.aspx?redirecturl=admin-slider-rachna-teracotta">Deal of the Day</a>
+            </li>
             <li class='dropdown'>
                 <a href="#" data-toggle="dropdown">Page & Menus</a>
                 <ul class="dropdown-menu">

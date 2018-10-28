@@ -1,13 +1,10 @@
-﻿using Rachna.Teracotta.Project.Source.App_Data;
-using Rachna.Teracotta.Project.Source.Core.bal;
+﻿using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -51,53 +48,71 @@ namespace Rachna.Teracotta.Project.Source.administration.home
         {
             try
             {
+                List<Ads> _Advertisement = bAds.List().ToList();
+                ddlAddType.Items.Clear();
 
-                    List<Ads> _Advertisement = bAds.List().ToList();
-                    ddlAddType.Items.Clear();
+                List<string> ads = new List<string>();
 
-                    List<string> ads = new List<string>();
+                if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 1").FirstOrDefault() == null)
+                {
+                    ads.Add("Advertisement 1");
+                }
+                if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 2").FirstOrDefault() == null)
+                {
+                    ads.Add("Advertisement 2");
+                }
+                if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 3").FirstOrDefault() == null)
+                {
+                    ads.Add("Advertisement 3");
+                }
+                if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 4").FirstOrDefault() == null)
+                {
+                    ads.Add("Advertisement 4");
+                }
+                if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 5").FirstOrDefault() == null)
+                {
+                    ads.Add("Advertisement 5");
+                }
+                if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 6").FirstOrDefault() == null)
+                {
+                    ads.Add("Advertisement 6");
+                }
+                if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 7").FirstOrDefault() == null)
+                {
+                    ads.Add("Advertisement 7");
+                }
+                if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 8").FirstOrDefault() == null)
+                {
+                    ads.Add("Advertisement 8");
+                }
+                if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 9").FirstOrDefault() == null)
+                {
+                    ads.Add("Advertisement 9");
+                }
+                if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 10").FirstOrDefault() == null)
+                {
+                    ads.Add("Advertisement 10");
+                }
 
-                    if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 1").FirstOrDefault() == null)
-                    {
-                        ads.Add("Advertisement 1");
-                    }
-                    if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 2").FirstOrDefault() == null)
-                    {
-                        ads.Add("Advertisement 2");
-                    }
-                    if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 3").FirstOrDefault() == null)
-                    {
-                        ads.Add("Advertisement 3");
-                    }
-                    if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 4").FirstOrDefault() == null)
-                    {
-                        ads.Add("Advertisement 4");
-                    }
-                    if (_Advertisement.Where(m => m.Ads_Type == "Advertisement 5").FirstOrDefault() == null)
-                    {
-                        ads.Add("Advertisement 5");
-                    }
+                foreach (var item in ads)
+                {
+                    ddlAddType.Items.Add(new ListItem { Text = item });
+                }
 
-                    foreach (var item in ads)
-                    {
-                        ddlAddType.Items.Add(new ListItem { Text = item });
-                    }
-
-                    if (_Advertisement.Count > 5)
-                    {
-                        btnSubmit.Visible = false;
-                    }
-                    else
-                    {
-                        btnSubmit.Visible = true;
-                    }
+                if (_Advertisement.Count > 5)
+                {
+                    btnSubmit.Visible = false;
+                }
+                else
+                {
+                    btnSubmit.Visible = true;
+                }
             }
             catch (Exception ex)
             {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "Advertisement", "new Messi(" + ex.Message + ", { title: 'Error!! ' });", true);
             }
         }
-
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             try
@@ -132,7 +147,7 @@ namespace Rachna.Teracotta.Project.Source.administration.home
                     pnlErrorMessage.Attributes.Remove("class");
                     pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
                     pnlErrorMessage.Visible = true;
-                    lblMessage.Text = "Failed! " + Advertisement.ErrorMessage; 
+                    lblMessage.Text = "Failed! " + Advertisement.ErrorMessage;
                 }
             }
             catch (Exception ex)
@@ -143,7 +158,6 @@ namespace Rachna.Teracotta.Project.Source.administration.home
                 lblMessage.Text = ex.Message;
             }
         }
-
         private void Upload()
         {
             try
@@ -167,13 +181,12 @@ namespace Rachna.Teracotta.Project.Source.administration.home
                 lblMessage.Text = ex.Message;
             }
         }
-
         protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
             {
                 int adsId = (Convert.ToInt32(e.Values[0].ToString()));
-                Ads _Advertisement = bAds.List().Where(m=>m.Ads_Id== adsId).FirstOrDefault();
+                Ads _Advertisement = bAds.List().Where(m => m.Ads_Id == adsId).FirstOrDefault();
 
                 int result = bAds.Delete(_Advertisement);
 

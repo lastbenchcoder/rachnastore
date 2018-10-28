@@ -55,10 +55,25 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="txtFirstName" class="control-label col-sm-2">Alternate Text</label>
-                                <div class="col-sm-10">
-                                    <asp:TextBox ID="txtAltText" runat="server" class="form-control input-sm" Width="50%"></asp:TextBox>
-                                </div>
+                                <label>Title</label>
+                                <a href="#" data-toggle="tooltip" title="Title On Slider"><i class="fa fa-question-circle"></i></a>
+                                <asp:TextBox ID="txtTitle" runat="server" class="form-control input-sm"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ForeColor="Red" runat="server"
+                                    ErrorMessage="Enter Title on slider" ControlToValidate="txtTitle" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <a href="#" data-toggle="tooltip" title="Small Description"><i class="fa fa-question-circle"></i></a>
+                                <asp:TextBox ID="txtDescription" TextMode="MultiLine" runat="server" class="form-control input-sm"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ForeColor="Red" runat="server"
+                                    ErrorMessage="Enter Small Description to your slider" ControlToValidate="txtDescription" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="form-group">
+                                <label>Button Title</label>
+                                <a href="#" data-toggle="tooltip" title="Button Title"><i class="fa fa-question-circle"></i></a>
+                                <asp:TextBox ID="txtBtnTitle" runat="server" class="form-control input-sm"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ForeColor="Red" runat="server"
+                                    ErrorMessage="Enter Button Title" ControlToValidate="txtBtnTitle" ValidationGroup="admin"></asp:RequiredFieldValidator>
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Confirm Password</label>

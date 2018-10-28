@@ -1,0 +1,223 @@
+﻿@{
+    Rachna.Teracotta.Project.Source.ViewModel.HeaderModel headerModel = new Rachna.Teracotta.Project.Source.ViewModel.HeaderModel();
+    headerModel = Rachna.Teracotta.Project.Source.ViewModel.Header.Instance.Get();
+    int totalitems = 0;
+    decimal totalsubtotal = 0;
+    decimal totalshippingcharge = 0;
+    decimal totaltotal = 0;
+
+    if (headerModel._carts.Count > 0)
+    {
+        totalitems = headerModel._carts.Count;
+        foreach (var item in headerModel._carts)
+        {
+            totalsubtotal = totalsubtotal + item.Cart_Price;
+            totalshippingcharge = totalshippingcharge + item.Shipping_Charge;
+        }
+        totaltotal = totalsubtotal + totalshippingcharge;
+    }
+}
+<header class="header header-3">
+    <!-- Header Top Area -->
+    <div class="header-top bg-theme">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                    @if (Session["UserKey"] != null)
+                    {
+                        <p class="header-welcomemsg">Welcome @headerModel._customer.Customers_FullName!</p>
+                    }
+                    else
+                    {
+                        <p class="header-welcomemsg">Welcome to <span>@System.Configuration.ConfigurationSettings.AppSettings["AppName"].ToString()</span> Shopping Store !</p>
+                    }
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                    <div class="header-langcurr">
+                        <div class="select-currency">
+                            <button class="select-currency-current">RUPEE &#x20B9;</button>
+                            <ul class="select-currency-list dropdown-list">
+                                <li><a href="#">RUPEE &#x20B9;</a></li>
+                                <li><a href="#">USD $</a></li>
+                            </ul>
+                        </div>
+                        <div class="select-language">
+                            <button class="select-language-current"><img src="../../appfiles/frontend2/images/icons/us.png" alt="us icon">English</button>
+                            <ul class="select-language-list dropdown-list">
+                                <li><a href="#"><img src="../../appfiles/frontend2/images/icons/us.png" alt="us icon">English</a></li>
+                                <li><a href="#"><img src="../../appfiles/frontend2/images/icons/eu.png" alt="eu icon">Français</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// Header Top Area -->
+    <!-- Header Middle Area -->
+    <div class="header-middle bg-theme">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-6 col-sm-6 order-1 order-lg-1">
+                    <a href="/" class="header-logo">
+                        @{
+                            if (@headerModel._logo != null)
+                            {
+                                <img src="../../@headerModel._logo.Logo_Banner" alt="logo" width="200" height="100" />
+                            }
+                            else
+                            {
+                                <img src="../../content/logo.png" alt="logo" width="200" height="100" />
+                            }
+                        }
+                    </a>
+                </div>
+                <div class="col-lg-6 col-12 order-3 order-lg-2">
+                    <form action="/home/searchresult" class="header-searchbox">
+                        <input type="text" name="s" placeholder="Enter your search key ...">
+                        <button type="submit"><i class="lnr lnr-magnifier"></i></button>
+                    </form>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 order-2 order-lg-3">
+                    <div class="header-icons">
+                        <div class="header-account">
+                            @if (Session["UserKey"] != null)
+                            {
+                                <button class="header-accountbox-trigger">
+                                    <span class="lnr lnr-user"></span> My
+                                    Account <i class="ion ion-ios-arrow-down"></i>
+                                </button>
+                                <ul class="header-accountbox dropdown-list">
+                                    <li>
+                                        <a href="/user/account?pageId=hjhgjgjgjgjhj234j2hgj234j2g2j35gj345gj34GUIDHHJF&redirect-url=account">My account</a>
+                                    </li>
+                                    <li>
+                                        <a href="/user/account?pageId=hjhgjgjgjgjhj234j2hgj234j2g2j35gj345gj34GUIDHHJF&redirect-url=wishlist">My wishlist</a>
+                                    </li>
+                                    <li>
+                                        <a href="/user/checkout?pageId=hjhgjgjgjgjhj234j2hgj234j2g2j35gj345gj34GUIDHHJF&redirect-url=checkout">Checkout</a>
+                                    </li>
+                                    <li>
+                                        <a href="/home/logout?id=876&redirect=logout.htm&grt=HGJHG898989JHGJG">Sign Out</a>
+                                    </li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <button class="header-accountbox-trigger" onclick="window.location.href='/user/login?pageId=hjhgjgjgjgjhj234j2hgj234j2g2j35gj345gj34GUIDHHJF&redirect-url=mylogin'">
+                                    <span class="lnr lnr-user"></span> Login
+                                </button>
+                            }
+                        </div>
+                        <div class="header-cart">
+                            <a class="header-carticon" href="/user/index?pageId=hjhgjgjgjgjhj234j2hgj234j2g2j35gj345gj34GUIDHHJF&redirect-url=mycart"><i class="lnr lnr-cart"></i><span class="count">@totalitems</span></a>
+                            @if (totalitems != 0)
+                            {
+                                <!-- Minicart -->
+                                <div class="header-minicart minicart">
+                                    <div class="minicart-header">
+                                        @foreach (var items in headerModel._carts)
+                                        {
+                                            <div class="minicart-product">
+                                                <div class="minicart-productimage">
+                                                    <a href="product-details.html">
+                                                        <img src="../../appfiles/frontend2/images/product/thumbnail/product-image-1.jpg" alt="product image">
+                                                    </a>
+                                                    <span class="minicart-productquantity">@items.Cart_Qty x</span>
+                                                </div>
+                                                <div class="minicart-productcontent">
+                                                    <h6>
+                                                        <a href="/product/index?id=@items.Product_Id">@items.Product_Title</a>
+                                                    </h6>
+                                                    <span class="minicart-productprice">&#x20B9;@items.Product_Price</span>
+                                                </div>
+                                                <button class="minicart-productclose" onclick="/cart/deletecart/@items.Product_Id"><i class="ion ion-ios-close-circle"></i></button>
+                                            </div>
+                                        }
+                                    </div>
+                                    <ul class="minicart-pricing">
+                                        <li>Subtotal <span>&#x20B9; @totalsubtotal</span></li>
+                                        <li>Shipping <span>&#x20B9; @totalshippingcharge</span></li>
+                                        <li>Total <span>&#x20B9; @totaltotal</span></li>
+                                    </ul>
+                                    <div class="minicart-footer">
+                                        <a href="/user/index?pageId=hjhgjgjgjgjhj234j2hgj234j2g2j35gj345gj34GUIDHHJF&redirect-url=mycart" class="ho-button ho-button-fullwidth">
+                                            <span>Cart</span>
+                                        </a>
+                                        <a href="/user/checkout?pageId=hjhgjgjgjgjhj234j2hgj234j2g2j35gj345gj34GUIDHHJF&redirect-url=checkout" class="ho-button ho-button-dark ho-button-fullwidth">
+                                            <span>Checkout</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--// Minicart -->
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// Header Middle Area -->
+    <!-- Header Bottom Area -->
+    <div class="header-bottom bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-10 d-none d-lg-block">
+
+                    <!-- Navigation -->
+                    <nav class="ho-navigation ho-navigation-3">
+                        @if (headerModel._menu != null && headerModel._menu.Count > 0)
+                        {
+                            if (headerModel._menu.Where(m => m.MenuType == Rachna.Teracotta.Project.Source.Entity.eMenu.Header.ToString()).ToList().Count > 0)
+                            {
+                                <ul>
+                                    @foreach (var item in headerModel._menu)
+                                    {
+                                        if (item.MenuType == Rachna.Teracotta.Project.Source.Entity.eMenu.Header.ToString())
+                                        {
+                                            if (item.Page_Id == 1)
+                                            {
+                                                <li><a href="/">Home</a></li>
+                                            }
+                                            else if (item.Page_Id == 2)
+                                            {
+                                                <li><a href="/home/offers?id=1234&redirect-page=latest-hot-offers-from-rachna.htm">Hot Offers</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="/home/page?pageid=@item.Page_Id&redirect-url=@item.Title">@item.Title</a></li>
+                                            }
+                                        }
+                                    }
+                                    <li><a href="/home/contactus?id=1234&redirect-page=online-store-contact-us-rachna.htm">Contact Us</a></li>
+                                </ul>
+                            }
+                        }
+                    </nav>
+                    <!--// Navigation -->
+                </div>
+                <div class="col-lg-2">
+                    <div class="header-contactinfo">
+                        <i class="flaticon-support"></i>
+                        <span>Call Us Now:</span>
+                        @{
+                            if (headerModel._contact != null)
+                            {
+                                <b>+@headerModel._contact.Contact_Phone</b>
+                            }
+                            else
+                            {
+                                <b>+080-12345678</b>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="col-12 d-block d-lg-none">
+                    <div class="mobile-menu clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// Header Bottom Area -->
+
+</header>

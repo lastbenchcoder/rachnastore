@@ -127,6 +127,9 @@ namespace Rachna.Teracotta.Project.Source.App_Data
         public DbSet<RMenu> RMenu { get; set; }
         public DbSet<RMenu_Audit> RMenu_Audit { get; set; }
 
+        public DbSet<DealOfTheDay> DealOfTheDay { get; set; }
+        public DbSet<DealOfTheDay_Audit> DealOfTheDay_Audit { get; set; }
+
         public DbSet<AdminChatting> AdminChatting { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -243,6 +246,9 @@ namespace Rachna.Teracotta.Project.Source.App_Data
 
             modelBuilder.Entity<RMenu>().ToTable("tbl_app_menu");
             modelBuilder.Entity<RMenu_Audit>().ToTable("tbl_app_menu_audit");
+
+            modelBuilder.Entity<DealOfTheDay>().ToTable("tbl_deal_of_the_day");
+            modelBuilder.Entity<DealOfTheDay_Audit>().ToTable("tbl_deal_of_the_day_audit");
 
             modelBuilder.Entity<AdminChatting>().ToTable("tbl_admin_chat");
         }

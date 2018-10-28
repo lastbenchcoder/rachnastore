@@ -1,0 +1,17 @@
+﻿@{
+    Rachna.Teracotta.Project.Source.Models.MetaInformation _metaInformation = new Rachna.Teracotta.Project.Source.Models.MetaInformation();
+    Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext context = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext();
+    if (context.MetaInformation.Where(m => m.Meta_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.Active.ToString()).Count() > 0)
+    {
+        _metaInformation = context.MetaInformation.Where(m => m.Meta_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.Active.ToString()).FirstOrDefault();
+    }
+    else
+    {
+        Response.Redirect("/error/inprogress");
+    }
+}
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="author" content="@_metaInformation.Meta_Title" />
+<meta name="description" content="@_metaInformation.Meta_Description">
+<meta name="keywords" content="@_metaInformation.Meta_KeyWords">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">

@@ -19,8 +19,10 @@ namespace Rachna.Teracotta.Project.Source.Models
         public string CartCode { get; set; }
         [MaxLength(50)]
         public string Ip_Address { get; set; }
-        public decimal Product_Price { get; set; }
+        public decimal Product_Price { get; set; }        
         public decimal Cart_Price { get; set; }
+        public decimal Shipping_Charge { get; set; }
+        public decimal Cart_Total_Price { get; set; }
         [MaxLength(50)]
         public string Cart_Size { get; set; }
         [MaxLength(15)]

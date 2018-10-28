@@ -52,6 +52,7 @@ namespace Rachna.Teracotta.Project.Source.administration.product
                     txtDiscount.Text = Math.Round(Product.Product_Discount).ToString();
                     rdbHasSize.SelectedValue = (txtSize.Text != "No Size") ? "Yes" : "No";
                     lblBcTitle.Text = Product.Product_Title;
+                    txtRating.Text = Product.Store_Rating.ToString();
                     if (Product.Product_Status == eProductStatus.Published.ToString())
                     {
                         lblStatus.Attributes.Remove("class");
@@ -98,6 +99,7 @@ namespace Rachna.Teracotta.Project.Source.administration.product
             Product.Product_Discount = Convert.ToDecimal(txtDiscount.Text);
             Product.Product_UpdatedDate = DateTime.Now;
             Product.Product_Status = eProductStatus.ReviewPending.ToString();
+            Product.Store_Rating = (txtRating.Text != "") ? Convert.ToInt32(txtRating.Text) : 1;
 
             context.Entry(Product).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();

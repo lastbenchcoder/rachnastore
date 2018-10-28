@@ -56,7 +56,8 @@ namespace Rachna.Teracotta.Project.Source.administration.product
                 SubCategory_Id = Convert.ToInt32(ddlCategory.SelectedValue),
                 Product_CreatedDate = DateTime.Now,
                 Product_UpdatedDate = DateTime.Now,
-                Product_Status = eProductStatus.ReviewPending.ToString()
+                Product_Status = eProductStatus.ReviewPending.ToString(),
+                Store_Rating = (txtRating.Text != "") ? Convert.ToInt32(txtRating.Text) : 1
             };
 
             int maxAdminId = 1;

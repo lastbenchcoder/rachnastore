@@ -1,0 +1,311 @@
+﻿<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <title>Rachna's Store - @ViewBag.Title</title>
+    <link rel="icon" href="../../content/favicon.png" type="image/x-icon" />
+    @System.Web.Optimization.Styles.Render("~/bundles/feglobal")
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="../../appfiles/frontend2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../appfiles/frontend2/css/plugins.css">
+    @System.Web.Optimization.Styles.Render("~/bundles/stylesTheme2")
+</head>
+
+<body>
+    <div id="wrapper" class="wrapper">
+        <!-- Header -->
+        @Html.Partial("themeglobal2/_header")
+        <!--// Header -->
+        <!-- Banners Area -->
+        @Html.Partial("themeglobal2/_sliderandcategory")
+        <!--// Banners Area -->
+        <!-- Page Conttent -->
+        <main class="page-content">
+            @RenderBody()
+            <!-- Newsletter Area -->
+            <div class="ho-section newsletter-area bg-grey ptb-50">
+                <div class="container">
+                    <div class="newsletter">
+                        <div class="newsletter-title">
+                            <h2>Subscribe to our <span>Newsletter!</span></h2>
+
+                        </div>
+                        <div class="newsletter-content">
+                            <form id="mc-form" class="newsletter-form">
+                                <input id="mc-email" type="email" autocomplete="off" placeholder="Your email address...">
+                                <button id="mc-submit" type="submit">Subscribe</button>
+                            </form>
+                            <!-- mailchimp-alerts start -->
+                            <div class="mailchimp-alerts text-centre">
+                                <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                                <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                                <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                            </div><!-- mailchimp-alerts end -->
+                        </div>
+                        <div class="newsletter-socialicons socialicons socialicons-radial">
+                            <ul>
+                                <li><a href="#"><i class="ion ion-logo-facebook"></i></a></li>
+                                <li><a href="#"><i class="ion ion-logo-twitter"></i></a></li>
+                                <li><a href="#"><i class="ion ion-logo-youtube"></i></a></li>
+                                <li><a href="#"><i class="ion ion-logo-google"></i></a></li>
+                                <li><a href="#"><i class="ion ion-logo-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--// Newsletter Area -->
+        </main>
+        <!--// Page Conttent -->
+        <!-- Footer -->
+        <footer class="footer bg-white">
+
+            <!-- Footer Top Area -->
+            <div class="footer-toparea">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-3 col-12">
+                            <div class="footer-widget widget-info">
+                                <h5 class="footer-widget-title">Contact Info</h5>
+                                <p>
+                                    We are a team of designers & developers that create high quality Magento,
+                                    Prestashop, Opencart.
+                                </p>
+                                <ul>
+                                    <li>
+                                        <i class="ion ion-ios-pin"></i> The Barn, Ullenhall, Henley in Arden B578 5CC,
+                                        England
+                                    </li>
+                                    <li><i class="ion ion-ios-call"></i> Call us: +88.2345.6789</li>
+                                    <li><i class="ion ion-ios-print"></i> Fax: +(1234) 408 1234</li>
+                                    <li><i class="ion ion-ios-mail"></i> Email us: <a href="#">info@example.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-4">
+                            <div class="footer-widget widget-links">
+                                <h5 class="footer-widget-title">Products</h5>
+                                <ul>
+                                    <li><a href="#">Prices drop</a></li>
+                                    <li><a href="#">New products</a></li>
+                                    <li><a href="#">Best sales</a></li>
+                                    <li><a href="#">Contact us</a></li>
+                                    <li><a href="#">Login</a></li>
+                                    <li><a href="#">My account</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-4">
+                            <div class="footer-widget widget-links">
+                                <h5 class="footer-widget-title">Our Company</h5>
+                                <ul>
+                                    <li><a href="#">Delivery</a></li>
+                                    <li><a href="#">Legal Notice</a></li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Secure payment</a></li>
+                                    <li><a href="#">Sitemap</a></li>
+                                    <li><a href="#">Stores</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-4">
+                            <div class="footer-widget widget-links">
+                                <h5 class="footer-widget-title">Your Account</h5>
+                                <ul>
+                                    <li><a href="#">Personal info</a></li>
+                                    <li><a href="#">Orders</a></li>
+                                    <li><a href="#">Credit slips</a></li>
+                                    <li><a href="#">Addresses</a></li>
+                                    <li><a href="#">My wishlists</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-12">
+                            <div class="footer-widget widget-customerservice">
+                                <div class="info">
+                                    <h5 class="footer-widget-title">CUSTOMER SERVICE</h5>
+                                    <h5>SEND AN EMAIL</h5>
+                                    <h5>HOTLINE: : <a href="#">+88.2345.6789</a></h5>
+                                    <h6>8:00AM–5.30PM AEST MON–FRI</h6>
+                                </div>
+                                <div class="payment">
+                                    <h6>SECURE PAYMENT VIA</h6>
+                                    <img src="../../appfiles/frontend2/images/icons/payment.png" alt="footer payment">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--// Footer Top Area -->
+            <!-- Footer Bottom -->
+            <div class="footer-bottomarea">
+                <div class="container">
+                    <div class="footer-copyright">
+                        <p class="copyright">Copyright &copy; <a href="#">Haltico</a> . All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+            <!--// Footer Bottom -->
+
+        </footer>
+        <!--// Footer -->
+        <!-- Quickview Modal -->
+        <div class="quickmodal">
+            <div class="body-overlay"></div>
+            <button class="quickmodal-close"><i class="ion ion-ios-close"></i></button>
+            <div class="quickmodal-inside">
+                <div class="container">
+                    <div class="pdetails">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="pdetails-images">
+                                    <div class="pdetails-largeimages">
+                                        <div class="pdetails-singleimage">
+                                            <img src="../../appfiles/frontend2/images/product/lg/product-image-1.jpg" alt="product image">
+                                        </div>
+                                        <div class="pdetails-singleimage">
+                                            <img src="../../appfiles/frontend2/images/product/lg/product-image-2.jpg" alt="product image">
+                                        </div>
+                                        <div class="pdetails-singleimage">
+                                            <img src="../../appfiles/frontend2/images/product/lg/product-image-3.jpg" alt="product image">
+                                        </div>
+                                        <div class="pdetails-singleimage">
+                                            <img src="../../appfiles/frontend2/images/product/lg/product-image-4.jpg" alt="product image">
+                                        </div>
+                                        <div class="pdetails-singleimage">
+                                            <img src="../../appfiles/frontend2/images/product/lg/product-image-1.jpg" alt="product image">
+                                        </div>
+                                        <div class="pdetails-singleimage">
+                                            <img src="../../appfiles/frontend2/images/product/lg/product-image-2.jpg" alt="product image">
+                                        </div>
+                                        <div class="pdetails-singleimage">
+                                            <img src="../../appfiles/frontend2/images/product/lg/product-image-3.jpg" alt="product image">
+                                        </div>
+                                        <div class="pdetails-singleimage">
+                                            <img src="../../appfiles/frontend2/images/product/lg/product-image-4.jpg" alt="product image">
+                                        </div>
+                                    </div>
+
+                                    <div class="pdetails-thumbs">
+                                        <div class="pdetails-singlethumb">
+                                            <img src="../../appfiles/frontend2/images/product/thumbnail/product-image-1.jpg" alt="product thumb">
+                                        </div>
+                                        <div class="pdetails-singlethumb">
+                                            <img src="../../appfiles/frontend2/images/product/thumbnail/product-image-2.jpg" alt="product thumb">
+                                        </div>
+                                        <div class="pdetails-singlethumb">
+                                            <img src="../../appfiles/frontend2/images/product/thumbnail/product-image-3.jpg" alt="product thumb">
+                                        </div>
+                                        <div class="pdetails-singlethumb">
+                                            <img src="../../appfiles/frontend2/images/product/thumbnail/product-image-4.jpg" alt="product thumb">
+                                        </div>
+                                        <div class="pdetails-singlethumb">
+                                            <img src="../../appfiles/frontend2/images/product/thumbnail/product-image-1.jpg" alt="product thumb">
+                                        </div>
+                                        <div class="pdetails-singlethumb">
+                                            <img src="../../appfiles/frontend2/images/product/thumbnail/product-image-2.jpg" alt="product thumb">
+                                        </div>
+                                        <div class="pdetails-singlethumb">
+                                            <img src="../../appfiles/frontend2/images/product/thumbnail/product-image-3.jpg" alt="product thumb">
+                                        </div>
+                                        <div class="pdetails-singlethumb">
+                                            <img src="../../appfiles/frontend2/images/product/thumbnail/product-image-4.jpg" alt="product thumb">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="pdetails-content">
+
+                                    <div class="rattingbox">
+                                        <span class="active"><i class="ion ion-ios-star"></i></span>
+                                        <span class="active"><i class="ion ion-ios-star"></i></span>
+                                        <span class="active"><i class="ion ion-ios-star"></i></span>
+                                        <span class="active"><i class="ion ion-ios-star"></i></span>
+                                        <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    </div>
+                                    <h3>SonicFuel Wireless Over-Ear Headphones</h3>
+                                    <div class="pdetails-pricebox">
+                                        <del class="oldprice">$35.90</del>
+                                        <span class="price">$34.11</span>
+                                        <span class="badge">Save 5%</span>
+                                    </div>
+                                    <p>
+                                        The ATH-S700BT offers clear, full-bodied audio reproduction with Bluetooth®
+                                        wireless operation. The headphones are equipped with a mic, and music and
+                                        volume controls, allowing you to easily answer calls..
+                                    </p>
+                                    <div class="pdetails-quantity">
+                                        <div class="quantity-select">
+                                            <input type="text" value="1">
+                                            <div class="inc qtybutton">+<i class="ion ion-ios-arrow-up"></i></div>
+                                            <div class="dec qtybutton">-<i class="ion ion-ios-arrow-down"></i></div>
+                                        </div>
+                                        <a href="shop-rightsidebar.html" class="ho-button">
+                                            <i class="lnr lnr-cart"></i>
+                                            <span>Add to cart</span>
+                                        </a>
+                                    </div>
+                                    <div class="pdetails-color">
+                                        <span>Color :</span>
+                                        <ul>
+                                            <li class="red"><span></span></li>
+                                            <li class="green checked"><span></span></li>
+                                            <li class="blue"><span></span></li>
+                                            <li class="black"><span></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pdetails-size">
+                                        <span>Size :</span>
+                                        <ul>
+                                            <li class="checked"><span>S</span></li>
+                                            <li><span>M</span></li>
+                                            <li><span>L</span></li>
+                                            <li><span>XL</span></li>
+                                            <li><span>XXL</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pdetails-categories">
+                                        <span>Categories :</span>
+                                        <ul>
+                                            <li><a href="shop-rightsidebar.html">Accessories</a></li>
+                                            <li><a href="shop-rightsidebar.html">Kids</a></li>
+                                            <li><a href="shop-rightsidebar.html">Women</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pdetails-tags">
+                                        <span>Tags :</span>
+                                        <ul>
+                                            <li><a href="shop-rightsidebar.html">Electronic</a></li>
+                                            <li><a href="shop-rightsidebar.html">Television</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pdetails-socialshare">
+                                        <span>Share :</span>
+                                        <ul>
+                                            <li><a href="#"><i class="ion ion-logo-facebook"></i></a></li>
+                                            <li><a href="#"><i class="ion ion-logo-twitter"></i></a></li>
+                                            <li><a href="#"><i class="ion ion-logo-googleplus"></i></a></li>
+                                            <li><a href="#"><i class="ion ion-logo-pinterest"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--// Quickview Modal -->
+
+    </div>
+    <!--// Wrapper -->
+    <!-- Js Files -->
+    @System.Web.Optimization.Scripts.Render("~/bundles/scriptsTheme2");
+</body>
+</html>

@@ -75,7 +75,7 @@ namespace Rachna.Teracotta.Project.Source.administration.product
 
 
             List<ProductBanners> ProductBanners = context.ProductBanner.Where(m => m.Product_Id == _Product.Product_Id).ToList();
-            if (ProductBanners.Count() > 0 && (!(ProductBanners[0].Product_Banner_Photo == "content/noimage.png" && ProductBanners[0].Product_Banner_Default == 1)))
+            if (ProductBanners.Count() > 1 && (!(ProductBanners[0].Product_Banner_Photo == "content/noimage.png" && ProductBanners[0].Product_Banner_Default == 1)))
             {
                 string currentStatus = _Product.Product_Status;
                 if (_Product.Product_Status != eProductStatus.Published.ToString())
@@ -108,7 +108,7 @@ namespace Rachna.Teracotta.Project.Source.administration.product
                 pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
                 pnlErrorMessage.Visible = true;
                 lblMessage.Text = "Oops!!! You cannot Update the product status to " + _Product.Product_Status
-                    + " Because, there is no enough product banner available. Product should not have default banner.";
+                    + " Because, there is no enough product banner available(Bnner should not be no image banner and also allease Minimum two banners required). Product should not have default banner.";
             }
         }
 
