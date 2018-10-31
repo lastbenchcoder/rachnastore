@@ -3,8 +3,7 @@
 
     int canSubmitRequest = 1;
     Rachna.Teracotta.Project.Source.Models.ContactOwner contactOwner = new Rachna.Teracotta.Project.Source.Models.ContactOwner();
-    Rachna.Teracotta.Project.Source.ViewModel.HomePageModelData homwModelData = new Rachna.Teracotta.Project.Source.ViewModel.HomePageModelData();
-    contactOwner = homwModelData.ContactUs();
+    contactOwner = Rachna.Teracotta.Project.Source.ViewModel.ContactModel.Instance.ContactUs();
 
     if (contactOwner != null)
     {
@@ -14,7 +13,7 @@
         }
     }
 
-    Layout = "~/Views/Shared/error.cshtml";
+    Layout = "~/Views/Shared/_productlayout.cshtml";
 }
 
 <div class="spacer30"></div>

@@ -22,6 +22,34 @@ namespace Rachna.Teracotta.Project.Source.administration.home
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                this.Title = ConfigurationSettings.AppSettings["AppName"].ToString() + " : Deal Of The Day";
+                if (Request.QueryString["id"] != null)
+                {
+                    if (Request.QueryString["id"] == "2000")
+                    {
+                        pnlErrorMessage.Attributes.Remove("class");
+                        pnlErrorMessage.Attributes["class"] = "alert alert-success alert-dismissable";
+                        pnlErrorMessage.Visible = true;
+                        lblMessage.Text = "Deal Of The Day Detail Updated Successfully";
+                    }
+                    else if (Request.QueryString["id"] == "3000")
+                    {
+                        pnlErrorMessage.Attributes.Remove("class");
+                        pnlErrorMessage.Attributes["class"] = "alert alert-success alert-dismissable";
+                        pnlErrorMessage.Visible = true;
+                        lblMessage.Text = "Deal Of The Day Detail Deleted Successfully";
+                    }
+                    else if (Request.QueryString["id"] == "404")
+                    {
+                        pnlErrorMessage.Attributes.Remove("class");
+                        pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
+                        pnlErrorMessage.Visible = true;
+                        lblMessage.Text = "Deal Of The Day Detail Failed to Update/Delete, Server Error Occured.";
+                    }
+                }
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)

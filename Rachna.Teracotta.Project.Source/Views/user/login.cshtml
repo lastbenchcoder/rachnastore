@@ -2,25 +2,97 @@
 
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_productlayout.cshtml";
 }
 
 
-<div class="spacer30"></div><!--spacer-->
-<!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
-<div class="wrapper-breadcrumbs clearfix">
+<div class="breadcrumb-area bg-grey">
     <div class="container">
-        <div class="breadcrumbs-main clearfix">
-            <h2>Login / Sign In  </h2>
+        <div class="ho-breadcrumb">
             <ul>
-                <li><a href="#">Home</a><span class="separator">/ </span></li>
-                <li><strong>Login</strong></li>
+                <li><a href="/">Home</a></li>
+                <li>Login/Register</li>
             </ul>
         </div>
     </div>
 </div>
-<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
-<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
+
+<div>
+    @if (ViewBag.Message != null)
+    {
+        <label style="color:red;font-weight:bold">@ViewBag.Message</label>
+    }
+</div>
+
+<div class="my-account-area ptb-30">
+    <div class="container">
+        <div class="row">
+
+            <!-- Login Form -->
+            <div class="col-lg-6">
+                <div class="login-form-wrapper">
+
+                    <form action="/user/loginuser" class="ho-form ho-form-boxed">
+                        <div class="ho-form-inner">
+                            <div class="single-input">
+                                <label for="Customers_EmailId">Username or email address *</label>
+                                <input type="text" id="Customers_EmailId" required name="Customers_EmailId" value="@Model.Customers_EmailId">
+                            </div>
+                            <div class="single-input">
+                                <label for="Customers_Password">Password *</label>
+                                <input type="password" id="Customers_Password" required name="Customers_Password">
+                            </div>
+                            <div class="single-input">
+                                <button type="submit" class="ho-button ho-button-dark mr-3">
+                                    <span>Login</span>
+                                </button>
+                                <div class="checkbox-input">
+                                    <input type="checkbox" name="login-form-remember" id="login-form-remember">
+                                    <label for="login-form-remember">Remember me</label>
+                                </div>
+                            </div>
+                            <div class="single-input">
+                                <a href="#">Lost your password?</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--// Login Form -->
+            <!-- Register Form -->
+            <div class="col-lg-6 mt-30 mt-lg-0">
+                <div class="login-form-wrapper">
+                    <form action="#" class="ho-form ho-form-boxed">
+                        <div class="ho-form-inner">
+                            <div class="single-input">
+                                <label for="register-form-name">Username</label>
+                                <input type="text" name="register-form-name" id="register-form-name">
+                            </div>
+                            <div class="single-input">
+                                <label for="register-form-email">Email address</label>
+                                <input type="text" name="register-form-email" id="register-form-email">
+                            </div>
+                            <div class="single-input">
+                                <label for="register-form-password">Password</label>
+                                <input type="password" name="register-form-password" id="register-form-password">
+                            </div>
+                            <div class="single-input">
+                                <button type="submit" class="ho-button ho-button-dark">
+                                    <span>Register</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--// Register Form -->
+
+        </div>
+    </div>
+</div>
+
+
+
 <div class="wrapper-main brandshop clearfix">
     <div class="spacer30"></div><!--spacer-->
     <div class="container">
@@ -107,7 +179,7 @@
 
 <script type="text/javascript">
     var password = document.getElementById("password")
-  , confirm_password = document.getElementById("confirm_password");
+        , confirm_password = document.getElementById("confirm_password");
 
     function validatePassword() {
         if (password.value != confirm_password.value) {

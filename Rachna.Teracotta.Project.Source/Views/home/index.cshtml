@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "index";
+    ViewBag.Title = "Online Shopping Store";
     Layout = "~/Views/Shared/_layout2.cshtml";
 
     Rachna.Teracotta.Project.Source.ViewModel.HomePageModel homePageModel = new Rachna.Teracotta.Project.Source.ViewModel.HomePageModel();
@@ -51,12 +51,12 @@
             <div class="product-slider deal-of-the-day-slider slider-navigation-2 slider-dots">
                 @foreach (var item in homePageModel._dealoftheday)
                 {
-                    if (item.Deal_Starts_From.Date == DateTime.Now.Date)
+                    if (item.Deal_Starts_From.Date >= DateTime.Now.Date)
                     {
                         <div class="product-slider-col">
                             <article class="hoproduct hoproduct-2">
                                 <div class="hoproduct-image">
-                                    <a class="hoproduct-thumb" href="product-details.html">
+                                    <a class="hoproduct-thumb" href="/product/index?id=@item.Product_Id&title=@item.Product.Product_Title">
                                         <img class="hoproduct-frontimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                         <img class="hoproduct-backimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                     </a>
@@ -119,8 +119,8 @@
                                     </div>
                                     <div class="hoproduct-pricebox">
                                         <div class="pricebox">
-                                            <del class="oldprice">&#x20B9; @item.Product.Product_Our_Price</del>
-                                            <span class="price">&#x20B9; @item.Deal_Price</span>
+                                            <del class="oldprice">&#x20B9; @Math.Round(item.Product.Product_Our_Price)</del>
+                                            <span class="price">&#x20B9; @Math.Round(item.Deal_Price)</span>
                                         </div>
                                         <span class="discount">@Math.Round(GST_Percentage) <span>%</span></span>
                                     </div>
@@ -253,8 +253,8 @@
                                         </div>
                                         <div class="hoproduct-pricebox">
                                             <div class="pricebox">
-                                                <del class="oldprice">&#x20B9; @item.Product.Product_Mkt_Price</del>
-                                                <span class="price">&#x20B9; @item.Product.Product_Our_Price</span>
+                                                <del class="oldprice">&#x20B9; @Math.Round(item.Product.Product_Mkt_Price)</del>
+                                                <span class="price">&#x20B9; @Math.Round(item.Product.Product_Our_Price)</span>
                                             </div>
                                         </div>
                                     </div>
@@ -327,8 +327,8 @@
                                         </div>
                                         <div class="hoproduct-pricebox">
                                             <div class="pricebox">
-                                                <del class="oldprice">&#x20B9; @item.Product.Product_Mkt_Price</del>
-                                                <span class="price">&#x20B9; @item.Product.Product_Our_Price</span>
+                                                <del class="oldprice">&#x20B9; @Math.Round(item.Product.Product_Mkt_Price)</del>
+                                                <span class="price">&#x20B9; @Math.Round(item.Product.Product_Our_Price)</span>
                                             </div>
                                         </div>
                                     </div>
@@ -402,8 +402,8 @@
                                         </div>
                                         <div class="hoproduct-pricebox">
                                             <div class="pricebox">
-                                                <del class="oldprice">&#x20B9; @item.Product.Product_Mkt_Price</del>
-                                                <span class="price">&#x20B9; @item.Product.Product_Our_Price</span>
+                                                <del class="oldprice">&#x20B9; @Math.Round(item.Product.Product_Mkt_Price)</del>
+                                                <span class="price">&#x20B9; @Math.Round(item.Product.Product_Our_Price)</span>
                                             </div>
                                         </div>
                                     </div>
@@ -472,7 +472,7 @@
                                     </div>
                                     <div class="hoproduct-content">
                                         <h5 class="hoproduct-title">
-                                            <a href="product-details.html">
+                                            <a href="/product/index?id=@item.Product_Id&title=@item.Product.Product_Title">
                                                 @item.Product.Product_Title
                                             </a>
                                         </h5>
@@ -512,8 +512,8 @@
                                         </div>
                                         <div class="hoproduct-pricebox">
                                             <div class="pricebox">
-                                                <del class="oldprice">&#x20B9; @item.Product.Product_Mkt_Price</del>
-                                                <span class="price">&#x20B9; @item.Product.Product_Our_Price</span>
+                                                <del class="oldprice">&#x20B9; @Math.Round(item.Product.Product_Mkt_Price)</del>
+                                                <span class="price">&#x20B9; @Math.Round(item.Product.Product_Our_Price)</span>
                                             </div>
                                         </div>
                                     </div>
@@ -533,18 +533,18 @@
     <div class="container">
         @if (homePageModel._stores != null && homePageModel._stores.Count > 0)
         {
-        <div class="brand-logo-slider slider-navigation-3">
-            @foreach (var item in homePageModel._stores)
-            {
-                <div class="brandlogo">
-                    <a href="/home/ProductByStore?storeId=@item.Store_Id&title=@item.Store_Name">
-                        <img src="../@item.Store_Logo" alt="brand logo">
-                    </a>
-                </div>
-            }
+            <div class="brand-logo-slider slider-navigation-3">
+                @foreach (var item in homePageModel._stores)
+                {
+                    <div class="brandlogo">
+                        <a href="/home/ProductByStore?storeId=@item.Store_Id&title=@item.Store_Name">
+                            <img src="../@item.Store_Logo" alt="brand logo">
+                        </a>
+                    </div>
+                }
             </div>
         }
-        </div>
+    </div>
 </div>
 <!--// Brand Logo Area -->
 <!-- Latest Blog Area -->
@@ -675,3 +675,37 @@
     </div>
 </div>
 <!--// Latest Blog Area -->
+<!-- Newsletter Area -->
+<div class="ho-section newsletter-area bg-grey ptb-50">
+    <div class="container">
+        <div class="newsletter">
+            <div class="newsletter-title">
+                <h2>Subscribe to our <span>Newsletter!</span></h2>
+            </div>
+            <div class="newsletter-content">
+                <form action="/home/subscribe/" class="newsletter-form">
+                    <input type="email" name="emailid" autocomplete="off" placeholder="Your email address..." required />
+                    <button type="submit">Subscribe</button>
+                </form>
+                <!-- mailchimp-alerts start -->
+                <div class="mailchimp-alerts text-centre">
+                    <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                    <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                    <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                </div><!-- mailchimp-alerts end -->
+            </div>
+            <div class="newsletter-socialicons socialicons socialicons-radial">
+                @if (homePageModel._social != null && homePageModel._social.Count > 0)
+                {
+                    <ul>
+                        @foreach (var item in homePageModel._social)
+                        {
+                            <li><a href="@item.Scl_Ntk_URL" target="_blank"><img src="../../@item.Scl_Ntk_Icon" alt="" /></a></li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--// Newsletter Area -->

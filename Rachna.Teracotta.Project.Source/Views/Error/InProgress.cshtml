@@ -4,54 +4,38 @@
     Layout = "~/Views/Shared/error.cshtml";
 
     Rachna.Teracotta.Project.Source.Models.UnderConstrunction underConstrunction = new Rachna.Teracotta.Project.Source.Models.UnderConstrunction();
-    Rachna.Teracotta.Project.Source.ViewModel.HomePageModelData homwModelData = new Rachna.Teracotta.Project.Source.ViewModel.HomePageModelData();
-    underConstrunction = homwModelData.PageUnderConstruction();
+    underConstrunction = Rachna.Teracotta.Project.Source.ViewModel.ContactModel.Instance.PageUnderConstruction();
+
 }
 
-<div class="no-page clearfix">
-    @{
-        if (@underConstrunction != null)
-        {
-            <h1>@underConstrunction.UnderConst_Title</h1>
-            <br />
-            <p>@underConstrunction.UnderConst_Description</p>
-            <br />
-        }
-        else
-        {
-            <h1>Sorry, We are currently working on this. Every minute of an hour don't think about a rest.</h1>
-            <br />
-            <p>Enter your Email below and we will notice you, when its ready. In the mean time check our facebook, twitter or instagram</p>
-            <br />
-        }
-    }
-    <div class="newsletter" style="margin-left:270px">
-        <input type="text" name="" class="txtSubscrEmailId" value="" required>
-        <input type="submit" class="btnSubscribe" value="SUBSCRIBE">
-        <script type="text/javascript">
-            $(".btnSubscribe").click(function () {
-                var emailid = $(".txtSubscrEmailId").val();
-                if (emailid == '') {
-                    Messi.alert('Please Enter Email Id to subscribe.');
-                    return false;
-                }
-                else {
-                    if (/^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($(".txtSubscrEmailId").val())) {
-                        $.ajax({
-                            type: "POST",
-                            url: '/home/subscribe?emailid=' + $(".txtSubscrEmailId").val(),
-                            success: function (data) {
-                                Messi.alert(data);
-                                return false;
-                            }
-                        });
-                    }
-                    else {
-                        Messi.alert("You have entered an invalid email address!")
-                        return (false)
-                    }
-                }
-            });
-        </script>
+<div class="ho-section newsletter-area bg-grey ptb-50">
+    <div class="container">
+        <div class="about-content">
+            @if (@underConstrunction != null)
+            {
+                <h2>@underConstrunction.UnderConst_Title</h2>
+                <p>
+                    @underConstrunction.UnderConst_Description
+                </p>
+            }
+            else
+            {
+                <h2>Sorry, We are currently working on this. Every minute of an hour don't think about a rest.</h2>
+                <br />
+                <p>Enter your Email below and we will notice you, when its ready. In the mean time check our facebook, twitter or instagram</p>
+                <br />
+            }
+        </div>
+        <div class="newsletter">
+            <div class="newsletter-title">
+                <h2>Subscribe to our <span>Newsletter!</span></h2>
+            </div>
+            <div class="newsletter-content">
+                <form action="/home/subscribe/" class="newsletter-form">
+                    <input type="email" name="emailid" autocomplete="off" placeholder="Your email address..." required="">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
     </div>
-</div><!-- End 404 -->
+</div>

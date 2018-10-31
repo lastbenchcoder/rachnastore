@@ -1,34 +1,24 @@
 ﻿<!doctype html>
 <html class="no-js" lang="zxx">
 <head>
-    @Html.Partial("themeglobal2/_metainfo")
     <title>Rachna's Store - @ViewBag.Title</title>
     <link rel="icon" href="../../content/favicon.png" type="image/x-icon" />
+    @System.Web.Optimization.Styles.Render("~/bundles/feglobal")
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet">
     <link rel="stylesheet" href="../../appfiles/frontend2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../appfiles/frontend2/css/plugins.css">
     @System.Web.Optimization.Styles.Render("~/bundles/stylesTheme2")
-    @{
-        Rachna.Teracotta.Project.Source.Models.UnderConstrunction UnderConstrunction = new Rachna.Teracotta.Project.Source.Models.UnderConstrunction();
-        UnderConstrunction = Rachna.Teracotta.Project.Source.ViewModel.ContactModel.Instance.PageUnderConstruction();
-    }
 </head>
 
 <body>
-    @if (UnderConstrunction != null)
-    {
-        if (UnderConstrunction.UnderConst_DispInstHmpPage == "Active")
-        {
-            Response.Redirect("/error/inprogress");
-        }
-    }
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="../../appfiles/frontend/js/jquery.tmpl.min.js"></script>
     <div id="wrapper" class="wrapper">
         <!-- Header -->
         @Html.Partial("themeglobal2/_header")
         <!--// Header -->
-        <!-- Banners Area -->
-        @Html.Partial("themeglobal2/_sliderandcategory")
-        <!--// Banners Area -->
         <!-- Page Conttent -->
         <main class="page-content">
             @RenderBody()

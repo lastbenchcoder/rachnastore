@@ -8,8 +8,12 @@ using System.Web;
 
 namespace Rachna.Teracotta.Project.Source.ViewModel
 {
-    public class ProductModel
+    public class ProductPageModel
     {
+        public ProductPageModel()
+        {
+
+        }
         public int AlreadyCommentsDone = 0;
         public Product Product { get; set; }
         public Customers Customers { get; set; }
@@ -21,11 +25,35 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
         public List<Categories> Categories { get; set; }
     }
 
-    public class ProductPageModel
+    public sealed class ProductPage
     {
-        public ProductModel GetProductPageData(int product_id)
+        private static ProductPage instance = null;
+        private static readonly object padlock = new object();
+
+        public ProductPage()
         {
-            ProductModel prdModel = new ProductModel();
+        }
+
+        public static ProductPage Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new ProductPage();
+                        }
+                    }
+                }
+                return instance;
+            }
+        }
+        public ProductPageModel GetProductPageData(int product_id)
+        {
+            ProductPageModel prdModel = new ProductPageModel();
 
             using (var ctx = new RachnaDBContext())
             {
@@ -80,9 +108,9 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
             }
         }
 
-        public ProductModel GetProductPageDataOffline(int product_id)
+        public ProductPageModel GetProductPageDataOffline(int product_id)
         {
-            ProductModel prdModel = new ProductModel();
+            ProductPageModel prdModel = new ProductPageModel();
 
             using (var ctx = new RachnaDBContext())
             {

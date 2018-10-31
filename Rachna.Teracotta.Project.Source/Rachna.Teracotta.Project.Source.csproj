@@ -169,6 +169,7 @@
     <Content Include="administration\home\advertisement.aspx" />
     <Content Include="administration\home\advertisementdetail.aspx" />
     <Content Include="administration\home\dealoftheday.aspx" />
+    <Content Include="administration\home\dealofthedaydetail.aspx" />
     <Content Include="administration\home\featuredproducts.aspx" />
     <Content Include="administration\home\slider.aspx" />
     <Content Include="administration\home\sliderdetail.aspx" />
@@ -336,7 +337,11 @@
     <Content Include="appfiles\frontend2\js\ajax-mail.js" />
     <Content Include="appfiles\frontend2\js\bootstrap.min.js" />
     <Content Include="appfiles\frontend2\js\google-map.js" />
+    <Content Include="appfiles\frontend2\js\jquery.blockUI.js" />
+    <Content Include="appfiles\frontend2\js\jquery.tmpl.js" />
     <Content Include="appfiles\frontend2\js\main.js" />
+    <Content Include="appfiles\frontend2\js\messi.css" />
+    <Content Include="appfiles\frontend2\js\messi.js" />
     <Content Include="appfiles\frontend2\js\plugins.js" />
     <Content Include="appfiles\frontend2\js\popper.min.js" />
     <Content Include="appfiles\frontend2\js\vendor\jquery-3.3.1.min.js" />
@@ -1477,6 +1482,13 @@
     <Compile Include="administration\home\dealoftheday.aspx.designer.cs">
       <DependentUpon>dealoftheday.aspx</DependentUpon>
     </Compile>
+    <Compile Include="administration\home\dealofthedaydetail.aspx.cs">
+      <DependentUpon>dealofthedaydetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\home\dealofthedaydetail.aspx.designer.cs">
+      <DependentUpon>dealofthedaydetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="administration\home\featuredproducts.aspx.cs">
       <DependentUpon>featuredproducts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1988,21 +2000,18 @@
     <Compile Include="Upload.ashx.cs">
       <DependentUpon>Upload.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ContactModel.cs" />
     <Compile Include="ViewModel\HomePageModel.cs" />
+    <Compile Include="ViewModel\ProductPageModel.cs" />
     <Compile Include="ViewModel\SliderModel.cs" />
     <Compile Include="ViewModel\CartModel.cs" />
     <Compile Include="ViewModel\FooterModel.cs" />
     <Compile Include="ViewModel\HeaderModel.cs" />
-    <Compile Include="ViewModel\HomeModel.cs" />
-    <Compile Include="ViewModel\ProductModel.cs" />
-    <Compile Include="ViewModel\TopBarModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="account\Account.Master" />
     <Content Include="account\Message.Master" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\home\index1.cshtml" />
     <Content Include="Views\web.config" />
     <Content Include="appfiles\frontend\fonts\fontawesome-webfont3e6e.eot" />
     <Content Include="appfiles\frontend\fonts\fontawesome-webfont3e6e.ttf" />
@@ -2054,9 +2063,6 @@
     <Content Include="appfiles\frontend2\fonts\slickd41d.eot" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\rachna teracotta.pubxml" />
-    <Content Include="Views\Shared\components\_cart.cshtml" />
-    <Content Include="Views\Shared\components\_header.cshtml" />
-    <Content Include="Views\Shared\components\_footer.cshtml" />
     <Content Include="Views\home\about.cshtml" />
     <Content Include="Views\home\contact.cshtml" />
     <Content Include="Views\user\login.cshtml" />
@@ -2076,7 +2082,6 @@
     <Content Include="Views\user\cancelorder.cshtml" />
     <Content Include="Views\home\productbycategory.cshtml" />
     <Content Include="Views\Error\InProgress.cshtml" />
-    <Content Include="Views\product\Index.cshtml" />
     <Content Include="Views\user\trackorder.cshtml" />
     <Content Include="Views\home\searchresult.cshtml" />
     <Content Include="Views\user\success.cshtml" />
@@ -2099,16 +2104,14 @@
     <Content Include="Web_Prod.Release.config">
       <DependentUpon>Web_Prod.config</DependentUpon>
     </Content>
-    <Content Include="Views\Shared\components\_topbar.cshtml" />
-    <Content Include="Views\Shared\components\_category.cshtml" />
-    <Content Include="Views\Shared\components\_slider.cshtml" />
-    <Content Include="Views\Shared\components\_featured.cshtml" />
-    <Content Include="Views\Shared\components\_metaInfo.cshtml" />
     <Content Include="Views\Shared\themeglobal2\_header.cshtml" />
     <Content Include="Views\Shared\_layout2.cshtml" />
     <Content Include="Views\home\index.cshtml" />
     <Content Include="Views\Shared\themeglobal2\_metaInfo.cshtml" />
     <Content Include="Views\Shared\themeglobal2\_sliderandcategory.cshtml" />
+    <Content Include="Views\Shared\themeglobal2\_footer.cshtml" />
+    <Content Include="Views\product\index.cshtml" />
+    <Content Include="Views\Shared\_productlayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

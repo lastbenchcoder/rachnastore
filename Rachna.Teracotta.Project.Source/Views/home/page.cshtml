@@ -5,7 +5,7 @@
     Pages = context.Pages.Where(m => m.Page_Id == pageid).FirstOrDefault();
 
     ViewBag.Title = Pages.Title;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_productlayout.cshtml";
 }
 
 <div class="spacer30"></div><!--spacer-->

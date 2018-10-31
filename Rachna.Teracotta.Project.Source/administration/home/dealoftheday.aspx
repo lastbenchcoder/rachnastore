@@ -172,7 +172,7 @@
                                     </td>
                                     <td><%=item.Deal_CreatedDate.ToString("D") %></td>
                                     <td><%=item.Deal_UpdatedDate.ToString("D") %></td>
-                                    <td><a href="/administration/home/advertisementdetail.aspx?adsId=<%=item.Deal_Id %>"><i class="fa fa-edit fa-lg"></i></a></td>
+                                    <td><a href="/administration/home/dealofthedaydetail.aspx?dealId=<%=item.Deal_Id %>"><i class="fa fa-edit fa-lg"></i></a></td>
                                 </tr>
                                 <%
                                     }

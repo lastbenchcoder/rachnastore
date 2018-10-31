@@ -17,9 +17,9 @@
         totaltotal = totalsubtotal + totalshippingcharge;
     }
 }
-<header class="header header-3">
+<header class="header">
     <!-- Header Top Area -->
-    <div class="header-top bg-theme">
+    <div class="header-top bg-white">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7 col-md-7 col-sm-7 col-12">
@@ -131,7 +131,7 @@
                                                     </h6>
                                                     <span class="minicart-productprice">&#x20B9;@items.Product_Price</span>
                                                 </div>
-                                                <button class="minicart-productclose" onclick="/cart/deletecart/@items.Product_Id"><i class="ion ion-ios-close-circle"></i></button>
+                                                <a class="minicart-productclose" href="/cart/deletecart/@items.Product_Id"><i class="ion ion-ios-close-circle"></i></a>
                                             </div>
                                         }
                                     </div>
@@ -159,13 +159,13 @@
     </div>
     <!--// Header Middle Area -->
     <!-- Header Bottom Area -->
-    <div class="header-bottom bg-white">
+    <div class="header-bottom bg-theme">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-10 d-none d-lg-block">
 
                     <!-- Navigation -->
-                    <nav class="ho-navigation ho-navigation-3">
+                    <nav class="ho-navigation">
                         @if (headerModel._menu != null && headerModel._menu.Count > 0)
                         {
                             if (headerModel._menu.Where(m => m.MenuType == Rachna.Teracotta.Project.Source.Entity.eMenu.Header.ToString()).ToList().Count > 0)

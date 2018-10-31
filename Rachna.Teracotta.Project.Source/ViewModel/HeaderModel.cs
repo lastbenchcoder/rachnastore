@@ -57,9 +57,9 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
                 if (HttpContext.Current.Session["UserKey"] != null)
                 {
                     int cusId = Convert.ToInt32(HttpContext.Current.Session["UserKey"].ToString());
-                    _header._customer = context.Customer.ToList().Where(m => m.Customer_Id == cusId).FirstOrDefault();
-                    _header._contact = context.ContactOwner.Where(m => m.Contact_Status == eStatus.Active.ToString()).FirstOrDefault();
+                    _header._customer = context.Customer.ToList().Where(m => m.Customer_Id == cusId).FirstOrDefault();                    
                 }
+                _header._contact = context.ContactOwner.Where(m => m.Contact_Status == eStatus.Active.ToString()).FirstOrDefault();
             }
             return _header;
         }

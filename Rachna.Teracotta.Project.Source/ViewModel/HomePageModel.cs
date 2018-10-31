@@ -21,6 +21,7 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
         public List<ProductFeatures> _featureBest { get; set; }
         public List<ProductFeatures> _featureHot { get; set; }
         public List<Stores> _stores { get; set; }
+        public List<SocialNetworking> _social { get; set; }
     }
 
     public sealed class HomePage
@@ -94,6 +95,8 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
                 }
 
                 _HomePage._stores = context.Store.ToList().Where(m => m.Store_Status == eStatus.Active.ToString()).ToList();
+
+                _HomePage._social = context.SocialNetworking.Where(m => m.Scl_Ntk_Status == eStatus.Active.ToString()).ToList();
             }
             return _HomePage;
         }

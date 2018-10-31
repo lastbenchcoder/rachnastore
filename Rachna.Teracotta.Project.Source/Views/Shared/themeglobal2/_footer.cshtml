@@ -1,0 +1,105 @@
+﻿@{
+    Rachna.Teracotta.Project.Source.ViewModel.FooterModel footerModel = new Rachna.Teracotta.Project.Source.ViewModel.FooterModel();
+    footerModel = Rachna.Teracotta.Project.Source.ViewModel.Footer.Instance.Get();
+}
+
+<footer class="footer bg-white">
+
+    <!-- Footer Top Area -->
+    <div class="footer-toparea">
+        <div class="container">
+            <div class="row">
+                @if (footerModel._contact != null)
+                {
+                    <div class="col-lg-3 col-12">
+                        <div class="footer-widget widget-info">
+                            <h5 class="footer-widget-title">Contact Info</h5>
+                            <p>
+                                @footerModel._contact.Contact_Description
+                            </p>
+                            <ul>
+                                <li>
+                                    <i class="ion ion-ios-pin"></i> @footerModel._contact.Contact_Address
+                                </li>
+                                <li><i class="ion ion-ios-call"></i> Call us: +@footerModel._contact.Contact_Phone</li>
+                                <li><i class="ion ion-ios-print"></i> Fax: +@footerModel._contact.Contact_Fax</li>
+                                <li><i class="ion ion-ios-mail"></i> Email us: <a href="#">@footerModel._contact.Contact_EmailId</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+                <div class="col-lg-2 col-md-4">
+                    <div class="footer-widget widget-links">
+                        <h5 class="footer-widget-title">Categories</h5>
+                        <ul>
+                            @if (footerModel._categories != null && footerModel._categories.Count > 0)
+                            {
+                                foreach (var item in footerModel._categories)
+                                {
+                                    <li><a href="#">@item.Category_Title</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <div class="footer-widget widget-links">
+                        <h5 class="footer-widget-title">Partners</h5>
+                        <ul>
+                            @if (footerModel._stores != null && footerModel._stores.Count > 0)
+                            {
+                                foreach (var item in footerModel._stores)
+                                {
+                                    <li><a href="/home/ProductByStore?storeId=@item.Store_Id&title=@item.Store_Name">@item.Store_Name</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <div class="footer-widget widget-links">
+                        <h5 class="footer-widget-title">Quick Help</h5>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Coming Soon</a></li>
+                            <li><a href="#">Special</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-12">
+                    <div class="footer-widget widget-customerservice">
+                        <div class="info">
+                            <h5 class="footer-widget-title">CUSTOMER SERVICE</h5>
+                            @if (footerModel._contact != null)
+                            {
+                                <h5>EMAIL : <a href="#">@footerModel._contact.Contact_EmailId</a></h5>
+                                <h5>HOTLINE: : <a href="#">+@footerModel._contact.Contact_Phone</a></h5>
+                            }
+                            <h6>8:00AM–5.30PM AEST MON–FRI</h6>
+                        </div>
+                        <div class="payment">
+                            <h6>SECURE PAYMENT VIA</h6>
+                            <img src="../../appfiles/frontend2/images/icons/payment.png" alt="footer payment">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// Footer Top Area -->
+    <!-- Footer Bottom -->
+    <div class="footer-bottomarea">
+        <div class="container">
+            <div class="footer-copyright">
+                <p class="copyright">Copyright &copy; <a href="/">@System.Configuration.ConfigurationSettings.AppSettings["AppName"].ToString() @DateTime.Now.Year</a> . All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+    <!--// Footer Bottom -->
+
+</footer>
