@@ -27,9 +27,14 @@
 <div class="my-account-area ptb-30">
     <div class="container">
         <div class="row">
-
             <!-- Login Form -->
             <div class="col-lg-6">
+                @if (ViewBag.Message != null)
+                {
+                    <blockquote>
+                        @ViewBag.Message
+                    </blockquote>
+                }
                 <div class="login-form-wrapper">
 
                     <form action="/user/loginuser" class="ho-form ho-form-boxed">
@@ -62,22 +67,30 @@
             <!-- Register Form -->
             <div class="col-lg-6 mt-30 mt-lg-0">
                 <div class="login-form-wrapper">
-                    <form action="#" class="ho-form ho-form-boxed">
+                    <form action="/user/signup/" class="ho-form ho-form-boxed">
                         <div class="ho-form-inner">
                             <div class="single-input">
-                                <label for="register-form-name">Username</label>
-                                <input type="text" name="register-form-name" id="register-form-name">
+                                <label for="Customers_FullName">Username</label>
+                                <input type="text" id="Customers_FullName" name="Customers_FullName" value="@Model.Customers_FullName" required>
                             </div>
                             <div class="single-input">
-                                <label for="register-form-email">Email address</label>
-                                <input type="text" name="register-form-email" id="register-form-email">
+                                <label for="Customers_EmailId">Email address</label>
+                                <input type="email" id="Customers_EmailId" name="Customers_EmailId" value="@Model.Customers_EmailId" required>
                             </div>
                             <div class="single-input">
-                                <label for="register-form-password">Password</label>
-                                <input type="password" name="register-form-password" id="register-form-password">
+                                <label for="Customers_Phone">Phone Number</label>
+                                <input type="number" id="Customers_Phone" name="Customers_Phone" value="@Model.Customers_Phone" required>
                             </div>
                             <div class="single-input">
-                                <button type="submit" class="ho-button ho-button-dark">
+                                <label for="Customers_Password">Password</label>
+                                <input type="number" id="Customers_Password" name="Customers_Password" required>
+                            </div>
+                            <div class="single-input">
+                                <label for="ConfirmPassword">Confirm Password</label>
+                                <input type="number" id="ConfirmPassword" name="ConfirmPassword" required>
+                            </div>
+                            <div class="single-input">
+                                <button type="submit" class="ho-button ho-button-dark btnLoginCustomer">
                                     <span>Register</span>
                                 </button>
                             </div>
@@ -90,92 +103,6 @@
         </div>
     </div>
 </div>
-
-
-
-<div class="wrapper-main brandshop clearfix">
-    <div class="spacer30"></div><!--spacer-->
-    <div class="container">
-        <div class="inner-block">
-            <!------Main Inner-------->
-            <div class="row">
-                <div class="sign-main">
-                    <!-- Start Sign -->
-                    <div class="sign-details clearfix">
-                        <!-- Start Form -->
-                        <div class="col-sm-6 contact-form">
-                            <div class="sign-block">
-                                <h4>Login</h4>
-                                <p class="mb15">
-                                    @if (ViewBag.Message != null)
-                                    {
-                                        <label style="color:red;font-weight:bold">@ViewBag.Message</label>
-                                    }
-                                </p>
-                                <form action="/user/loginuser">
-                                    <ul>
-                                        <li class="form-group">
-                                            <label for="CustomerId">Email Address <span>*</span></label>
-                                            <input type="text" id="CustomerId" class="form-control" required name="Customers_EmailId" value="@Model.Customers_EmailId">
-                                        </li>
-                                        <li class="form-group">
-                                            <label for="Password">Password <span>*</span></label>
-                                            <input type="password" id="Password" class="form-control" required name="Customers_Password">
-                                        </li>
-                                        <li class="form-group">
-                                            <label><input type="radio" value="" />Remember me!<span>*</span></label>
-                                            <a class="pull-right" href="#">Forgot your Password?</a>
-                                        </li>
-                                        <li>
-                                            <button type="submit" class="btnLoginCustomer btn">Login</button>
-                                        </li>
-                                    </ul>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 contact-form">
-                            <div class="new-account">
-                                <div class="sign-block">
-                                    <h4>Create new account</h4>
-                                    <form action="/user/signup/">
-                                        <ul>
-                                            <li class="form-group">
-                                                <label for="FirstName">Full Name<span>*</span></label>
-                                                <input type="text" id="FirstName" class="form-control" name="Customers_FullName" value="@Model.Customers_FullName" required>
-                                            </li><!-- End .form-group -->
-                                            <li class="form-group">
-                                                <label for="EmailId">EmailId<span>*</span></label>
-                                                <input type="email" id="EmailId" class="form-control" name="Customers_EmailId" value="@Model.Customers_EmailId" required>
-                                            </li><!-- End .form-group -->
-                                            <li class="form-group">
-                                                <label for="Phone">Phone<span>*</span></label>
-                                                <input type="number" id="Phone" class="form-control" name="Customers_Phone" value="@Model.Customers_Phone" required>
-                                            </li><!-- End .form-group -->
-                                            <li class="form-group">
-                                                <label for="password">Password<span>*</span></label>
-                                                <input type="password" id="password" class="form-control" name="Customers_Password" required>
-                                            </li><!-- End .form-group -->
-                                            <li class="form-group">
-                                                <label for="confirm_password">Confirm Password<span>*</span></label>
-                                                <input type="password" id="confirm_password" class="form-control" name="ConfirmPassword" required>
-                                            </li><!-- End .form-group -->
-
-                                            <li>
-                                                <button type="submit" class="btnLoginCustomer btn">REGISTER</button>
-                                            </li>
-                                        </ul>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End Form -->
-                </div><!-- End Sign -->
-            </div>
-        </div>
-    </div>
-    <div class="spacer30"></div><!--spacer-->
-</div>
-<!-------------- End wrapper main -------------->
 
 <script type="text/javascript">
     var password = document.getElementById("password")

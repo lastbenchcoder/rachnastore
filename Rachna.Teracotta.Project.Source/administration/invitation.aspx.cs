@@ -61,8 +61,6 @@ namespace Rachna.Teracotta.Project.Source.administration
                     {
                         if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
                         {
-                            _invitation = null;
-                            invitations = null;
                             txtEmailId.Text = "";
                             ddlRole.SelectedIndex = 0;
                             ddlStore.SelectedIndex = 0;
@@ -77,8 +75,6 @@ namespace Rachna.Teracotta.Project.Source.administration
                         }
                         else
                         {
-                            _invitation = null;
-                            invitations = null;
                             txtEmailId.Text = "";
                             ddlRole.SelectedIndex = 0;
                             ddlStore.SelectedIndex = 0;
@@ -95,6 +91,9 @@ namespace Rachna.Teracotta.Project.Source.administration
                         pnlErrorMessage.Visible = true;
                         lblMessage.Text = "Failed!" + invitations.ErrorMessage;
                     }
+
+                    _invitation = null;
+                    invitations = null;
                 }
                 else
                 {

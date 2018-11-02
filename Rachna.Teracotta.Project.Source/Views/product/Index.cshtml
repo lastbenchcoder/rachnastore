@@ -118,8 +118,18 @@
                                         }
                                         else
                                         {
-                                            <a href="/user/" class="ho-button"><i class="lnr lnr-cart"></i>Go To Cart</a>
+                                            <button type="button" class="ho-button" onclick="window.location.href('/user/');">
+                                                <i class="lnr lnr-cart"></i>
+                                                <span>Go to Cart</span>
+                                            </button>
                                         }
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="ho-button">
+                                            <i class="lnr lnr-cart"></i>
+                                            <span>Add to cart</span>
+                                        </button>
                                     }
                                 }
                                 else
