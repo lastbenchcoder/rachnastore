@@ -21,55 +21,67 @@
                                     foreach (var item in sliderModel._categories)
                                     {
                                         a = a + 1;
-                                        <li class="catmenu-dropdown">
-                                            @if (a == 1)
-                                            {
-                                                <a href="#"><i class="ion ion-ios-power"></i>@item.Category_Title</a>
-                                            }
-                                            else if (a == 2)
-                                            {
-                                                <a href="#"><i class="ion ion-ios-infinite"></i>@item.Category_Title</a>
-                                            }
-                                            else if (a == 3)
-                                            {
-                                                <a href="#"><i class="ion ion-ios-desktop"></i>@item.Category_Title</a>
-                                            }
-                                            else if (a == 4)
-                                            {
-                                                <a href="#"><i class="ion ion-md-watch"></i>@item.Category_Title</a>
-                                            }
-                                            else if (a == 5)
-                                            {
-                                                <a href="#"><i class="ion ion-ios-camera"></i>@item.Category_Title</a>
-                                            }
-                                            else if (a == 6)
-                                            {
-                                                <a href="#"><i class="ion ion-ios-volume-high"></i>@item.Category_Title</a>
-                                            }
-                                            else if (a == 7)
-                                            {
-                                                <a href="#"><i class="ion ion-md-headset"></i>@item.Category_Title</a>
-                                            }
-                                            else
-                                            {
-                                                <a href="#"><i class="ion ion-ios-desktop"></i>@item.Category_Title</a>
-                                            }
+                                <li class="catmenu-dropdown">
+                                    @if (a == 1)
+                                    {
+                                        <a href="#"><i class="ion ion-ios-power"></i>@item.Category_Title</a>
+                                    }
+                                    else if (a == 2)
+                                    {
+                                        <a href="#"><i class="ion ion-ios-infinite"></i>@item.Category_Title</a>
+                                    }
+                                    else if (a == 3)
+                                    {
+                                        <a href="#"><i class="ion ion-ios-desktop"></i>@item.Category_Title</a>
+                                    }
+                                    else if (a == 4)
+                                    {
+                                        <a href="#"><i class="ion ion-md-watch"></i>@item.Category_Title</a>
+                                    }
+                                    else if (a == 5)
+                                    {
+                                        <a href="#"><i class="ion ion-ios-camera"></i>@item.Category_Title</a>
+                                    }
+                                    else if (a == 6)
+                                    {
+                                        <a href="#"><i class="ion ion-ios-volume-high"></i>@item.Category_Title</a>
+                                    }
+                                    else if (a == 7)
+                                    {
+                                        <a href="#"><i class="ion ion-md-headset"></i>@item.Category_Title</a>
+                                    }
+                                    else if (a == 8)
+                                    {
+                                        <a href="#"><i class="ion ion-md-heart"></i>@item.Category_Title</a>
+                                    }
+                                    else if (a == 9)
+                                    {
+                                        <a href="#"><i class="ion ion-md-hammer"></i>@item.Category_Title</a>
+                                    }
+                                    else if (a == 10)
+                                    {
+                                        <a href="#"><i class="ion ion-md-airplane"></i>@item.Category_Title</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#"><i class="ion ion-ios-desktop"></i>@item.Category_Title</a>
+                                    }
 
-                                            @if (item.SubCategory != null)
-                                            {
-                                                <ul class="megamenu catmenu-megamenu">
-                                                    <li>
-                                                        <a href="#">@item.Category_Title</a>
-                                                        <ul>
-                                                            @foreach (var item1 in item.SubCategory)
-                                                            {
-                                                                <li><a href="/home/productbycategory?subcatid=@item1.SubCategory_Id&subcategory-url=rachna-teracotta.htm">@item1.SubCategory_Title</a></li>
-                                                            }
-                                                        </ul>
-                                                    </li>
+                                    @if (item.SubCategory != null)
+                                    {
+                                        <ul class="megamenu catmenu-megamenu">
+                                            <li>
+                                                <a href="#">@item.Category_Title</a>
+                                                <ul>
+                                                    @foreach (var item1 in item.SubCategory)
+                                                    {
+                                                        <li><a href="/home/productbycategory?subcatid=@item1.SubCategory_Id&subcategory-url=rachna-teracotta.htm">@item1.SubCategory_Title</a></li>
+                                                    }
                                                 </ul>
-                                            }
-                                        </li>
+                                            </li>
+                                        </ul>
+                                    }
+                                </li>
                                     }
                                 }
                             </ul>

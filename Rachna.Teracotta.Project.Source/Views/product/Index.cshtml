@@ -109,7 +109,7 @@
                                 {
                                     if (ProductModel.Carts != null && ProductModel.Carts.Count > 0)
                                     {
-                                        if (ProductModel.Carts.Where(m => m.Product_Id == @ProductModel.Product.Product_Id).FirstOrDefault() != null)
+                                        if (ProductModel.Carts.Where(m => m.Product_Id == @ProductModel.Product.Product_Id).FirstOrDefault() == null)
                                         {
                                             <button type="submit" class="ho-button">
                                                 <i class="lnr lnr-cart"></i>

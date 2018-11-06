@@ -411,7 +411,7 @@
                         <!-- Single Product -->
                         <article class="hoproduct">
                             <div class="hoproduct-image">
-                                <a class="hoproduct-thumb" href="/product/index?id=@item.Product_Id&title=@item.Product_Title">
+                                <a class="hoproduct-thumb" href="/product/productoffline?id=@item.Product_Id&title=@item.Product_Title">
                                     <img class="hoproduct-frontimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                     <img class="hoproduct-backimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                 </a>
@@ -424,7 +424,7 @@
                             </div>
                             <div class="hoproduct-content">
                                 <h5 class="hoproduct-title">
-                                    <a href="/product/index?id=@item.Product_Id&title=@item.Product_Title">
+                                    <a href="/product/productoffline?id=@item.Product_Id&title=@item.Product_Title">
                                         @item.Product_Title
                                     </a>
                                 </h5>
