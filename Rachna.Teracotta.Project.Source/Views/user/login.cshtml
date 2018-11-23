@@ -17,13 +17,6 @@
     </div>
 </div>
 
-<div>
-    @if (ViewBag.Message != null)
-    {
-        <label style="color:red;font-weight:bold">@ViewBag.Message</label>
-    }
-</div>
-
 <div class="my-account-area ptb-30">
     <div class="container">
         <div class="row">
@@ -32,7 +25,7 @@
                 @if (ViewBag.Message != null)
                 {
                     <blockquote>
-                        @ViewBag.Message
+                        <label style="color:red;font-weight:bold">@ViewBag.Message</label>
                     </blockquote>
                 }
                 <div class="login-form-wrapper">

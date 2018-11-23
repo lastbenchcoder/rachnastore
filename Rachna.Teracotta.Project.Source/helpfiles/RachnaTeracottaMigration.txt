@@ -30,7 +30,10 @@ using (var dbCtx = new SchoolDBEntities())
 }
 
 Automated Migration
-Automated Migration was first introduced in Entity framework 4.3. In automated migration you don't need to process database migration manually in the code file. For example, for each change you will also need to change in your domain classes. But with automated migration you just have to run a command in Package Manager Console to get done this.
+Automated Migration was first introduced in Entity framework 4.3. 
+In automated migration you don't need to process database migration manually in the 
+code file. For example, for each change you will also need to change in your domain classes. 
+But with automated migration you just have to run a command in Package Manager Console to get done this.
 
 Let’s take a look at the following step-by-step process of automated migration.
 
