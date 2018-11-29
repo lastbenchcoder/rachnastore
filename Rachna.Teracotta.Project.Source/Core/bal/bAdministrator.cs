@@ -38,5 +38,23 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dAdministrator _dAdministrator = new dAdministrator();
             return _dAdministrator.ListChatMessage();
         }
+
+        public static AdminActivity Create(AdminActivity adminActivity)
+        {
+            dAdministrator _dAdministrator = new dAdministrator();
+            return _dAdministrator.CreateActivity(adminActivity);
+        }
+
+        public static List<AdminActivity> ListActivity()
+        {
+            dAdministrator _dAdministrator = new dAdministrator();
+            return _dAdministrator.ListActivity();
+        }
+
+        public static List<AdminActivity> ListActivityByAdmin(int adminId)
+        {
+            dAdministrator _dAdministrator = new dAdministrator();
+            return _dAdministrator.ListActivityByAdmin(adminId);
+        }
     }
 }

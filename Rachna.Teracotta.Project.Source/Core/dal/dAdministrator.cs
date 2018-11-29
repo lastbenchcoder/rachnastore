@@ -92,5 +92,50 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
                 return adminChatting;
             }
         }
+
+        internal AdminActivity CreateActivity(AdminActivity adminActivity)
+        {
+            try
+            {
+                context.AdminActivity.Add(adminActivity);
+                context.SaveChanges();
+                return adminActivity;
+            }
+            catch (Exception ex)
+            {
+                adminActivity.ErrorMessage = ex.Message;
+                return adminActivity;
+            }
+        }
+
+        internal List<AdminActivity> ListActivity()
+        {
+            List<AdminActivity> administrators = new List<AdminActivity>();
+            try
+            {
+                administrators = context.AdminActivity.Include("Administrators").ToList();
+                return administrators;
+            }
+            catch (Exception ex)
+            {
+                administrators[0].ErrorMessage = ex.Message;
+                return administrators;
+            }
+        }
+
+        internal List<AdminActivity> ListActivityByAdmin(int adminId)
+        {
+            List<AdminActivity> administrators = new List<AdminActivity>();
+            try
+            {
+                administrators = context.AdminActivity.Include("Administrators").Where(m=>m.Administrators_Id==adminId).ToList();
+                return administrators;
+            }
+            catch (Exception ex)
+            {
+                administrators[0].ErrorMessage = ex.Message;
+                return administrators;
+            }
+        }
     }
 }

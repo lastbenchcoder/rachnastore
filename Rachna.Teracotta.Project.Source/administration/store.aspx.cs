@@ -1,6 +1,7 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
 using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
+using Rachna.Teracotta.Project.Source.Helper;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,9 @@ namespace Page3.Project.Source.administration
                 };
 
                 stores = bStores.Create(stores);
+                ActivityHelper.Create("New Store Creation", "New Store Created On " +
+                       DateTime.Now.ToString("D") + " Successfully, for Store Name " + stores.Store_Name + ".",
+                       Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()));
 
                 if (String.IsNullOrEmpty(stores.ErrorMessage))
                 {

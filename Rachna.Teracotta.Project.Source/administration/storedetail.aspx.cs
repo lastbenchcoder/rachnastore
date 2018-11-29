@@ -1,7 +1,7 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
 using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
-
+using Rachna.Teracotta.Project.Source.Helper;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
@@ -73,6 +73,10 @@ namespace Rachna.Teracotta.Project.Source.administration
 
                 stores.Store_Url = "?storecode=" + stores.StoreCode + "&redirect-url=" + stores.Store_Name.Trim() + ".html";
                 stores = bStores.Update(stores);
+
+                ActivityHelper.Create("Store Updation", "Store Detail Updated On " +
+                       DateTime.Now.ToString("D") + " Successfully, for Store Name " + stores.Store_Name + ".",
+                       Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()));
 
                 if (String.IsNullOrEmpty(stores.ErrorMessage))
                 {

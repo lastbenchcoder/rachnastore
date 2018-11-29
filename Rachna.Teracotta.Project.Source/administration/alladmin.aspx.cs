@@ -66,6 +66,9 @@ namespace Rachna.Teracotta.Project.Source.administration
                     };
 
                     invitations = bInvitations.Create(invitations);
+                    ActivityHelper.Create("New Invitation", "New Invitation Created On " +
+                        DateTime.Now.ToString("D") + " Successfully, for EmailId " + invitations.Invitation_EmailId + ".",
+                        Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()));
 
                     if (string.IsNullOrEmpty(invitations.ErrorMessage))
                     {
@@ -87,6 +90,9 @@ namespace Rachna.Teracotta.Project.Source.administration
                         };
 
                         administrators = bAdministrator.Create(administrators);
+                        ActivityHelper.Create("New Administrator", "New Administrator Created On " +
+                                            DateTime.Now.ToString("D") + " Successfully, for EmailId " + administrators.Administrators_Id + ".",
+                                            Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()));
 
                         if (string.IsNullOrEmpty(administrators.ErrorMessage))
                         {
@@ -95,7 +101,6 @@ namespace Rachna.Teracotta.Project.Source.administration
                                 txtEmailId.Text = "";
                                 string body = MailHelper.AccountCreated(administrators.FullName, administrators.EmailId, administrators.Password, administrators.Admin_Role);
                                 string mail_result = MailHelper.SendEmail(administrators.EmailId, "[Rachna Teracotta]-New Account Creation", body, "[Rachna Teracotta]-New Account Creation");
-                                Page.ClientScript.RegisterStartupScript(this.GetType(), "Admin", "new Messi('New Admin Account created successfully.', { title: 'Success!! ' });", true);
 
                                 txtEmailId.Text = "";
                                 txtFullname.Text = "";

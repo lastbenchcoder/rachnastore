@@ -56,6 +56,9 @@ namespace Rachna.Teracotta.Project.Source.administration
                     };
 
                     invitations = bInvitations.Create(invitations);
+                    ActivityHelper.Create("New Invitation", "New Invitation Created On " +
+                       DateTime.Now.ToString("D") + " Successfully, for EmailId " + invitations.Invitation_EmailId + ".",
+                       Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()));
 
                     if (String.IsNullOrEmpty(invitations.ErrorMessage))
                     {

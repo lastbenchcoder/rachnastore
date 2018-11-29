@@ -1,7 +1,7 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
 using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
-
+using Rachna.Teracotta.Project.Source.Helper;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
@@ -90,6 +90,10 @@ namespace Rachna.Teracotta.Project.Source.administration
                     administrators.Admin_UpdatedDate = DateTime.Now;
                     administrators = bAdministrator.Update(administrators);
                 }
+
+                ActivityHelper.Create("Profile Updaion", "Admin Profile Updated On " +
+                       DateTime.Now.ToString("D") + " Successfully, for EmailId " + administrators.EmailId + ".",
+                       Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()));
 
                 LoadDetail(administrators.Administrators_Id.ToString());
                 Response.Redirect("/administration/alladmin.aspx?id=100&redirect-url=uyiretieyt7985798435ihtiuertireyte&id-red=alladmin.html");

@@ -137,6 +137,7 @@
     <Content Include="admindelivery\delieveryupdate.aspx" />
     <Content Include="admindelivery\deliveryhome.aspx" />
     <Content Include="administration\account.aspx" />
+    <Content Include="administration\adminactivity.aspx" />
     <Content Include="administration\alladmin.aspx" />
     <Content Include="administration\application\contact.aspx" />
     <Content Include="administration\application\contactdetail.aspx" />
@@ -1108,7 +1109,7 @@
     <Content Include="Scripts\messi.js" />
     <Content Include="Scripts\messi.min.css" />
     <Content Include="Scripts\messi.min.js" />
-    <Content Include="Web_dev.config">
+    <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
@@ -1168,6 +1169,13 @@
     </Compile>
     <Compile Include="administration\account.aspx.designer.cs">
       <DependentUpon>account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\adminactivity.aspx.cs">
+      <DependentUpon>adminactivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\adminactivity.aspx.designer.cs">
+      <DependentUpon>adminactivity.aspx</DependentUpon>
     </Compile>
     <Compile Include="administration\alladmin.aspx.cs">
       <DependentUpon>alladmin.aspx</DependentUpon>
@@ -1787,6 +1795,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ActivityHelper.cs" />
     <Compile Include="Helper\AdminDashboardHelper.cs" />
     <Compile Include="Helper\FilesHelper.cs" />
     <Compile Include="Helper\ImageHandler.cs" />
@@ -1822,6 +1831,7 @@
       <DependentUpon>Message.Master</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AdminActivity.cs" />
     <Compile Include="Models\AdminChatting.cs" />
     <Compile Include="Models\Administrators_Audit.cs" />
     <Compile Include="Models\Administrator.cs" />
@@ -1992,14 +2002,14 @@
     <Content Include="Views\home\offers.cshtml" />
     <Content Include="Views\home\page.cshtml" />
     <Content Include="Views\product\productoffline.cshtml" />
-    <Content Include="Web.config">
+    <Content Include="Web_prd.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <Content Include="Web_prd.Debug.config">
+      <DependentUpon>Web_prd.config</DependentUpon>
     </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <Content Include="Web_prd.Release.config">
+      <DependentUpon>Web_prd.config</DependentUpon>
     </Content>
     <Content Include="Views\Shared\themeglobal2\_header.cshtml" />
     <Content Include="Views\Shared\_layout2.cshtml" />
@@ -2009,11 +2019,11 @@
     <Content Include="Views\Shared\themeglobal2\_footer.cshtml" />
     <Content Include="Views\product\index.cshtml" />
     <Content Include="Views\Shared\_productlayout.cshtml" />
-    <None Include="Web_dev.Debug.config">
-      <DependentUpon>Web_dev.config</DependentUpon>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
     </None>
-    <None Include="Web_dev.Release.config">
-      <DependentUpon>Web_dev.config</DependentUpon>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

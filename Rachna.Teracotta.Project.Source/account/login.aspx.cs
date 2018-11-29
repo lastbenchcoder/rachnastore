@@ -71,6 +71,7 @@ namespace Rachna.Teracotta.Project.Source.account
                 else
                 {
                     getLoginUsers(_admin);
+                    ActivityHelper.Create("Login", "Loogged In on " + DateTime.Now.ToString("D") + " Successfully", _admin.Administrators_Id);
                     pnlErrorMessage.Visible = false;
                     lblErrorMessage.Text = "";
                     if (_admin.Admin_Role == eRole.Super.ToString() || _admin.Admin_Role == eRole.Developer.ToString())

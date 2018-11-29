@@ -46,7 +46,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
         }
         public static string PasswordResetLink(string host)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/noimage.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                 + "<div>"
              + "Dear User,<br />"
              + "<br />"
@@ -62,7 +62,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
         }
         public static string PasswordResetSuccess()
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                 + "<div>"
              + "Dear User,<br />"
              + "<br />"
@@ -75,7 +75,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
         }
         public static string EmailSubscribe()
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                 + "<div>"
              + "Dear User,<br />"
              + "<br />"
@@ -89,7 +89,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
         }
         public static string EmailArticleUploaded(string url, string title)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                 + "<div>"
              + "Dear User,<br />"
              + "<br />"
@@ -106,7 +106,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
         }
         public static string InvitationLink(string host)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                 + "<div>"
              + "Dear User,<br />"
              + "<br />"
@@ -120,10 +120,9 @@ namespace Rachna.Teracotta.Project.Source.Helper
              + "</div>";
             return result;
         }
-
         public static string RequestRaised()
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                + "<div>"
             + "Dear User,<br />"
             + "<br />"
@@ -136,7 +135,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
         }
         public static string CustomerOrderPlaced(string Orders, string Fullname)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
              + "<div>"
              + "Dear," + Fullname + "<br />"
              + "<br />"
@@ -154,10 +153,9 @@ namespace Rachna.Teracotta.Project.Source.Helper
              + "</div>";
             return result;
         }
-
         public static string CustomerOrderCancelled(string Orders, string Fullname, string Reason)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
              + "<div>"
              + "Dear," + Fullname + "<br />"
              + "<br />"
@@ -175,10 +173,9 @@ namespace Rachna.Teracotta.Project.Source.Helper
              + "</div>";
             return result;
         }
-
         public static string CustomerOrderProcessed(string Orders, string Fullname, string Reason)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
              + "<div>"
              + "Dear," + Fullname + "<br />"
              + "<br />"
@@ -198,7 +195,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
         }
         public static string VerifyEmailLink(string host, string user)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                 + "<div>"
              + "Dear "+ user + ",<br />"
              + "<br />"
@@ -212,10 +209,9 @@ namespace Rachna.Teracotta.Project.Source.Helper
              + "</div>";
             return result;
         }
-
         public static string FunctionalityAddedOrUpdated(Functionality Functionality)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                 + "<div>"
              + "Dear Admin,<br />"
              + "<br />"
@@ -230,10 +226,9 @@ namespace Rachna.Teracotta.Project.Source.Helper
              + "</div>";
             return result;
         }
-
         public static string DefectAddedOrUpdated(FunctionalDefect FunctionalDefect)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                 + "<div>"
              + "Dear Admin,<br />"
              + "<br />"
@@ -248,10 +243,9 @@ namespace Rachna.Teracotta.Project.Source.Helper
              + "</div>";
             return result;
         }
-
         public static string AccountCreated(string fullname,string emailId, string password, string role)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/UnderConstrunction.png' width='200'></div>"
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                + "<div>"
             + "Dear " + fullname + ",<br />"
             + "<br />"

@@ -1,5 +1,6 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
 using Rachna.Teracotta.Project.Source.Core.bal;
+using Rachna.Teracotta.Project.Source.Helper;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,7 @@ namespace Rachna.Teracotta.Project.Source.administration
                 administrators.Admin_UpdatedDate = DateTime.Now;
                 administrators.Password = txtPassword.Text;
                 administrators = bAdministrator.Update(administrators);
+                ActivityHelper.Create("Password Reset", "Password Updated on " + DateTime.Now.ToString("D") + " Successfully", adminId);
                 if (string.IsNullOrEmpty(administrators.ErrorMessage))
                 {
                     Response.Redirect("~/account/logout.aspx?logout=1000&redUrl=HGHGH786876");

@@ -131,6 +131,7 @@ namespace Rachna.Teracotta.Project.Source.App_Data
         public DbSet<DealOfTheDay_Audit> DealOfTheDay_Audit { get; set; }
 
         public DbSet<AdminChatting> AdminChatting { get; set; }
+        public DbSet<AdminActivity> AdminActivity { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -251,6 +252,8 @@ namespace Rachna.Teracotta.Project.Source.App_Data
             modelBuilder.Entity<DealOfTheDay_Audit>().ToTable("tbl_deal_of_the_day_audit");
 
             modelBuilder.Entity<AdminChatting>().ToTable("tbl_admin_chat");
+
+            modelBuilder.Entity<AdminActivity>().ToTable("tbl_admin_activity");
         }
     }
 }

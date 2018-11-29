@@ -32,11 +32,10 @@
         <%
             Rachna.Teracotta.Project.Source.Models.Administrators _Administrator = null;
             List<Rachna.Teracotta.Project.Source.Models.Invitations> _Invitations = null;
-            using (var ctx = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext())
-            {
-                _Administrator = ctx.Administrator.ToList().Where(m => m.Administrators_Id == Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString())).FirstOrDefault();
-                _Invitations = ctx.Invitation.Where(m => m.Invitation_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.InActive.ToString()).ToList();
-            }
+            List<Rachna.Teracotta.Project.Source.Models.AdminActivity> _AdminActivity = null;
+
+            _Administrator = Rachna.Teracotta.Project.Source.Core.bal.bAdministrator.List().Where(m => m.Administrators_Id == Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString())).FirstOrDefault();
+            _Invitations = Rachna.Teracotta.Project.Source.Core.bal.bInvitations.List().Where(m => m.Invitation_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.InActive.ToString()).ToList();
         %>
         <div id="navigation">
             <div class="container-fluid">

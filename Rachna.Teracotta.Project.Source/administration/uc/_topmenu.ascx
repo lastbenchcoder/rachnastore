@@ -20,6 +20,9 @@
             <li>
                 <a href="/administration/alladmin.aspx?redirecturl=admin-slider-rachna-teracotta">Add/View Admin</a>
             </li>
+             <li>
+                <a href="/administration/adminactivity.aspx?redirecturl=admin-slider-rachna-teracotta">View My Activity</a>
+            </li>
         </ul>
     </li>
     <li>
