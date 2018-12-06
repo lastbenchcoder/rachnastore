@@ -58,23 +58,23 @@
                 <div class="col-lg-7">
                     <div class="commentbox">
                         <h5>LEAVE US A MESSAGE</h5>
-                        <form id="contact-form" action="/" method="POST" class="ho-form contact-form">
+                        <form id="contact-form"  action="/home/CustomerRequest/" method="POST" class="ho-form contact-form">
                             <div class="ho-form-inner">
                                 <div class="single-input single-input-half">
                                     <label for="new-review-name">Name*</label>
-                                    <input type="text" name="name" id="new-review-name">
+                                    <input type="text" name="FullName" id="new-review-name" required>
                                 </div>
                                 <div class="single-input single-input-half">
                                     <label for="new-review-email">Email*</label>
-                                    <input type="email" name="email" id="new-review-email">
+                                    <input type="email" name="EmailId" id="new-review-email" required>
                                 </div>
                                 <div class="single-input">
                                     <label for="new-review-subject">Subject*</label>
-                                    <input type="text" name="subject" id="new-review-subject">
+                                    <input type="text" name="Subject" id="new-review-subject" required>
                                 </div>
                                 <div class="single-input">
                                     <label for="new-review-textbox">Your Message</label>
-                                    <textarea id="new-review-textbox" name="message" cols="30" rows="5"></textarea>
+                                    <textarea id="new-review-textbox" name="Description" cols="30" rows="5" required></textarea>
                                 </div>
                                 <div class="single-input">
                                     <button class="ho-button ho-button-dark" type="submit"><span>Send</span></button>

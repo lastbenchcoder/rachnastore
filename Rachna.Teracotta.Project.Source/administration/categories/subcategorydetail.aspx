@@ -69,8 +69,15 @@
                                     <asp:Label ID="lblAdministrator" runat="server"></asp:Label>
                                 </span>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">Is Active?</label>
+                                <div class="col-sm-10">
+                                    <asp:CheckBox ID="chkIsActive" runat="server" />
+                                    Active
+                                </div>
+                            </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
-                                 <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Submit" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
+                                <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Submit" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
                             </div>
                         </div>
                     </div>

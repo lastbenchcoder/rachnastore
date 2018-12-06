@@ -1,6 +1,7 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
-
+using Rachna.Teracotta.Project.Source.Helper;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,6 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
 {
     public partial class subcategory : System.Web.UI.Page
     {
-        private RachnaDBContext context;
-        public subcategory()
-        {
-            context = new RachnaDBContext();
-        }
         protected void Page_Load(object sender, EventArgs e)
         {
             this.Title = ConfigurationSettings.AppSettings["AppName"].ToString() + " : Sub Category";
@@ -31,7 +27,7 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
             if (!IsPostBack)
             {
                 List<Categories> _category = new List<Categories>();
-                _category = context.Category.Where(m => m.Category_Status == eStatus.Active.ToString()).ToList();
+                _category = bCategory.List().Where(m => m.Category_Status == eStatus.Active.ToString()).ToList();
                 foreach (var item in _category)
                 {
                     ddlCategory.Items.Add(new ListItem { Text = item.Category_Title, Value = item.Category_Id.ToString() });
@@ -45,27 +41,23 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
             {
                 SubCategories _category1 = new SubCategories();
                 int catId = Convert.ToInt32(ddlCategory.SelectedValue);
-                _category1 = context.SubCategory.Where(m => m.Category_Id == catId && m.SubCategory_Title == txtCategory.Text).FirstOrDefault();
+                _category1 = bSubCategory.List().Where(m => m.Category_Id == catId && m.SubCategory_Title == txtCategory.Text).FirstOrDefault();
+                int adminId = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString());
                 if (_category1 == null)
                 {
                     SubCategories SubCategories = new SubCategories()
                     {
                         SubCategory_Title = txtCategory.Text,
-                        Administrators_Id = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()),
+                        Administrators_Id = adminId,
                         Category_Id = Convert.ToInt32(ddlCategory.SelectedValue),
                         SubCategory_CreatedDate = DateTime.Now,
                         SubCategory_UpdatedDate = DateTime.Now,
                         SubCategory_Status = eStatus.Active.ToString()
                     };
 
-                    int maxAdminId = 0;
-                    if (context.SubCategory.ToList().Count > 0)
-                        maxAdminId = context.SubCategory.Max(m => m.SubCategory_Id);
-                    maxAdminId = (maxAdminId > 0) ? (maxAdminId + 1) : 1;
-                    SubCategories.SubCategoryCode = "SCATRACH" + maxAdminId + "TERA" + (maxAdminId + 1);
-                    context.SubCategory.Add(SubCategories);
+                    bSubCategory.Create(SubCategories);
+                    ActivityHelper.Create("New Sub Category", "New Sub Category Created On " + DateTime.Now.ToString("D") + " Successfully and Title is " + SubCategories.SubCategory_Title + ".", adminId);
 
-                    context.SaveChanges();
                     pnlErrorMessage.Attributes.Remove("class");
                     pnlErrorMessage.Attributes["class"] = "alert alert-success alert-dismissable";
                     pnlErrorMessage.Visible = true;

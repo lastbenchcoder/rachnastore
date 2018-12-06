@@ -134,7 +134,6 @@ namespace Rachna.Teracotta.Project.Source.administration.product
                     int discount = (Convert.ToInt32(txtMarketPrice.Text) * Convert.ToInt32(txtDiscount.Text)) / 100;
                     decimal ourprice = Convert.ToInt32(txtMarketPrice.Text) - discount;
                     txtOurPrice.Text = ourprice.ToString();
-                    Page.SetFocus(txtShippingCharge);
                 }
             }
         }

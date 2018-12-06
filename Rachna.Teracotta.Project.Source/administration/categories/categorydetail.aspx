@@ -53,7 +53,7 @@
                                 <label for="txtFirstName" class="control-label col-sm-2">Title</label>
                                 <div class="col-sm-10">
                                     <asp:TextBox ID="txtCategory" runat="server" class="form-control" Width="50%"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server" 
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server"
                                         ErrorMessage="Enter Category title" ControlToValidate="txtCategory" ValidationGroup="category"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
@@ -93,8 +93,15 @@
                                     <asp:TextBox ID="txtAdministrator" runat="server" class="form-control" ReadOnly="true" Width="50%"></asp:TextBox>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">Is Active?</label>
+                                <div class="col-sm-10">
+                                    <asp:CheckBox ID="chkIsActive" runat="server" />
+                                    Active
+                                </div>
+                            </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
-                                <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Submit" class="btn btn-primary" 
+                                <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Submit" class="btn btn-primary"
                                     ValidationGroup="category" OnClick="btnSubmit_Click" />
                             </div>
                         </div>

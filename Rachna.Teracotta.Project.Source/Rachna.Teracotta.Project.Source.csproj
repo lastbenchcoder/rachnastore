@@ -1752,8 +1752,10 @@
     <Compile Include="Controllers\homeController.cs" />
     <Compile Include="Controllers\productController.cs" />
     <Compile Include="Controllers\userController.cs" />
+    <Compile Include="Core\bal\bSubCategory.cs" />
     <Compile Include="Core\bal\bContactOwner.cs" />
     <Compile Include="Core\bal\bDealOfTheDay.cs" />
+    <Compile Include="Core\bal\bCategory.cs" />
     <Compile Include="Core\bal\bUnderConstrunction.cs" />
     <Compile Include="Core\bal\bMetaInformation.cs" />
     <Compile Include="Core\bal\bSocialNetworking.cs" />
@@ -1762,8 +1764,10 @@
     <Compile Include="Core\bal\bLogo.cs" />
     <Compile Include="Core\dal\dAds.cs" />
     <Compile Include="Core\dal\dAdministrator.cs" />
+    <Compile Include="Core\dal\dSubCategory.cs" />
     <Compile Include="Core\dal\dContactOwner.cs" />
     <Compile Include="Core\dal\dDealOfTheDay.cs" />
+    <Compile Include="Core\dal\dCategory.cs" />
     <Compile Include="Core\dal\dUnderConstrunction.cs" />
     <Compile Include="Core\dal\dMetaInformation.cs" />
     <Compile Include="Core\dal\dLogo.cs" />

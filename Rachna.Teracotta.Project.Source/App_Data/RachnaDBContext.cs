@@ -133,6 +133,8 @@ namespace Rachna.Teracotta.Project.Source.App_Data
         public DbSet<AdminChatting> AdminChatting { get; set; }
         public DbSet<AdminActivity> AdminActivity { get; set; }
 
+        public DbSet<CustomerRequest> CustomerRequest { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
@@ -254,6 +256,8 @@ namespace Rachna.Teracotta.Project.Source.App_Data
             modelBuilder.Entity<AdminChatting>().ToTable("tbl_admin_chat");
 
             modelBuilder.Entity<AdminActivity>().ToTable("tbl_admin_activity");
+
+            modelBuilder.Entity<CustomerRequest>().ToTable("tbl_customer_request");
         }
     }
 }

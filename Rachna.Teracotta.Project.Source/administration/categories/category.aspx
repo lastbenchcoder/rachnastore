@@ -6,7 +6,7 @@
     <%
         List<Rachna.Teracotta.Project.Source.Models.Categories> _RequestList = null;
         Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext context = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext();
-        _RequestList = context.Category.Include("Admin").ToList();
+        _RequestList = Rachna.Teracotta.Project.Source.Core.bal.bCategory.List();
     %>
 
     <div class="container-fluid">

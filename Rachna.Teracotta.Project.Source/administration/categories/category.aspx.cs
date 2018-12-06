@@ -1,5 +1,7 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
+using Rachna.Teracotta.Project.Source.Helper;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
@@ -14,11 +16,6 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
 {
     public partial class category : System.Web.UI.Page
     {
-        private RachnaDBContext context;
-        public category()
-        {
-            context = new RachnaDBContext();
-        }
         protected void Page_Load(object sender, EventArgs e)
         {
             this.Title = ConfigurationSettings.AppSettings["AppName"].ToString() + " : Category";
@@ -39,29 +36,24 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
             try
             {
                 Categories _category1 = new Categories();
-                _category1 = context.Category.Where(m => m.Category_Title == txtCategory.Text).FirstOrDefault();
+                _category1 = bCategory.List().Where(m => m.Category_Title == txtCategory.Text).FirstOrDefault();
+                int adminId = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString());
                 if (_category1 == null)
                 {
                     Categories Categories = new Categories()
                     {
                         Category_Title = txtCategory.Text,
-                        Administrators_Id = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()),
+                        Administrators_Id = adminId,
                         Category_Photo = "files/category/" + "Category_" + imgInp.FileName,
                         Category_CreatedDate = DateTime.Now,
                         Category_UpdatedDate = DateTime.Now,
                         Category_Status = eStatus.Active.ToString()
                     };
 
+                    Categories = bCategory.Create(Categories);
+                    ActivityHelper.Create("New Category", "New Category Created On " + DateTime.Now.ToString("D") + " Successfully and Title is " + Categories.Category_Title + ".", adminId);
 
-                    int maxAdminId = 0;
-                    if (context.Category.ToList().Count > 0)
-                        maxAdminId = context.Category.Max(m => m.Category_Id);
-                    maxAdminId = (maxAdminId > 0) ? (maxAdminId + 1) : 1;
-                    Categories.CategoryCode = "CATRACH" + maxAdminId + "TERA" + (maxAdminId + 1);
-                    context.Category.Add(Categories);
-                    context.SaveChanges();
-
-                    if(Categories.Category_Id!=null || Categories.Category_Id!=0)
+                    if (Categories.Category_Id != null || Categories.Category_Id != 0)
                     {
                         Upload();
                     }
