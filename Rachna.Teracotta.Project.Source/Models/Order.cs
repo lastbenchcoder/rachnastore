@@ -39,6 +39,7 @@ namespace Rachna.Teracotta.Project.Source.Models
         public string ErrorMessage { get; set; }
 
         public Customers Customer { get; set; }
+        public Stores Stores { get; set; }
         public CustomerAddress CustomerAddress { get; set; }
         public Product Products { get; set; }
         public PaymentMethod PaymentMethod { get; set; }

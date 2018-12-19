@@ -43,7 +43,6 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-
     <!--Modal-->
     <div class="modal fade" id="modalProdHistory">
         <div class="modal-dialog">
@@ -81,7 +80,7 @@
             <div class="pull-left">
                 <h1>Product Information</h1>
             </div>
-            <div class="pull-right">
+            <div class="pull-right" style="margin-top: 20px">
                 <%
                     string url = "/product/productoffline?id=" + lblProductId.Text + "&title=" + lblBcTitle.Text + "&redirect-page-mode=offline-mode";
                 %>
@@ -125,276 +124,235 @@
             <button type="button" class="close" data-dismiss="alert">×</button>
             <asp:Label ID="lblMessage" runat="server"></asp:Label>
         </asp:Panel>
+
+
         <div class="row">
-            <div class="container">
-                <div class="col-sm-12">
-                    <div class="box box-bordered">
-                        <div class="box-title">
-                            <h3>
-                                <i class="fa fa-th-list"></i>Product Information</h3>
-                            <asp:HiddenField ID="hdnAdminId" runat="server" />
+            <div class="col-sm-12">
+                <div class="box box-bordered">
+                    <div class="box-title">
+                        <h3>
+                            <i class="fa fa-th-list"></i>Basic Detail</h3>
+                        <asp:HiddenField ID="hdnAdminId" runat="server" />
+                        <div class="pull-right">
+                            <asp:Button ID="btnEdit" runat="server" Text="Edit" class="btn btn-info" OnClick="btnEdit_Click" />
+                            &nbsp &nbsp
+                        <asp:Button ID="btnImageUpload" runat="server" Text="Upload Banner" class="btn btn-info" OnClick="btnImageUpload_Click" />
+                            &nbsp &nbsp
+                        <asp:Button ID="btnApprove" runat="server" Text="Publish" class="btn btn-primary" OnClick="btnApprove_Click" />
+                            &nbsp &nbsp
+                        <asp:HyperLink ID="btnRejectModel" runat="server" data-toggle="modal" data-target="#modalRejectProduct" class="btn btn-danger">Reject</asp:HyperLink>
+                            &nbsp &nbsp
+                        <a href="/administration/product/products.aspx?redirecturl=admin-allproduct-RachnaTeracotta" class="btn btn-brown">Go Back</a>
+                            &nbsp &nbsp
                         </div>
-                        <div class="box-content nopadding">
-                            <div class='form-horizontal form-striped'>
-                                <table class="nav-justified" style="margin-left: 20px">
-                                    <tr>
-                                        <td class="auto-style2" style="font-weight: bold">Product Status :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
+                    </div>
+                    <div class="box-content nopadding">
+                        <div class='form-horizontal form-striped'>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2"><b>Status:</b></label>
+                                <div class="col-sm-4">
                                     <h4>
                                         <asp:Label ID="lblStatus" runat="server"></asp:Label></h4>
-                                            &nbsp;&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style2" style="font-weight: bold">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style2">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Product Code: </td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                    <asp:Label ID="lblProductCode" runat="server"></asp:Label>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style2">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Product Id: </td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                    <asp:Label ID="lblProductId" runat="server"></asp:Label>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Product Name:</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;&nbsp;
-                 <asp:Label ID="lblProductName" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Product Description :</td>
-                                        <td class="auto-style3">&nbsp;
-                 <asp:Label ID="lblDescription" runat="server"></asp:Label>
-                                            &nbsp;&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Product Specification :</td>
-                                        <td class="auto-style3">&nbsp;
-                 <asp:Label ID="lblSpecification" runat="server"></asp:Label>
-                                            &nbsp;&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Category and Sub Category :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                 <asp:Label ID="lblCategorySubCategory" runat="server" Text=""></asp:Label>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Total Quantity :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                 <asp:Label ID="lblQty" runat="server" Text=""></asp:Label>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Alert when product reach :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                 <asp:Label ID="lblAlert" runat="server" Text=""></asp:Label>
-                                            <span>items.</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Delievered In :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                    <asp:Label ID="lblDelieveryTime" runat="server" Text=""></asp:Label>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Market Price :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                 <asp:Label ID="lblmktprc" runat="server" Text=""></asp:Label>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Our Price :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                 <asp:Label ID="lblourprc" runat="server" Text=""></asp:Label>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Shipping Charge :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                 <asp:Label ID="lblShippingchrge" runat="server" Text=""></asp:Label>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Discount :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                 <asp:Label ID="lbldiscount" runat="server" Text=""></asp:Label>
-                                            <span>%</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Available Size :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                 <asp:Label ID="lblSizes" runat="server" Text=""></asp:Label>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Available Zipcodes :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                 <asp:Label ID="lblzipcode" runat="server" Text=""></asp:Label>
-                                            &nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Customer can purchase max :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                 <asp:Label ID="lblmaxpurchase" runat="server" Text=""></asp:Label>
-                                            <span>products.</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">Created By :</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                    <asp:Label ID="lblCreatedBy" runat="server"></asp:Label>
-                                            &nbsp;&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style1">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style2" style="font-weight: bold">Uploaded Images</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-                    <asp:DataList ID="DataList1" runat="server" RepeatColumns="5" RepeatDirection="Horizontal" ShowFooter="False" ShowHeader="False" Width="696px">
-                        <ItemTemplate>
-                            <asp:Image ID="imgEmp" runat="server" Width="100px" Height="100px" ImageUrl='<%# Bind("Product_Banner_Photo", "../../{0}") %>' Style="padding-left: 40px" /><br />
-                        </ItemTemplate>
-                    </asp:DataList>
-                                            &nbsp;&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style2" style="font-weight: bold">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style2" style="font-weight: bold">Comments</td>
-                                        <td class="auto-style3">&nbsp;&nbsp;
-
-                                            <asp:GridView ID="grdComments" runat="server" AutoGenerateColumns="False" CellPadding="0" GridLines="None" Enabled="False" EnableModelValidation="False" EnableTheming="False">
-                                                <Columns>
-                                                    <asp:TemplateField ItemStyle-Width="696px" ItemStyle-CssClass="margin-right:20px">
-                                                        <ItemTemplate>
-                                                            <table border="1">
-                                                                <tr>
-                                                                    <th style="width: 25%">Rating</th>
-                                                                    <th style="width: 25%">LikeUnlike</th>
-                                                                    <th style="width: 25%">Description</th>
-                                                                    <th style="width: 25%">Status</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 25%">
-                                                                        <asp:Label Text='<%# Eval("Rating").ToString() %>'
-                                                                            runat="server" /></td>
-                                                                    <td style="width: 25%">
-                                                                        <asp:Label Text='<%# Eval("LikeUnlike").ToString() == "1" ? "Liked" : "DisLike" %>'
-                                                                            runat="server" /></td>
-                                                                    <td style="width: 25%">
-                                                                        <asp:Label Text='<%# Eval("Description").ToString() %>'
-                                                                            runat="server" /></td>
-                                                                    <td style="width: 25%">
-                                                                        <asp:Label Text='<%# Eval("Comment_Status").ToString().ToLower() == "active" ? "Pending For Approve" : "Approved" %>'
-                                                                            runat="server" /></td>
-                                                                </tr>
-                                                            </table>
-                                                        </ItemTemplate>
-
-                                                        <ItemStyle CssClass="margin-right:20px" Width="696px"></ItemStyle>
-                                                    </asp:TemplateField>
-                                                </Columns>
-                                            </asp:GridView>
-                                            &nbsp;&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style2" style="font-weight: bold">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style2" style="font-weight: bold">&nbsp;</td>
-                                        <td class="auto-style3">
-                                            <asp:Button ID="btnEdit" runat="server" Text="Edit" class="btn btn-info" OnClick="btnEdit_Click" />
-                                            &nbsp &nbsp
-                        <asp:Button ID="btnImageUpload" runat="server" Text="Upload Banner" class="btn btn-info" OnClick="btnImageUpload_Click" />
-                                            &nbsp &nbsp
-                        <asp:Button ID="btnApprove" runat="server" Text="Publish" class="btn btn-primary" OnClick="btnApprove_Click" />
-                                            &nbsp &nbsp
-                        <asp:HyperLink ID="btnRejectModel" runat="server" data-toggle="modal" data-target="#modalRejectProduct" class="btn btn-danger">Reject</asp:HyperLink>
-                                            &nbsp &nbsp |  &nbsp &nbsp
-                        <a href="/administration/product/products.aspx?redirecturl=admin-allproduct-RachnaTeracotta">Go Back</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style2" style="font-weight: bold">&nbsp;</td>
-                                        <td class="auto-style3">&nbsp;</td>
-                                    </tr>
-                                </table>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2"><b>Store Name:</b></label>
+                                <div class="col-sm-4">
+                                    <h5>
+                                        <asp:Label ID="lblStore" runat="server"></asp:Label></h5>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2"><b>Product Id & Code :</b></label>
+                                <div class="col-sm-4">
+                                    Product Id :
+                                    <asp:Label ID="lblProductId" runat="server"></asp:Label>
+                                    &nbsp;&nbsp;
+                                   Product Code :
+                                    <asp:Label ID="lblProductCode" runat="server"></asp:Label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2"><b>Title :</b></label>
+                                <div class="col-sm-4">
+                                    <asp:Label ID="lblProductName" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2"><b>Category :</b></label>
+                                <div class="col-sm-4">
+                                    <asp:Label ID="lblCategorySubCategory" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2"><b>Description:</b></label>
+                                <div class="col-sm-10">
+                                    <asp:Label ID="lblDescription" runat="server"></asp:Label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2"><b>Specification:</b></label>
+                                <div class="col-sm-10">
+                                    <asp:Label ID="lblSpecification" runat="server"></asp:Label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2"><b>Created By :</b></label>
+                                <div class="col-sm-4">
+                                    <asp:Label ID="lblCreatedBy" runat="server"></asp:Label>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="box box-bordered">
+                    <div class="box-title">
+                        <h3>
+                            <i class="fa fa-th-list"></i>Price Detail</h3>
+                    </div>
+                    <div class="box-content nopadding">
+                        <div class='form-horizontal form-striped'>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Market Price</label>
+                                <div class="col-sm-4">
+                                    <span>&#x20B9;&nbsp;</span><asp:Label ID="lblmktprc" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Quantity</label>
+                                <div class="col-sm-4">
+                                    <asp:Label ID="lblQty" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Qty Low Alert</label>
+                                <div class="col-sm-4">
+                                    <asp:Label ID="lblAlert" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Discount(%)</label>
+                                <div class="col-sm-4">
+                                    <asp:Label ID="lbldiscount" runat="server" Text=""></asp:Label><span>%</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Our Price</label>
+                                <div class="col-sm-4">
+                                    <span>&#x20B9;&nbsp;</span><asp:Label ID="lblourprc" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Shipping Charge :</label>
+                                <div class="col-sm-4">
+                                    <span>&#x20B9;&nbsp;</span><asp:Label ID="lblShippingchrge" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-bordered">
+                    <div class="box-title">
+                        <h3>
+                            <i class="fa fa-th-list"></i>Size And Delivery</h3>
+                    </div>
+                    <div class="box-content nopadding">
+                        <div class='form-horizontal form-striped'>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Delivered In:</label>
+                                <div class="col-sm-4">
+                                    <asp:Label ID="lblDelieveryTime" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Customer:</label>
+                                <div class="col-sm-4">
+                                    <span>can Purchase max&nbsp;&nbsp;</span><asp:Label ID="lblmaxpurchase" runat="server" Text=""></asp:Label><span>&nbsp;&nbsp;products</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Size : </label>
+                                <div class="col-sm-4">
+                                    <asp:Label ID="lblSizes" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Available Zip Codes:</label>
+                                <div class="col-sm-4">
+                                    <asp:Label ID="lblzipcode" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Rating from Store:</label>
+                                <div class="col-sm-4">
+                                    <asp:Label ID="lblRatingStore" runat="server" Text=""></asp:Label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box box-bordered">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-th-list"></i>Product Banners</h3>
+            </div>
+            <div class="box-content nopadding">
+                <div class='form-horizontal form-striped'>
+                    <div class="form-group">
+                        <label for="txtFirstName" class="control-label col-sm-2">&nbsp;</label>
+                        <asp:DataList ID="DataList1" runat="server" RepeatColumns="5" RepeatDirection="Horizontal" ShowFooter="False" ShowHeader="False" Width="696px">
+                            <ItemTemplate>
+                                <asp:Image ID="imgEmp" runat="server" Width="100px" Height="100px" ImageUrl='<%# Bind("Product_Banner_Photo", "../../{0}") %>' Style="padding-left: 40px" /><br />
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box box-bordered">
+            <div class="box-title">
+                <h3>
+                    <i class="fa fa-th-list"></i>Product Comments</h3>
+            </div>
+            <div class="box-content nopadding">
+                <div class='form-horizontal form-striped'>
+                    <div class="form-group">
+                        <label for="txtFirstName" class="control-label col-sm-2">&nbsp;</label>
+                        <asp:GridView ID="grdComments" runat="server" AutoGenerateColumns="False" CellPadding="0" GridLines="None" Enabled="False" EnableModelValidation="False" EnableTheming="False">
+                            <Columns>
+                                <asp:TemplateField ItemStyle-Width="696px" ItemStyle-CssClass="margin-right:20px">
+                                    <ItemTemplate>
+                                        <table border="1">
+                                            <tr>
+                                                <th style="width: 25%">Rating</th>
+                                                <th style="width: 25%">LikeUnlike</th>
+                                                <th style="width: 25%">Description</th>
+                                                <th style="width: 25%">Status</th>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 25%">
+                                                    <asp:Label Text='<%# Eval("Rating").ToString() %>'
+                                                        runat="server" /></td>
+                                                <td style="width: 25%">
+                                                    <asp:Label Text='<%# Eval("LikeUnlike").ToString() == "1" ? "Liked" : "DisLike" %>'
+                                                        runat="server" /></td>
+                                                <td style="width: 25%">
+                                                    <asp:Label Text='<%# Eval("Description").ToString() %>'
+                                                        runat="server" /></td>
+                                                <td style="width: 25%">
+                                                    <asp:Label Text='<%# Eval("Comment_Status").ToString().ToLower() == "active" ? "Pending For Approve" : "Approved" %>'
+                                                        runat="server" /></td>
+                                            </tr>
+                                        </table>
+                                    </ItemTemplate>
+
+                                    <ItemStyle CssClass="margin-right:20px" Width="696px"></ItemStyle>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
                     </div>
                 </div>
             </div>

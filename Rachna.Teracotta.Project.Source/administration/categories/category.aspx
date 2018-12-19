@@ -118,7 +118,7 @@
                                     <th>CreatedBy</th>
                                     <th>CreatedDate</th>
                                     <th>UpdatedDate</th>
-                                    <th>Edit Detail</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -129,7 +129,7 @@
                                 <tr>
                                     <td> <img src="../../<%=item.Category_Photo %>" style="height: 50px; width: 50px" /></td>
                                     <td>
-                                        <%=item.Category_Id %></td>
+                                        <%=item.CategoryCode %></td>
                                     <td><%=item.Category_Title %></td>
                                     <%if (item.Category_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.Active.ToString())
                                         { %>

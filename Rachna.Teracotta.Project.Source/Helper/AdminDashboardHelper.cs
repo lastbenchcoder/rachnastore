@@ -34,6 +34,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
         public List<Product> ProdPendForReview { get; set; }
         public List<Product> ProdPendForApprove { get; set; }
         public List<Product> ProdPendForPublish { get; set; }
+        public List<CustomerRequest> CustomerRequest { get; set; }
     }   
     
     public class AdministratorDetail
@@ -76,6 +77,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
             hlprAdminDashboard.ProdPendForReview = _products.Where(m => m.Product_Status == eProductStatus.ReviewPending.ToString()).ToList();
             hlprAdminDashboard.ProdPendForApprove = _products.Where(m => m.Product_Status == eProductStatus.ReviewCompleted.ToString()).ToList();
             hlprAdminDashboard.ProdPendForPublish = _products.Where(m => m.Product_Status == eProductStatus.Approved.ToString()).ToList();
+            hlprAdminDashboard.CustomerRequest = context.CustomerRequest.Take(20).ToList();
 
             return hlprAdminDashboard;
         }

@@ -41,7 +41,7 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
             List<Stores> stores = new List<Stores>();
             try
             {
-                stores = context.Store.ToList();
+                stores = context.Store.Include("Order").ToList();
                 return stores;
             }
             catch (Exception ex)

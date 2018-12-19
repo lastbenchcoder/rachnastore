@@ -82,15 +82,14 @@
                         <table class="table table-hover table-nomargin table-bordered dataTable">
                             <thead>
                                 <tr>
-                                    <th>SubCategoryId</th>
                                     <th>SubCategoryCode</th>
                                     <th>Category</th>
-                                    <th>Title</th>
+                                    <th>SubCategory</th>
                                     <th>Status</th>
                                     <th>CreatedBy</th>
                                     <th>CreatedDate</th>
                                     <th>UpdatedDate</th>
-                                    <th>Edit Detail</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -99,8 +98,6 @@
                                     {
                                 %>
                                 <tr>
-                                    <td>
-                                        <%=item.SubCategory_Id %></td>
                                     <td>
                                         <%=item.SubCategoryCode %></td>
                                     <td>

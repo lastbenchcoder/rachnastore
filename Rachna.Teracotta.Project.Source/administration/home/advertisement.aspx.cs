@@ -98,15 +98,6 @@ namespace Rachna.Teracotta.Project.Source.administration.home
                 {
                     ddlAddType.Items.Add(new ListItem { Text = item });
                 }
-
-                if (_Advertisement.Count > 5)
-                {
-                    btnSubmit.Visible = false;
-                }
-                else
-                {
-                    btnSubmit.Visible = true;
-                }
             }
             catch (Exception ex)
             {

@@ -50,7 +50,7 @@
                         <div class='form-horizontal form-striped'>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Select Category :</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:DropDownList ID="ddlCategory" runat="server" class="form-control">
                                         <asp:ListItem>Select..</asp:ListItem>
                                     </asp:DropDownList>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Title</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtTitle" runat="server" class="form-control"></asp:TextBox>
                                     <label></label>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server"
@@ -96,7 +96,7 @@
                         <div class='form-horizontal form-striped'>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Market Price</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtMarketPrice" runat="server" class="form-control txtMarketPrice"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ForeColor="Red" runat="server"
                                         ErrorMessage="Enter Market Price(If no mention 0)" ControlToValidate="txtMarketPrice" ValidationGroup="admin"></asp:RequiredFieldValidator>
@@ -104,7 +104,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Quantity</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtQuantity" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ForeColor="Red" runat="server"
                                         ErrorMessage="Enter Quantity" ControlToValidate="txtQuantity" ValidationGroup="admin"></asp:RequiredFieldValidator>
@@ -112,7 +112,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Qty Low Alert</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtAlert" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ForeColor="Red" runat="server"
                                         ErrorMessage="Enter Quantity Alert" ControlToValidate="txtAlert" ValidationGroup="admin"></asp:RequiredFieldValidator>
@@ -120,7 +120,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Discount(%)</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtDiscount" runat="server" class="form-control" TextMode="Number"
                                         OnTextChanged="txtDiscount_TextChanged" AutoPostBack="true"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator13" ForeColor="Red" runat="server"
@@ -129,7 +129,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Our Price</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtOurPrice" runat="server" class="form-control txtOurPrice" ReadOnly="true"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" ForeColor="Red" runat="server" placeholder="Our Price (Depends on Discount, If no discount please enter 0)"
                                         ErrorMessage="Enter Our Price" ControlToValidate="txtOurPrice" ValidationGroup="admin"></asp:RequiredFieldValidator>
@@ -137,7 +137,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Shipping Charge :</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtShippingCharge" runat="server" class="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10" ForeColor="Red" runat="server" ErrorMessage="Enter Shipping Charge" ControlToValidate="txtShippingCharge" ValidationGroup="admin"></asp:RequiredFieldValidator>
                                 </div>
@@ -154,7 +154,7 @@
                         <div class='form-horizontal form-striped'>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Delivered In</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtProductDelieveredIn" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator11" ForeColor="Red" runat="server"
                                         ErrorMessage="Enter Delievery time" ControlToValidate="txtProductDelieveredIn" ValidationGroup="admin"></asp:RequiredFieldValidator>
@@ -162,7 +162,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Max Purchase</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtMaxPurchase" runat="server" class="form-control" TextMode="Number" placeholder="Max Item Customer can purchase."></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator12" ForeColor="Red" runat="server"
                                         ErrorMessage="Enter Max Purchase Product" ControlToValidate="txtMaxPurchase" ValidationGroup="admin"></asp:RequiredFieldValidator>
@@ -172,7 +172,7 @@
                                 <ContentTemplate>
                                     <div class="form-group">
                                         <label for="txtFirstName" class="control-label col-sm-2">Product Has Size</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             <asp:RadioButtonList ID="rdbHasSize" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rdbHasSize_SelectedIndexChanged">
                                                 <asp:ListItem>Yes</asp:ListItem>
                                                 <asp:ListItem Selected="True">No</asp:ListItem>
@@ -182,7 +182,7 @@
                                     <asp:Panel ID="pnlSize" runat="server" Visible="false">
                                         <div class="form-group">
                                             <label for="txtFirstName" class="control-label col-sm-2">Size : </label>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-4">
                                                 <asp:TextBox ID="txtSize" runat="server" class="form-control"></asp:TextBox>
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ForeColor="Red" runat="server" ErrorMessage="Enter Size, Size Detail Should Be comma seperated." ControlToValidate="txtSize" ValidationGroup="admin"></asp:RequiredFieldValidator>
                                             </div>
@@ -192,13 +192,13 @@
                             </asp:UpdatePanel>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Zip Codes</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtZipcode" runat="server" class="form-control" placeholder="Zip Code (Product Will Not Be available to these Zipcodes)"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Rating from Store</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtRating" runat="server" class="form-control" Text="0"
                                         placeholder="Enter Number 1 to 5"></asp:TextBox>
                                 </div>

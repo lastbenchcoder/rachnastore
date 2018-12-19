@@ -1,5 +1,4 @@
-﻿using CuteWebUI;
-using Rachna.Teracotta.Project.Source.App_Data;
+﻿using Rachna.Teracotta.Project.Source.App_Data;
 using Rachna.Teracotta.Project.Source.Helper;
 
 using Rachna.Teracotta.Project.Source.Models;
@@ -20,11 +19,9 @@ namespace Rachna.Teracotta.Project.Source.administration.product
     public partial class uploadproductsbanner : System.Web.UI.Page
     {
         private RachnaDBContext context;
-        List<ErrorInImageUpload> errorInImageUpload;
         public uploadproductsbanner()
         {
             context = new RachnaDBContext();
-            errorInImageUpload = new List<ErrorInImageUpload>();
         }
         private string _prdId { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -52,92 +49,74 @@ namespace Rachna.Teracotta.Project.Source.administration.product
             Product Product = context.Product.Where(m => m.Product_Id == prdId).FirstOrDefault();
             lblBcTitle.Text = Product.Product_Title;
             List<ProductBanners> _banners = context.ProductBanner.Where(m => m.Product_Id == prdId).ToList();
+            if (_banners.Count > 4)
+            {
+                pnlCreateBanner.Visible = false;
+            }
+            else
+            {
+                pnlCreateBanner.Visible = true;
+            }
             grdPrdSlider.DataSource = _banners;
             grdPrdSlider.DataBind();
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            try
+            string result = Upload(hdnProdId.Value);
+            if (result == "100")
             {
-                string errorSuccessMessage = string.Empty;
-                foreach (AttachmentItem attachment in Attachments1.Items)
+                int prdId = Convert.ToInt32(hdnProdId.Value);
+                ProductBanners currentBanner = context.ProductBanner.Where(m => m.Product_Id == prdId).FirstOrDefault();
+                ProductBanners Product = new ProductBanners()
                 {
-                    Upload(hdnProdId.Value, attachment);
-                    if (errorInImageUpload.Count == 0)
+                    Product_Id = Convert.ToInt32(hdnProdId.Value),
+                    Product_Banner_Photo = "files/product/" + hdnProdId.Value + "/" + hdnProdId.Value + "_" + imgInp.FileName,
+                    Administrators_Id = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()),
+                    Product_Banner_Default = Convert.ToInt32(ddlStatus.SelectedValue),
+                    Product_Banner_CreatedDate = DateTime.Now,
+                    Product_Banner_UpdatedDate = DateTime.Now
+                };
+
+                if (Product.Product_Banner_Default == 1)
+                {
+                    List<ProductBanners> Productbnrs = context.ProductBanner.Where(m => m.Product_Id == prdId).ToList();
+                    foreach (var item in Productbnrs)
                     {
-                        int prdId = Convert.ToInt32(hdnProdId.Value);
-                        ProductBanners currentBanner = context.ProductBanner.Where(m => m.Product_Id == prdId).FirstOrDefault();
-                        ProductBanners Product = new ProductBanners()
-                        {
-                            Product_Id = Convert.ToInt32(hdnProdId.Value),
-                            Product_Banner_Photo = "files/product/" + hdnProdId.Value + "/" + hdnProdId.Value + "_" + attachment.FileName,
-                            Administrators_Id = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()),
-                            Product_Banner_Default = 0,
-                            Product_Banner_CreatedDate = DateTime.Now,
-                            Product_Banner_UpdatedDate = DateTime.Now
-                        };
-
-                        if (Product.Product_Banner_Default == 1)
-                        {
-                            List<ProductBanners> Productbnrs = context.ProductBanner.Where(m => m.Product_Id == prdId).ToList();
-                            foreach (var item in Productbnrs)
-                            {
-                                item.Product_Banner_Default = 0;
-                                context.Entry(item).State = System.Data.Entity.EntityState.Modified;
-                                context.SaveChanges();
-                            }
-                        }
-                        else
-                        {
-                            if (currentBanner == null)
-                            {
-                                Product.Product_Banner_Default = 1;
-                            }
-                        }
-
-                        int maxBnrAdminId = 1;
-                        if (context.ProductBanner.ToList().Count > 0)
-                            maxBnrAdminId = context.ProductBanner.Max(m => m.Product_Id);
-                        maxBnrAdminId = (maxBnrAdminId == 1 && context.ProductBanner.ToList().Count > 0) ? (maxBnrAdminId + 1) : maxBnrAdminId;
-                        Product.Product_BannerCode = "RT" + maxBnrAdminId + "PRDBNRCODE" + (maxBnrAdminId + 1);
-                        context.ProductBanner.Add(Product);
+                        item.Product_Banner_Default = 0;
+                        context.Entry(item).State = System.Data.Entity.EntityState.Modified;
                         context.SaveChanges();
-                        errorSuccessMessage = errorSuccessMessage + " ---> " + attachment.FileName;
-                    }
-                    else
-                    {
-                        foreach (var item in errorInImageUpload)
-                        {
-                            errorSuccessMessage = errorSuccessMessage + " ---> " + item.ErrorMessage;
-                        }
-                        pnlErrorMessage.Attributes.Remove("class");
-                        pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
-                        pnlErrorMessage.Visible = true;
-                        lblMessage.Text = "Failed!!! " + errorSuccessMessage;
                     }
                 }
+                else
+                {
+                    if (currentBanner == null)
+                    {
+                        Product.Product_Banner_Default = 1;
+                    }
+                }
+
+                int maxBnrAdminId = 1;
+                if (context.ProductBanner.ToList().Count > 0)
+                    maxBnrAdminId = context.ProductBanner.Max(m => m.Product_Id);
+                maxBnrAdminId = (maxBnrAdminId == 1 && context.ProductBanner.ToList().Count > 0) ? (maxBnrAdminId + 1) : maxBnrAdminId;
+                Product.Product_BannerCode = "PRDBNRTRACH" + maxBnrAdminId + "TERA" + (maxBnrAdminId + 1);
+                context.ProductBanner.Add(Product);
+                context.SaveChanges();
 
                 LoadGrid();
                 pnlErrorMessage.Attributes.Remove("class");
                 pnlErrorMessage.Attributes["class"] = "alert alert-success alert-dismissable";
                 pnlErrorMessage.Visible = true;
-                lblMessage.Text = "Success!!! " + errorSuccessMessage + " Banners Uploaded Successfully";
-                Attachments1.DeleteAllAttachments();
-            }
-            catch (Exception ex)
-            {
-                pnlErrorMessage.Attributes.Remove("class");
-                pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
-                pnlErrorMessage.Visible = true;
-                lblMessage.Text = "Oops!! Server error occured, please contact administrator.";
+                lblMessage.Text = "Success!!! Banner Created Successfully.";
+                ddlStatus.SelectedIndex = 0;
             }
         }
-        private void Upload(string Id, AttachmentItem imgInp)
+        private string Upload(string Id)
         {
             try
             {
-                int iFileSize = imgInp.FileSize;
+                int iFileSize = imgInp.PostedFile.ContentLength;
                 if (iFileSize < 1048576)  // 1MB
                 {
                     string folderPath = Server.MapPath("~/files/product/" + Id + "/");
@@ -156,23 +135,28 @@ namespace Rachna.Teracotta.Project.Source.administration.product
                     }
 
                     //Save the File to the Directory (Folder).
-                    imgInp.CopyTo(folderPath + Path.GetFileName(Id + "_" + imgInp.FileName));
+                    imgInp.SaveAs(folderPath + Path.GetFileName(Id + "_" + imgInp.FileName));
+
+                    return "100";
                 }
                 else
                 {
-                    ErrorInImageUpload error = new ErrorInImageUpload();
-                    error.ErrorMessage = "Oops!! Banner could not be uploaded Selected banner " + imgInp.FileName + " (" + imgInp.FileSize + ") should not be higher than 1MB.\n";
-                    errorInImageUpload.Add(error);
+                    pnlErrorMessage.Attributes.Remove("class");
+                    pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
+                    pnlErrorMessage.Visible = true;
+                    lblMessage.Text = "Oops!! Selected banner should not be higher than 1MB.";
+                    return "404";
                 }
             }
             catch (Exception ex)
             {
-                ErrorInImageUpload error = new ErrorInImageUpload();
-                error.ErrorMessage = ex.Message;
-                errorInImageUpload.Add(error);
+                pnlErrorMessage.Attributes.Remove("class");
+                pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
+                pnlErrorMessage.Visible = true;
+                lblMessage.Text = "Oops!! Server error occured, please contact administrator.";
+                return "500";
             }
         }
-
         protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
@@ -249,10 +233,6 @@ namespace Rachna.Teracotta.Project.Source.administration.product
         {
             Response.Redirect("/administration/product/productsdetailstatic.aspx?productid=" + hdnProductId.Value);
         }
-    }
 
-    public class ErrorInImageUpload
-    {
-        public string ErrorMessage { get; set; }
     }
 }

@@ -19,10 +19,7 @@
             </li>
             <li>
                 <a href="/administration/alladmin.aspx?redirecturl=admin-slider-rachna-teracotta">Add/View Admin</a>
-            </li>
-             <li>
-                <a href="/administration/adminactivity.aspx?redirecturl=admin-slider-rachna-teracotta">View My Activity</a>
-            </li>
+            </li>            
         </ul>
     </li>
     <li>
@@ -113,31 +110,6 @@
             </li>
             <li>
                 <a href="/administration/delivery/ordersdelivery.aspx?id=jhgj657657HGH.htm">Delivery Detail</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
-            <span>More...</span>
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li>
-                <a href="/administration/defectmanager/functionalities.aspx?redirectUrl=jhgj657657HGH.htm">Functionality</a>
-            </li>
-            <li>
-                <a href="/administration/defectmanager/defect.aspx?redirectUrl=jhgj657657HGH.htm">Defect</a>
-            </li>
-            <li class='dropdown-submenu'>
-                <a href="#" data-toggle="dropdown" class='dropdown-toggle'>Audit</a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="/administration/audit/store_audit.aspx?redirecturl=admin-Product-RachnaTeracotta">Store</a>
-                    </li>
-                    <li>
-                        <a href="/administration/audit/invitations_audit.aspx?redirecturl=admin-Product-rachna-teracotta">Invitation</a>
-                    </li>
-                </ul>
             </li>
         </ul>
     </li>

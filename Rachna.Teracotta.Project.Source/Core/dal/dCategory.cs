@@ -22,7 +22,7 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
                 int maxCategoriesId = 1;
                 if (context.Category.ToList().Count > 0)
                     maxCategoriesId = context.Category.Max(m => m.Category_Id);
-                maxCategoriesId = (maxCategoriesId == 1 && context.Category.ToList().Count > 0) ? (maxCategoriesId + 1) : maxCategoriesId;
+                maxCategoriesId = (context.Category.ToList().Count > 0) ? (maxCategoriesId + 1) : maxCategoriesId;
                 Categories.CategoryCode = "RT" + maxCategoriesId + "CATCODE" + (maxCategoriesId + 1);                
                 context.Category.Add(Categories);
                 context.SaveChanges();

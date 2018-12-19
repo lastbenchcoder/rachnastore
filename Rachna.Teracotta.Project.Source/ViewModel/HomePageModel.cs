@@ -22,6 +22,7 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
         public List<ProductFeatures> _featureHot { get; set; }
         public List<Stores> _stores { get; set; }
         public List<SocialNetworking> _social { get; set; }
+        public List<Product> _recentAddition { get; set; }
     }
 
     public sealed class HomePage
@@ -97,6 +98,12 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
                 _HomePage._stores = context.Store.ToList().Where(m => m.Store_Status == eStatus.Active.ToString()).ToList();
 
                 _HomePage._social = context.SocialNetworking.Where(m => m.Scl_Ntk_Status == eStatus.Active.ToString()).ToList();
+
+                _HomePage._recentAddition = context.Product.Take(10).ToList().Where(m => m.Product_Status == eProductStatus.Published.ToString()).ToList();
+                foreach (var item in _HomePage._recentAddition)
+                {
+                    item.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
+                }
             }
             return _HomePage;
         }

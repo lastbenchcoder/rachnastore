@@ -190,15 +190,17 @@ namespace Rachna.Teracotta.Project.Source.administration.product
                     lblSpecification.Text = _prd.Product_Specification;
                     lblQty.Text = _prd.Product_Qty.ToString(); ;
                     lblAlert.Text = _prd.Product_Qty_Alert.ToString();
-                    lblmktprc.Text = _prd.Product_Mkt_Price.ToString();
-                    lblourprc.Text = _prd.Product_Our_Price.ToString();
-                    lblShippingchrge.Text = _prd.Product_ShippingCharge.ToString();
-                    lbldiscount.Text = _prd.Product_Discount.ToString();
+                    lblmktprc.Text = Math.Round(_prd.Product_Mkt_Price).ToString();
+                    lblourprc.Text = Math.Round(_prd.Product_Our_Price).ToString();
+                    lblShippingchrge.Text = Math.Round(_prd.Product_ShippingCharge).ToString();
+                    lbldiscount.Text = Math.Round(_prd.Product_Discount).ToString();
                     lblSizes.Text = _prd.Product_Size;
                     lblzipcode.Text = _prd.Product_Avail_ZipCode;
                     lblmaxpurchase.Text = _prd.Product_Max_Purchase.ToString();
                     lblDelieveryTime.Text = (_prd.Product_Delivery_Time - 1) + " to " + _prd.Product_Delivery_Time.ToString() + " days";
                     lblBcTitle.Text = _prd.Product_Title;
+                    lblRatingStore.Text = _prd.Store_Rating.ToString();
+                    lblStore.Text = _prd.Store.Store_Name;
 
                     btnApprove.Visible = false;
                     if (_prd.Product_Status == eProductStatus.Rejected.ToString())

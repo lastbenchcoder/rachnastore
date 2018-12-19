@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="_ucleftmenu.ascx.cs" Inherits="Rachna.Teracotta.Project.Source.administration.uc._ucleftmenu" %>
-<%@ Register TagPrefix="uc" TagName="ucOnlineUser" Src="~/administration/uc/_onlineusers.ascx" %>
 <div id="left">
     <div class='search-form'>
         <div class="search-pane">
@@ -35,20 +34,25 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="/administration/home/slider.aspx?redirecturl=admin-slider-rachna-teracotta">Home Page Slider</a>
-            </li>
-            <li>
-                <a href="/administration/home/advertisement.aspx?redirecturl=admin-advertisement-rachna-teracotta">Advertisement Area</a>
-            </li>
-            <li>
-                <a href="/administration/home/featuredProducts.aspx?redirecturl=admin-featured-products-rachna-teracotta">Featured Products</a>
-            </li>
-            <li>
-                <a href="/administration/home/topeight.aspx?redirecturl=admin-slider-rachna-teracotta">Top Eight Products</a>
-            </li>
-             <li>
-                <a href="/administration/home/dealoftheday.aspx?redirecturl=admin-slider-rachna-teracotta">Deal of the Day</a>
+            <li class='dropdown'>
+                <a href="#" data-toggle="dropdown">Home Page Section</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/administration/home/slider.aspx?redirecturl=admin-slider-rachna-teracotta">Home Page Slider</a>
+                    </li>
+                    <li>
+                        <a href="/administration/home/advertisement.aspx?redirecturl=admin-advertisement-rachna-teracotta">Advertisement Area</a>
+                    </li>
+                    <li>
+                        <a href="/administration/home/featuredProducts.aspx?redirecturl=admin-featured-products-rachna-teracotta">Featured Products</a>
+                    </li>
+                    <li>
+                        <a href="/administration/home/topeight.aspx?redirecturl=admin-slider-rachna-teracotta">Top Eight Products</a>
+                    </li>
+                    <li>
+                        <a href="/administration/home/dealoftheday.aspx?redirecturl=admin-slider-rachna-teracotta">Deal of the Day</a>
+                    </li>
+                </ul>
             </li>
             <li class='dropdown'>
                 <a href="#" data-toggle="dropdown">Page & Menus</a>
@@ -62,9 +66,8 @@
                 </ul>
             </li>
             <li>
-                <a href="#" id="addClass">Open in chat </a>
+                <a href="/administration/adminactivity.aspx?redirecturl=admin-slider-rachna-teracotta">View My Activity</a>
             </li>
         </ul>
-       <uc:ucOnlineUser ID="ucOnlineUser" runat="server" />
     </div>
 </div>

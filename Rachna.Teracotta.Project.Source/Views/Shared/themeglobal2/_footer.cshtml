@@ -36,7 +36,7 @@
                             {
                                 foreach (var item in footerModel._categories)
                                 {
-                                    <li><a href="#">@item.Category_Title</a></li>
+                                    <li><a href="/home/productbycategory?subcatid=@item.Category_Id&category=category">@item.Category_Title</a></li>
                                 }
                             }
                         </ul>
@@ -60,14 +60,34 @@
 
                 <div class="col-lg-2 col-md-4">
                     <div class="footer-widget widget-links">
-                        <h5 class="footer-widget-title">Quick Help</h5>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Coming Soon</a></li>
-                            <li><a href="#">Special</a></li>
-                        </ul>
+                        <h5 class="footer-widget-title">Quick Links</h5>
+                        @if (footerModel._menu != null && footerModel._menu.Count > 0)
+                        {
+                            if (footerModel._menu.Where(m => m.MenuType == Rachna.Teracotta.Project.Source.Entity.eMenu.Header.ToString()).ToList().Count > 0)
+                            {
+                                <ul>
+                                    @foreach (var item in footerModel._menu)
+                                    {
+                                        if (item.MenuType == Rachna.Teracotta.Project.Source.Entity.eMenu.Footer.ToString())
+                                        {
+                                            if (item.Page_Id == 1)
+                                            {
+                                                <li><a href="/">Home</a></li>
+                                            }
+                                            else if (item.Page_Id == 2)
+                                            {
+                                                <li><a href="/home/offers?id=1234&redirect-page=latest-hot-offers-from-rachna.htm">Hot Offers</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="/home/page?pageid=@item.Page_Id&redirect-url=@item.Title">@item.Title</a></li>
+                                            }
+                                        }
+                                    }
+                                    <li><a href="/home/contact?id=1234&redirect-page=online-store-contact-us-rachna.htm">Contact Us</a></li>
+                                </ul>
+                            }
+                        }
                     </div>
                 </div>
 

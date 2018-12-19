@@ -25,6 +25,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
             using (var ctx = new RachnaDBContext())
             {
                 _product = ctx.Product.Where(m => m.SubCategory_Id == id && m.Product_Status == eProductStatus.Published.ToString()).ToList();
+
                 foreach (var item in _product)
                 {
                     item.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
@@ -38,11 +39,14 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                     _prdModel.Add(new HomePageProductModel
                     {
                         Id = item.Product_Id,
-                        Title = (item.Product_Title.Length > 20) ? item.Product_Title.Substring(0, 17) + "..." : item.Product_Title,
-                        Description = item.Product_Description,
-                        Banner = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Title = item.Product_Title,
+                        Description = (item.Product_Description.Length > 500) ? item.Product_Description.Substring(0, 500) + "..." : item.Product_Description,
+                        Banner1 = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Banner2 = item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        OldPrice = item.Product_Mkt_Price,
                         TotalPrice = item.Product_Our_Price,
-                        DiscountPrice = item.Product_Discount
+                        DiscountPrice = item.Product_Discount,
+                        Rating = item.Store_Rating
                     });
                 }
             }
@@ -60,9 +64,10 @@ namespace Rachna.Teracotta.Project.Source.Controllers
         {
             return View();
         }
-        public ActionResult ProductByCategory(string subcatid)
+        public ActionResult ProductByCategory(string subcatid, string category)
         {
             ViewBag.SubCatId = subcatid;
+            ViewBag.Category = category;
             return View();
         }
         public ActionResult Subscribe(string emailid)
@@ -92,20 +97,29 @@ namespace Rachna.Teracotta.Project.Source.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetProductsBySubCatId(int id, int max_price, int min_price)
+        public ActionResult GetProductsBySubCatId(int id, int max_price, int min_price, string filter, string category)
         {
             List<Product> _product = null;
             List<HomePageProductModel> _prdModel = new List<HomePageProductModel>();
             using (var ctx = new RachnaDBContext())
             {
-                _product = ctx.Product.Where(m => m.SubCategory_Id == id && m.Product_Our_Price <= max_price && m.Product_Our_Price >= min_price && m.Product_Status == eProductStatus.Published.ToString()).ToList();
+                if (category != null)
+                {
+                    _product = ctx.Product.Include("SubCategory").Where(m => m.SubCategory.Category_Id == id && m.Product_Status == eProductStatus.Published.ToString()).ToList();
+                }
+                else
+                {
+                    _product = ctx.Product.Where(m => m.SubCategory_Id == id && m.Product_Our_Price <= max_price && m.Product_Our_Price >= min_price && m.Product_Status == eProductStatus.Published.ToString()).ToList();
+                }
                 foreach (var item in _product)
                 {
                     item.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
                 }
             }
 
-            foreach (var item in _product.Take(8).ToList())
+            ViewBag.TotProducts = _product.Count;
+
+            foreach (var item in _product)
             {
                 if (item.ProductBanner.Count > 0)
                 {
@@ -113,13 +127,33 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                     {
                         Id = item.Product_Id,
                         Title = item.Product_Title,
-                        Description = (item.Product_Description.Length > 150) ? item.Product_Description.Substring(0, 150) + "..." : item.Product_Description,
-                        Banner = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Description = (item.Product_Description.Length > 500) ? item.Product_Description.Substring(0, 500) + "..." : item.Product_Description,
+                        Banner1 = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Banner2 = item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        OldPrice = item.Product_Mkt_Price,
                         TotalPrice = item.Product_Our_Price,
-                        DiscountPrice = item.Product_Discount
+                        DiscountPrice = item.Product_Discount,
+                        Rating = item.Store_Rating
                     });
                 }
             }
+
+            if (filter != "NA")
+            {
+                if (filter == "az" && filter == "za")
+                {
+                    return Json(_prdModel.OrderBy(o => o.Title).ToList(), JsonRequestBehavior.AllowGet);
+                }
+                else if (filter == "hl")
+                {
+                    return Json(_prdModel.OrderByDescending(o => o.TotalPrice).ToList(), JsonRequestBehavior.AllowGet);
+                }
+                else if (filter == "lh")
+                {
+                    return Json(_prdModel.OrderBy(o => o.TotalPrice).ToList(), JsonRequestBehavior.AllowGet);
+                }
+            }
+
             return Json(_prdModel, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Logout()
@@ -161,10 +195,13 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                     {
                         Id = item.Product_Id,
                         Title = item.Product_Title,
-                        Description = (item.Product_Description.Length > 150) ? item.Product_Description.Substring(0, 150) + "..." : item.Product_Description,
-                        Banner = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Description = (item.Product_Description.Length > 500) ? item.Product_Description.Substring(0, 500) + "..." : item.Product_Description,
+                        Banner1 = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Banner2 = item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        OldPrice = item.Product_Mkt_Price,
                         TotalPrice = item.Product_Our_Price,
-                        DiscountPrice = item.Product_Discount
+                        DiscountPrice = item.Product_Discount,
+                        Rating = item.Store_Rating
                     });
                 }
             }
@@ -196,7 +233,10 @@ namespace Rachna.Teracotta.Project.Source.Controllers
             List<HomePageProductModel> _prdModel = new List<HomePageProductModel>();
             using (var ctx = new RachnaDBContext())
             {
-                _product = ctx.Product.Where(m => m.SubCategory_Id == id && m.Product_Our_Price <= max_price && m.Product_Our_Price >= min_price && m.Product_Status == eProductStatus.Published.ToString() && m.Store_Id == storeId).ToList();
+                if (id != 0)
+                    _product = ctx.Product.Where(m => m.SubCategory_Id == id && m.Product_Our_Price <= max_price && m.Product_Our_Price >= min_price && m.Product_Status == eProductStatus.Published.ToString() && m.Store_Id == storeId).ToList();
+                else
+                    _product = ctx.Product.Where(m => m.Product_Our_Price <= max_price && m.Product_Our_Price >= min_price && m.Product_Status == eProductStatus.Published.ToString() && m.Store_Id == storeId).ToList();
                 foreach (var item in _product)
                 {
                     item.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
@@ -211,10 +251,13 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                     {
                         Id = item.Product_Id,
                         Title = item.Product_Title,
-                        Description = (item.Product_Description.Length > 150) ? item.Product_Description.Substring(0, 150) + "..." : item.Product_Description,
-                        Banner = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Description = (item.Product_Description.Length > 500) ? item.Product_Description.Substring(0, 500) + "..." : item.Product_Description,
+                        Banner1 = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Banner2 = item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        OldPrice = item.Product_Mkt_Price,
                         TotalPrice = item.Product_Our_Price,
-                        DiscountPrice = item.Product_Discount
+                        DiscountPrice = item.Product_Discount,
+                        Rating = item.Store_Rating
                     });
                 }
             }
@@ -229,9 +272,12 @@ namespace Rachna.Teracotta.Project.Source.Controllers
             public int Id { get; set; }
             public string Title { get; set; }
             public string Description { get; set; }
-            public string Banner { get; set; }
+            public string Banner1 { get; set; }
+            public string Banner2 { get; set; }
+            public decimal OldPrice { get; set; }
             public decimal TotalPrice { get; set; }
             public decimal DiscountPrice { get; set; }
+            public int Rating { get; set; }
         }
         public ActionResult CustomerRequest(CustomerRequest customerRequest)
         {
@@ -240,13 +286,13 @@ namespace Rachna.Teracotta.Project.Source.Controllers
             {
                 CustomerRequest _customerRequest = new CustomerRequest()
                 {
-                    FullName= customerRequest.FullName,
-                    EmailId= customerRequest.EmailId,
-                    Subject= customerRequest.Subject,
-                    Description= customerRequest.Description,
-                    IpAddress="",
-                    DateCreated=DateTime.Now,
-                    DateUpdated=DateTime.Now
+                    FullName = customerRequest.FullName,
+                    EmailId = customerRequest.EmailId,
+                    Subject = customerRequest.Subject,
+                    Description = customerRequest.Description,
+                    IpAddress = IpAddress.GetLocalIPAddress(),
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now
                 };
 
                 ctx.CustomerRequest.Add(_customerRequest);

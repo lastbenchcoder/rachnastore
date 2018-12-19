@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +12,7 @@ namespace Rachna.Teracotta.Project.Source.administration
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            this.Title = ConfigurationSettings.AppSettings["AppName"].ToString() + " : My Activity";
         }
     }
 }

@@ -22,13 +22,13 @@
                         <div class="category-wrapper">
                             <!-- Single Category -->
                             <div class="category">
-                                <a href="/home/productbycategory?categoryId=" class="category-thumb">
+                                <a href="/home/productbycategory?subcatid=@item.Category_Id&category=category" class="category-thumb">
                                     <img src="../../@item.Category_Photo" alt="category image">
                                 </a>
                                 <div class="category-content">
                                     <h5 class="category-title">@item.Category_Title</h5>
                                     <span class="category-productcounter">Many Products In Stock</span>
-                                    <a href="/home/productbycategory?categoryId=" class="category-productlink">Shop Now <i class="ion ion-md-arrow-dropright"></i></a>
+                                    <a href="/home/productbycategory?subcatid=@item.Category_Id&category=category" class="category-productlink">Shop Now <i class="ion ion-md-arrow-dropright"></i></a>
                                 </div>
                             </div>
                             <!--// Single Category -->
@@ -60,17 +60,21 @@
                                         <img class="hoproduct-frontimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                         <img class="hoproduct-backimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                     </a>
-                                    <ul class="hoproduct-flags">
-                                        <li class="flag-pack">New</li>
-                                        @{
-                                            decimal GST_Amount = 0, GST_Percentage = 0;
-                                            GST_Amount = (item.Product.Product_Our_Price - item.Deal_Price);
-                                            GST_Percentage = (GST_Amount * 100) / item.Product.Product_Our_Price;
-                                        }
-                                        <li class="flag-discount">
-                                            @Math.Round(GST_Percentage) <span>%</span>
-                                        </li>
-                                    </ul>
+                                    @{
+                                        decimal GST_Amount = 0, GST_Percentage = 0;
+                                        GST_Amount = (item.Product.Product_Our_Price - item.Deal_Price);
+                                        GST_Percentage = (GST_Amount * 100) / item.Product.Product_Our_Price;
+                                    }
+                                    @if (GST_Percentage != 0)
+                                    {
+                                        <ul class="hoproduct-flags">
+
+                                            <li class="flag-pack">New</li>
+                                            <li class="flag-discount">
+                                                @Math.Round(GST_Percentage) <span>%</span>
+                                            </li>
+                                        </ul>
+                                    }
                                 </div>
                                 @{
                                     DateTime dealDay = item.Deal_Starts_From.AddDays(1);
@@ -206,10 +210,13 @@
                                             <img class="hoproduct-frontimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                             <img class="hoproduct-backimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                         </a>
-                                        <ul class="hoproduct-flags">
-                                            <li class="flag-pack">New</li>
-                                            <li class="flag-discount">-@item.Product.Product_Discount %</li>
-                                        </ul>
+                                        @if (@item.Product.Product_Discount != 0)
+                                        {
+                                            <ul class="hoproduct-flags">
+                                                <li class="flag-pack">New</li>
+                                                <li class="flag-discount">-@Math.Round(item.Product.Product_Discount) %</li>
+                                            </ul>
+                                        }
                                     </div>
                                     <div class="hoproduct-content">
                                         <h5 class="hoproduct-title">
@@ -280,10 +287,13 @@
                                             <img class="hoproduct-frontimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                             <img class="hoproduct-backimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                         </a>
-                                        <ul class="hoproduct-flags">
-                                            <li class="flag-pack">New</li>
-                                            <li class="flag-discount">-@item.Product.Product_Discount %</li>
-                                        </ul>
+                                        @if (@item.Product.Product_Discount != 0)
+                                        {
+                                            <ul class="hoproduct-flags">
+                                                <li class="flag-pack">New</li>
+                                                <li class="flag-discount">-@Math.Round(item.Product.Product_Discount) %</li>
+                                            </ul>
+                                        }
                                     </div>
                                     <div class="hoproduct-content">
                                         <h5 class="hoproduct-title">
@@ -355,10 +365,13 @@
                                             <img class="hoproduct-frontimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                             <img class="hoproduct-backimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                         </a>
-                                        <ul class="hoproduct-flags">
-                                            <li class="flag-pack">New</li>
-                                            <li class="flag-discount">-@item.Product.Product_Discount %</li>
-                                        </ul>
+                                        @if (@item.Product.Product_Discount != 0)
+                                        {
+                                            <ul class="hoproduct-flags">
+                                                <li class="flag-pack">New</li>
+                                                <li class="flag-discount">-@Math.Round(item.Product.Product_Discount) %</li>
+                                            </ul>
+                                        }
                                     </div>
                                     <div class="hoproduct-content">
                                         <h5 class="hoproduct-title">
@@ -465,10 +478,13 @@
                                             <img class="hoproduct-frontimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                             <img class="hoproduct-backimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                         </a>
-                                        <ul class="hoproduct-flags">
-                                            <li class="flag-pack">New</li>
-                                            <li class="flag-discount">@item.Product.Product_Discount %</li>
-                                        </ul>
+                                        @if (@item.Product.Product_Discount != 0)
+                                        {
+                                            <ul class="hoproduct-flags">
+                                                <li class="flag-pack">New</li>
+                                                <li class="flag-discount">-@Math.Round(item.Product.Product_Discount) %</li>
+                                            </ul>
+                                        }
                                     </div>
                                     <div class="hoproduct-content">
                                         <h5 class="hoproduct-title">
@@ -531,6 +547,9 @@
 <!-- Brand Logo Area -->
 <div class="ho-section brand-logos-area bg-grey">
     <div class="container">
+        <div class="section-title">
+            <h3>PROUD PARTNERS</h3>
+        </div>
         @if (homePageModel._stores != null && homePageModel._stores.Count > 0)
         {
             <div class="brand-logo-slider slider-navigation-3">
@@ -551,126 +570,75 @@
 <div class="ho-section latest-blog-area bg-white pt-40">
     <div class="container">
         <div class="section-title">
-            <h3>LATEST BLOGS</h3>
+            <h3>LATEST ADDITION</h3>
         </div>
         <div class="product-slider blogitem-slider slider-navigation-2">
-
-            <div class="product-slider-col">
-                <!-- Single Blog -->
-                <article class="blogitem">
-                    <div class="blogitem-thumb">
-                        <a href="blog-details.html">
-                            <img src="../../appfiles/frontend2/images/blog/blog-item-image-1.jpg" alt="blog item image">
-                        </a>
-                    </div>
-                    <div class="blogitem-content">
-                        <h4 class="blogitem-title">
-                            <a href="blog-details.html">
-                                This is First Post For
-                                XipBlog
-                            </a>
-                        </h4>
-                        <div class="blogitem-meta">
-                            <span class="blogitem-date"><i class="ion ion-md-calendar"></i> July 11, 2018</span>
-                            <span class="blogitem-author">
-                                <a href="blog.html">
-                                    <i class="ion ion-md-person"></i>By
-                                    Admin
+            <!-- Single Blog -->
+            @if (homePageModel._recentAddition != null && homePageModel._recentAddition.Count > 0)
+            {
+                foreach (var item in homePageModel._recentAddition)
+                {
+                    <div class="product-slider-col">
+                        <article class="blogitem">
+                            <div class="blogitem-thumb">
+                                <a href="/product/index?id=@item.Product_Id&title=@item.Product_Title">
+                                    <img class="hoproduct-frontimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                 </a>
-                            </span>
-                        </div>
+                            </div>
+                            <div class="blogitem-content">
+                                <h4 class="blogitem-title">
+                                    <a href="/product/index?id=@item.Product_Id&title=@item.Product_Title">
+                                        @item.Product_Title
+                                    </a>
+                                </h4>
+                                <div class="blogitem-meta">
+                                    <span class="blogitem-date">
+                                        <div class="hoproduct-rattingbox">
+                                            <div class="rattingbox">
+                                                @if (item.Store_Rating == 1)
+                                                {
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                }
+                                                else if (item.Store_Rating == 2)
+                                                {
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                }
+                                                else if (item.Store_Rating == 3)
+                                                {
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                }
+                                                else if (item.Store_Rating == 4)
+                                                {
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                }
+                                                else if (item.Store_Rating == 5)
+                                                {
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </span>
+                                    <span class="blogitem-author">
+                                        <del class="oldprice">&#x20B9; @Math.Round(item.Product_Mkt_Price)</del>
+                                        <span class="price">&#x20B9; @Math.Round(item.Product_Our_Price)</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </article>
                     </div>
-                </article>
-                <!--// Single Blog -->
-            </div>
-
-            <div class="product-slider-col">
-                <!-- Single Blog -->
-                <article class="blogitem">
-                    <div class="blogitem-thumb">
-                        <a href="blog-details.html">
-                            <img src="../../appfiles/frontend2/images/blog/blog-item-image-2.jpg" alt="blog item image">
-                        </a>
-                    </div>
-                    <div class="blogitem-content">
-                        <h4 class="blogitem-title">
-                            <a href="blog-details.html">
-                                This is Secound Post For
-                                XipBlog
-                            </a>
-                        </h4>
-                        <div class="blogitem-meta">
-                            <span class="blogitem-date"><i class="ion ion-md-calendar"></i> July 11, 2018</span>
-                            <span class="blogitem-author">
-                                <a href="blog.html">
-                                    <i class="ion ion-md-person"></i>By
-                                    Admin
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                </article>
-                <!--// Single Blog -->
-            </div>
-
-            <div class="product-slider-col">
-                <!-- Single Blog -->
-                <article class="blogitem">
-                    <div class="blogitem-thumb">
-                        <a href="blog-details.html">
-                            <img src="../../appfiles/frontend2/images/blog/blog-item-image-3.jpg" alt="blog item image">
-                        </a>
-                    </div>
-                    <div class="blogitem-content">
-                        <h4 class="blogitem-title">
-                            <a href="blog-details.html">
-                                This is Third Post For
-                                XipBlog
-                            </a>
-                        </h4>
-                        <div class="blogitem-meta">
-                            <span class="blogitem-date"><i class="ion ion-md-calendar"></i> July 11, 2018</span>
-                            <span class="blogitem-author">
-                                <a href="blog.html">
-                                    <i class="ion ion-md-person"></i>By
-                                    Admin
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                </article>
-                <!--// Single Blog -->
-            </div>
-
-            <div class="product-slider-col">
-                <!-- Single Blog -->
-                <article class="blogitem">
-                    <div class="blogitem-thumb">
-                        <a href="blog-details.html">
-                            <img src="../../appfiles/frontend2/images/blog/blog-item-image-4.jpg" alt="blog item image">
-                        </a>
-                    </div>
-                    <div class="blogitem-content">
-                        <h4 class="blogitem-title">
-                            <a href="blog-details.html">
-                                This is Fourth Post For
-                                XipBlog
-                            </a>
-                        </h4>
-                        <div class="blogitem-meta">
-                            <span class="blogitem-date"><i class="ion ion-md-calendar"></i> July 11, 2018</span>
-                            <span class="blogitem-author">
-                                <a href="blog.html">
-                                    <i class="ion ion-md-person"></i>By
-                                    Admin
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                </article>
-                <!--// Single Blog -->
-            </div>
-
+                }
+            }
+            <!--// Single Blog -->
         </div>
     </div>
 </div>

@@ -45,5 +45,6 @@ namespace Rachna.Teracotta.Project.Source.Models
         public string ErrorMessage { get; set; }
 
         public ICollection<Product> Product { get; set; }
+        public ICollection<Order> Order { get; set; }
     }
 }

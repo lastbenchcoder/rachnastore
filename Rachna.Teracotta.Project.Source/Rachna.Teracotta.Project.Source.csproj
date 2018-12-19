@@ -161,11 +161,6 @@
     <Content Include="administration\categories\subcategory.aspx" />
     <Content Include="administration\categories\subcategorydetail.aspx" />
     <Content Include="administration\default.aspx" />
-    <Content Include="administration\defectmanager\defect.aspx" />
-    <Content Include="administration\defectmanager\defectdetail.aspx" />
-    <Content Include="administration\defectmanager\defectedit.aspx" />
-    <Content Include="administration\defectmanager\functdetail.aspx" />
-    <Content Include="administration\defectmanager\functionalities.aspx" />
     <Content Include="administration\delivery\ordersdelivery.aspx" />
     <Content Include="administration\home\advertisement.aspx" />
     <Content Include="administration\home\advertisementdetail.aspx" />
@@ -209,11 +204,6 @@
     <Content Include="administration\store.aspx" />
     <Content Include="administration\storedetail.aspx" />
     <Content Include="administration\subscription\emailsubscription.aspx" />
-    <Content Include="administration\task\reviewapproved.aspx" />
-    <Content Include="administration\task\reviewpending.aspx" />
-    <Content Include="administration\task\reviewpublished.aspx" />
-    <Content Include="administration\uc\_chatmessage.ascx" />
-    <Content Include="administration\uc\_onlineusers.ascx" />
     <Content Include="administration\uc\_topmenu.ascx" />
     <Content Include="administration\uc\_ucleftmenu.ascx" />
     <Content Include="adminvendor\default.aspx" />
@@ -1338,41 +1328,6 @@
     <Compile Include="administration\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="administration\defectmanager\defect.aspx.cs">
-      <DependentUpon>defect.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="administration\defectmanager\defect.aspx.designer.cs">
-      <DependentUpon>defect.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="administration\defectmanager\defectdetail.aspx.cs">
-      <DependentUpon>defectdetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="administration\defectmanager\defectdetail.aspx.designer.cs">
-      <DependentUpon>defectdetail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="administration\defectmanager\defectedit.aspx.cs">
-      <DependentUpon>defectedit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="administration\defectmanager\defectedit.aspx.designer.cs">
-      <DependentUpon>defectedit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="administration\defectmanager\functdetail.aspx.cs">
-      <DependentUpon>functdetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="administration\defectmanager\functdetail.aspx.designer.cs">
-      <DependentUpon>functdetail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="administration\defectmanager\functionalities.aspx.cs">
-      <DependentUpon>functionalities.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="administration\defectmanager\functionalities.aspx.designer.cs">
-      <DependentUpon>functionalities.aspx</DependentUpon>
-    </Compile>
     <Compile Include="administration\delivery\ordersdelivery.aspx.cs">
       <DependentUpon>ordersdelivery.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1680,41 +1635,6 @@
     </Compile>
     <Compile Include="administration\subscription\emailsubscription.aspx.designer.cs">
       <DependentUpon>emailsubscription.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="administration\task\reviewapproved.aspx.cs">
-      <DependentUpon>reviewapproved.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="administration\task\reviewapproved.aspx.designer.cs">
-      <DependentUpon>reviewapproved.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="administration\task\reviewpending.aspx.cs">
-      <DependentUpon>reviewpending.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="administration\task\reviewpending.aspx.designer.cs">
-      <DependentUpon>reviewpending.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="administration\task\reviewpublished.aspx.cs">
-      <DependentUpon>reviewpublished.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="administration\task\reviewpublished.aspx.designer.cs">
-      <DependentUpon>reviewpublished.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="administration\uc\_chatmessage.ascx.cs">
-      <DependentUpon>_chatmessage.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="administration\uc\_chatmessage.ascx.designer.cs">
-      <DependentUpon>_chatmessage.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="administration\uc\_onlineusers.ascx.cs">
-      <DependentUpon>_onlineusers.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="administration\uc\_onlineusers.ascx.designer.cs">
-      <DependentUpon>_onlineusers.ascx</DependentUpon>
     </Compile>
     <Compile Include="administration\uc\_topmenu.ascx.cs">
       <DependentUpon>_topmenu.ascx</DependentUpon>
@@ -2048,6 +1968,7 @@
     <Folder Include="bin\tr-TR\" />
     <Folder Include="bin\zh-CHS\" />
     <Folder Include="bin\zh-CHT\" />
+    <Folder Include="learning\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

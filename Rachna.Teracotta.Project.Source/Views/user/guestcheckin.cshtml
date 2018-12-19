@@ -1,128 +1,132 @@
 ﻿@model Tuple<Rachna.Teracotta.Project.Source.Models.Customers, Rachna.Teracotta.Project.Source.Models.CustomerAddress>
-    @{
-        ViewBag.Title = "Guest Checkin";
-        Layout = "~/Views/Shared/_productlayout.cshtml";
-    }
+@{
+    ViewBag.Title = "Guest Checkin";
+    Layout = "~/Views/Shared/_productlayout.cshtml";
+}
 
-    <div class="spacer30"></div><!--spacer-->
-    <!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
-    <div class="wrapper-breadcrumbs clearfix">
+
+<div class="breadcrumb-area bg-grey">
+    <div class="container">
+        <div class="ho-breadcrumb">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li>Guest Checkin</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<form action="/user/submitasguest">
+    <div class="my-account-area ptb-30">
         <div class="container">
-            <div class="breadcrumbs-main clearfix">
-                <h2>Guest Checkin </h2>
-                <ul>
-                    <li><a href="/">Home</a><span class="separator">/</span></li>
-                    <li><strong>Checkin</strong></li>
-                </ul>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        @if (ViewBag.Message != null)
+                        {
+                            <blockquote>
+                                <label style="color:red;font-weight:bold">@ViewBag.Message</label>
+                            </blockquote>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Login Form -->
+                    <div class="col-lg-6">
+                        @if (ViewBag.Message != null)
+                        {
+                            <blockquote>
+                                <label style="color:red;font-weight:bold">@ViewBag.Message</label>
+                            </blockquote>
+                        }
+                        <div class="login-form-wrapper">
+                            <div class="ho-form ho-form-boxed">
+                                <div class="ho-form-inner">
+                                    <div class="single-input">
+                                        <label for="FirstName">First Name<span>*</span></label>
+                                        <input type="text" id="FirstName" class="form-control" name="Customers_FullName" required value="@Model.Item1.Customers_FullName" />
+                                    </div><!-- End .form-group -->
+                                    <div class="single-input">
+                                        <label for="EmailId">EmailId<span>*</span></label>
+                                        <input type="email" id="EmailId" class="form-control" name="Customers_EmailId" required value="@Model.Item1.Customers_EmailId" />
+                                    </div><!-- End .form-group -->
+                                    <div class="single-input">
+                                        <label for="Phone">Phone<span>*</span></label>
+                                        <input type="number" id="Phone" class="form-control" name="Customers_Phone" required value="@Model.Item1.Customers_Phone" />
+                                    </div><!-- End .form-group -->
+                                    <div class="single-input">
+                                        <label for="password">Password<span>*</span></label>
+                                        <input type="password" id="password" class="form-control" name="Customers_Password" required value="@Model.Item1.Customers_Password" />
+                                    </div><!-- End .form-group -->
+                                    <div class="single-input">
+                                        <label for="confirm_password">Confirm Password<span>*</span></label>
+                                        <input type="password" id="confirm_password" class="form-control" name="ConfirmPassword" required value="@Model.Item1.Customers_Password" />
+                                    </div><!-- End .form-group -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--// Login Form -->
+                    <!-- Register Form -->
+                    <div class="col-lg-6 mt-30 mt-lg-0">
+                        <div class="login-form-wrapper">
+                            <div class="ho-form ho-form-boxed">
+                                <div class="ho-form-inner">
+                                    <div class="single-input">
+                                        <label for="FirstName">Address Line 1<span>*</span></label>
+                                        <input type="text" class="form-control" required name="Customer_AddressLine1" value="@Model.Item2.Customer_AddressLine1" />
+                                    </div><!-- End .form-group -->
+                                    <div class="single-input">
+                                        <label for="LastName">Address Line 2<span>*</span></label>
+                                        <input type="text" class="form-control" name="Customer_AddressLine2" value="@Model.Item2.Customer_AddressLine2" />
+                                    </div><!-- End .form-group -->
+                                    <div class="single-input">
+                                        <label for="EmailId">LandMark<span>*</span></label>
+                                        <input type="text" class="form-control" required name="CustomerAddress_LandMark" value="@Model.Item2.CustomerAddress_LandMark" />
+                                    </div><!-- End .form-group -->
+                                    <div class="single-input">
+                                        <label for="Phone">City<span>*</span></label>
+                                        <input type="text" class="form-control" required name="CustomerAddress_City" value="@Model.Item2.CustomerAddress_City" />
+                                    </div><!-- End .form-group -->
+                                    <div class="single-input">
+                                        <label for="password">State<span>*</span></label>
+                                        <input type="text" class="form-control" required name="CustomerAddress_State" value="@Model.Item2.CustomerAddress_State" />
+                                    </div><!-- End .form-group -->
+                                    <div class="single-input">
+                                        <label for="confirm_password">Country<span>*</span></label>
+                                        <input type="text" class="form-control" required name="CustomerAddress_Country" value="@Model.Item2.CustomerAddress_Country" />
+                                    </div><!-- End .form-group -->
+                                    <div class="single-input">
+                                        <label for="confirm_password">ZipCode<span>*</span></label>
+                                        <input type="number" class="form-control" required name="CustomerAddress_ZipCode" value="@Model.Item2.CustomerAddress_ZipCode" />
+                                    </div><!-- End .form-group -->
+                                    <div class="single-input">
+                                        <button type="submit" class="ho-button ho-button-dark btnLoginCustomer">
+                                            <span>Register</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--// Register Form -->
+                </div>
             </div>
         </div>
     </div>
-    <form action="/user/submitasguest">
-        <!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
-        <div class="wrapper-main brandshop clearfix">
-            <div class="spacer30"></div><!--spacer-->
-            <div class="container">
-                <div class="inner-block">
-                    <!------Main Inner-------->
-                    <div class="row">
-                        <div class="sign-main">
-                            <!-- Start Sign -->
-                            <div class="sign-details clearfix">
-                                <!-- Start Form -->
-                                <div class="col-sm-6 contact-form">
-                                    <div class="sign-block">
-                                        <h4>Account Detail</h4>
-                                        <p class="mb15">
-                                            @if (ViewBag.Message != null)
-                                            {
-                                                <label style="color:red;font-weight:bold">@ViewBag.Message</label>
-                                            }
-                                        </p>
-                                        <ul>
-                                            <li class="form-group">
-                                                <label for="FirstName">First Name<span>*</span></label>
-                                                <input type="text" id="FirstName" class="form-control" name="Customers_FullName" required value="@Model.Item1.Customers_FullName"/>
-                                            </li><!-- End .form-group -->
-                                            <li class="form-group">
-                                                <label for="EmailId">EmailId<span>*</span></label>
-                                                <input type="email" id="EmailId" class="form-control" name="Customers_EmailId" required value="@Model.Item1.Customers_EmailId"/>
-                                            </li><!-- End .form-group -->
-                                            <li class="form-group">
-                                                <label for="Phone">Phone<span>*</span></label>
-                                                <input type="number" id="Phone" class="form-control" name="Customers_Phone" required value="@Model.Item1.Customers_Phone"/>
-                                            </li><!-- End .form-group -->
-                                            <li class="form-group">
-                                                <label for="password">Password<span>*</span></label>
-                                                <input type="password" id="password" class="form-control" name="Customers_Password" required value="@Model.Item1.Customers_Password"/>
-                                            </li><!-- End .form-group -->
-                                            <li class="form-group">
-                                                <label for="confirm_password">Confirm Password<span>*</span></label>
-                                                <input type="password" id="confirm_password" class="form-control" name="ConfirmPassword" required value="@Model.Item1.Customers_Password"/>
-                                            </li><!-- End .form-group -->
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 contact-form">
-                                    <div class="new-account">
-                                        <div class="sign-block">
-                                            <h4>Billing Address</h4>
-                                            <ul>
-                                                <li class="form-group">
-                                                    <label for="FirstName">Address Line 1<span>*</span></label>
-                                                    <input type="text" class="form-control" required name="Customer_AddressLine1" value="@Model.Item2.Customer_AddressLine1"/>
-                                                </li><!-- End .form-group -->
-                                                <li class="form-group">
-                                                    <label for="LastName">Address Line 2<span>*</span></label>
-                                                    <input type="text" class="form-control" name="Customer_AddressLine2" value="@Model.Item2.Customer_AddressLine2"/>
-                                                </li><!-- End .form-group -->
-                                                <li class="form-group">
-                                                    <label for="EmailId">LandMark<span>*</span></label>
-                                                    <input type="text" class="form-control" required name="CustomerAddress_LandMark" value="@Model.Item2.CustomerAddress_LandMark"/>
-                                                </li><!-- End .form-group -->
-                                                <li class="form-group">
-                                                    <label for="Phone">City<span>*</span></label>
-                                                    <input type="text" class="form-control" required name="CustomerAddress_City" value="@Model.Item2.CustomerAddress_City"/>
-                                                </li><!-- End .form-group -->
-                                                <li class="form-group">
-                                                    <label for="password">State<span>*</span></label>
-                                                    <input type="text" class="form-control" required name="CustomerAddress_State" value="@Model.Item2.CustomerAddress_State"/>
-                                                </li><!-- End .form-group -->
-                                                <li class="form-group">
-                                                    <label for="confirm_password">Country<span>*</span></label>
-                                                    <input type="text" class="form-control" required name="CustomerAddress_Country" value="@Model.Item2.CustomerAddress_Country"/>
-                                                </li><!-- End .form-group -->
-                                                <li class="form-group">
-                                                    <label for="confirm_password">ZipCode<span>*</span></label>
-                                                    <input type="number" class="form-control" required name="CustomerAddress_ZipCode" value="@Model.Item2.CustomerAddress_ZipCode"/>
-                                                </li><!-- End .form-group -->
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- End Form -->
-                            <div class="text-right">
-                                <input type="submit" value="Submit" class="btn btn-custom min-width-md" />
-                            </div>
-                        </div><!-- End Sign -->
-                    </div>
-                </div>
-            </div>
-            <div class="spacer30"></div><!--spacer-->
-        </div>
-        <!-------------- End wrapper main -------------->
-    </form>
-    <script type="text/javascript">
-        var password = document.getElementById("password")
-      , confirm_password = document.getElementById("confirm_password");
+</form>
 
-        function validatePassword() {
-            if (password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Passwords Don't Match");
-            } else {
-                confirm_password.setCustomValidity('');
-            }
+<script type="text/javascript">
+    var password = document.getElementById("password")
+        , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
         }
+    }
 
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
-    </script>
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
