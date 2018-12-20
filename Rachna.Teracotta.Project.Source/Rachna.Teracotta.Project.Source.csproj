@@ -206,9 +206,30 @@
     <Content Include="administration\subscription\emailsubscription.aspx" />
     <Content Include="administration\uc\_topmenu.ascx" />
     <Content Include="administration\uc\_ucleftmenu.ascx" />
+    <Content Include="adminvendor\account.aspx" />
+    <Content Include="adminvendor\adminactivity.aspx" />
+    <Content Include="adminvendor\alladmin.aspx" />
     <Content Include="adminvendor\default.aspx" />
+    <Content Include="adminvendor\delivery\ordersdelivery.aspx" />
+    <Content Include="adminvendor\invitation.aspx" />
+    <Content Include="adminvendor\product\newproducts.aspx" />
+    <Content Include="adminvendor\product\productcomments.aspx" />
+    <Content Include="adminvendor\product\productcommentsupdate.aspx" />
+    <Content Include="adminvendor\product\productdetail.aspx" />
+    <Content Include="adminvendor\product\products.aspx" />
+    <Content Include="adminvendor\product\productsdetailstatic.aspx" />
+    <Content Include="adminvendor\product\uploadproductsbanner.aspx" />
+    <Content Include="adminvendor\profile.aspx" />
+    <Content Include="adminvendor\salesmanagement\cart.aspx" />
+    <Content Include="adminvendor\salesmanagement\customers.aspx" />
+    <Content Include="adminvendor\salesmanagement\deleverydetail.aspx" />
+    <Content Include="adminvendor\salesmanagement\orderdetail.aspx" />
+    <Content Include="adminvendor\salesmanagement\orders.aspx" />
+    <Content Include="adminvendor\salesmanagement\vorderdetail.aspx" />
+    <Content Include="adminvendor\store.aspx" />
     <Content Include="appfiles\frontend2\css\bootstrap.min.css" />
     <Content Include="appfiles\frontend2\css\custom.css" />
+    <Content Include="appfiles\frontend2\css\order.css" />
     <Content Include="appfiles\frontend2\css\plugins.css" />
     <Content Include="appfiles\frontend2\fonts\Flaticon.svg" />
     <Content Include="appfiles\frontend2\fonts\ioniconsc329.svg" />
@@ -1650,6 +1671,27 @@
     <Compile Include="administration\uc\_ucleftmenu.ascx.designer.cs">
       <DependentUpon>_ucleftmenu.ascx</DependentUpon>
     </Compile>
+    <Compile Include="adminvendor\account.aspx.cs">
+      <DependentUpon>account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\account.aspx.designer.cs">
+      <DependentUpon>account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\adminactivity.aspx.cs">
+      <DependentUpon>adminactivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\adminactivity.aspx.designer.cs">
+      <DependentUpon>adminactivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\alladmin.aspx.cs">
+      <DependentUpon>alladmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\alladmin.aspx.designer.cs">
+      <DependentUpon>alladmin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminvendor\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1657,12 +1699,131 @@
     <Compile Include="adminvendor\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminvendor\delivery\ordersdelivery.aspx.cs">
+      <DependentUpon>ordersdelivery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\delivery\ordersdelivery.aspx.designer.cs">
+      <DependentUpon>ordersdelivery.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminvendor\Home.Master.cs">
       <DependentUpon>Home.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adminvendor\Home.Master.designer.cs">
       <DependentUpon>Home.Master</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\invitation.aspx.cs">
+      <DependentUpon>invitation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\invitation.aspx.designer.cs">
+      <DependentUpon>invitation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\product\newproducts.aspx.cs">
+      <DependentUpon>newproducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\product\newproducts.aspx.designer.cs">
+      <DependentUpon>newproducts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\product\productcomments.aspx.cs">
+      <DependentUpon>productcomments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\product\productcomments.aspx.designer.cs">
+      <DependentUpon>productcomments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\product\productcommentsupdate.aspx.cs">
+      <DependentUpon>productcommentsupdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\product\productcommentsupdate.aspx.designer.cs">
+      <DependentUpon>productcommentsupdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\product\productdetail.aspx.cs">
+      <DependentUpon>productdetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\product\productdetail.aspx.designer.cs">
+      <DependentUpon>productdetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\product\products.aspx.cs">
+      <DependentUpon>products.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\product\products.aspx.designer.cs">
+      <DependentUpon>products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\product\productsdetailstatic.aspx.cs">
+      <DependentUpon>productsdetailstatic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\product\productsdetailstatic.aspx.designer.cs">
+      <DependentUpon>productsdetailstatic.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\product\uploadproductsbanner.aspx.cs">
+      <DependentUpon>uploadproductsbanner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\product\uploadproductsbanner.aspx.designer.cs">
+      <DependentUpon>uploadproductsbanner.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\profile.aspx.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\profile.aspx.designer.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\cart.aspx.cs">
+      <DependentUpon>cart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\cart.aspx.designer.cs">
+      <DependentUpon>cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\customers.aspx.cs">
+      <DependentUpon>customers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\customers.aspx.designer.cs">
+      <DependentUpon>customers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\deleverydetail.aspx.cs">
+      <DependentUpon>deleverydetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\deleverydetail.aspx.designer.cs">
+      <DependentUpon>deleverydetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\orderdetail.aspx.cs">
+      <DependentUpon>orderdetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\orderdetail.aspx.designer.cs">
+      <DependentUpon>orderdetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\orders.aspx.cs">
+      <DependentUpon>orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\orders.aspx.designer.cs">
+      <DependentUpon>orders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\vorderdetail.aspx.cs">
+      <DependentUpon>vorderdetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\salesmanagement\vorderdetail.aspx.designer.cs">
+      <DependentUpon>vorderdetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminvendor\store.aspx.cs">
+      <DependentUpon>store.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminvendor\store.aspx.designer.cs">
+      <DependentUpon>store.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

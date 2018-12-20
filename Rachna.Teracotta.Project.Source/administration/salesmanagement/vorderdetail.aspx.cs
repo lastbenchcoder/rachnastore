@@ -60,7 +60,7 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement
                     lblOrder_Status.Font.Bold = true;
                     lblOrder_Status.ForeColor = System.Drawing.Color.Green;
                     lblOrder_Status.Text = _RequestList.Order_Status.ToUpper();
-                    if (_RequestList.Order_Status == eOrderStatus.Delevery.ToString() || _RequestList.Order_Status == eOrderStatus.Delivered.ToString())
+                    if (_RequestList.Order_Status == eOrderStatus.Delevery.ToString())
                     {
                         btnEdit.Enabled = false;
                     }

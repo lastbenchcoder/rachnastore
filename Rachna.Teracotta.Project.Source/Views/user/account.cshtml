@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_productlayout.cshtml";
 
     Rachna.Teracotta.Project.Source.Models.Customers _customer = new Rachna.Teracotta.Project.Source.Models.Customers();
+    List<Rachna.Teracotta.Project.Source.Models.SocialNetworking> _socialNetworking = null;
     if (Session["UserKey"] != null)
     {
         using (var ctx = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext())
@@ -13,6 +14,7 @@
             {
                 _customer.CustomerAddress = ctx.CustomerAddres.Where(m => m.Customer_Id == _customer.Customer_Id).ToList();
             }
+            _socialNetworking = ctx.SocialNetworking.Where(m => m.Scl_Ntk_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.Active.ToString()).ToList();
         }
     }
 }
@@ -26,129 +28,159 @@
     @Html.Partial("_password")
 </div>
 
-<!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
-<div class="wrapper-breadcrumbs clearfix">
+
+<!-- Breadcrumb Area -->
+<div class="breadcrumb-area bg-grey">
     <div class="container">
-        <div class="spacer30"></div><!--spacer-->
-        <div class="breadcrumbs-main clearfix">
-            <h2>My Account Setup</h2>
+        <div class="ho-breadcrumb">
             <ul>
-                <li><a href="/">Home</a><span class="separator">/ </span></li>
-                <li><strong>Account</strong></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="/user/account/">My Account</a></li>
             </ul>
-            <p>
-                @if (ViewBag.Message != null)
-                {
-                    <label style="color:red;font-weight:bold">@ViewBag.Message</label>
-                }
-            </p>
         </div>
-        <div class="spacer15"></div><!--spacer-->
     </div>
 </div>
-<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
-<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
-<div class="wrapper-main brandshop clearfix">
-    <div class="spacer15"></div><!--spacer-->
-    <div class="container">
-        <div class="inner-block">
-            <!------Main Inner-------->
-            <div class="row">
-                <div class="cart-main">
-                    <!-- Shopping Cart -->
-                    <div class="col-md-12">
-                        <div class="cart-control clearfix">
-                            <table class="table total-table">
-                                <tbody>
-                                    <tr>
-                                        <td class="total-table-title">Your Detail:</td>
+<!--// Breadcrumb Area -->
+<!-- Page Conttent -->
+<main class="page-content">
+    <!-- Checkout Area -->
+    <div class="checkout-area bg-white ptb-30">
+        <div class="container">
 
-                                        <td>
-                                            <table>
-                                                <tr>
-                                                    <td style="width:30%;color:blue;">FullName :</td>
-                                                    <td style="width:70%">@_customer.Customers_FullName</td>
-                                                </tr>
-                                                <tr>
-                                                    @if (_customer.IsEmailVerified == 0)
-                                                    {
-                                                        <td style="width:30%;color:blue;">EmailID :</td>
-                                                        <td style="width:70%">@_customer.Customers_EmailId<span style="color:red;font-weight:bold">(Not Verified)</span></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td style="width:30%;color:blue;">EmailID :</td>
-                                                        <td style="width:70%">@_customer.Customers_EmailId<span style="color:green;font-weight:bold">(Verified)</span></td>
-                                                    }
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:30%;color:blue;">Phone No :</td>
-                                                    <td style="width:70%">@_customer.Customers_Phone</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:30%;color:blue;">Customer Id :</td>
-                                                    <td style="width:70%">@_customer.Customer_Id</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:30%;color:blue;">Customer Code :</td>
-                                                    <td style="width:70%">@_customer.CustomerCode</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:30%;color:blue;">User Since From :</td>
-                                                    <td style="width:70%">@_customer.Customers_CreatedDate.ToString("D")</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:30%;color:blue;">&nbsp</td>
-                                                    <td style="width:70%">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:30%;color:blue;">&nbsp</td>
-                                                    <td style="width:70%">
-                                                        <button class="btn btn-primary" data-toggle="modal" data-target="#mdlPasswrdChange">Update Account Password</button>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
+            <div class="billing-info">
+                <div class="row">
+                    @if (ViewBag.Message != null)
+                    {
+                        <label style="color:red;font-weight:bold">@ViewBag.Message</label>
+                    }
+                </div>
+                <div class="row">
+                    <!-- Place Order -->
+                    <div class="col-lg-6">
+                        <div class="order-infobox">
+                            <h3 class="small-title">MY PROFILE</h3>
+                            <div class="checkout-table table-responsive">
+                                <table>
+                                    <tr>
+                                        <td style="width:30%;color:blue;">FullName :</td>
+                                        <td style="width:70%">@_customer.Customers_FullName</td>
                                     </tr>
                                     <tr>
-                                        <td class="total-table-title">All Address:</td>
-                                        <td>
-                                            <ul>
-                                                @if (_customer.CustomerAddress.Count > 0)
-                                                {
-                                                    foreach (var item in _customer.CustomerAddress)
-                                                    {
-                                                        <li>
-                                                            <strong>@item.Customer_AddressLine1 @item.Customer_AddressLine2</strong>
-                                                            <p>@item.CustomerAddress_LandMark</p>
-                                                            <p>City @item.CustomerAddress_City State @item.CustomerAddress_State</p>
-                                                            <p>Country @item.CustomerAddress_Country - @item.CustomerAddress_ZipCode</p>
-                                                            <hr />
-                                                            <br />
-                                                        </li>
-                                                    }
-                                                    <li>
-                                                        <span>
-                                                            <a data-toggle="modal" data-target="#mdlCreateAddress" style="cursor:pointer">Click here</a> to create the new address.
-                                                        </span>
-                                                    </li>
-                                                }
-                                                else
-                                                {
-                                                    <li>
-                                                        <span style="color:red">No Delievery Address found <a data-toggle="modal" data-target="#mdlCreateAddress" style="cursor:pointer">Click here</a> to create the new address.</span>
-                                                    </li>
-                                                }
-                                            </ul>
+                                        @if (_customer.IsEmailVerified == 0)
+                                        {
+                                            <td style="width:30%;color:blue;">EmailID :</td>
+                                            <td style="width:70%">@_customer.Customers_EmailId<span style="color:red;font-weight:bold">(Not Verified)</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td style="width:30%;color:blue;">EmailID :</td>
+                                            <td style="width:70%">@_customer.Customers_EmailId<span style="color:green;font-weight:bold">(Verified)</span></td>
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td style="width:30%;color:blue;">Phone No :</td>
+                                        <td style="width:70%">@_customer.Customers_Phone</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:30%;color:blue;">Customer Id :</td>
+                                        <td style="width:70%">@_customer.Customer_Id</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:30%;color:blue;">Customer Code :</td>
+                                        <td style="width:70%">@_customer.CustomerCode</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:30%;color:blue;">User Since From :</td>
+                                        <td style="width:70%">@_customer.Customers_CreatedDate.ToString("D")</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:30%;color:blue;">&nbsp</td>
+                                        <td style="width:70%">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:30%;color:blue;">&nbsp</td>
+                                        <td style="width:70%">
+                                            <button class="btn btn-blue" data-toggle="modal" data-target="#mdlPasswrdChange">Update Account Password</button>
                                         </td>
                                     </tr>
-                            </table>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div><!-- End Shopping Cart -->
+                    <!--// Place Order -->
+                    <!-- Billing Details -->
+                    <div class="col-lg-6">
+                        <h3 class="small-title">SELECT ANY BILLING ADDRESS DETAILS</h3>
+                        <div class="ho-form">
+                            <div class="ho-form-inner">
+                                <div class="single-input single-input-half">
+                                    @if (_customer.CustomerAddress.Count > 0)
+                                    {
+                                        foreach (var item in _customer.CustomerAddress)
+                                        {
+                                            <div class="check-payment">
+                                                <strong>@item.Customer_AddressLine1</strong>
+                                                <strong>@item.Customer_AddressLine2</strong>
+                                                <p>@item.CustomerAddress_LandMark</p>
+                                                <p>City @item.CustomerAddress_City State @item.CustomerAddress_State</p>
+                                                <p>Country @item.CustomerAddress_Country - @item.CustomerAddress_ZipCode</p>
+                                            </div>
+                                        }
+                                        <span>
+                                            <a data-toggle="modal" data-target="#mdlCreateAddress" style="cursor:pointer;color:red">Click here</a> to create the new address.
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            <span style="color:red">No Delievery Address found <a data-toggle="modal" data-target="#mdlCreateAddress" style="cursor:pointer">Click here</a> to create the new address.</span>
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--// Billing Details -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--// Checkout Area -->
+    <!-- Newsletter Area -->
+    <div class="ho-section newsletter-area bg-grey ptb-50">
+        <div class="container">
+            <div class="newsletter">
+                <div class="newsletter-title">
+                    <h2>Subscribe to our <span>Newsletter!</span></h2>
+                </div>
+                <div class="newsletter-content">
+                    <form action="/home/subscribe/" class="newsletter-form">
+                        <input type="email" name="emailid" autocomplete="off" placeholder="Your email address..." required />
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <!-- mailchimp-alerts start -->
+                    <div class="mailchimp-alerts text-centre">
+                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                    </div><!-- mailchimp-alerts end -->
+                </div>
+                <div class="newsletter-socialicons socialicons socialicons-radial">
+                    @if (_socialNetworking != null && _socialNetworking.Count > 0)
+                    {
+                        <ul>
+                            @foreach (var item in _socialNetworking)
+                            {
+                                <li><a href="@item.Scl_Ntk_URL" target="_blank"><img src="../../@item.Scl_Ntk_Icon" alt="" /></a></li>
+                            }
+                        </ul>
+                    }
+                </div>
             </div>
         </div>
     </div>
-    <div class="spacer30"></div><!--spacer-->
-</div>
-<!-------------- End wrapper main -------------->
+    <!--// Newsletter Area -->
+
+</main>
+<!--// Page Conttent -->

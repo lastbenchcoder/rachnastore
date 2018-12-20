@@ -11,86 +11,137 @@
     }
 }
 
-<!--XXXXXXXXXX-- Wrapper-breadcrumbs --XXXXXXXXXX-->
-<div class="wrapper-breadcrumbs clearfix">
+<!-- Breadcrumb Area -->
+<div class="breadcrumb-area bg-grey">
     <div class="container">
-        <div class="spacer30"></div><!--spacer-->
-        <div class="breadcrumbs-main clearfix">
-            <h2>My Order</h2>
+        <div class="ho-breadcrumb">
             <ul>
-                <li><a href="/">Home</a><span class="separator">/ </span></li>
-                <li><strong>My Orders</strong></li>
+                <li><a href="/">Home</a></li>
+                <li><strong>Your Order Detail</strong></li>
             </ul>
         </div>
-        <div class="spacer15"></div><!--spacer-->
     </div>
 </div>
-<!--XXXXXXXXXX-- End Wrapper-breadcrumbs --XXXXXXXXXX-->
-<!--XXXXXXXXXX-- Start Wrapper Main XXXXXXXXXX-->
-<div class="wrapper-main brandshop clearfix">
-    <div class="spacer15"></div><!--spacer-->
+<!--// Breadcrumb Area -->
+<div class="my-account-area ptb-30">
     <div class="container">
-        <div>
-            <table class="table total-table">
-                <tbody>
-                    <tr>
-                        <td class="total-table-title">&nbsp;</td>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row shop-tracking-status">
 
-                        <td>
-                            <strong>Product :</strong>@_orders.Product_Title
-                            <br />
-                            <img src="../@_orders.Product_Banner" style="width:100px;height:auto" />
-                            <br />
-                            <strong>Ordered Date :</strong> @_orders.Order_Date.ToString("D")
-                            <br />
-                            <strong>Phone Number :</strong> Delivery expected by @_orders.Order_Delievery_Date.ToString("D")
-                            <br />
-                            <strong>Selected Payment Mode : </strong> @_orders.PaymentMethod.Title
-                            <br />
-                            @if (_orders.Order_Status == "Placed" || _orders.Order_Status == "Approved" || _orders.Order_Status == "Shipped" || _orders.Order_Status == "Dispatched")
-                            {
-                                <a href="/user/cancelorder?orderId=@_orders.Order_Id" class="btn btn-primary">Cancel Order</a>
-                            }
-                        </td>
-                    </tr>
-            </table>
-        </div>
-        <div class="inner-block">
-            <!------Main Inner-------->
-            <div class="row">
-                <div class="cart-main">
-                    <!-- Shopping Cart -->
                     <div class="col-md-12">
-                        <div class="cart-control clearfix">
-                            <table class="table cart-table">
-                                <thead>
-                                    <tr>
-                                        <th class="table-title">Detail</th>
-                                        <th class="table-title">Status</th>
-                                        <th class="table-title">Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in _orders.OrderHistory)
+                        <div class="well">
+                            <div class="order-status">
+                                <div class="order-status-timeline">
+                                    <!-- class names: c0 c1 c2 c3 and c4 -->
+                                    @if (_orders.Order_Status == Rachna.Teracotta.Project.Source.Entity.eOrderStatus.Approved.ToString())
                                     {
-                                        <tr>
-                                            <td class="product-code">@item.OrderHistory_Description</td>
-                                            <td class="product-code">@item.OrderHistory_Status</td>
-                                            <td>
-                                                <div class="custom-quantity-input">
-                                                    <span>@item.OrderHistory_CreatedDate.ToString("D")</span>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        <div class="order-status-timeline-completion c1"></div>
                                     }
-                                </tbody>
-                            </table>
+                                    else if (_orders.Order_Status == Rachna.Teracotta.Project.Source.Entity.eOrderStatus.Packed.ToString())
+                                    {
+                                        <div class="order-status-timeline-completion c2"></div>
+                                    }
+                                    else if (_orders.Order_Status == Rachna.Teracotta.Project.Source.Entity.eOrderStatus.Shipped.ToString() && 
+                                        _orders.Order_Status == Rachna.Teracotta.Project.Source.Entity.eOrderStatus.Delevery.ToString())
+                                    {
+                                        <div class="order-status-timeline-completion c3"></div>
+                                    }
+                                    else if (_orders.Order_Status == Rachna.Teracotta.Project.Source.Entity.eOrderDeliveryStatus.DelveryCompleted.ToString())
+                                    {
+                                        <div class="order-status-timeline-completion c4"></div>
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                </div>
+                                <div class="image-order-status image-order-status-new active img-circle">
+                                    <span class="status">Accepted</span>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="image-order-status image-order-status-active active img-circle">
+                                    <span class="status">Packed</span>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="image-order-status image-order-status-intransit active img-circle">
+                                    <span class="status">Shipped</span>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="image-order-status image-order-status-delivered active img-circle">
+                                    <span class="status">Out For Delievery</span>
+                                    <div class="icon"></div>
+                                </div>
+                                <div class="image-order-status image-order-status-completed active img-circle">
+                                    <span class="status">Delievered</span>
+                                    <div class="icon"></div>
+                                </div>
+                            </div>
+
+                            <h4 style="margin-top:20px">Your order status:</h4>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="prefix"><strong>Product:</strong></span>
+                                    <span class="label label-success">@_orders.Product_Title</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="prefix"><strong>Date created:</strong></span>
+                                    <span class="label label-success">@_orders.Order_Date.ToString("D")</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="prefix"><strong>Last update:</strong></span>
+                                    <span class="label label-success">@_orders.Order_UpdateDate.ToString("D")</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="prefix"><strong>Payment Mode:</strong></span>
+                                    <span class="label label-success">@_orders.PaymentMethod.Title</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="prefix"><strong>Delivery expected by:</strong></span>
+                                    <span class="label label-success"> @_orders.Order_Delievery_Date.ToString("D")</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="prefix"><strong>Current Status:</strong></span>
+                                    <span class="label label-success">@_orders.Order_Status</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="prefix"><strong>Complete Order Detail:</strong></span>
+                                    <span class="label label-success"><a data-toggle="modal" data-target="#mdlOrderStatus" style="color:darkblue;cursor:pointer">Click Here to view Complete Detail</a></span>
+                                </li>
+                                @if (_orders.Order_Status == "Placed" || _orders.Order_Status == "Approved" || _orders.Order_Status == "Shipped" || _orders.Order_Status == "Dispatched")
+                                {
+                                    <li class="list-group-item">
+                                        <a href="/user/cancelorder?orderId=@_orders.Order_Id" class="btn btn-primary">Cancel Order</a>
+                                    </li>
+                                }
+                            </ul>
                         </div>
                     </div>
-                </div><!-- End Shopping Cart -->
+                </div>
             </div>
         </div>
     </div>
-    <div class="spacer30"></div><!--spacer-->
 </div>
-<!-------------- End wrapper main -------------->
+
+<div id="mdlOrderStatus" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Complete Detail</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    @foreach (var item in _orders.OrderHistory)
+                    {
+                        <li class="list-group-item">
+                            <span class="prefix"><strong>@item.OrderHistory_Status&nbsp;:</strong></span>
+                            <span class="label label-success">@item.OrderHistory_Description&nbsp; on &nbsp; @item.OrderHistory_CreatedDate.ToString("D")</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

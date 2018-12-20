@@ -74,15 +74,15 @@
                                     <td><%=item.Order.Product_Title %></td>
                                     <td><%=item.Order.Order_Qty %></td>
                                     <th><%=item.Status %></th>
-                                    <%if (item.Status != Rachna.Teracotta.Project.Source.Entity.eOrderDeliveryStatus.DeliveryFailed.ToString() ||
-                                                item.Status != Rachna.Teracotta.Project.Source.Entity.eOrderDeliveryStatus.DeliveryRejected.ToString() ||
+                                    <%if (item.Status != Rachna.Teracotta.Project.Source.Entity.eOrderDeliveryStatus.DeliveryFailed.ToString() &&
+                                                item.Status != Rachna.Teracotta.Project.Source.Entity.eOrderDeliveryStatus.DeliveryRejected.ToString() &&
                                                 item.Status != Rachna.Teracotta.Project.Source.Entity.eOrderDeliveryStatus.DelveryCompleted.ToString())
                                         {%>
-                                    <td><a href="#"><i class="fa fa-edit fa-lg"></i></a></td>
+                                    <td><a href="/admindelivery/delieveryupdate.aspx?delId=<%=item.Order_Delivery_Id %>"><i class="fa fa-edit fa-lg"></i></a></td>
                                     <%}
                                         else
                                         { %>
-                                    <td><a href="/admindelivery/delieveryupdate.aspx?delId=<%=item.Order_Delivery_Id %>"><i class="fa fa-edit fa-lg"></i></a></td>
+                                    <td><a href="#"><i class="fa fa-edit fa-lg"></i></a></td>
                                     <% }
                                         } %>
                                 </tr>

@@ -61,7 +61,6 @@ namespace Rachna.Teracotta.Project.Source.administration
                 administrators.Admin_Status = ddlStatus.Text;
                 administrators.Admin_Role = ddlRole.Text;
                 administrators.Photo = administrators.Photo;
-                administrators.Store_Id = Convert.ToInt32(ddlStore.SelectedValue);
 
                 if (imgInp.HasFile)
                 {
@@ -162,12 +161,6 @@ namespace Rachna.Teracotta.Project.Source.administration
         {
             try
             {
-                List<Stores> Stores = bStores.List().Where(m => m.Store_Status == eStatus.Active.ToString()).ToList();
-                foreach (var item in Stores)
-                {
-                    ddlStore.Items.Add(new ListItem { Text = item.Store_Name, Value = item.Store_Id.ToString() });
-                }
-
                 int adminId = Convert.ToInt32(id);
                 Administrators _admin = bAdministrator.List().Where(m => m.Administrators_Id == adminId).FirstOrDefault();
 
@@ -178,7 +171,7 @@ namespace Rachna.Teracotta.Project.Source.administration
                 imgProduct.ImageUrl = "../" + _admin.Photo;
                 ddlRole.Text = _admin.Admin_Role.ToString();
                 ddlStatus.Text = _admin.Admin_Status.ToString();
-                ddlStore.SelectedValue = _admin.Store_Id.ToString();
+                lblStore.Text = _admin.Store.Store_Name.ToString();
             }
             catch (Exception ex)
             {

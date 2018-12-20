@@ -70,7 +70,6 @@ namespace Rachna.Teracotta.Project.Source.account
                 }
                 else
                 {
-                    getLoginUsers(_admin);
                     ActivityHelper.Create("Login", "Loogged In on " + DateTime.Now.ToString("D") + " Successfully", _admin.Administrators_Id);
                     pnlErrorMessage.Visible = false;
                     lblErrorMessage.Text = "";
@@ -126,8 +125,7 @@ namespace Rachna.Teracotta.Project.Source.account
                             _admin.Admin_UpdatedDate = DateTime.Now;
                             _admin = bAdministrator.Update(_admin);
                         }
-                        //Response.Redirect("/adminvendor/default.aspx?redirecturl=rachna-teracotta-home");
-                        Response.Redirect("/account/inprogress.aspx?redirecturl=rachna-teracotta-home");
+                        Response.Redirect("/adminvendor/default.aspx?redirecturl=rachna-teracotta-home");
                     }
                 }
             }
@@ -137,38 +135,6 @@ namespace Rachna.Teracotta.Project.Source.account
                 pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
                 pnlErrorMessage.Visible = true;
                 lblErrorMessage.Text = "Oops!! Server error occured, please contact administrator.";
-            }
-        }
-
-        public void getLoginUsers(Administrators administrators)
-        {
-            if (administrators.Administrators_Id != null)
-            {
-                //if the list exists, add this user to it
-                if (HttpRuntime.Cache["LoggedInUsers"] != null)
-                {
-                    //get the list of logged in users from the cache
-                    var loggedInUsers = (Dictionary<string, DateTime>)HttpRuntime.Cache["LoggedInUsers"];
-
-                    if (!loggedInUsers.ContainsKey(administrators.EmailId))
-                    {
-                        //add this user to the list
-                        loggedInUsers.Add(administrators.EmailId, DateTime.Now);
-                        //add the list back into the cache
-                        HttpRuntime.Cache["LoggedInUsers"] = loggedInUsers;
-                    }
-                }
-
-                //the list does not exist so create it
-                else
-                {
-                    //create a new list
-                    var loggedInUsers = new Dictionary<string, DateTime>();
-                    //add this user to the list
-                    loggedInUsers.Add(administrators.EmailId, DateTime.Now);
-                    //add the list into the cache
-                    HttpRuntime.Cache["LoggedInUsers"] = loggedInUsers;
-                }
             }
         }
     }

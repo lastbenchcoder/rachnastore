@@ -49,22 +49,13 @@ namespace Rachna.Teracotta.Project.Source.administration {
         protected global::System.Web.UI.WebControls.HiddenField hdnAdminId;
         
         /// <summary>
-        /// ddlStore control.
+        /// lblStore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStore;
-        
-        /// <summary>
-        /// RequiredFieldValidator5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
+        protected global::System.Web.UI.WebControls.Label lblStore;
         
         /// <summary>
         /// txtFullname control.

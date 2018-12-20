@@ -48,12 +48,9 @@
                     <div class="box-content nopadding">
                         <div class='form-horizontal form-striped'>
                             <div class="form-group">
-                                <label for="txtFirstName" class="control-label col-sm-2">Select Store</label>
+                                <label for="txtFirstName" class="control-label col-sm-2">Store</label>
                                 <div class="col-sm-10">
-                                    <asp:DropDownList ID="ddlStore" runat="server" class="form-control" style="width:30%">
-                                        <asp:ListItem>Select..</asp:ListItem>
-                                    </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ForeColor="Red" runat="server" ErrorMessage="Select Store" InitialValue="Select.." ControlToValidate="ddlStore" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                                    <asp:Label ID="lblStore" runat="server"></asp:Label>
                                 </div>
                             </div>
                             <div class="form-group">

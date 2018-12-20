@@ -14,6 +14,7 @@ namespace Rachna.Teracotta.Project.Source.account
         protected void Page_Load(object sender, EventArgs e)
         {
             string emailid = string.Empty;
+
             if (Request.QueryString["logoutEmail"] != null)
             {
                 emailid = Request.QueryString["logoutEmail"].ToString();
@@ -42,41 +43,8 @@ namespace Rachna.Teracotta.Project.Source.account
             {
                 lblLogoutMessage.Text = "We are sorry!! your account logged out due to inactivity.";
             }
-            RemoveLoggedOutUser(emailid);
+
             this.Title = ConfigurationSettings.AppSettings["AppName"].ToString() + " : Logged Out";
-        }
-
-        private void RemoveLoggedOutUser(string emailId)
-        {
-            var loggedInUsers = (Dictionary<string, DateTime>)HttpRuntime.Cache["LoggedInUsers"];
-
-            if (loggedInUsers != null)
-            {
-                foreach (var item in loggedInUsers.ToList())
-                {
-                    if (item.Value < DateTime.Now.AddMinutes(-10))
-                    {
-                        loggedInUsers.Remove(item.Key);
-                    }
-                }
-                HttpRuntime.Cache["LoggedInUsers"] = loggedInUsers;
-            }
-
-            if (loggedInUsers != null)
-            {
-                if (!string.IsNullOrEmpty(emailId))
-                {
-                    foreach (var item in loggedInUsers.ToList())
-                    {
-                        if (item.Key == emailId)
-                        {
-                            loggedInUsers.Remove(item.Key);
-                        }
-                    }
-
-                    HttpRuntime.Cache["LoggedInUsers"] = loggedInUsers;
-                }
-            }
         }
     }
 }

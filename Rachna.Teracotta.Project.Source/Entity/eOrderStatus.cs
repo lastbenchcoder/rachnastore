@@ -9,10 +9,9 @@ namespace Rachna.Teracotta.Project.Source.Entity
     {
         Placed = 0,
         Approved = 1,
-        Shipped = 2,
-        Dispached = 3,
+        Packed = 2,
+        Shipped = 3,
         Delevery = 4,
-        Delivered = 5,
         Rejected = 6,
         Cancelled = 7
     }

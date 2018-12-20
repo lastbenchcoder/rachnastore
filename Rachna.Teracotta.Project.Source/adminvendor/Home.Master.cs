@@ -14,18 +14,17 @@ namespace Rachna.Teracotta.Project.Source.adminvendor
         {
             if (!IsPostBack)
             {
-                if (Session[ConfigurationSettings.AppSettings["VendorKey"].ToString()] == null)
-                {
-                    string url = HttpContext.Current.Request.Url.PathAndQuery;
-                    Session["PreviousUrl"] = url;
-                    Response.Redirect("~/account/logout.aspx?logout=100&redUrl=HGHGH786876");
-                }
+                Check();
             }
         }
-
-        protected void btnSearchPrdHome_Click(object sender, EventArgs e)
+        protected void Check()
         {
-            Response.Redirect("/adminvendor/product/productsdetailstatic.aspx?productid=" + txtSearchHome.Text);
+            if (Session[ConfigurationSettings.AppSettings["VendorSession"].ToString()] == null)
+            {
+                string url = HttpContext.Current.Request.Url.PathAndQuery;
+                Session["PreviousUrl"] = url;
+                Response.Redirect("~/account/logout.aspx?logout=100&redUrl=HGHGH786876");
+            }
         }
     }
 }
