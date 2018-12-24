@@ -100,8 +100,8 @@ namespace Rachna.Teracotta.Project.Source.App_Data
         public DbSet<Functionality> Functionality { get; set; }
         public DbSet<Functionality_Audit> Functionality_Audit { get; set; }
 
-        public DbSet<FunctionalDefect> DefectsManager { get; set; }
-        public DbSet<FunctionalDefect_Audit> DefectsManager_Audit { get; set; }
+        public DbSet<FunctionalDefect> FunctionalDefect { get; set; }
+        public DbSet<FunctionalDefect_Audit> FunctionalDefect_Audit { get; set; }
 
         public DbSet<FunctionalDefectStory> FunctionalDefectStory { get; set; }
         public DbSet<FunctionalDefectStory_Audit> FunctionalDefectStory_Audit { get; set; }

@@ -64,7 +64,7 @@
     <div class="wrapper">
         <h1>
             <a href="/account/login.aspx?a4rredirectUrl=login-administrator-home&pageId=1234HJHJKJ*7987979">
-                <img src="../content/logo.png" alt="" class='retina-ready'></a>
+                <img src="../content/logo.png" alt="" class='retina-ready'/></a>
         </h1>
         <div class="login-body">
             <form id="form1" runat="server">

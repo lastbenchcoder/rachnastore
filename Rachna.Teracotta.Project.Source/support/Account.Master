@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Message.master.cs" Inherits="Rachna.Teracotta.Project.Source.account.Message" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="account.master.cs" Inherits="Rachna.Teracotta.Project.Source.support.Account" %>
 
 <!DOCTYPE html>
 
@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="../content/admin/css/style.css">
     <!-- Color CSS -->
     <link rel="stylesheet" href="../content/admin/css/themes.css">
+    <!-- Messi -->
+    <link href="~/Scripts/messi.min.css" rel="stylesheet" />
 
 
     <!-- jQuery -->
@@ -50,7 +52,7 @@
 			});
 		</script>
 	<![endif]-->
-
+    <script src="../Scripts/messi.min.js"></script>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon.html" />
@@ -64,7 +66,7 @@
             <a href="/account/login.aspx?a4rredirectUrl=login-administrator-home&pageId=1234HJHJKJ*7987979">
                 <img src="../content/logo.png" alt="" class='retina-ready'/></a>
         </h1>
-        <div class="login-body" style="width: 638px;margin-left: -125px;text-align:center">
+        <div class="login-body">
             <form id="form1" runat="server">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>

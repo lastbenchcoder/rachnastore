@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Message.master.cs" Inherits="Rachna.Teracotta.Project.Source.account.Message" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Message.master.cs" Inherits="Rachna.Teracotta.Project.Source.support.Message" %>
 
 <!DOCTYPE html>
 
@@ -61,7 +61,7 @@
 
     <div class="wrapper">
         <h1>
-            <a href="/account/login.aspx?a4rredirectUrl=login-administrator-home&pageId=1234HJHJKJ*7987979">
+            <a href="/support/login.aspx?a4rredirectUrl=login-administrator-home&pageId=1234HJHJKJ*7987979">
                 <img src="../content/logo.png" alt="" class='retina-ready'/></a>
         </h1>
         <div class="login-body" style="width: 638px;margin-left: -125px;text-align:center">

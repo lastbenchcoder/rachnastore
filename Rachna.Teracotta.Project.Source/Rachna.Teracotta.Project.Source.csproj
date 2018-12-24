@@ -1120,6 +1120,10 @@
     <Content Include="Scripts\messi.js" />
     <Content Include="Scripts\messi.min.css" />
     <Content Include="Scripts\messi.min.js" />
+    <Content Include="support\home\default.aspx" />
+    <Content Include="support\home\functionality.aspx" />
+    <Content Include="support\login.aspx" />
+    <Content Include="support\logout.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1833,6 +1837,8 @@
     <Compile Include="Controllers\homeController.cs" />
     <Compile Include="Controllers\productController.cs" />
     <Compile Include="Controllers\userController.cs" />
+    <Compile Include="Core\bal\bFunctionalDefect.cs" />
+    <Compile Include="Core\bal\bFunctionality.cs" />
     <Compile Include="Core\bal\bSubCategory.cs" />
     <Compile Include="Core\bal\bContactOwner.cs" />
     <Compile Include="Core\bal\bDealOfTheDay.cs" />
@@ -1845,6 +1851,8 @@
     <Compile Include="Core\bal\bLogo.cs" />
     <Compile Include="Core\dal\dAds.cs" />
     <Compile Include="Core\dal\dAdministrator.cs" />
+    <Compile Include="Core\dal\dFunctionalDefect.cs" />
+    <Compile Include="Core\dal\dFunctionality.cs" />
     <Compile Include="Core\dal\dSubCategory.cs" />
     <Compile Include="Core\dal\dContactOwner.cs" />
     <Compile Include="Core\dal\dDealOfTheDay.cs" />
@@ -2010,6 +2018,55 @@
     <Compile Include="account\success.aspx.designer.cs">
       <DependentUpon>success.aspx</DependentUpon>
     </Compile>
+    <Compile Include="support\Account.Master.cs">
+      <DependentUpon>Account.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="support\Account.Master.designer.cs">
+      <DependentUpon>Account.Master</DependentUpon>
+    </Compile>
+    <Compile Include="support\home\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="support\home\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="support\home\functionality.aspx.cs">
+      <DependentUpon>functionality.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="support\home\functionality.aspx.designer.cs">
+      <DependentUpon>functionality.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="support\home\Home.Master.cs">
+      <DependentUpon>Home.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="support\home\Home.Master.designer.cs">
+      <DependentUpon>Home.Master</DependentUpon>
+    </Compile>
+    <Compile Include="support\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="support\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="support\logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="support\logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="support\Message.Master.cs">
+      <DependentUpon>Message.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="support\Message.Master.designer.cs">
+      <DependentUpon>Message.Master</DependentUpon>
+    </Compile>
     <Compile Include="Upload.ashx.cs">
       <DependentUpon>Upload.ashx</DependentUpon>
     </Compile>
@@ -2104,6 +2161,9 @@
     <Content Include="Views\Shared\themeglobal2\_footer.cshtml" />
     <Content Include="Views\product\index.cshtml" />
     <Content Include="Views\Shared\_productlayout.cshtml" />
+    <Content Include="support\Account.Master" />
+    <Content Include="support\home\Home.Master" />
+    <Content Include="support\Message.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2129,7 +2189,6 @@
     <Folder Include="bin\tr-TR\" />
     <Folder Include="bin\zh-CHS\" />
     <Folder Include="bin\zh-CHT\" />
-    <Folder Include="learning\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -219,7 +219,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
              + "<h4>" + Functionality.Title + "</h4>"
              + "Click below link to read full functionality detail.<br />"
              + "<br />"
-             + "<a href='/administration/defectmanager/functdetail.aspx?id=" + Functionality.Function_Id + "'>Click here to read full detail about functionality.</a>"
+             + "<a href='/support/home/functdetail.aspx?id=" + Functionality.Function_Id + "'>Click here to read full detail about functionality.</a>"
              + "<br />"
              + "Thanks,<br />"
              + "Rachna Teracotta Admin"

@@ -13,11 +13,11 @@ namespace Rachna.Teracotta.Project.Source.Models
         public int Defect_Id { get; set; }
         public int Administrators_Id { get; set; }
         public int Function_Id { get; set; }
+        [MaxLength(50)]
+        public string FunctionalityDefectCode { get; set; }
         [MaxLength(200)]
         public string Title { get; set; }
         public string Description { get; set; }
-        [MaxLength(500)]
-        public string Banner { get; set; }
         public int Resolver_Id { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime FixDate { get; set; }
