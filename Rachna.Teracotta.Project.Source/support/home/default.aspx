@@ -3,9 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:HyperLink ID="btnRejectModel" runat="server" data-toggle="modal" data-target="#modalFunctionality" class="btn btn-danger">Functionality</asp:HyperLink>
-
-
     <%
         Rachna.Teracotta.Project.Source.Models.Administrators _Administrator = null;
         List<Rachna.Teracotta.Project.Source.Models.Functionality> Functionality = null;

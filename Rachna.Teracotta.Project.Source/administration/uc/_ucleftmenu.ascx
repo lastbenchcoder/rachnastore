@@ -68,6 +68,9 @@
             <li>
                 <a href="/administration/adminactivity.aspx?redirecturl=admin-slider-rachna-teracotta">View My Activity</a>
             </li>
+             <li>
+                <a href="/administration/emailtracker.aspx?redirecturl=admin-slider-rachna-teracotta">Email Activity</a>
+            </li>
         </ul>
     </div>
 </div>

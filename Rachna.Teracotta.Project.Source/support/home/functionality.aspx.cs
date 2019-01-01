@@ -35,7 +35,7 @@ namespace Rachna.Teracotta.Project.Source.support.home
                 Administrators_Id = AdminId,
                 Developer_Id = DeveloperId,
                 Title = txtTitle.Text,
-                Description = txtDescription1.Text,
+                Description = txtDescription.Text,
                 Status = eFunctionalityStatus.InProgress.ToString(),
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now
@@ -60,7 +60,14 @@ namespace Rachna.Teracotta.Project.Source.support.home
                     {
                         if (item.Admin_Role == eRole.Super.ToString())
                         {
-                            emailIdToSend = emailIdToSend + ";" + item.EmailId;
+                            if (!string.IsNullOrEmpty(emailIdToSend))
+                            {
+                                emailIdToSend = emailIdToSend + "," + item.EmailId;
+                            }
+                            else
+                            {
+                                emailIdToSend = item.EmailId;
+                            }
                         }
                     }
                     string CreatorAdmin = Administrators.Where(m => m.Administrators_Id == _Functionality.Administrators_Id).FirstOrDefault().EmailId;

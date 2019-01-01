@@ -85,7 +85,7 @@
                                     <td class='hidden-1024'><%=item.DateCreated.ToString("D") %></td>
                                     <td class='hidden-480'><%=item.DateUpdated.ToString("D") %></td>
                                     <td>
-                                        <a href="/support/functionalitydetail.aspx?adminid=<%=item.Function_Id %>&pageId=1234"><i class="fa fa-edit fa-lg"></i></a>
+                                        <a href="/support/home/functionalitydetail.aspx?functionalId=<%=item.Function_Id %>&pageId=1234"><i class="fa fa-edit fa-lg"></i></a>
                                     </td>
                                 </tr>
                                 <%} %>
@@ -122,9 +122,9 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <asp:TextBox ID="txtDescription1" TextMode="MultiLine" runat="server" class="form-control" placeholder="Description"></asp:TextBox>
+                        <asp:TextBox ID="txtDescription" TextMode="MultiLine" runat="server" class="form-control" placeholder="Description"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ForeColor="Red" runat="server"
-                            ErrorMessage="Enter Functionality Description" ControlToValidate="txtDescription1" ValidationGroup="functionality"></asp:RequiredFieldValidator>
+                            ErrorMessage="Enter Functionality Description" ControlToValidate="txtDescription" ValidationGroup="functionality"></asp:RequiredFieldValidator>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -140,7 +140,7 @@
     <!-- /.modal -->
     <script type="text/javascript">
         $(function () {
-            CKEDITOR.replace('<%=txtDescription1.ClientID %>', { filebrowserImageUploadUrl: '../../Upload.ashx' });
+            CKEDITOR.replace('<%=txtDescription.ClientID %>', { filebrowserImageUploadUrl: '../../Upload.ashx' });
         });
     </script>
 </asp:Content>

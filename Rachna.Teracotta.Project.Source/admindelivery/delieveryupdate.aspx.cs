@@ -116,7 +116,7 @@ namespace Rachna.Teracotta.Project.Source.admindelivery
                     string host = string.Empty;
                     host = "<table style='width:100%'>" + _res + "</ table >";
                     string body = MailHelper.CustomerOrderProcessed(host, (_cust.Customers_FullName), txtOrderDescription.Text);
-                    string mail_result = MailHelper.SendEmail(_cust.Customers_EmailId, "Success!!! " + txtOrderDescription.Text + " Rachna Teracotta Estore.", body, "Rachna Teracotta Order" + txtOrderDescription.Text);
+                    MailHelper.SendEmail(_cust.Customers_EmailId, "Success!!! " + txtOrderDescription.Text + " Rachna Teracotta Estore.", body, "Rachna Teracotta Order" + txtOrderDescription.Text);
                 }
 
                 Response.Redirect("/admindelivery/deliveryhome.aspx?id=200&requesttype=view-order-detail.html");

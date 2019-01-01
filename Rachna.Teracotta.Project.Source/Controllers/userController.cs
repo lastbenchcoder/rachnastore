@@ -104,7 +104,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                     string host = ConfigurationSettings.AppSettings["DomainUrl"].ToString();
                     host = host + "/user/VerifyEmail?VerificationId=" + Customer.CustomerCode + "&reirect-url=ghgfhsgf798798jhshfjsfkjs.html";
                     string body = MailHelper.VerifyEmailLink(host, Customer.Customers_FullName);
-                    string mail_result = MailHelper.SendEmail(Customer.Customers_EmailId, "Verify Your EmailId", body, "Rachna Teracotta Store");
+                    MailHelper.SendEmail(Customer.Customers_EmailId, "Verify Your EmailId", body, "Rachna Teracotta Store");
                 }
 
                 return Redirect("/user/success");
@@ -194,7 +194,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                     string host = ConfigurationSettings.AppSettings["DomainUrl"].ToString();
                     host = host + "/user/VerifyEmail?VerificationId=" + Customer.CustomerCode + "&reirect-url=ghgfhsgf798798jhshfjsfkjs.html";
                     string body = MailHelper.VerifyEmailLink(host, Customer.Customers_FullName);
-                    string mail_result = MailHelper.SendEmail(Customer.Customers_EmailId, "Verify Your EmailId", body, "Rachna Teracotta Store");
+                    MailHelper.SendEmail(Customer.Customers_EmailId, "Verify Your EmailId", body, "Rachna Teracotta Store");
                 }
 
                 CustomerAddress CustomerAddres = new CustomerAddress()
@@ -353,7 +353,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                 string host = string.Empty;
                 host = "<table style='width:100%'>" + _res + "</ table >";
                 string body = MailHelper.CustomerOrderPlaced(host, (_cust.Customers_FullName));
-                string mail_result = MailHelper.SendEmail(_cust.Customers_EmailId, "Success!!! You Order Placed In Rachna Teracotta Estore.", body, "Rachna Teracotta Order Placed");
+                MailHelper.SendEmail(_cust.Customers_EmailId, "Success!!! You Order Placed In Rachna Teracotta Estore.", body, "Rachna Teracotta Order Placed");
             }
             return Json("success", JsonRequestBehavior.AllowGet);
         }
@@ -437,7 +437,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                 string host = string.Empty;
                 host = "<table style='width:100%'>" + _res + "</ table >";
                 string body = MailHelper.CustomerOrderCancelled(host, (_cust.Customers_FullName), reason);
-                string mail_result = MailHelper.SendEmail(_cust.Customers_EmailId, "Success!!! You Order Has Been Cancelled In Rachna Teracotta Estore.", body, "Rachna Teracotta Order Cancelled");
+                MailHelper.SendEmail(_cust.Customers_EmailId, "Success!!! You Order Has Been Cancelled In Rachna Teracotta Estore.", body, "Rachna Teracotta Order Cancelled");
             }
             return Redirect("/user/orders");
         }

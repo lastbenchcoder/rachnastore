@@ -99,7 +99,7 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
 
                 _HomePage._social = context.SocialNetworking.Where(m => m.Scl_Ntk_Status == eStatus.Active.ToString()).ToList();
 
-                _HomePage._recentAddition = context.Product.Take(10).ToList().Where(m => m.Product_Status == eProductStatus.Published.ToString()).ToList();
+                _HomePage._recentAddition = context.Product.OrderBy(m=>m.Product_CreatedDate).Take(10).ToList().Where(m => m.Product_Status == eProductStatus.Published.ToString()).ToList();
                 foreach (var item in _HomePage._recentAddition)
                 {
                     item.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();

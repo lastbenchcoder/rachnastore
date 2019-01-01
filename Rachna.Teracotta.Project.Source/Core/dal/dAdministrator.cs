@@ -32,7 +32,14 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
             {
                 administrators.ErrorMessage = ex.Message;
                 return administrators;
-            }            
+            }
+        }
+
+        internal EmailTracker CreateEmailTracker(EmailTracker EmailTracker)
+        {
+            context.EmailTracker.Add(EmailTracker);
+            context.SaveChanges();
+            return EmailTracker;
         }
 
         internal List<Administrators> List()
@@ -48,6 +55,13 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
                 administrators[0].ErrorMessage = ex.Message;
                 return administrators;
             }
+        }
+
+        internal List<EmailTracker> ListEmailTracker()
+        {
+            List<EmailTracker> EmailTracker = new List<EmailTracker>();
+            EmailTracker = context.EmailTracker.ToList();
+            return EmailTracker;
         }
 
         internal Administrators Update(Administrators administrators)
@@ -128,7 +142,7 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
             List<AdminActivity> administrators = new List<AdminActivity>();
             try
             {
-                administrators = context.AdminActivity.Include("Administrators").Where(m=>m.Administrators_Id==adminId).ToList();
+                administrators = context.AdminActivity.Include("Administrators").Where(m => m.Administrators_Id == adminId).ToList();
                 return administrators;
             }
             catch (Exception ex)

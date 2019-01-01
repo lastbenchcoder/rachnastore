@@ -29,14 +29,15 @@ namespace Rachna.Teracotta.Project.Source.Helper
         public int TotalProductsPublished { get; set; }
         public int TotalProductsRejected { get; set; }
         public int TotalCustomer { get; set; }
-        public List<Invitations> Invitations { get; set; }        
+        public List<Invitations> Invitations { get; set; }
         public Administrators Administrators { get; set; }
         public List<Product> ProdPendForReview { get; set; }
         public List<Product> ProdPendForApprove { get; set; }
         public List<Product> ProdPendForPublish { get; set; }
         public List<CustomerRequest> CustomerRequest { get; set; }
-    }   
-    
+        public int prdQtyFlagActive { get; set; }
+    }
+
     public class AdministratorDetail
     {
         private RachnaDBContext context;
@@ -78,6 +79,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
             hlprAdminDashboard.ProdPendForApprove = _products.Where(m => m.Product_Status == eProductStatus.ReviewCompleted.ToString()).ToList();
             hlprAdminDashboard.ProdPendForPublish = _products.Where(m => m.Product_Status == eProductStatus.Approved.ToString()).ToList();
             hlprAdminDashboard.CustomerRequest = context.CustomerRequest.Take(20).ToList();
+            hlprAdminDashboard.prdQtyFlagActive = (_products.Where(m => m.Product_Qty_Alert >= m.Product_Qty).ToList().Count > 0) ? 1 : 0;
 
             return hlprAdminDashboard;
         }
@@ -88,11 +90,11 @@ namespace Rachna.Teracotta.Project.Source.Helper
             _admin = context.Administrator.Where(m => m.Administrators_Id == AdminId).FirstOrDefault(); ;
 
             AdminDashboardHelper hlprAdminDashboard = new AdminDashboardHelper();
-            List<Product> _products = context.Product.Where(m=>m.Store_Id==_admin.Store_Id).ToList();
+            List<Product> _products = context.Product.Where(m => m.Store_Id == _admin.Store_Id).ToList();
 
-            hlprAdminDashboard.TotalAdministrator = context.Administrator.ToList().Where(m=>m.Store_Id==_admin.Store_Id).Count();
+            hlprAdminDashboard.TotalAdministrator = context.Administrator.ToList().Where(m => m.Store_Id == _admin.Store_Id).Count();
             hlprAdminDashboard.TotalInvitation = context.Invitation.ToList().Where(m => m.Store_Id == _admin.Store_Id).Count();
-            hlprAdminDashboard.TotalPendingInvitation = context.Invitation.ToList().Where(m => m.Invitation_Status == eStatus.InActive.ToString()&& m.Store_Id == _admin.Store_Id).Count();
+            hlprAdminDashboard.TotalPendingInvitation = context.Invitation.ToList().Where(m => m.Invitation_Status == eStatus.InActive.ToString() && m.Store_Id == _admin.Store_Id).Count();
             hlprAdminDashboard.TotalCategory = context.Category.ToList().Count();
             hlprAdminDashboard.TotalSubCategory = context.SubCategory.ToList().Count();
             hlprAdminDashboard.TotalProducts = _products.Count();
@@ -103,8 +105,9 @@ namespace Rachna.Teracotta.Project.Source.Helper
             hlprAdminDashboard.TotalProductsPublished = _products.Where(m => m.Product_Status == eProductStatus.Published.ToString()).Count();
             hlprAdminDashboard.TotalProductsRejected = _products.Where(m => m.Product_Status == eProductStatus.Rejected.ToString()).Count();
             hlprAdminDashboard.TotalItemsInCart = context.Cart.ToList().Where(m => m.Store_Id == _admin.Store_Id).Count();
+            hlprAdminDashboard.prdQtyFlagActive = (_products.Where(m => m.Product_Qty_Alert >= m.Product_Qty && m.Store_Id == _admin.Store_Id).ToList().Count > 0) ? 1 : 0;
 
             return hlprAdminDashboard;
         }
-    } 
+    }
 }

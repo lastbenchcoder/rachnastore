@@ -1,7 +1,10 @@
 ﻿using Rachna.Teracotta.Project.Source.Core.dal;
+using Rachna.Teracotta.Project.Source.Entity;
+using Rachna.Teracotta.Project.Source.Helper;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
@@ -12,7 +15,37 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         public static Administrators Create(Administrators administrators)
         {
             dAdministrator _dAdministrator = new dAdministrator();
+            if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
+            {
+                string mailBody = MailHelper.ActivityMail("Invitations", "New Administrator " + administrators.EmailId +
+                    "( " + administrators.Administrators_Id + "  and " + administrators.AdminCode + " ) created successfully.",
+                    1, DateTime.Now.ToString());
+                string emailIdToSend = string.Empty;
+                List<Administrators> Administrators = bAdministrator.List().Where(m => m.Admin_Status == eStatus.Active.ToString()).ToList();
+                foreach (var item in Administrators)
+                {
+                    if (item.Admin_Role == eRole.Super.ToString())
+                    {
+                        if (!string.IsNullOrEmpty(emailIdToSend))
+                        {
+                            emailIdToSend = emailIdToSend + "," + item.EmailId;
+                        }
+                        else
+                        {
+                            emailIdToSend = item.EmailId;
+                        }
+                    }
+                }
+
+                MailHelper.SendEmail(emailIdToSend, "New Administrator Created", mailBody, "Activity Admin");
+            }
             return _dAdministrator.Create(administrators);
+        }
+
+        public static EmailTracker CreateEmailTracker(EmailTracker EmailTracker)
+        {
+            dAdministrator _dAdministrator = new dAdministrator();
+            return _dAdministrator.CreateEmailTracker(EmailTracker);
         }
 
         public static List<Administrators> List()
@@ -21,9 +54,39 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             return _dAdministrator.List();
         }
 
+        public static List<EmailTracker> ListEmailTracker()
+        {
+            dAdministrator _dAdministrator = new dAdministrator();
+            return _dAdministrator.ListEmailTracker();
+        }
+
         public static Administrators Update(Administrators administrators)
         {
             dAdministrator _dAdministrator = new dAdministrator();
+            if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
+            {
+                string mailBody = MailHelper.ActivityMail("Invitations", "Administrator Updation " + administrators.EmailId +
+                    "( " + administrators.Administrators_Id + "  and " + administrators.AdminCode + " ) created successfully.",
+                    1, DateTime.Now.ToString());
+                string emailIdToSend = string.Empty;
+                List<Administrators> Administrators = bAdministrator.List().Where(m => m.Admin_Status == eStatus.Active.ToString()).ToList();
+                foreach (var item in Administrators)
+                {
+                    if (item.Admin_Role == eRole.Super.ToString())
+                    {
+                        if (!string.IsNullOrEmpty(emailIdToSend))
+                        {
+                            emailIdToSend = emailIdToSend + "," + item.EmailId;
+                        }
+                        else
+                        {
+                            emailIdToSend = item.EmailId;
+                        }
+                    }
+                }
+
+                MailHelper.SendEmail(emailIdToSend, "Administrator Updation", mailBody, "Activity Admin");
+            }
             return _dAdministrator.Update(administrators);
         }
 

@@ -86,7 +86,6 @@
 
                     <div class="shop-page-products list-view-active mt-30">
                         <div class="row no-gutters">
-                            <input type="hidden" id="hdSubCategory" value="0" />
                             <!-- Start Product List -->
                             <div id="RachnaContainer"></div>
                             <script id="RachnaTemplate" type="text/x-jQuery-tmpl">
@@ -410,6 +409,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".hrfRachnaSubCatId").click(function () {
+            debugger;
             $("#hdSubCategory").val("");
             var subcatid = $(this).attr("catId");            
             $.ajax({
@@ -429,24 +429,31 @@
         if ($("#hdSubCategory").val() != "") {
             debugger;
             var category = $("#hdCategory").val();
+            if (category == "") {
+                category = '0';
+            }
             $.ajax({
                 type: 'GET',
                 url: '/home/GetProductsBySubCatId',
                 data: { id: $("#hdSubCategory").val(), min_price: $('.range-slider-leftlabel').text(), max_price: $('.range-slider-rightlabel').text(), filter: "NA", category: category },
                 cache: false,
                 success: function (result) {
+                    debugger;
+                    $("#RachnaContainer").html('');
                     $("#RachnaTemplate").tmpl(result).appendTo("#RachnaContainer");
                 }
             });
         }
 
         $(".btnFilterProducts").click(function () {
+            debugger;
             $.ajax({
                 type: 'GET',
                 url: '/home/GetProductsBySubCatId',
                 data: { id: $("#hdSubCategory").val(), min_price: $('.range-slider-leftlabel').text(), max_price: $('.range-slider-rightlabel').text(), filter: "NA", category: '' },
                 cache: false,
                 success: function (result) {
+                    debugger;
                     $("#RachnaContainer").html('');
                     $("#RachnaTemplate").tmpl(result).appendTo("#RachnaContainer");
                 }
@@ -455,6 +462,7 @@
     });
 
     $(".liSortProduct li").click(function () {
+        debugger;
         value = this.id;
         $.ajax({
             type: 'GET',
@@ -462,6 +470,7 @@
             data: { id: $("#hdSubCategory").val(), min_price: $('.range-slider-leftlabel').text(), max_price: $('.range-slider-rightlabel').text(), filter: value, category: '' },
             cache: false,
             success: function (result) {
+                debugger;
                 $("#RachnaContainer").html('');
                 $("#RachnaTemplate").tmpl(result).appendTo("#RachnaContainer");
             }

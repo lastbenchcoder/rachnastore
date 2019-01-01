@@ -162,6 +162,7 @@
     <Content Include="administration\categories\subcategorydetail.aspx" />
     <Content Include="administration\default.aspx" />
     <Content Include="administration\delivery\ordersdelivery.aspx" />
+    <Content Include="administration\emailtracker.aspx" />
     <Content Include="administration\home\advertisement.aspx" />
     <Content Include="administration\home\advertisementdetail.aspx" />
     <Content Include="administration\home\dealoftheday.aspx" />
@@ -1122,9 +1123,10 @@
     <Content Include="Scripts\messi.min.js" />
     <Content Include="support\home\default.aspx" />
     <Content Include="support\home\functionality.aspx" />
+    <Content Include="support\home\functionalitydetail.aspx" />
     <Content Include="support\login.aspx" />
     <Content Include="support\logout.aspx" />
-    <Content Include="Web.config">
+    <Content Include="Web_Old.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
@@ -1359,6 +1361,13 @@
     </Compile>
     <Compile Include="administration\delivery\ordersdelivery.aspx.designer.cs">
       <DependentUpon>ordersdelivery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\emailtracker.aspx.cs">
+      <DependentUpon>emailtracker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\emailtracker.aspx.designer.cs">
+      <DependentUpon>emailtracker.aspx</DependentUpon>
     </Compile>
     <Compile Include="administration\Home.Master.cs">
       <DependentUpon>Home.Master</DependentUpon>
@@ -1839,6 +1848,7 @@
     <Compile Include="Controllers\userController.cs" />
     <Compile Include="Core\bal\bFunctionalDefect.cs" />
     <Compile Include="Core\bal\bFunctionality.cs" />
+    <Compile Include="Core\bal\bProduct.cs" />
     <Compile Include="Core\bal\bSubCategory.cs" />
     <Compile Include="Core\bal\bContactOwner.cs" />
     <Compile Include="Core\bal\bDealOfTheDay.cs" />
@@ -1853,6 +1863,7 @@
     <Compile Include="Core\dal\dAdministrator.cs" />
     <Compile Include="Core\dal\dFunctionalDefect.cs" />
     <Compile Include="Core\dal\dFunctionality.cs" />
+    <Compile Include="Core\dal\dProduct.cs" />
     <Compile Include="Core\dal\dSubCategory.cs" />
     <Compile Include="Core\dal\dContactOwner.cs" />
     <Compile Include="Core\dal\dDealOfTheDay.cs" />
@@ -1867,6 +1878,7 @@
     <Compile Include="Core\bal\bStores.cs" />
     <Compile Include="Entity\eCartStatus.cs" />
     <Compile Include="Entity\eCustomerType.cs" />
+    <Compile Include="Entity\eEmailStatus.cs" />
     <Compile Include="Entity\eFunctionalityStatus.cs" />
     <Compile Include="Entity\eMenu.cs" />
     <Compile Include="Entity\eOrderDeliveryStatus.cs" />
@@ -1941,6 +1953,7 @@
     <Compile Include="Models\DeleveryTeam_Audit.cs" />
     <Compile Include="Models\DeleveryTeam.cs" />
     <Compile Include="Models\DeliveryMethod_Audit.cs" />
+    <Compile Include="Models\EmailTracker.cs" />
     <Compile Include="Models\FunctionalDefectStory_Audit.cs" />
     <Compile Include="Models\FunctionalDefect_Audit.cs" />
     <Compile Include="Models\FunctionalDefectStory.cs" />
@@ -2038,6 +2051,13 @@
     </Compile>
     <Compile Include="support\home\functionality.aspx.designer.cs">
       <DependentUpon>functionality.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="support\home\functionalitydetail.aspx.cs">
+      <DependentUpon>functionalitydetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="support\home\functionalitydetail.aspx.designer.cs">
+      <DependentUpon>functionalitydetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="support\home\Home.Master.cs">
       <DependentUpon>Home.Master</DependentUpon>
@@ -2144,14 +2164,14 @@
     <Content Include="Views\home\offers.cshtml" />
     <Content Include="Views\home\page.cshtml" />
     <Content Include="Views\product\productoffline.cshtml" />
-    <Content Include="Web_prd.config">
+    <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web_prd.Debug.config">
-      <DependentUpon>Web_prd.config</DependentUpon>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Web_prd.Release.config">
-      <DependentUpon>Web_prd.config</DependentUpon>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Shared\themeglobal2\_header.cshtml" />
     <Content Include="Views\Shared\_layout2.cshtml" />
@@ -2164,11 +2184,11 @@
     <Content Include="support\Account.Master" />
     <Content Include="support\home\Home.Master" />
     <Content Include="support\Message.Master" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="Web_Old.Debug.config">
+      <DependentUpon>Web_Old.config</DependentUpon>
     </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="Web_Old.Release.config">
+      <DependentUpon>Web_Old.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

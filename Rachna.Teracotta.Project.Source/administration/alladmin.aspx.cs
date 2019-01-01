@@ -100,7 +100,7 @@ namespace Rachna.Teracotta.Project.Source.administration
                             {
                                 txtEmailId.Text = "";
                                 string body = MailHelper.AccountCreated(administrators.FullName, administrators.EmailId, administrators.Password, administrators.Admin_Role);
-                                string mail_result = MailHelper.SendEmail(administrators.EmailId, "[Rachna Teracotta]-New Account Creation", body, "[Rachna Teracotta]-New Account Creation");
+                                MailHelper.SendEmail(administrators.EmailId, "[Rachna Teracotta]-New Account Creation", body, "[Rachna Teracotta]-New Account Creation");
 
                                 txtEmailId.Text = "";
                                 txtFullname.Text = "";

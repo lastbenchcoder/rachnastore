@@ -78,7 +78,7 @@ namespace Rachna.Teracotta.Project.Source.account
                 if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
                 {
                     string body = MailHelper.AccountCreated(Administrators.FullName, Administrators.EmailId, Administrators.Password, Administrators.Admin_Role);
-                    string mail_result = MailHelper.SendEmail(Administrators.EmailId, "[Rachna Teracotta] - New Account Creation", body, "[Rachna Teracotta] - New Account Creation");
+                    MailHelper.SendEmail(Administrators.EmailId, "[Rachna Teracotta] - New Account Creation", body, "[Rachna Teracotta] - New Account Creation");
                 }
 
                 Response.Redirect("success.aspx?success=invitation");

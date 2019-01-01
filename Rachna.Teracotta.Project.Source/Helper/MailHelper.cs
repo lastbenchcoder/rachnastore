@@ -1,11 +1,10 @@
-﻿using Rachna.Teracotta.Project.Source.Models;
+﻿using Rachna.Teracotta.Project.Source.Core.bal;
+using Rachna.Teracotta.Project.Source.Entity;
+using Rachna.Teracotta.Project.Source.Models;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rachna.Teracotta.Project.Source.Helper
 {
@@ -18,13 +17,28 @@ namespace Rachna.Teracotta.Project.Source.Helper
         private static string SmtpPort = ConfigurationSettings.AppSettings["SmtpPort"].ToString();
         private static string NetworkCredentialEmail = ConfigurationSettings.AppSettings["NetworkCredentialEmail"].ToString();
         private static string NetworkCredentialPwd = ConfigurationSettings.AppSettings["NetworkCredentialPwd"].ToString();
-        public static string SendEmail(string ToEmailId, string Subject, string BodyMessage, string MailFrom)
+        public static void SendEmail(string ToEmailId, string Subject, string BodyMessage, string MailFrom)
         {
+            EmailTracker _emailTracker = new EmailTracker()
+            {
+                ToEmailId = ToEmailId,
+                MailSubject = Subject,
+                MailBody = BodyMessage,
+                MailFrom = MailFrom,
+                Status = eEmailStatus.Success.ToString(),
+                Result = "Email Sent Successfull to the given emailId",
+                DateCreated = DateTime.Now
+            };
+
             try
             {
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.From = new MailAddress(MailAddressFrom, MailFrom);
-                mailMessage.To.Add(new MailAddress(ToEmailId));
+                string[] emailList = ToEmailId.Split(',');
+                foreach (var item in emailList)
+                {
+                    mailMessage.To.Add(new MailAddress(item));
+                }               
                 mailMessage.IsBodyHtml = true;
                 mailMessage.Subject = Subject;
                 mailMessage.Body = BodyMessage;
@@ -36,12 +50,13 @@ namespace Rachna.Teracotta.Project.Source.Helper
                 smtpClient.Credentials = MyCache;
                 smtpClient.EnableSsl = false;
                 smtpClient.Send(mailMessage);
-
-                return "success";
+                bAdministrator.CreateEmailTracker(_emailTracker);
             }
             catch (Exception ex)
             {
-                return ex.Message + "ToEmailId:";
+                _emailTracker.Status = eEmailStatus.Fail.ToString();
+                _emailTracker.Result = "Failed: " + ex.Message;
+                bAdministrator.CreateEmailTracker(_emailTracker);
             }
         }
         public static string PasswordResetLink(string host)
@@ -197,7 +212,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
         {
             string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                 + "<div>"
-             + "Dear "+ user + ",<br />"
+             + "Dear " + user + ",<br />"
              + "<br />"
              + "Thank you for registering with us, Please click below link to verify your email id.<br />"
              + "<br />"
@@ -243,7 +258,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
              + "</div>";
             return result;
         }
-        public static string AccountCreated(string fullname,string emailId, string password, string role)
+        public static string AccountCreated(string fullname, string emailId, string password, string role)
         {
             string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                + "<div>"
@@ -256,6 +271,28 @@ namespace Rachna.Teracotta.Project.Source.Helper
             + "Password : " + password
             + "<br />"
             + "Role : " + role
+            + "<br />"
+            + "Thanks,<br />"
+            + "Rachna Teracotta Admin"
+            + "</div>";
+            return result;
+        }
+        public static string ActivityMail(string type, string description,int adminId, string dateofactivity)
+        {
+            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
+               + "<div>"
+            + "Dear Administrator,<br />"
+            + "<br />"
+            + "Following Activity has been done, In administration department.<br />"
+            + "<br />"
+            + "<b>Type :</b> " + type
+            + "<br />"
+            + "<b>Description :</b> " + description
+            + "<br />"
+            + "<b>Date Of Activity :</b> " + dateofactivity
+            + "<br />" 
+            + "<br />"
+            + "<b>Created By(Admin ID) :</b> " + adminId
             + "<br />"
             + "Thanks,<br />"
             + "Rachna Teracotta Admin"

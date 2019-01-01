@@ -27,7 +27,7 @@ namespace Rachna.Teracotta.Project.Source.account
 
         protected void btnForgotPassword_Click(object sender, EventArgs e)
         {
-            Administrators _admin = context.Administrator.Where(m=>m.EmailId==txtUserName.Text).FirstOrDefault();
+            Administrators _admin = context.Administrator.Where(m => m.EmailId == txtUserName.Text).FirstOrDefault();
 
             if (_admin == null)
             {
@@ -43,15 +43,8 @@ namespace Rachna.Teracotta.Project.Source.account
                     string host = ConfigurationSettings.AppSettings["DomainUrl"].ToString();
                     host = host + "account/passwordreset.aspx?emailid=" + txtUserName.Text;
                     string body = MailHelper.PasswordResetLink(host);
-                    string mail_result = MailHelper.SendEmail(txtUserName.Text, "Password Reset Link", body, "Password Admin");
-                    if (mail_result == "success")
-                    {
-                        Response.Redirect("success.aspx?success=forgot-pwd");
-                    }
-                    pnlErrorMessage.Attributes.Remove("class");
-                    pnlErrorMessage.Attributes["class"] = "alert alert-success alert-dismissable";
-                    pnlErrorMessage.Visible = true;
-                    lblErrorMessage.Text = mail_result;
+                    MailHelper.SendEmail(txtUserName.Text, "Password Reset Link", body, "Password Admin");
+                    Response.Redirect("success.aspx?success=forgot-pwd");
                 }
                 else
                 {

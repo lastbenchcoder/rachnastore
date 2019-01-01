@@ -135,6 +135,8 @@ namespace Rachna.Teracotta.Project.Source.App_Data
 
         public DbSet<CustomerRequest> CustomerRequest { get; set; }
 
+        public DbSet<EmailTracker> EmailTracker { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
@@ -258,6 +260,8 @@ namespace Rachna.Teracotta.Project.Source.App_Data
             modelBuilder.Entity<AdminActivity>().ToTable("tbl_admin_activity");
 
             modelBuilder.Entity<CustomerRequest>().ToTable("tbl_customer_request");
+
+            modelBuilder.Entity<EmailTracker>().ToTable("tbl_email_tracker");
         }
     }
 }

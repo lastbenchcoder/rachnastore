@@ -63,7 +63,7 @@ namespace Rachna.Teracotta.Project.Source.adminvendor
                             string host = ConfigurationSettings.AppSettings["DomainUrl"].ToString();
                             host = host + "account/invitation.aspx?code=" + invitations.Invitation_Code + "&emailid=" + invitations.Invitation_EmailId;
                             string body = MailHelper.InvitationLink(host);
-                            string mail_result = MailHelper.SendEmail(invitations.Invitation_EmailId, "Hurray!!! You Are Invited To Rachna Teracotta.", body, "Rachna Teracotta Invitation");
+                            MailHelper.SendEmail(invitations.Invitation_EmailId, "Hurray!!! You Are Invited To Rachna Teracotta.", body, "Rachna Teracotta Invitation");
                             pnlErrorMessage.Attributes.Remove("class");
                             pnlErrorMessage.Attributes["class"] = "alert alert-success alert-dismissable";
                             pnlErrorMessage.Visible = true;

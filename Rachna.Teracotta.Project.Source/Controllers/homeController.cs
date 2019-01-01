@@ -103,13 +103,13 @@ namespace Rachna.Teracotta.Project.Source.Controllers
             List<HomePageProductModel> _prdModel = new List<HomePageProductModel>();
             using (var ctx = new RachnaDBContext())
             {
-                if (category != null)
+                if (category != null && category != "0")
                 {
                     _product = ctx.Product.Include("SubCategory").Where(m => m.SubCategory.Category_Id == id && m.Product_Status == eProductStatus.Published.ToString()).ToList();
                 }
                 else
                 {
-                    _product = ctx.Product.Where(m => m.SubCategory_Id == id && m.Product_Our_Price <= max_price && m.Product_Our_Price >= min_price && m.Product_Status == eProductStatus.Published.ToString()).ToList();
+                    _product = ctx.Product.Include("SubCategory").Where(m => m.SubCategory_Id == id && m.Product_Our_Price <= max_price && m.Product_Our_Price >= min_price && m.Product_Status == eProductStatus.Published.ToString()).ToList();
                 }
                 foreach (var item in _product)
                 {

@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rachna.Teracotta.Project.Source.support.home {
+namespace Rachna.Teracotta.Project.Source.administration {
     
     
-    public partial class _default {
+    public partial class emailTracker {
         
         /// <summary>
         /// pnlErrorMessage control.
