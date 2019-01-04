@@ -86,8 +86,9 @@ namespace Rachna.Teracotta.Project.Source.administration
                             Admin_CreatedDate = DateTime.Now,
                             Admin_UpdatedDate = DateTime.Now,
                             Admin_Login_Attempt = 0,
-                            Store_Id = Convert.ToInt32(ddlStore.SelectedValue)
-                        };
+                            Store_Id = Convert.ToInt32(ddlStore.SelectedValue),
+                            Send_Activity_Mail = (chkGetActivityMail.Checked) ? 1 : 0
+                    };
 
                         administrators = bAdministrator.Create(administrators);
                         ActivityHelper.Create("New Administrator", "New Administrator Created On " +

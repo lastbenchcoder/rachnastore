@@ -213,15 +213,7 @@ namespace Rachna.Teracotta.Project.Source.administration.product
                     }
                     else
                     {
-                        if (_admin.Admin_Role == eRole.Approver.ToString() && eProductStatus.ReviewCompleted.ToString() == _prd.Product_Status)
-                        {
-                            btnApprove.Visible = true;
-                        }
-                        else if (_admin.Admin_Role == eRole.Publisher.ToString() && eProductStatus.Approved.ToString() == _prd.Product_Status)
-                        {
-                            btnApprove.Visible = true;
-                        }
-                        else if (_admin.Admin_Role == eRole.Super.ToString())
+                        if (_admin.Admin_Role == eRole.Super.ToString())
                         {
                             btnApprove.Visible = true;
                         }

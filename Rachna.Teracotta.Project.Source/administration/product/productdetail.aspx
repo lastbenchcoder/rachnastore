@@ -49,7 +49,7 @@
         </div>
         <asp:Panel ID="pnlErrorMessage" class="page-header" runat="server" Visible="false" Style="margin-top: 10px">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <asp:Label ID="Label1" runat="server"></asp:Label>
+            <asp:Label ID="lblMessage" runat="server"></asp:Label>
         </asp:Panel>
         <div class="row margin-top">
             <div class="col-sm-12">
@@ -241,7 +241,7 @@
     </div>
     <script type="text/javascript">
         function ProductUpdateConfirmation() {
-            return confirm("Are you sure you want to update this product? By updating this product, it will set status to Review Pending and also Items in Top Eight Product, Product Features and Carts will be deleted.");
+            return confirm("Are you sure you want to update this product? By updating Title, Description and Specification product, it will set status to Review Pending and also Items in Top Eight Product, Product Features and Carts will be deleted.");
         }
     </script>
 </asp:Content>

@@ -360,6 +360,7 @@
     <Content Include="appfiles\frontend2\js\vendor\jquery-3.3.1.min.js" />
     <Content Include="appfiles\frontend2\js\vendor\modernizr-3.6.0.min.js" />
     <Content Include="appfiles\frontend2\style.css" />
+    <Content Include="appsetup.aspx" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="bin\Elmah.dll" />
     <Content Include="bin\EntityFramework.dll" />
@@ -1837,6 +1838,13 @@
     </Compile>
     <Compile Include="adminvendor\store.aspx.designer.cs">
       <DependentUpon>store.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="appsetup.aspx.cs">
+      <DependentUpon>appsetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="appsetup.aspx.designer.cs">
+      <DependentUpon>appsetup.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

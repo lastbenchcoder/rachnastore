@@ -1,4 +1,5 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
 using Rachna.Teracotta.Project.Source.Helper;
 
@@ -15,15 +16,10 @@ namespace Rachna.Teracotta.Project.Source.administration.product
 {
     public partial class newproducts : System.Web.UI.Page
     {
-        private RachnaDBContext context;
-        public newproducts()
-        {
-            context = new RachnaDBContext();
-        }
         protected void Page_Load(object sender, EventArgs e)
         {
             this.Title = ConfigurationSettings.AppSettings["AppName"].ToString() + " : New Product";
-            List<SubCategories> _subCategoryList = context.SubCategory.Include("Category").Where(m => m.SubCategory_Status == eStatus.Active.ToString()).ToList();
+            List<SubCategories> _subCategoryList = bSubCategory.List().Where(m => m.SubCategory_Status == eStatus.Active.ToString()).ToList();
             foreach (var item in _subCategoryList)
             {
                 ddlCategory.Items.Add(new ListItem { Text = item.SubCategory_Title + "(" + item.Category.Category_Title + ")", Value = item.SubCategory_Id.ToString() });
@@ -33,7 +29,7 @@ namespace Rachna.Teracotta.Project.Source.administration.product
         protected void btnProceedToSubmit_Click(object sender, EventArgs e)
         {
             int AdminId = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString());
-            Administrators _admin = context.Administrator.ToList().Where(m => m.Administrators_Id == AdminId).FirstOrDefault();
+            Administrators _admin = bAdministrator.List().Where(m => m.Administrators_Id == AdminId).FirstOrDefault();
 
             Product Product = new Product()
             {
@@ -60,34 +56,33 @@ namespace Rachna.Teracotta.Project.Source.administration.product
                 Store_Rating = (txtRating.Text != "") ? Convert.ToInt32(txtRating.Text) : 1
             };
 
-            int maxAdminId = 1;
-            if (context.Product.ToList().Count > 0)
-                maxAdminId = context.Product.Max(m => m.Product_Id);
-            maxAdminId = (maxAdminId == 1 && context.Product.ToList().Count > 0) ? (maxAdminId + 1) : maxAdminId;
-            Product.ProductCode = "PRDTRACH" + maxAdminId + "TERA" + (maxAdminId + 1);
-            context.Product.Add(Product);
-            context.SaveChanges();
+            bProduct.Create(Product);
 
-            ProductHelper.CreateProductFlow(Product.Product_Id, Product.Product_Title, _admin.Administrators_Id, _admin.FullName, "New Product Created and Pending for Review", Product.Product_Status);
-
-            ProductBanners ProductBanner = new ProductBanners()
+            if (Product.ErrorMessage != null)
             {
-                Product_Id = Product.Product_Id,
-                Administrators_Id = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()),
-                Product_Banner_Default = 1,
-                Product_Banner_Photo = "content/noimage.png",
-                Product_Banner_CreatedDate = DateTime.Now,
-                Product_Banner_UpdatedDate = DateTime.Now
-            };
+                ProductHelper.CreateProductFlow(Product.Product_Id, Product.Product_Title, _admin.Administrators_Id, _admin.FullName, "New Product Created and Pending for Review", Product.Product_Status);
 
-            int maxBnrAdminId = 1;
-            if (context.ProductBanner.ToList().Count > 0)
-                maxAdminId = context.ProductBanner.Max(m => m.Product_Id);
-            Product.ProductCode = "PRDBNRTRACH" + maxBnrAdminId + "TERA" + (maxBnrAdminId + 1);
-            context.ProductBanner.Add(ProductBanner);
-            context.SaveChanges();
+                ProductBanners ProductBanner = new ProductBanners()
+                {
+                    Product_Id = Product.Product_Id,
+                    Administrators_Id = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString()),
+                    Product_Banner_Default = 1,
+                    Product_Banner_Photo = "content/noimage.png",
+                    Product_Banner_CreatedDate = DateTime.Now,
+                    Product_Banner_UpdatedDate = DateTime.Now
+                };
 
-            Response.Redirect("/administration/product/productsdetailstatic.aspx?SavePrdId=1000&Productid=" + Product.Product_Id);
+                bProduct.CreateProductBanner(ProductBanner);
+
+                Response.Redirect("/administration/product/productsdetailstatic.aspx?SavePrdId=1000&Productid=" + Product.Product_Id);
+            }
+            else
+            {
+                pnlErrorMessage.Attributes.Remove("class");
+                pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
+                pnlErrorMessage.Visible = true;
+                lblMessage.Text = "Product cannot be created. " + Product.ErrorMessage;
+            }
         }
 
         protected void txtDiscount_TextChanged(object sender, EventArgs e)

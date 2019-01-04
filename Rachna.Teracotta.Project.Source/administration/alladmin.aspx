@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <%
-        List<Rachna.Teracotta.Project.Source.Models.Administrators> Administrators = null;       
+        List<Rachna.Teracotta.Project.Source.Models.Administrators> Administrators = null;
         Administrators = Rachna.Teracotta.Project.Source.Core.bal.bAdministrator.List();
     %>
 
@@ -48,6 +48,10 @@
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ForeColor="Red" runat="server" ErrorMessage="Select Role" InitialValue="Select.." ControlToValidate="ddlRole" ValidationGroup="admin"></asp:RequiredFieldValidator>
                     </div>
+                    <div class="form-group">
+                        <label>Get Activity Mail</label>
+                        <asp:CheckBox runat="server" ID="chkGetActivityMail"></asp:CheckBox>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -62,7 +66,7 @@
 
     <div class="container-fluid">
         <div class="page-header">
-             <div class="pull-left">
+            <div class="pull-left">
                 <h1>All Administrators</h1>
             </div>
             <div class="pull-right">

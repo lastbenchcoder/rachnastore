@@ -8,9 +8,8 @@ namespace Rachna.Teracotta.Project.Source.Entity
     public enum eRole
     {
         Super = 0,
-        Approver = 1,
-        Publisher = 2,
-        Vendor = 3,
-        Developer = 4
+        Publisher = 1,
+        Vendor = 2,
+        Developer = 3
     }
 }

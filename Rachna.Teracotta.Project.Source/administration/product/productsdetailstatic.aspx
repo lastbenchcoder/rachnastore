@@ -343,7 +343,7 @@
                                                     <asp:Label Text='<%# Eval("Description").ToString() %>'
                                                         runat="server" /></td>
                                                 <td style="width: 25%">
-                                                    <asp:Label Text='<%# Eval("Comment_Status").ToString().ToLower() == "active" ? "Pending For Approve" : "Approved" %>'
+                                                    <asp:Label Text='<%# Eval("Comment_Status").ToString().ToLower() == "active" ? "Approved" : "Pending For Approve" %>'
                                                         runat="server" /></td>
                                             </tr>
                                         </table>

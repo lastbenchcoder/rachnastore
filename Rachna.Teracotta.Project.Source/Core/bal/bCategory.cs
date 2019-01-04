@@ -19,24 +19,9 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
                 string mailBody = MailHelper.ActivityMail("Sub Category", "New SubCategory " + Category.Category_Title +
                     "( " + Category.Category_Id + "  and " + Category.CategoryCode + " ) created successfully.",
                     Category.Administrators_Id, DateTime.Now.ToString());
-                string emailIdToSend = string.Empty;
-                List<Administrators> Administrators = bAdministrator.List().Where(m => m.Admin_Status == eStatus.Active.ToString()).ToList();
-                foreach (var item in Administrators)
-                {
-                    if (item.Admin_Role == eRole.Super.ToString())
-                    {
-                        if (!string.IsNullOrEmpty(emailIdToSend))
-                        {
-                            emailIdToSend = emailIdToSend + "," + item.EmailId;
-                        }
-                        else
-                        {
-                            emailIdToSend = item.EmailId;
-                        }
-                    }
-                }
+               
 
-                MailHelper.SendEmail(emailIdToSend, "New Category Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Category Created", mailBody, "Activity Admin");
             }
             return _dCategory.Create(Category);
         }
@@ -61,24 +46,8 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
                 string mailBody = MailHelper.ActivityMail("Sub Category", "Category Updation " + Category.Category_Title +
                     "( " + Category.Category_Id + "  and " + Category.CategoryCode + " ) updated successfully.",
                     Category.Administrators_Id, DateTime.Now.ToString());
-                string emailIdToSend = string.Empty;
-                List<Administrators> Administrators = bAdministrator.List().Where(m => m.Admin_Status == eStatus.Active.ToString()).ToList();
-                foreach (var item in Administrators)
-                {
-                    if (item.Admin_Role == eRole.Super.ToString())
-                    {
-                        if (!string.IsNullOrEmpty(emailIdToSend))
-                        {
-                            emailIdToSend = emailIdToSend + "," + item.EmailId;
-                        }
-                        else
-                        {
-                            emailIdToSend = item.EmailId;
-                        }
-                    }
-                }
 
-                MailHelper.SendEmail(emailIdToSend, "Category Updation ", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Category Updation ", mailBody, "Activity Admin");
             }
             return _dCategory.Delete(Category);
         }

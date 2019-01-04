@@ -48,6 +48,8 @@ namespace Rachna.Teracotta.Project.Source.Models
         public DateTime Admin_UpdatedDate { get; set; }
         [Column("login_attempt")]
         public int Admin_Login_Attempt { get; set; }
+        [Column("activity_mail")]
+        public int Send_Activity_Mail{ get; set; }
         [NotMapped]
         public string ErrorMessage;
 

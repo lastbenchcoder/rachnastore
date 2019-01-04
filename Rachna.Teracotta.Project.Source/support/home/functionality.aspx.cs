@@ -54,24 +54,10 @@ namespace Rachna.Teracotta.Project.Source.support.home
                 if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
                 {
                     string mailBody = MailHelper.FunctionalityAddedOrUpdated(_Functionality);
-                    string emailIdToSend = string.Empty;
-                    List<Administrators> Administrators = bAdministrator.List().Where(m => m.Admin_Status == eStatus.Active.ToString()).ToList();
-                    foreach (var item in Administrators)
-                    {
-                        if (item.Admin_Role == eRole.Super.ToString())
-                        {
-                            if (!string.IsNullOrEmpty(emailIdToSend))
-                            {
-                                emailIdToSend = emailIdToSend + "," + item.EmailId;
-                            }
-                            else
-                            {
-                                emailIdToSend = item.EmailId;
-                            }
-                        }
-                    }
-                    string CreatorAdmin = Administrators.Where(m => m.Administrators_Id == _Functionality.Administrators_Id).FirstOrDefault().EmailId;
-                    string DeveloperAdmin = Administrators.Where(m => m.Administrators_Id == _Functionality.Developer_Id).FirstOrDefault().EmailId;
+                    string emailIdToSend = MailHelper.EmailToSend();
+
+                    string CreatorAdmin = bAdministrator.List().Where(m => m.Administrators_Id == _Functionality.Administrators_Id).FirstOrDefault().EmailId;
+                    string DeveloperAdmin = bAdministrator.List().Where(m => m.Administrators_Id == _Functionality.Developer_Id).FirstOrDefault().EmailId;
                     emailIdToSend = emailIdToSend + ";" + CreatorAdmin;
                     emailIdToSend = emailIdToSend + ";" + DeveloperAdmin;
                     MailHelper.SendEmail(emailIdToSend, "New Functionality Added", mailBody, "Support Team");

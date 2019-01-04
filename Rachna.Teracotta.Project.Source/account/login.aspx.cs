@@ -44,7 +44,14 @@ namespace Rachna.Teracotta.Project.Source.account
                     pnlErrorMessage.Visible = true;
                     lblErrorMessage.Text = "Oops!!! No entered email id exists in our database.";
                 }
-                else if (_admin.Admin_Status == "inactive")
+                else if (_admin.Admin_Status.ToLower() == "inactive")
+                {
+                    pnlErrorMessage.Attributes.Remove("class");
+                    pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
+                    pnlErrorMessage.Visible = true;
+                    lblErrorMessage.Text = "Oops!!! Cannot login to your account, becaues your account is inactive. Please raise request to activate your account.";
+                }
+                else if (_admin.Admin_Status.ToLower() == "locked")
                 {
                     pnlErrorMessage.Attributes.Remove("class");
                     pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
@@ -61,6 +68,8 @@ namespace Rachna.Teracotta.Project.Source.account
                 else if (_admin.Password != txtPassword.Text && _admin.Admin_Login_Attempt < 5)
                 {
                     _admin.Admin_Login_Attempt = (_admin.Admin_Login_Attempt + 1);
+                    if (_admin.Admin_Login_Attempt == 5)
+                        _admin.Admin_Status = eStatus.Locked.ToString();
                     _admin.Admin_UpdatedDate = DateTime.Now;
                     _admin = bAdministrator.Update(_admin);
                     pnlErrorMessage.Attributes.Remove("class");
@@ -91,18 +100,6 @@ namespace Rachna.Teracotta.Project.Source.account
                             Response.Redirect("/administration/default.aspx?redirecturl=rachna-teracotta-home");
                         }
 
-                    }
-                    else if (_admin.Admin_Role == eRole.Approver.ToString())
-                    {
-                        Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()] = _admin.Administrators_Id;
-                        if (_admin.Admin_Login_Attempt != 0)
-                        {
-                            _admin.Admin_Login_Attempt = 0;
-                            _admin.Admin_UpdatedDate = DateTime.Now;
-                            _admin = bAdministrator.Update(_admin);
-                        }
-                        //Response.Redirect("/admapprover/default.aspx?redirecturl=rachna-teracotta-home");
-                        Response.Redirect("/account/inprogress.aspx?redirecturl=rachna-teracotta-home");
                     }
                     else if (_admin.Admin_Role == eRole.Publisher.ToString())
                     {

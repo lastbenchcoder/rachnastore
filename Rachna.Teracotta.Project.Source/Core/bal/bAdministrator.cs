@@ -17,27 +17,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dAdministrator _dAdministrator = new dAdministrator();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Invitations", "New Administrator " + administrators.EmailId +
+                string mailBody = MailHelper.ActivityMail("Administrator", "New Administrator " + administrators.EmailId +
                     "( " + administrators.Administrators_Id + "  and " + administrators.AdminCode + " ) created successfully.",
-                    1, DateTime.Now.ToString());
-                string emailIdToSend = string.Empty;
-                List<Administrators> Administrators = bAdministrator.List().Where(m => m.Admin_Status == eStatus.Active.ToString()).ToList();
-                foreach (var item in Administrators)
-                {
-                    if (item.Admin_Role == eRole.Super.ToString())
-                    {
-                        if (!string.IsNullOrEmpty(emailIdToSend))
-                        {
-                            emailIdToSend = emailIdToSend + "," + item.EmailId;
-                        }
-                        else
-                        {
-                            emailIdToSend = item.EmailId;
-                        }
-                    }
-                }
+                    1, DateTime.Now.ToString());                
 
-                MailHelper.SendEmail(emailIdToSend, "New Administrator Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Administrator Created", mailBody, "Activity Admin");
             }
             return _dAdministrator.Create(administrators);
         }
@@ -65,27 +49,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dAdministrator _dAdministrator = new dAdministrator();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Invitations", "Administrator Updation " + administrators.EmailId +
+                string mailBody = MailHelper.ActivityMail("Administrator", "Administrator Updation " + administrators.EmailId +
                     "( " + administrators.Administrators_Id + "  and " + administrators.AdminCode + " ) created successfully.",
                     1, DateTime.Now.ToString());
-                string emailIdToSend = string.Empty;
-                List<Administrators> Administrators = bAdministrator.List().Where(m => m.Admin_Status == eStatus.Active.ToString()).ToList();
-                foreach (var item in Administrators)
-                {
-                    if (item.Admin_Role == eRole.Super.ToString())
-                    {
-                        if (!string.IsNullOrEmpty(emailIdToSend))
-                        {
-                            emailIdToSend = emailIdToSend + "," + item.EmailId;
-                        }
-                        else
-                        {
-                            emailIdToSend = item.EmailId;
-                        }
-                    }
-                }
-
-                MailHelper.SendEmail(emailIdToSend, "Administrator Updation", mailBody, "Activity Admin");
+                
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Administrator Updation", mailBody, "Activity Admin");
             }
             return _dAdministrator.Update(administrators);
         }

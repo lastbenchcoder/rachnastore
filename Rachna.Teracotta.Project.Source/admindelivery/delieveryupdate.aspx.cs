@@ -1,4 +1,5 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
 using Rachna.Teracotta.Project.Source.Helper;
 using Rachna.Teracotta.Project.Source.Models;
@@ -82,7 +83,7 @@ namespace Rachna.Teracotta.Project.Source.admindelivery
                 int delOrderId = Convert.ToInt32(hdnDelId.Value);
                 Order _productOrder = new Order();
                 _productOrder = ctx.Orders.ToList().Where(m => m.Order_Id == productId).FirstOrDefault();
-                OrderDelivery OrderDelivery = ctx.OrderDelivery.Where(m => m.Order_Delivery_Id == delOrderId).FirstOrDefault();
+                OrderDelivery OrderDelivery = ctx.OrderDelivery.Include("Order").Where(m => m.Order_Delivery_Id == delOrderId).FirstOrDefault();
 
 
                 _productOrder.Order_Status = ddlSorderStatus.Text;
@@ -117,6 +118,17 @@ namespace Rachna.Teracotta.Project.Source.admindelivery
                     host = "<table style='width:100%'>" + _res + "</ table >";
                     string body = MailHelper.CustomerOrderProcessed(host, (_cust.Customers_FullName), txtOrderDescription.Text);
                     MailHelper.SendEmail(_cust.Customers_EmailId, "Success!!! " + txtOrderDescription.Text + " Rachna Teracotta Estore.", body, "Rachna Teracotta Order" + txtOrderDescription.Text);
+                }
+
+                if (OrderDelivery.Status==eOrderDeliveryStatus.DelveryCompleted.ToString())
+                {
+                    Product Product = bProduct.List().Where(m => m.Product_Id == OrderDelivery.Order.Product_Id).FirstOrDefault();
+                    int qty = (Product.Product_Qty - OrderDelivery.Order.Order_Qty);
+                    Product.Product_Qty = qty;
+                    Product.Product_UpdatedDate = DateTime.Now;
+                    Product.Administrators_Id = 1;
+
+                    bProduct.Update(Product);
                 }
 
                 Response.Redirect("/admindelivery/deliveryhome.aspx?id=200&requesttype=view-order-detail.html");

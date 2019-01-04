@@ -5,13 +5,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <%
         List<Rachna.Teracotta.Project.Source.Models.Product> _RequestList = null;
-        Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext context = new Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext();
-        _RequestList = context.Product.Include("SubCategory").Include("ProductBanner").Include("Admin").Include("Store").ToList();
+        _RequestList = Rachna.Teracotta.Project.Source.Core.bal.bProduct.List();
         if (_RequestList.Count > 0)
         {
             foreach (var item in _RequestList)
             {
-                item.SubCategory.Category = context.Category.Where(m => m.Category_Id == item.SubCategory.Category_Id).FirstOrDefault();
+                item.SubCategory.Category = Rachna.Teracotta.Project.Source.Core.bal.bCategory.List().Where(m => m.Category_Id == item.SubCategory.Category_Id).FirstOrDefault();
             }
         }
     %>

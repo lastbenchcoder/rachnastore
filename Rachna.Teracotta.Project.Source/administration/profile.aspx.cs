@@ -61,6 +61,7 @@ namespace Rachna.Teracotta.Project.Source.administration
                 administrators.Admin_Status = ddlStatus.Text;
                 administrators.Admin_Role = ddlRole.Text;
                 administrators.Photo = administrators.Photo;
+                administrators.Send_Activity_Mail = (chkGetActivityMail.Checked) ? 1 : 0;
 
                 if (imgInp.HasFile)
                 {
@@ -172,6 +173,8 @@ namespace Rachna.Teracotta.Project.Source.administration
                 ddlRole.Text = _admin.Admin_Role.ToString();
                 ddlStatus.Text = _admin.Admin_Status.ToString();
                 lblStore.Text = _admin.Store.Store_Name.ToString();
+                lblLoginAttempt.Text = "Failed to login " + _admin.Admin_Login_Attempt.ToString() + " times";
+                chkGetActivityMail.Checked = (_admin.Send_Activity_Mail == 1) ? true : false;
             }
             catch (Exception ex)
             {

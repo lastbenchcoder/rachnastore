@@ -92,10 +92,13 @@
             Rachna.Teracotta.Project.Source.Models.Administrators _Administrator = null;
             List<Rachna.Teracotta.Project.Source.Models.Invitations> _Invitations = null;
             List<Rachna.Teracotta.Project.Source.Models.AdminActivity> _AdminActivity = null;
+            List<Rachna.Teracotta.Project.Source.Models.Product> _AlertProduct = null;
 
             _Administrator = Rachna.Teracotta.Project.Source.Core.bal.bAdministrator.List().Where(m => m.Administrators_Id == Convert.ToInt32(Session[ConfigurationSettings.AppSettings["AdminSession"].ToString()].ToString())).FirstOrDefault();
             _Invitations = Rachna.Teracotta.Project.Source.Core.bal.bInvitations.List().Where(m => m.Invitation_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.InActive.ToString()).ToList();
+            _AlertProduct = Rachna.Teracotta.Project.Source.Core.bal.bProduct.List().Where(m => m.Product_Qty_Alert >= m.Product_Qty).ToList();
         %>
+
         <div id="navigation">
             <div class="container-fluid">
                 <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979" id="brand"><%=System.Configuration.ConfigurationSettings.AppSettings["AppName"].ToString() %></a>
@@ -155,6 +158,88 @@
                 </asp:ContentPlaceHolder>
             </div>
         </div>
+        <%if (_AlertProduct.Count > 0)
+            { %>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#modalAlertProducts").modal();
+            });
+        </script>
+        <%}%>
+
+        <!--Modal-->
+        <div class="modal fade" id="modalAlertProducts">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4>Product With Low Quantity</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <p>
+                                There are <%=_AlertProduct.Count %> products with low quantity, please take care of this. 
+                            Until you take care, you will recieve this alert message.
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <table class="table table-hover table-nomargin table-bordered dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Product Id</th>
+                                        <th>Store</th>
+                                        <th></th>
+                                        <th>Code</th>
+                                        <th>Product</th>
+                                        <th>Edit Detail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% 
+                                        foreach (var item in _AlertProduct)
+                                        {
+                                    %>
+                                    <tr>
+                                        <td>
+                                            <%=item.Product_Id %>
+                                        </td>
+                                        <td>
+                                            <%=item.Store.Store_Name %>
+                                        </td>
+                                        <td><a href="/administration/product/uploadproductsbanner.aspx?Productid=<%=item.Product_Id %>"><%if (item.ProductBanner.Count > 0)
+                                                { %>
+                                            <img src="../../<%=item.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo %>" style="height: 50px; width: 50px" />
+                                            <%}
+                                                else
+                                                { %>
+                                            <img src="../../content/noimage.png" style="height: 50px; width: 50px" />
+                                            <%} %>
+                                        </a>
+                                        </td>
+                                        <td><%=item.ProductCode %></td>
+                                        <%if (item.Product_Title.Length > 30)
+                                            {%>
+                                        <td><%=item.Product_Title.Substring(0, 30).ToString() %><span>...</span></td>
+                                        <%}
+                                            else
+                                            { %>
+                                        <td><%=item.Product_Title %><span>...</span></td>
+                                        <%} %>
+                                        <td><a href="/administration/product/productsdetailstatic.aspx?Productid=<%=item.Product_Id %>"><i class="fa fa-edit fa-lg"></i></a></td>
+                                        <%} %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     </form>
 </body>
 </html>

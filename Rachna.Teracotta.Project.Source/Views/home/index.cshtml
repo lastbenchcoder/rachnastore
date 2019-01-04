@@ -43,99 +43,102 @@
 <!-- Deal Of The Day Area -->
 @if (homePageModel._dealoftheday.Count > 0)
 {
-    <div class="ho-section deal-of-the-day-area bg-white pt-30">
-        <div class="container">
-            <div class="section-title">
-                <h3>DEAL OF THE DAYS</h3>
-            </div>
-            <div class="product-slider deal-of-the-day-slider slider-navigation-2 slider-dots">
-                @foreach (var item in homePageModel._dealoftheday)
-                {
-                    if (item.Deal_Starts_From.Date >= DateTime.Now.Date)
+    if (homePageModel._dealoftheday.Where(m => m.Deal_Starts_From.Date >= DateTime.Now.Date).ToList().Count > 0)
+    {
+        <div class="ho-section deal-of-the-day-area bg-white pt-30">
+            <div class="container">
+                <div class="section-title">
+                    <h3>DEAL OF THE DAYS</h3>
+                </div>
+                <div class="product-slider deal-of-the-day-slider slider-navigation-2 slider-dots">
+                    @foreach (var item in homePageModel._dealoftheday)
                     {
-                        <div class="product-slider-col">
-                            <article class="hoproduct hoproduct-2">
-                                <div class="hoproduct-image">
-                                    <a class="hoproduct-thumb" href="/product/index?id=@item.Product_Id&title=@item.Product.Product_Title">
-                                        <img class="hoproduct-frontimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
-                                        <img class="hoproduct-backimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
-                                    </a>
-                                    @{
-                                        decimal GST_Amount = 0, GST_Percentage = 0;
-                                        GST_Amount = (item.Product.Product_Our_Price - item.Deal_Price);
-                                        GST_Percentage = (GST_Amount * 100) / item.Product.Product_Our_Price;
-                                    }
-                                    @if (GST_Percentage != 0)
-                                    {
-                                        <ul class="hoproduct-flags">
-
-                                            <li class="flag-pack">New</li>
-                                            <li class="flag-discount">
-                                                @Math.Round(GST_Percentage) <span>%</span>
-                                            </li>
-                                        </ul>
-                                    }
-                                </div>
-                                @{
-                                    DateTime dealDay = item.Deal_Starts_From.AddDays(1);
-                                }
-                                <div class="hoproduct-countdown countdown" data-countdown="@dealDay.ToString("yyyy/MM/dd")"></div>
-                                <div class="hoproduct-content">
-                                    <h5 class="hoproduct-title">
-                                        <a href="product-details.html">
-                                            @item.Product.Product_Title
+                        if (item.Deal_Starts_From.Date >= DateTime.Now.Date)
+                        {
+                            <div class="product-slider-col">
+                                <article class="hoproduct hoproduct-2">
+                                    <div class="hoproduct-image">
+                                        <a class="hoproduct-thumb" href="/product/index?id=@item.Product_Id&title=@item.Product.Product_Title">
+                                            <img class="hoproduct-frontimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
+                                            <img class="hoproduct-backimage" src="../../@item.Product.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
                                         </a>
-                                    </h5>
-                                    <div class="hoproduct-rattingbox">
-                                        <h6>@item.Product.ProdComments.Count Review(s)</h6>
-                                        <div class="rattingbox">
-                                            @if (item.Product.Store_Rating == 1)
-                                            {
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            }
-                                            else if (item.Product.Store_Rating == 2)
-                                            {
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            }
-                                            else if (item.Product.Store_Rating == 3)
-                                            {
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            }
-                                            else if (item.Product.Store_Rating == 4)
-                                            {
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            }
-                                            else if (item.Product.Store_Rating == 5)
-                                            {
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            }
+                                        @{
+                                            decimal GST_Amount = 0, GST_Percentage = 0;
+                                            GST_Amount = (item.Product.Product_Our_Price - item.Deal_Price);
+                                            GST_Percentage = (GST_Amount * 100) / item.Product.Product_Our_Price;
+                                        }
+                                        @if (GST_Percentage != 0)
+                                        {
+                                            <ul class="hoproduct-flags">
+
+                                                <li class="flag-pack">New</li>
+                                                <li class="flag-discount">
+                                                    @Math.Round(GST_Percentage) <span>%</span>
+                                                </li>
+                                            </ul>
+                                        }
+                                    </div>
+                                    @{
+                                        DateTime dealDay = item.Deal_Starts_From.AddDays(1);
+                                    }
+                                    <div class="hoproduct-countdown countdown" data-countdown="@dealDay.ToString("yyyy/MM/dd")"></div>
+                                    <div class="hoproduct-content">
+                                        <h5 class="hoproduct-title">
+                                            <a href="product-details.html">
+                                                @item.Product.Product_Title
+                                            </a>
+                                        </h5>
+                                        <div class="hoproduct-rattingbox">
+                                            <h6>@item.Product.ProdComments.Count Review(s)</h6>
+                                            <div class="rattingbox">
+                                                @if (item.Product.Store_Rating == 1)
+                                                {
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                }
+                                                else if (item.Product.Store_Rating == 2)
+                                                {
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                }
+                                                else if (item.Product.Store_Rating == 3)
+                                                {
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                }
+                                                else if (item.Product.Store_Rating == 4)
+                                                {
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                }
+                                                else if (item.Product.Store_Rating == 5)
+                                                {
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="hoproduct-pricebox">
+                                            <div class="pricebox">
+                                                <del class="oldprice">&#x20B9; @Math.Round(item.Product.Product_Our_Price)</del>
+                                                <span class="price">&#x20B9; @Math.Round(item.Deal_Price)</span>
+                                            </div>
+                                            <span class="discount">@Math.Round(GST_Percentage) <span>%</span></span>
                                         </div>
                                     </div>
-                                    <div class="hoproduct-pricebox">
-                                        <div class="pricebox">
-                                            <del class="oldprice">&#x20B9; @Math.Round(item.Product.Product_Our_Price)</del>
-                                            <span class="price">&#x20B9; @Math.Round(item.Deal_Price)</span>
-                                        </div>
-                                        <span class="discount">@Math.Round(GST_Percentage) <span>%</span></span>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
+                                </article>
+                            </div>
+                        }
                     }
-                }
+                </div>
             </div>
         </div>
-    </div>
+    }
 }
 <!--// Deal Of The Day Area -->
 <!-- Banner Area -->

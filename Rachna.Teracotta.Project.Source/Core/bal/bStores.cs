@@ -19,24 +19,8 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
                 string mailBody = MailHelper.ActivityMail("Stores", "New Store " + stores.Store_Name +
                     "( " + stores.Store_Id + "  and " + stores.StoreCode + " ) created successfully.",
                     1, DateTime.Now.ToString());
-                string emailIdToSend = string.Empty;
-                List<Administrators> Administrators = bAdministrator.List().Where(m => m.Admin_Status == eStatus.Active.ToString()).ToList();
-                foreach (var item in Administrators)
-                {
-                    if (item.Admin_Role == eRole.Super.ToString())
-                    {
-                        if (!string.IsNullOrEmpty(emailIdToSend))
-                        {
-                            emailIdToSend = emailIdToSend + "," + item.EmailId;
-                        }
-                        else
-                        {
-                            emailIdToSend = item.EmailId;
-                        }
-                    }
-                }
 
-                MailHelper.SendEmail(emailIdToSend, "New Store Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Store Created", mailBody, "Activity Admin");
             }
             return _dStores.Create(stores);
         }
@@ -55,24 +39,8 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
                 string mailBody = MailHelper.ActivityMail("Stores", "Store Updation " + stores.Store_Name +
                     "( " + stores.Store_Id + "  and " + stores.StoreCode + " ) updated successfully.",
                     1, DateTime.Now.ToString());
-                string emailIdToSend = string.Empty;
-                List<Administrators> Administrators = bAdministrator.List().Where(m => m.Admin_Status == eStatus.Active.ToString()).ToList();
-                foreach (var item in Administrators)
-                {
-                    if (item.Admin_Role == eRole.Super.ToString())
-                    {
-                        if (!string.IsNullOrEmpty(emailIdToSend))
-                        {
-                            emailIdToSend = emailIdToSend + "," + item.EmailId;
-                        }
-                        else
-                        {
-                            emailIdToSend = item.EmailId;
-                        }
-                    }
-                }
 
-                MailHelper.SendEmail(emailIdToSend, "Store Updation", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Store Updation", mailBody, "Activity Admin");
             }
             return _dStores.Update(stores);
         }

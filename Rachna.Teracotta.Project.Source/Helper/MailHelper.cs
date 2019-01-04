@@ -2,6 +2,7 @@
 using Rachna.Teracotta.Project.Source.Entity;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
@@ -292,12 +293,33 @@ namespace Rachna.Teracotta.Project.Source.Helper
             + "<b>Date Of Activity :</b> " + dateofactivity
             + "<br />" 
             + "<br />"
-            + "<b>Created By(Admin ID) :</b> " + adminId
-            + "<br />"
+            + "<b>Created/Updated By(Admin ID) :</b> " + adminId
+            + "<br /><br />"
             + "Thanks,<br />"
             + "Rachna Teracotta Admin"
             + "</div>";
             return result;
+        }
+
+        public static string EmailToSend()
+        {
+            string emailIdToSend = string.Empty;
+            List<Administrators> Administrators = bAdministrator.List().Where(m => m.Admin_Status == eStatus.Active.ToString()).ToList();
+            foreach (var item in Administrators)
+            {
+                if (item.Send_Activity_Mail == 1)
+                {
+                    if (!string.IsNullOrEmpty(emailIdToSend))
+                    {
+                        emailIdToSend = emailIdToSend + "," + item.EmailId;
+                    }
+                    else
+                    {
+                        emailIdToSend = item.EmailId;
+                    }
+                }
+            }
+            return emailIdToSend;
         }
     }
 }

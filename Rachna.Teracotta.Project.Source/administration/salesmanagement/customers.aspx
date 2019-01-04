@@ -72,9 +72,10 @@
                                     <th>FullName</th>
                                     <th>EmailId</th>
                                     <th>Phone</th>
+                                    <th>Status</th>
+                                    <th>Email Varified</th>
                                     <th>Cart</th>
                                     <th>Orders</th>
-                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -89,9 +90,21 @@
                                     <td><a href="/administration/salesmanagement/detail.aspx?id=<%=item.Customer_Id %>"><%=item.Customers_FullName %></a></td>
                                     <td><%=item.Customers_EmailId %></td>
                                     <td><%=item.Customers_Phone %></td>
+                                    <th><%=item.Customers_Status %></th>
+                                     <%if (item.IsEmailVerified == 1)
+                                        {%>
+                                    <td>
+                                        <span class="label label-success">Verified
+                                        </span>
+                                    </td>
+                                    <%}
+                                        else
+                                        { %>
+                                    <td><span class="label label-danger">Not Verified
+                                    </span></td>
+                                    <%} %>
                                     <td><%=item.Cart.Count %></td>
                                     <td><%=item.Orders.Count %></td>
-                                    <th><%=item.Customers_Status %></th>
                                     <td>
                                         <a href="/administration/salesmanagement/cart.aspx?customer_id=<%=item.Customer_Id %>&requesttype=edit-customer-detail.html"><i class="fa fa-shopping-cart fa-lg" title="Cart"></i></a>
                                         &nbsp;&nbsp;&nbsp;

@@ -8,6 +8,7 @@ namespace Rachna.Teracotta.Project.Source.Entity
     public enum eStatus
     {
         Active = 0,
-        InActive = 1
+        InActive = 1,
+        Locked = 2
     }
 }

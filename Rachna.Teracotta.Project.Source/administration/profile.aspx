@@ -24,7 +24,8 @@
                 </li>
                 <li>
                     <a href="#">
-                        <asp:Label ID="lblBcTitle" runat="server"></asp:Label></a>
+                        <asp:label id="lblBcTitle" runat="server"></asp:label>
+                    </a>
                 </li>
             </ul>
             <div class="close-bread">
@@ -33,59 +34,59 @@
                 </a>
             </div>
         </div>
-        <asp:Panel ID="pnlErrorMessage" class="page-header" runat="server" Visible="false" Style="margin-top: 10px">
+        <asp:panel id="pnlErrorMessage" class="page-header" runat="server" visible="false" style="margin-top: 10px">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <asp:Label ID="lblMessage" runat="server"></asp:Label>
-        </asp:Panel>
+        </asp:panel>
         <div class="row">
             <div class="col-sm-12">
                 <div class="box box-bordered">
                     <div class="box-title">
                         <h3>
                             <i class="fa fa-th-list"></i>Update Information</h3>
-                        <asp:HiddenField ID="hdnAdminId" runat="server" />
+                        <asp:hiddenfield id="hdnAdminId" runat="server" />
                     </div>
                     <div class="box-content nopadding">
                         <div class='form-horizontal form-striped'>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Store</label>
                                 <div class="col-sm-10">
-                                    <asp:Label ID="lblStore" runat="server"></asp:Label>
+                                    <asp:label id="lblStore" runat="server"></asp:label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">FullName</label>
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtFullname" runat="server" class="form-control" style="width:30%"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ForeColor="Red" runat="server" ErrorMessage="Enter Fullname" ControlToValidate="txtFullname" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                                    <asp:textbox id="txtFullname" runat="server" class="form-control" style="width: 30%"></asp:textbox>
+                                    <asp:requiredfieldvalidator id="RequiredFieldValidator4" forecolor="Red" runat="server" errormessage="Enter Fullname" controltovalidate="txtFullname" validationgroup="admin"></asp:requiredfieldvalidator>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">EmailId</label>
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtEmailId" TextMode="Email" runat="server" class="form-control" ReadOnly="true" style="width:30%"></asp:TextBox>
+                                    <asp:textbox id="txtEmailId" textmode="Email" runat="server" class="form-control" readonly="true" style="width: 30%"></asp:textbox>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Phone</label>
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtPhone" TextMode="Phone" runat="server" class="form-control" style="width:30%"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server" ErrorMessage="Enter Phone Number" ControlToValidate="txtPhone" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                                    <asp:textbox id="txtPhone" textmode="Phone" runat="server" class="form-control" style="width: 30%"></asp:textbox>
+                                    <asp:requiredfieldvalidator id="RequiredFieldValidator1" forecolor="Red" runat="server" errormessage="Enter Phone Number" controltovalidate="txtPhone" validationgroup="admin"></asp:requiredfieldvalidator>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Description</label>
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtDescription" TextMode="MultiLine" runat="server" class="form-control" Height="100px"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ForeColor="Red" runat="server" ErrorMessage="Enter Description" ControlToValidate="txtDescription" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                                    <asp:textbox id="txtDescription" textmode="MultiLine" runat="server" class="form-control" height="100px"></asp:textbox>
+                                    <asp:requiredfieldvalidator id="RequiredFieldValidator6" forecolor="Red" runat="server" errormessage="Enter Description" controltovalidate="txtDescription" validationgroup="admin"></asp:requiredfieldvalidator>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Profile Photo</label>
                                 <div class="col-sm-10">
-                                    <asp:Image ID="imgProduct" runat="server" ClientIDMode="Static" Width="100px" Height="100px" class="form-control" />
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Image !.." ControlToValidate="imgInp" ForeColor="Red" ValidationExpression="^.+(.jpg|.JPG|.gif|.GIF|.PNG|.png)$"></asp:RegularExpressionValidator>
-                                    <asp:FileUpload ID="imgInp" runat="server" ClientIDMode="Static" class="form-control" />
+                                    <asp:image id="imgProduct" runat="server" clientidmode="Static" width="100px" height="100px" class="form-control" />
+                                    <asp:regularexpressionvalidator id="RegularExpressionValidator1" runat="server" errormessage="Invalid Image !.." controltovalidate="imgInp" forecolor="Red" validationexpression="^.+(.jpg|.JPG|.gif|.GIF|.PNG|.png)$"></asp:regularexpressionvalidator>
+                                    <asp:fileupload id="imgInp" runat="server" clientidmode="Static" class="form-control" />
                                     <script type="text/javascript">
                                         function readURL(input) {
                                             if (input.files && input.files[0]) {
@@ -108,27 +109,39 @@
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Select Role</label>
                                 <div class="col-sm-10">
-                                    <asp:DropDownList ID="ddlRole" runat="server" class="form-control input-sm" style="width:30%">
+                                    <asp:dropdownlist id="ddlRole" runat="server" class="form-control input-sm" style="width: 30%">
                                         <asp:ListItem>Select..</asp:ListItem>
-                                    </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ForeColor="Red" runat="server"
-                                        ErrorMessage="Select Role" InitialValue="Select.." ControlToValidate="ddlRole" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                                    </asp:dropdownlist>
+                                    <asp:requiredfieldvalidator id="RequiredFieldValidator2" forecolor="Red" runat="server"
+                                        errormessage="Select Role" initialvalue="Select.." controltovalidate="ddlRole" validationgroup="admin"></asp:requiredfieldvalidator>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Select Status</label>
                                 <div class="col-sm-10">
-                                    <asp:DropDownList ID="ddlStatus" runat="server" class="form-control" style="width:30%">
+                                    <asp:dropdownlist id="ddlStatus" runat="server" class="form-control" style="width: 30%">
                                         <asp:ListItem>Select..</asp:ListItem>
-                                    </asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ForeColor="Red" runat="server"
-                                        Width="30%" ErrorMessage="Select Status" InitialValue="Select.." ControlToValidate="ddlStatus"
-                                        ValidationGroup="admin"></asp:RequiredFieldValidator>
+                                    </asp:dropdownlist>
+                                    <asp:requiredfieldvalidator id="RequiredFieldValidator3" forecolor="Red" runat="server"
+                                        width="30%" errormessage="Select Status" initialvalue="Select.." controltovalidate="ddlStatus"
+                                        validationgroup="admin"></asp:requiredfieldvalidator>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Login Attempt</label>
+                                <div class="col-sm-10">
+                                    <asp:label runat="server" Id="lblLoginAttempt"></asp:label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtFirstName" class="control-label col-sm-2">Get Activity Mail</label>
+                                <div class="col-sm-10">
+                                    <asp:checkbox runat="server" Id="chkGetActivityMail"></asp:checkbox>
                                 </div>
                             </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
-                                <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-success btn-sm"
-                                    ValidationGroup="admin" OnClick="btnSubmit_Click" />
+                                <asp:button id="btnSubmit" runat="server" text="Submit" class="btn btn-success btn-sm"
+                                    validationgroup="admin" onclick="btnSubmit_Click" />
                             </div>
                         </div>
                     </div>
