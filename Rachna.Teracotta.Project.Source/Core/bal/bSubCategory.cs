@@ -14,15 +14,16 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         public static SubCategories Create(SubCategories SubCategory)
         {
             dSubCategory _dSubCategory = new dSubCategory();
+            SubCategory = _dSubCategory.Create(SubCategory);
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
                 string mailBody = MailHelper.ActivityMail("Sub Category", "New SubCategory " + SubCategory.SubCategory_Title +
                     "( " + SubCategory.SubCategory_Id + "  and " + SubCategory.SubCategoryCode + " ) created successfully.",
                     SubCategory.Administrators_Id, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "New SubCategory Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New SubCategory Created", mailBody, "Rachna Teracotta : Activity Admin");
             }
-            return _dSubCategory.Create(SubCategory);
+            return SubCategory;
         }
 
         public static List<SubCategories> List()
@@ -36,12 +37,12 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dSubCategory _dSubCategory = new dSubCategory();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Sub Category", "SubCategory Updation " + SubCategory.SubCategory_Title +
-                    "( " + SubCategory.SubCategory_Id + "  and " + SubCategory.SubCategoryCode + " ) updated successfully.",
+                string mailBody = MailHelper.ActivityMail("Sub Category", "SubCategory Updation done on " + SubCategory.SubCategory_Title +
+                    "( " + SubCategory.SubCategory_Id + "  and " + SubCategory.SubCategoryCode + " ) successfully.",
                     SubCategory.Administrators_Id, DateTime.Now.ToString());
                
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "SubCategory Updation", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "SubCategory Updation", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dSubCategory.Update(SubCategory);
         }
@@ -49,6 +50,15 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         public static int Delete(SubCategories SubCategory)
         {
             dSubCategory _dSubCategory = new dSubCategory();
+            if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
+            {
+                string mailBody = MailHelper.ActivityMail("Sub Category", "SubCategory Deletion done on " + SubCategory.SubCategory_Title +
+                    "( " + SubCategory.SubCategory_Id + "  and " + SubCategory.SubCategoryCode + " ) successfully.",
+                    SubCategory.Administrators_Id, DateTime.Now.ToString());
+
+
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "SubCategory Deletion", mailBody, "Rachna Teracotta : Activity Admin");
+            }
             return _dSubCategory.Delete(SubCategory);
         }
     }

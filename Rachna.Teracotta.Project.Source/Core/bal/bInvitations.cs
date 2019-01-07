@@ -14,15 +14,16 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         public static Invitations Create(Invitations invitations)
         {
             dInvitations _dInvitations = new dInvitations();
+            invitations= _dInvitations.Create(invitations);
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
                 string mailBody = MailHelper.ActivityMail("Invitations", "New Invitation " + invitations.Invitation_EmailId +
                     "( " + invitations.Invitation_Id + "  and " + invitations.Invitation_Code + " ) created successfully.",
                     1, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "New SubCategory Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New SubCategory Created", mailBody, "Rachna Teracotta : Activity Admin");
             }
-            return _dInvitations.Create(invitations);
+            return invitations;
         }
 
         public static List<Invitations> List()
@@ -35,11 +36,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dInvitations _dInvitations = new dInvitations();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Invitations", "Invitation Updation" + invitations.Invitation_EmailId +
-                    "( " + invitations.Invitation_Id + "  and " + invitations.Invitation_Code + " ) updated successfully.",
+                string mailBody = MailHelper.ActivityMail("Invitations", "Invitation Updation done on " + invitations.Invitation_EmailId +
+                    "( " + invitations.Invitation_Id + "  and " + invitations.Invitation_Code + " ) successfully.",
                     1, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "Invitation Updation", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Invitation Updation", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dInvitations.Update(invitations);
         }

@@ -12,15 +12,16 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         public static Logo Create(Logo logo)
         {
             dLogo _dLogo = new dLogo();
+            logo= _dLogo.Create(logo);
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
                 string mailBody = MailHelper.ActivityMail("Logo", "New Logo " + logo.Logo_Title +
                     "( " + logo.Logo_Id + "  and " + logo.LogoCode + " ) created successfully.",
                     logo.Administrators_Id, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Logo Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Logo Created", mailBody, "Rachna Teracotta : Activity Admin");
             }
-            return _dLogo.Create(logo);
+            return logo;
         }
 
         public static List<Logo> List()
@@ -34,11 +35,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dLogo _dLogo = new dLogo();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Logo", "Updation Logo " + logo.Logo_Title +
-                    "( " + logo.Logo_Id + "  and " + logo.LogoCode + " ) done successfully.",
+                string mailBody = MailHelper.ActivityMail("Logo", "Logo updation done on " + logo.Logo_Title +
+                    "( " + logo.Logo_Id + "  and " + logo.LogoCode + " ) successfully.",
                     logo.Administrators_Id, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "Logo Deletion", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Logo Deletion", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dLogo.Update(logo);
         }
@@ -48,11 +49,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dLogo _dLogo = new dLogo();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Logo", "Updation Logo " + logo.Logo_Title +
-                    "( " + logo.Logo_Id + "  and " + logo.LogoCode + " ) done successfully.",
+                string mailBody = MailHelper.ActivityMail("Logo", "Logo Deletion done on " + logo.Logo_Title +
+                    "( " + logo.Logo_Id + "  and " + logo.LogoCode + " ) successfully.",
                     logo.Administrators_Id, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "Logo Deletion", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Logo Deletion", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dLogo.Delete(logo);
         }

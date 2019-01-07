@@ -1127,9 +1127,6 @@
     <Content Include="support\home\functionalitydetail.aspx" />
     <Content Include="support\login.aspx" />
     <Content Include="support\logout.aspx" />
-    <Content Include="Web_Old.config">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="account\Account.Master.cs">
@@ -2192,12 +2189,15 @@
     <Content Include="support\Account.Master" />
     <Content Include="support\home\Home.Master" />
     <Content Include="support\Message.Master" />
-    <None Include="Web_Old.Debug.config">
+    <Content Include="Web_Old.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web_Old.Debug.config">
       <DependentUpon>Web_Old.config</DependentUpon>
-    </None>
-    <None Include="Web_Old.Release.config">
+    </Content>
+    <Content Include="Web_Old.Release.config">
       <DependentUpon>Web_Old.config</DependentUpon>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\ar\" />

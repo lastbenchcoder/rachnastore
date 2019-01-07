@@ -14,6 +14,7 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         public static DealOfTheDay Create(DealOfTheDay DealOfTheDay)
         {
             dDealOfTheDay _dDealOfTheDay = new dDealOfTheDay();
+            DealOfTheDay= _dDealOfTheDay.Create(DealOfTheDay);
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
                 string mailBody = MailHelper.ActivityMail("Deal Of The Day", "Deal Of The Day Create " +
@@ -21,9 +22,9 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
                     DealOfTheDay.Administrators_Id, DateTime.Now.ToString());
 
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "Deal Of The Day Create", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Deal Of The Day Create", mailBody, "Rachna Teracotta : Activity Admin");
             }
-            return _dDealOfTheDay.Create(DealOfTheDay);
+            return DealOfTheDay;
         }
 
         public static List<DealOfTheDay> List()
@@ -36,12 +37,12 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dDealOfTheDay _dDealOfTheDay = new dDealOfTheDay();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Deal Of The Day", "Deal Of The Day Updation " +
-                    "( " + DealOfTheDay.Deal_Id + "  and " + DealOfTheDay.Deal_Code + " ) updated successfully.",
+                string mailBody = MailHelper.ActivityMail("Deal Of The Day", "Deal Of The Day Updation done on " +
+                    "( " + DealOfTheDay.Deal_Id + "  and " + DealOfTheDay.Deal_Code + " ) successfully.",
                     DealOfTheDay.Administrators_Id, DateTime.Now.ToString());
 
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "Deal Of The Day Updation", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Deal Of The Day Updation", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dDealOfTheDay.Update(DealOfTheDay);
         }

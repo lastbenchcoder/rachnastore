@@ -102,7 +102,7 @@
                             </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
                                 <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Submit" class="btn btn-primary"
-                                    ValidationGroup="category" OnClick="btnSubmit_Click" />
+                                    ValidationGroup="category" OnClientClick="if (!CategoryUpdateConfirmation()) return false;"  OnClick="btnSubmit_Click" />
                             </div>
                         </div>
                     </div>
@@ -110,4 +110,9 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function CategoryUpdateConfirmation() {
+            return confirm("Are you sure you want to deactivate this category? By deactivating this Category will deactivate the SubCategory and Product and also Product Features and Carts will be deleted.");
+        }
+    </script>
 </asp:Content>

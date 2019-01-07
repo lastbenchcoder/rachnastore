@@ -12,15 +12,16 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         public static Product Create(Product Product)
         {
             dProduct _dProduct = new dProduct();
+            Product = _dProduct.Create(Product);
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
                 string mailBody = MailHelper.ActivityMail("Product", "New Product " + Product.Product_Title +
                     "( " + Product.Product_Id + "  and " + Product.ProductCode + " ) created successfully.",
                     Product.Administrators_Id, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Product Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Product Created", mailBody, "Rachna Teracotta : Activity Admin");
             }
-            return _dProduct.Create(Product);
+            return Product;
         }
 
         public static ProductBanners CreateProductBanner(ProductBanners ProductBanner)
@@ -32,7 +33,7 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
                     "( " + ProductBanner.Product_Banner_Id + "  and " + ProductBanner.Product_BannerCode + " ) created successfully.",
                     ProductBanner.Administrators_Id, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Product Banner Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Product Banner Created", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dProduct.CreateProductBanner(ProductBanner);
         }
@@ -54,11 +55,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dProduct _dProduct = new dProduct();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Product", "Product Updation " + Product.Product_Title +
-                    "( " + Product.Product_Id + "  and " + Product.ProductCode + " ) updated successfully.",
+                string mailBody = MailHelper.ActivityMail("Product", "Product Updation done on " + Product.Product_Title +
+                    "( " + Product.Product_Id + "  and " + Product.ProductCode + " ) successfully.",
                     Product.Administrators_Id, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "Product Updation", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Product Updation", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dProduct.Update(Product);
         }

@@ -15,6 +15,7 @@ namespace Rachna.Teracotta.Project.Source.Entity
         Approved = 5,
         PublishPending = 6,
         Published = 7,
-        Rejected = 8
+        Rejected = 8,
+        CategoryDeactivated = 8
     }
 }

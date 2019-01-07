@@ -14,16 +14,17 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         public static Categories Create(Categories Category)
         {
             dCategory _dCategory = new dCategory();
+            Category = _dCategory.Create(Category);
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Sub Category", "New SubCategory " + Category.Category_Title +
-                    "( " + Category.Category_Id + "  and " + Category.CategoryCode + " ) created successfully.",
+                string mailBody = MailHelper.ActivityMail("Sub Category", "New SubCategory updation done on " + Category.Category_Title +
+                    "( " + Category.Category_Id + "  and " + Category.CategoryCode + " ) successfully.",
                     Category.Administrators_Id, DateTime.Now.ToString());
-               
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Category Created", mailBody, "Activity Admin");
+
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Category Created", mailBody, "Rachna Teracotta : Activity Admin");
             }
-            return _dCategory.Create(Category);
+            return Category;
         }
 
         public static List<Categories> List()
@@ -43,11 +44,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dCategory _dCategory = new dCategory();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Sub Category", "Category Updation " + Category.Category_Title +
-                    "( " + Category.Category_Id + "  and " + Category.CategoryCode + " ) updated successfully.",
+                string mailBody = MailHelper.ActivityMail("Sub Category", "Category Deletion done on " + Category.Category_Title +
+                    "( " + Category.Category_Id + "  and " + Category.CategoryCode + " ) successfully.",
                     Category.Administrators_Id, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "Category Updation ", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Category Deletion ", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dCategory.Delete(Category);
         }

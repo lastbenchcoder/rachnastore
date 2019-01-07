@@ -15,15 +15,16 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         public static Administrators Create(Administrators administrators)
         {
             dAdministrator _dAdministrator = new dAdministrator();
+            administrators = _dAdministrator.Create(administrators);
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
                 string mailBody = MailHelper.ActivityMail("Administrator", "New Administrator " + administrators.EmailId +
                     "( " + administrators.Administrators_Id + "  and " + administrators.AdminCode + " ) created successfully.",
-                    1, DateTime.Now.ToString());                
+                    1, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Administrator Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Administrator Created", mailBody, "Rachna Teracotta : Activity Admin");
             }
-            return _dAdministrator.Create(administrators);
+            return administrators;
         }
 
         public static EmailTracker CreateEmailTracker(EmailTracker EmailTracker)
@@ -49,11 +50,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dAdministrator _dAdministrator = new dAdministrator();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Administrator", "Administrator Updation " + administrators.EmailId +
-                    "( " + administrators.Administrators_Id + "  and " + administrators.AdminCode + " ) created successfully.",
+                string mailBody = MailHelper.ActivityMail("Administrator", "Administrator Updation done on " + administrators.EmailId +
+                    "( " + administrators.Administrators_Id + "  and " + administrators.AdminCode + " ) successfully.",
                     1, DateTime.Now.ToString());
-                
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "Administrator Updation", mailBody, "Activity Admin");
+
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Administrator Updation", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dAdministrator.Update(administrators);
         }

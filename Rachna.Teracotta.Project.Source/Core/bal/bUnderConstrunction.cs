@@ -12,15 +12,16 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         public static UnderConstrunction Create(UnderConstrunction UnderConstrunction)
         {
             dUnderConstrunction _dUnderConstrunction = new dUnderConstrunction();
+            UnderConstrunction= _dUnderConstrunction.Create(UnderConstrunction);
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
                 string mailBody = MailHelper.ActivityMail("Under Construnction", "New Under Construnction " +
                     "( " + UnderConstrunction.UnderConst_Id + "  and " + UnderConstrunction.UnderConstCode + " ) created successfully.",
                     UnderConstrunction.Administrators_Id, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "New UnderConstrunction Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New UnderConstrunction Created", mailBody, "Rachna Teracotta : Activity Admin");
             }
-            return _dUnderConstrunction.Create(UnderConstrunction);
+            return UnderConstrunction;
         }
 
         public static List<UnderConstrunction> List()
@@ -34,11 +35,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dUnderConstrunction _dUnderConstrunction = new dUnderConstrunction();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Under Construnction", "Under Updation " +
-                    "( " + UnderConstrunction.UnderConst_Id + "  and " + UnderConstrunction.UnderConstCode + " ) done successfully.",
+                string mailBody = MailHelper.ActivityMail("Under Construnction", "Under Updation done on " +
+                    "( " + UnderConstrunction.UnderConst_Id + "  and " + UnderConstrunction.UnderConstCode + " ) successfully.",
                     UnderConstrunction.Administrators_Id, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "UnderConstrunction Updation", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "UnderConstrunction Updation", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dUnderConstrunction.Update(UnderConstrunction);
         }
@@ -48,11 +49,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dUnderConstrunction _dUnderConstrunction = new dUnderConstrunction();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Under Construnction", "Under Construnction Deletion " +
-                    "( " + UnderConstrunction.UnderConst_Id + "  and " + UnderConstrunction.UnderConstCode + " ) done successfully.",
+                string mailBody = MailHelper.ActivityMail("Under Construnction", "Under Construnction Deletion done on " +
+                    "( " + UnderConstrunction.UnderConst_Id + "  and " + UnderConstrunction.UnderConstCode + " ) successfully.",
                     UnderConstrunction.Administrators_Id, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "UnderConstrunction Deletion", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "UnderConstrunction Deletion", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dUnderConstrunction.Delete(UnderConstrunction);
         }

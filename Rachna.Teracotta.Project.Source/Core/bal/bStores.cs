@@ -20,7 +20,7 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
                     "( " + stores.Store_Id + "  and " + stores.StoreCode + " ) created successfully.",
                     1, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Store Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Store Created", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dStores.Create(stores);
         }
@@ -36,11 +36,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dStores _dStores = new dStores();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Stores", "Store Updation " + stores.Store_Name +
-                    "( " + stores.Store_Id + "  and " + stores.StoreCode + " ) updated successfully.",
+                string mailBody = MailHelper.ActivityMail("Stores", "Store Updation done on " + stores.Store_Name +
+                    "( " + stores.Store_Id + "  and " + stores.StoreCode + " ) successfully.",
                     1, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "Store Updation", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Store Updation", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dStores.Update(stores);
         }

@@ -60,7 +60,11 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
             List<Product> Product = new List<Product>();
             try
             {
-                Product = context.Product.Include("SubCategory").Include("ProductBanner").Include("Admin").Include("Store").ToList();
+                Product = context.Product
+                    .Include("SubCategory")
+                    .Include("ProductBanner")
+                    .Include("Admin")
+                    .Include("Store").ToList();
                 return Product;
             }
             catch (Exception ex)

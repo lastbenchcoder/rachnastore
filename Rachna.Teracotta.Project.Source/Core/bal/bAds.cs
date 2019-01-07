@@ -15,15 +15,16 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         public static Ads Create(Ads ads)
         {
             dAds _dads = new dAds();
+            ads= _dads.Create(ads);
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
                 string mailBody = MailHelper.ActivityMail("Ads", "New Ads " + ads.Ads_RedirectUrl +
                     "( " + ads.Ads_Id + "  and " + ads.AdsCode + " ) created successfully.",
                     1, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Ads Created", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "New Ads Created", mailBody, "Rachna Teracotta : Activity Admin");
             }
-            return _dads.Create(ads);
+            return ads;
         }
 
         public static List<Ads> List()
@@ -37,11 +38,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dAds _dads = new dAds();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Ads", "Ads Updation " + ads.Ads_RedirectUrl +
-                    "( " + ads.Ads_Id + "  and " + ads.AdsCode + " ) updated successfully.",
+                string mailBody = MailHelper.ActivityMail("Ads", "Ads Updation done on " + ads.Ads_RedirectUrl +
+                    "( " + ads.Ads_Id + "  and " + ads.AdsCode + " ) successfully.",
                     1, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "Ads Updation", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Ads Updation", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dads.Update(ads);
         }
@@ -51,11 +52,11 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             dAds _dads = new dAds();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {
-                string mailBody = MailHelper.ActivityMail("Ads", "Ads Deletion " + ads.Ads_RedirectUrl +
-                    "( " + ads.Ads_Id + "  and " + ads.AdsCode + " ) Deleted successfully.",
+                string mailBody = MailHelper.ActivityMail("Ads", "Ads Deletion done on" + ads.Ads_RedirectUrl +
+                    "( " + ads.Ads_Id + "  and " + ads.AdsCode + " ) successfully.",
                     1, DateTime.Now.ToString());
 
-                MailHelper.SendEmail(MailHelper.EmailToSend(), "Ads Deletion", mailBody, "Activity Admin");
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Ads Deletion", mailBody, "Rachna Teracotta : Activity Admin");
             }
             return _dads.Delete(ads);
         }

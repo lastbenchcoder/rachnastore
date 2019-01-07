@@ -58,7 +58,7 @@ namespace Rachna.Teracotta.Project.Source.administration.product
 
             bProduct.Create(Product);
 
-            if (Product.ErrorMessage != null)
+            if (!string.IsNullOrEmpty(Product.ErrorMessage))
             {
                 ProductHelper.CreateProductFlow(Product.Product_Id, Product.Product_Title, _admin.Administrators_Id, _admin.FullName, "New Product Created and Pending for Review", Product.Product_Status);
 
