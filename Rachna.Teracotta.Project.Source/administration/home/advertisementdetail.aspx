@@ -6,21 +6,25 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>Edit Advertisement Information</h1>
+                <h1>Advertisement</h1>
             </div>
         </div>
         <div class="breadcrumbs">
             <ul>
                 <li>
-                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Dashboard</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="#">Content</a>
+                    <a href="#">Application Content</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="#">Advertisement Area</a>
+                    <a href="#">Home Page Section</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="/administration/home/advertisement.aspx?redirecturl=admin-slider-rachna-teracotta">Advertisement</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
@@ -42,7 +46,7 @@
                 <div class="box box-bordered">
                     <div class="box-title">
                         <h3>
-                            <i class="fa fa-th-list"></i>Update Advertisement Information</h3>
+                            <i class="fa fa-th-list"></i>Edit Advertisement Information</h3>
                         <asp:HiddenField ID="hdnAdsId" runat="server" />
                     </div>
                     <div class="box-content nopadding">
@@ -69,9 +73,9 @@
                                 </div>
                             </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
-                                <asp:Button ID="btnDelete" runat="server" Style="float: right" Text="Delete" class="btn btn-primary" OnClick="btnDelete_Click" />
-                                <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Submit" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
-                                <a href="/administration/home/advertisement.aspx?redirecturl=admin-slider-rachna-teracotta" class="btn btn-info">Go Back to list</a>
+                                <a href="/administration/home/advertisement.aspx?redirecturl=admin-slider-rachna-teracotta" class="btn btn-info">Back</a>
+                                <asp:Button ID="btnDelete" runat="server" Text="Delete" class="btn btn-primary" OnClick="btnDelete_Click" />
+                                <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
                             </div>
                         </div>
                     </div>

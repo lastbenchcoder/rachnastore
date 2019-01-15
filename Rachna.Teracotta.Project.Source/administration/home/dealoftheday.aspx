@@ -19,12 +19,13 @@
                     <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
-                <li>
-                    <a href="/administration/store.aspx?redirecturl=admin-store-rachna-teracotta">Content</a>
+               <li>
+                    <a href="#">Application Content</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="/administration/store.aspx?redirecturl=admin-store-rachna-teracotta">Top Eight Products</a>
+                    <a href="#">Deal Of The Day</a>
+                    <i class="fa fa-angle-right"></i>
                 </li>
             </ul>
             <div class="close-bread">

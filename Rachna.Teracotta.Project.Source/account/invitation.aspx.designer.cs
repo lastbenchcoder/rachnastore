@@ -112,13 +112,13 @@ namespace Rachna.Teracotta.Project.Source.account {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
-        /// RegularExpressionValidator3 control.
+        /// Regex5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator Regex5;
         
         /// <summary>
         /// txtConfirmPassword control.

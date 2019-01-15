@@ -93,7 +93,7 @@
                                 <%foreach (var item in FunctionalDefect)
                                     { %>
                                 <tr>
-                                    <td><%=item.FunctionalityDefectCode %></td>
+                                    <td><%=item.DefectCode %></td>
                                     <td><%=item.Title %></td>
                                     <%if (item.Status == Rachna.Teracotta.Project.Source.Entity.eFunctionalityStatus.Completed.ToString())
                                         { %>

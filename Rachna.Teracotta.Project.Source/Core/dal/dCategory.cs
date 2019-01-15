@@ -3,6 +3,7 @@ using Rachna.Teracotta.Project.Source.Entity;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Rachna.Teracotta.Project.Source.Core.dal
@@ -54,7 +55,15 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
-                context.Entry(Categories).State = System.Data.Entity.EntityState.Modified;
+                var entity = context.Category.Where(c => c.Category_Id == Categories.Category_Id).AsQueryable().FirstOrDefault();
+                if (entity == null)
+                {
+                    context.Category.Add(Categories);
+                }
+                else
+                {
+                    context.Entry(entity).CurrentValues.SetValues(Categories);
+                }
                 context.SaveChanges();
                 return Categories;
             }

@@ -6,187 +6,188 @@
     Layout = "~/Views/Shared/_productlayout.cshtml";
 }
 
-<!-- Breadcrumb Area -->
-<div class="breadcrumb-area bg-grey">
-    <div class="container">
-        <div class="ho-breadcrumb">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/">@ProductModel.Product.SubCategory.SubCategory_Title ( @ProductModel.Product.SubCategory.Category.Category_Title )</a></li>
-                <li>@ProductModel.Product.Product_Title</li>
-            </ul>
+@if (ProductModel.Product != null)
+{
+    <!-- Breadcrumb Area -->
+    <div class="breadcrumb-area bg-grey">
+        <div class="container">
+            <div class="ho-breadcrumb">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/">@ProductModel.Product.SubCategory.SubCategory_Title ( @ProductModel.Product.SubCategory.Category.Category_Title )</a></li>
+                    <li>@ProductModel.Product.Product_Title</li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
-<!--// Breadcrumb Area -->
-<!-- Product Details Area -->
-<div class="product-details-area bg-white ptb-30">
-    <div class="container">
+    <!--// Breadcrumb Area -->
+    <!-- Product Details Area -->
+    <div class="product-details-area bg-white ptb-30">
+        <div class="container">
+            <div class="pdetails">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="pdetails-images pdetails-images-vertical">
+                            <div class="pdetails-largeimages pdetails-imagezoom">
+                                @foreach (var item in ProductModel.Product.ProductBanner)
+                                {
+                                    <div class="pdetails-singleimage" data-src="../../@item.Product_Banner_Photo">
+                                        <img src="../../@item.Product_Banner_Photo" alt="product image">
+                                    </div>
+                                }
+                            </div>
 
-        <div class="pdetails">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="pdetails-images pdetails-images-vertical">
-                        <div class="pdetails-largeimages pdetails-imagezoom">
-                            @foreach (var item in ProductModel.Product.ProductBanner)
-                            {
-                                <div class="pdetails-singleimage" data-src="../../@item.Product_Banner_Photo">
-                                    <img src="../../@item.Product_Banner_Photo" alt="product image">
-                                </div>
-                            }
-                        </div>
-
-                        <div class="pdetails-thumbs pdetails-thumbs-vertical">
-                            @foreach (var item in ProductModel.Product.ProductBanner)
-                            {
-                                <div class="pdetails-singlethumb">
-                                    <img src="../../@item.Product_Banner_Photo" alt="product thumb">
-                                </div>
-                            }
+                            <div class="pdetails-thumbs pdetails-thumbs-vertical">
+                                @foreach (var item in ProductModel.Product.ProductBanner)
+                                {
+                                    <div class="pdetails-singlethumb">
+                                        <img src="../../@item.Product_Banner_Photo" alt="product thumb">
+                                    </div>
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="pdetails-content">
+                    <div class="col-lg-6">
+                        <div class="pdetails-content">
 
-                        <div class="rattingbox">
-                            @if (ProductModel.Product.Store_Rating == 1)
-                            {
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                            }
-                            else if (ProductModel.Product.Store_Rating == 2)
-                            {
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                            }
-                            else if (ProductModel.Product.Store_Rating == 3)
-                            {
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                            }
-                            else if (ProductModel.Product.Store_Rating == 4)
-                            {
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                            }
-                            else if (ProductModel.Product.Store_Rating == 5)
-                            {
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                                <span class="active"><i class="ion ion-ios-star"></i></span>
-                            }
-                        </div>
-                        <h3>@ProductModel.Product.Product_Title</h3>
-                        <div class="pdetails-pricebox">
-                            <del class="oldprice">&#x20B9; @Math.Round(ProductModel.Product.Product_Mkt_Price)</del>
-                            <span class="price">&#x20B9; @Math.Round(ProductModel.Product.Product_Our_Price)</span>
-                            <span class="badge">Save @Math.Round(ProductModel.Product.Product_Discount) %</span>
-                        </div>
-                        <p>
-                            @if (ProductModel.Product.Product_Description.Length > 500)
-                            {
-                                @Html.Raw(ProductModel.Product.Product_Description.Substring(0, 500)) <span>...</span>
-                            }
-                            else
-                            {
-                                @Html.Raw(ProductModel.Product.Product_Description)
-                            }
-                        </p>
-                        <form action="/cart/addtocart">
-                            <input type="hidden" id="hdnPrdId" name="id" value="@ProductModel.Product.Product_Id" />
-                            <div class="pdetails-quantity">
-                                <div class="quantity-select">
-                                    <input type="text" value="1" min="1" max="10" name="qty" required>
-                                    <div class="inc qtybutton">+<i class="ion ion-ios-arrow-up"></i></div>
-                                    <div class="dec qtybutton">-<i class="ion ion-ios-arrow-down"></i></div>
-                                </div>
-                                @if (@ProductModel.Product.Product_Qty > 0)
+                            <div class="rattingbox">
+                                @if (ProductModel.Product.Store_Rating == 1)
                                 {
-                                    if (ProductModel.Carts != null && ProductModel.Carts.Count > 0)
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                }
+                                else if (ProductModel.Product.Store_Rating == 2)
+                                {
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                }
+                                else if (ProductModel.Product.Store_Rating == 3)
+                                {
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                }
+                                else if (ProductModel.Product.Store_Rating == 4)
+                                {
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                }
+                                else if (ProductModel.Product.Store_Rating == 5)
+                                {
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                }
+                            </div>
+                            <h3>@ProductModel.Product.Product_Title</h3>
+                            <div class="pdetails-pricebox">
+                                <del class="oldprice">&#x20B9; @Math.Round(ProductModel.Product.Product_Mkt_Price)</del>
+                                <span class="price">&#x20B9; @Math.Round(ProductModel.Product.Product_Our_Price)</span>
+                                <span class="badge">Save @Math.Round(ProductModel.Product.Product_Discount) %</span>
+                            </div>
+                            <p>
+                                @if (ProductModel.Product.Product_Description.Length > 500)
+                                {
+                                    @Html.Raw(ProductModel.Product.Product_Description.Substring(0, 500)) <span>...</span>
+                                }
+                                else
+                                {
+                                    @Html.Raw(ProductModel.Product.Product_Description)
+                                }
+                            </p>
+                            <form action="/cart/addtocart">
+                                <input type="hidden" id="hdnPrdId" name="id" value="@ProductModel.Product.Product_Id" />
+                                <div class="pdetails-quantity">
+                                    <div class="quantity-select">
+                                        <input type="text" value="1" min="1" max="10" name="qty" required>
+                                        <div class="inc qtybutton">+<i class="ion ion-ios-arrow-up"></i></div>
+                                        <div class="dec qtybutton">-<i class="ion ion-ios-arrow-down"></i></div>
+                                    </div>
+                                    @if (@ProductModel.Product.Product_Qty > 0)
                                     {
-                                        if (ProductModel.Carts.Where(m => m.Product_Id == @ProductModel.Product.Product_Id).FirstOrDefault() == null)
+                                        if (ProductModel.Carts != null && ProductModel.Carts.Count > 0)
+                                        {
+                                            if (ProductModel.Carts.Where(m => m.Product_Id == @ProductModel.Product.Product_Id).FirstOrDefault() == null)
+                                            {
+                                                <button type="submit" class="ho-button">
+                                                    <i class="lnr lnr-cart"></i>
+                                                    <span>Add to cart</span>
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="ho-button" onclick="window.location.href('/user/');">
+                                                    <i class="lnr lnr-cart"></i>
+                                                    <span>Go to Cart</span>
+                                                </button>
+                                            }
+                                        }
+                                        else
                                         {
                                             <button type="submit" class="ho-button">
                                                 <i class="lnr lnr-cart"></i>
                                                 <span>Add to cart</span>
                                             </button>
                                         }
-                                        else
-                                        {
-                                            <button type="button" class="ho-button" onclick="window.location.href('/user/');">
-                                                <i class="lnr lnr-cart"></i>
-                                                <span>Go to Cart</span>
-                                            </button>
-                                        }
                                     }
                                     else
                                     {
-                                        <button type="submit" class="ho-button">
+                                        <button type="submit" class="btn-danger" disabled>
                                             <i class="lnr lnr-cart"></i>
-                                            <span>Add to cart</span>
+                                            <span>Sold Out</span>
                                         </button>
                                     }
-                                }
-                                else
+                                </div>
+                                @if (ProductModel.Product.Product_Has_Size)
                                 {
-                                    <button type="submit" class="btn-danger" disabled>
-                                        <i class="lnr lnr-cart"></i>
-                                        <span>Sold Out</span>
-                                    </button>
-                                }
-                            </div>
-                            @if (ProductModel.Product.Product_Has_Size)
-                            {
-                                string defaultSize = string.Empty;
-                                <div class="pdetails-size">
-                                    <span>Size :</span>
-                                    <ul>
-                                        @{
-                                            string[] values = ProductModel.Product.Product_Size.Split(',');
-                                            for (int i = 0; i < values.Length; i++)
-                                            {
-                                                if (i == 0)
+                                    string defaultSize = string.Empty;
+                                    <div class="pdetails-size">
+                                        <span>Size :</span>
+                                        <ul>
+                                            @{
+                                                string[] values = ProductModel.Product.Product_Size.Split(',');
+                                                for (int i = 0; i < values.Length; i++)
                                                 {
-                                                    defaultSize = @values[i].Trim();
-                                                    <li class="checked clssize" size="@values[i].Trim()"><span>@values[i].Trim()</span></li>
-                                                }
-                                                else
-                                                {
-                                                    <li class="clssize" size="@values[i].Trim()"><span>@values[i].Trim()</span></li>
+                                                    if (i == 0)
+                                                    {
+                                                        defaultSize = @values[i].Trim();
+                                                        <li class="checked clssize" size="@values[i].Trim()"><span>@values[i].Trim()</span></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li class="clssize" size="@values[i].Trim()"><span>@values[i].Trim()</span></li>
+                                                    }
                                                 }
                                             }
-                                        }
-                                    </ul>
-                                </div>
-                                <input type="hidden" name="size" id="hdnPrdSize" value="@defaultSize" />
-                                <script type="text/javascript">
-                                    $(document).ready(function () {
-                                        $('.clssize').click(function () {
-                                            //Get the id of list items
-                                            var sizeValue = $(this).attr('size');
-                                            $('#hdnPrdSize').val(sizeValue);
+                                        </ul>
+                                    </div>
+                                    <input type="hidden" name="size" id="hdnPrdSize" value="@defaultSize" />
+                                    <script type="text/javascript">
+                                        $(document).ready(function () {
+                                            $('.clssize').click(function () {
+                                                //Get the id of list items
+                                                var sizeValue = $(this).attr('size');
+                                                $('#hdnPrdSize').val(sizeValue);
+                                            });
                                         });
-                                    });
-                                </script>
-                            }
+                                    </script>
+                                }
 
-                            <div class="pdetails-categories">
-                                <span>
-                                    <input type="text" value="Enter pincode" class="txtSearchZipCide" style="width:240px"
-                                           onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter pincode';}" required="">
-                                </span>
-                                <button type="button" class="ho-button-sm btn-primary btnSearchPinCode">
-                                    <i class="lnr lnr-question-circle"></i>
-                                    <span>Check Availability</span>
-                                </button>
-                                <br />
-                                <label class="lblMessagePinCode" style="font-weight:bold;color:blue"></label>
-                                <script type="text/javascript">
+                                <div class="pdetails-categories">
+                                    <span>
+                                        <input type="text" value="Enter pincode" class="txtSearchZipCide" style="width:240px"
+                                               onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter pincode';}" required="">
+                                    </span>
+                                    <button type="button" class="ho-button-sm btn-primary btnSearchPinCode">
+                                        <i class="lnr lnr-question-circle"></i>
+                                        <span>Check Availability</span>
+                                    </button>
+                                    <br />
+                                    <label class="lblMessagePinCode" style="font-weight:bold;color:blue"></label>
+                                    <script type="text/javascript">
                                     $(document).ready(function () {
                                         $('.btnSearchPinCode').click(function () {
                                             var value = $('.txtSearchZipCide').val();
@@ -211,269 +212,294 @@
                                             }
                                         });
                                     });
-                                </script>
-                            </div>
-                            <div class="pdetails-socialshare">
-                                <span>Share :</span>
-                                <ul>
-                                    <li><a href="#"><i class="ion ion-logo-facebook"></i></a></li>
-                                    <li><a href="#"><i class="ion ion-logo-twitter"></i></a></li>
-                                    <li><a href="#"><i class="ion ion-logo-googleplus"></i></a></li>
-                                    <li><a href="#"><i class="ion ion-logo-pinterest"></i></a></li>
-                                </ul>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="pdetails-allinfo">
-
-            <ul class="nav pdetails-allinfotab justify-content-center" id="product-details" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="product-details-area1-tab" data-toggle="tab" href="#product-details-area1"
-                       role="tab" aria-controls="product-details-area1" aria-selected="true">Description</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="product-details-area2-tab" data-toggle="tab" href="#product-details-area2"
-                       role="tab" aria-controls="product-details-area2" aria-selected="false">
-                        More
-                        Information
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="product-details-area3-tab" data-toggle="tab" href="#product-details-area3"
-                       role="tab" aria-controls="product-details-area3" aria-selected="false">Reviews (@ProductModel.ProdComments.Count())</a>
-                </li>
-            </ul>
-
-            <div class="tab-content" id="product-details-ontent">
-                <div class="tab-pane fade show active" id="product-details-area1" role="tabpanel"
-                     aria-labelledby="product-details-area1-tab">
-                    <div class="pdetails-description">
-                        @Html.Raw(ProductModel.Product.Product_Description)
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="product-details-area2" role="tabpanel" aria-labelledby="product-details-area2-tab">
-                    <div class="pdetails-moreinfo">
-                        @Html.Raw(ProductModel.Product.Product_Specification)
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="product-details-area3" role="tabpanel" aria-labelledby="product-details-area3-tab">
-                    <div class="pdetails-reviews">
-                        <div class="product-review">
-                            <div class="commentlist">
-                                @if (ProductModel.ProdComments != null)
-                                {
-                                    <h5>@ProductModel.ProdComments.Count() Review for “@ProductModel.Product.Product_Title”</h5>
-                                }
-                                else
-                                {
-                                    <h5>0 Review for “@ProductModel.Product.Product_Title”</h5>
-                                }
-
-                                @if (ProductModel.ProdComments != null)
-                                {
-                                    foreach (var item in ProductModel.ProdComments)
-                                    {
-                                        <div class="single-comment">
-                                            <div class="single-comment-thumb">
-                                                <img src="../../content/noimage.png" alt="hastech logo">
-                                            </div>
-                                            <div class="single-comment-content">
-                                                <div class="single-comment-content-top">
-                                                    <h6>@item.Customer_Name – @item.DateCreated.ToString("D")</h6>
-                                                    <div class="rattingbox">
-                                                        @if (item.Rating == 1)
-                                                        {
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                        }
-                                                        else if (item.Rating == 2)
-                                                        {
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                        }
-                                                        else if (item.Rating == 3)
-                                                        {
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                        }
-                                                        else if (item.Rating == 4)
-                                                        {
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                        }
-                                                        else if (item.Rating == 5)
-                                                        {
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                                        }
-                                                    </div>
-                                                </div>
-                                                <p>
-                                                    @item.Description
-                                                </p>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <div class="single-comment">
-                                        <h5 style="color:red"> No Ratings and Reviewd found.</h5>
-                                    </div>
-                                }
-                            </div>
-
-                            <div class="commentbox mt-5">
-                                @if (Session["UserKey"] != null)
-                                {
-                                    <h5>ADD A REVIEW</h5>
-                                    <form action="/user/ProductComments/" class="ho-form">
-                                        <input type="hidden" name="ProductId" value="@ProductModel.Product.Product_Id" />
-                                        <input type="hidden" name="CustomerId" value="@Session["UserKey"].ToString()" />
-                                        <input type="hidden" name="rating" value="3" id="hdnRating" />
-                                        <input type="hidden" name="likeunlike" value="like" />
-                                        <div class="ho-form-inner">
-                                            <div class="single-input">
-                                                <label>Your Rating</label>
-                                                <div class="rattingbox hover-action">
-                                                    <span class="active ratingprd" ratingvalue="1"><i class="ion ion-ios-star"></i></span>
-                                                    <span class="active ratingprd" ratingvalue="2"><i class="ion ion-ios-star"></i></span>
-                                                    <span class="active ratingprd" ratingvalue="3"><i class="ion ion-ios-star"></i></span>
-                                                    <span class="ratingprd" ratingvalue="4"><i class="ion ion-ios-star"></i></span>
-                                                    <span class="ratingprd" ratingvalue="5"><i class="ion ion-ios-star"></i></span>
-                                                </div>
-                                                <script type="text/javascript">
-                                                    $(document).ready(function () {
-                                                        $('.ratingprd').click(function () {
-                                                            //Get the id of list items
-                                                            var ratingValue = $(this).attr('ratingvalue');
-                                                            $('#hdnRating').val(ratingValue);
-                                                        });
-                                                    });
-                                                </script>
-                                            </div>
-                                            <div class="single-input">
-                                                <label for="new-review-textbox">Your Review</label>
-                                                <textarea id="new-review-textbox" cols="30" rows="5" name="description" required></textarea>
-                                            </div>
-                                            <div class="single-input">
-                                                <label for="new-review-name">Name*</label>
-                                                <input type="text" id="new-review-name">
-                                            </div>
-                                            <div class="single-input">
-                                                <label for="new-review-email">Email*</label>
-                                                <input type="email" id="new-review-email">
-                                            </div>
-                                            <div class="single-input">
-                                                <button class="ho-button" type="submit"><span>SUBMIT</span></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                }
-                                else
-                                {
-                                    <h5 style="color:red">You should be login to comment this product.</h5>
-                                }
-                            </div>
-
+                                    </script>
+                                </div>
+                                <div class="pdetails-socialshare">
+                                    <span>Share :</span>
+                                    <ul>
+                                        <li><a href="#"><i class="ion ion-logo-facebook"></i></a></li>
+                                        <li><a href="#"><i class="ion ion-logo-twitter"></i></a></li>
+                                        <li><a href="#"><i class="ion ion-logo-googleplus"></i></a></li>
+                                        <li><a href="#"><i class="ion ion-logo-pinterest"></i></a></li>
+                                    </ul>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="pdetails-allinfo">
 
-        </div>
+                <ul class="nav pdetails-allinfotab justify-content-center" id="product-details" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="product-details-area1-tab" data-toggle="tab" href="#product-details-area1"
+                           role="tab" aria-controls="product-details-area1" aria-selected="true">Description</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-details-area2-tab" data-toggle="tab" href="#product-details-area2"
+                           role="tab" aria-controls="product-details-area2" aria-selected="false">
+                            More
+                            Information
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-details-area3-tab" data-toggle="tab" href="#product-details-area3"
+                           role="tab" aria-controls="product-details-area3" aria-selected="false">Reviews (@ProductModel.ProdComments.Count())</a>
+                    </li>
+                </ul>
 
-    </div>
-</div>
-<!--// Product Details Area -->
-<!-- Related Product Area -->
-<div class="ho-section related-product-area pb-30">
-    <div class="container">
-        <div class="section-title">
-            <h3>RELATED PRODUCTS</h3>
-        </div>
-        @if (ProductModel.RelatedProducts != null && ProductModel.RelatedProducts.Count > 0)
-        {
-            <div class="product-slider new-best-featured-slider slider-navigation-2">
-                @foreach (var item in ProductModel.RelatedProducts)
-                {
-                    <div class="product-slider-col">
-                        <!-- Single Product -->
-                        <article class="hoproduct">
-                            <div class="hoproduct-image">
-                                <a class="hoproduct-thumb" href="/product/index?id=@item.Product_Id&title=@item.Product_Title">
-                                    <img class="hoproduct-frontimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
-                                    <img class="hoproduct-backimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
-                                </a>
-                                <ul class="hoproduct-flags">
-                                    <li class="flag-pack">New</li>
-                                    <li class="flag-discount">
-                                        @Math.Round(item.Product_Discount) <span>%</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="hoproduct-content">
-                                <h5 class="hoproduct-title">
-                                    <a href="/product/index?id=@item.Product_Id&title=@item.Product_Title">
-                                        @item.Product_Title
-                                    </a>
-                                </h5>
-                                <div class="hoproduct-rattingbox">
-                                    <div class="rattingbox">
-                                        @if (item.Store_Rating == 1)
-                                        {
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                        }
-                                        else if (item.Store_Rating == 2)
-                                        {
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                        }
-                                        else if (item.Store_Rating == 3)
-                                        {
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                        }
-                                        else if (item.Store_Rating == 4)
-                                        {
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                        }
-                                        else if (item.Store_Rating == 5)
-                                        {
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                            <span class="active"><i class="ion ion-ios-star"></i></span>
-                                        }
-                                    </div>
-                                </div>
-                                <div class="hoproduct-pricebox">
-                                    <div class="pricebox">
-                                        <del class="oldprice">&#x20B9; @Math.Round(item.Product_Mkt_Price)</del>
-                                        <span class="price">&#x20B9; @Math.Round(item.Product_Our_Price)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <!--// Single Product -->
+                <div class="tab-content" id="product-details-ontent">
+                    <div class="tab-pane fade show active" id="product-details-area1" role="tabpanel"
+                         aria-labelledby="product-details-area1-tab">
+                        <div class="pdetails-description">
+                            @Html.Raw(ProductModel.Product.Product_Description)
+                        </div>
                     </div>
-                }
+                    <div class="tab-pane fade" id="product-details-area2" role="tabpanel" aria-labelledby="product-details-area2-tab">
+                        <div class="pdetails-moreinfo">
+                            @Html.Raw(ProductModel.Product.Product_Specification)
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="product-details-area3" role="tabpanel" aria-labelledby="product-details-area3-tab">
+                        <div class="pdetails-reviews">
+                            <div class="product-review">
+                                <div class="commentlist">
+                                    @if (ProductModel.ProdComments != null)
+                                    {
+                                        <h5>@ProductModel.ProdComments.Count() Review for “@ProductModel.Product.Product_Title”</h5>
+                                    }
+                                    else
+                                    {
+                                        <h5>0 Review for “@ProductModel.Product.Product_Title”</h5>
+                                    }
+
+                                    @if (ProductModel.ProdComments != null)
+                                    {
+                                        foreach (var item in ProductModel.ProdComments)
+                                        {
+                                            <div class="single-comment">
+                                                <div class="single-comment-thumb">
+                                                    <img src="../../content/noimage.png" alt="hastech logo">
+                                                </div>
+                                                <div class="single-comment-content">
+                                                    <div class="single-comment-content-top">
+                                                        <h6>@item.Customer_Name – @item.DateCreated.ToString("D")</h6>
+                                                        <div class="rattingbox">
+                                                            @if (item.Rating == 1)
+                                                            {
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                            }
+                                                            else if (item.Rating == 2)
+                                                            {
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                            }
+                                                            else if (item.Rating == 3)
+                                                            {
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                            }
+                                                            else if (item.Rating == 4)
+                                                            {
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                            }
+                                                            else if (item.Rating == 5)
+                                                            {
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <p>
+                                                        @item.Description
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="single-comment">
+                                            <h5 style="color:red"> No Ratings and Reviewd found.</h5>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="commentbox mt-5">
+                                    @if (Session["UserKey"] != null)
+                                    {
+                                        <h5>ADD A REVIEW</h5>
+                                        <form action="/user/ProductComments/" class="ho-form">
+                                            <input type="hidden" name="ProductId" value="@ProductModel.Product.Product_Id" />
+                                            <input type="hidden" name="CustomerId" value="@Session["UserKey"].ToString()" />
+                                            <input type="hidden" name="rating" value="3" id="hdnRating" />
+                                            <input type="hidden" name="likeunlike" value="like" />
+                                            <div class="ho-form-inner">
+                                                <div class="single-input">
+                                                    <label>Your Rating</label>
+                                                    <div class="rattingbox hover-action">
+                                                        <span class="active ratingprd" ratingvalue="1"><i class="ion ion-ios-star"></i></span>
+                                                        <span class="active ratingprd" ratingvalue="2"><i class="ion ion-ios-star"></i></span>
+                                                        <span class="active ratingprd" ratingvalue="3"><i class="ion ion-ios-star"></i></span>
+                                                        <span class="ratingprd" ratingvalue="4"><i class="ion ion-ios-star"></i></span>
+                                                        <span class="ratingprd" ratingvalue="5"><i class="ion ion-ios-star"></i></span>
+                                                    </div>
+                                                    <script type="text/javascript">
+                                                        $(document).ready(function () {
+                                                            $('.ratingprd').click(function () {
+                                                                //Get the id of list items
+                                                                var ratingValue = $(this).attr('ratingvalue');
+                                                                $('#hdnRating').val(ratingValue);
+                                                            });
+                                                        });
+                                                    </script>
+                                                </div>
+                                                <div class="single-input">
+                                                    <label for="new-review-textbox">Your Review</label>
+                                                    <textarea id="new-review-textbox" cols="30" rows="5" name="description" required></textarea>
+                                                </div>
+                                                <div class="single-input">
+                                                    <label for="new-review-name">Name*</label>
+                                                    <input type="text" id="new-review-name">
+                                                </div>
+                                                <div class="single-input">
+                                                    <label for="new-review-email">Email*</label>
+                                                    <input type="email" id="new-review-email">
+                                                </div>
+                                                <div class="single-input">
+                                                    <button class="ho-button" type="submit"><span>SUBMIT</span></button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <h5 style="color:red">You should be login to comment this product.</h5>
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        }
+        </div>
     </div>
-</div>
-<!--// Related Product Area -->
+    <!--// Product Details Area -->
+    <!-- Related Product Area -->
+    <div class="ho-section related-product-area pb-30">
+        <div class="container">
+            <div class="section-title">
+                <h3>RELATED PRODUCTS</h3>
+            </div>
+            @if (ProductModel.RelatedProducts != null && ProductModel.RelatedProducts.Count > 0)
+            {
+                <div class="product-slider new-best-featured-slider slider-navigation-2">
+                    @foreach (var item in ProductModel.RelatedProducts)
+                    {
+                        <div class="product-slider-col">
+                            <!-- Single Product -->
+                            <article class="hoproduct">
+                                <div class="hoproduct-image">
+                                    <a class="hoproduct-thumb" href="/product/index?id=@item.Product_Id&title=@item.Product_Title">
+                                        <img class="hoproduct-frontimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
+                                        <img class="hoproduct-backimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
+                                    </a>
+                                    <ul class="hoproduct-flags">
+                                        <li class="flag-pack">New</li>
+                                        <li class="flag-discount">
+                                            @Math.Round(item.Product_Discount) <span>%</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="hoproduct-content">
+                                    <h5 class="hoproduct-title">
+                                        <a href="/product/index?id=@item.Product_Id&title=@item.Product_Title">
+                                            @item.Product_Title
+                                        </a>
+                                    </h5>
+                                    <div class="hoproduct-rattingbox">
+                                        <div class="rattingbox">
+                                            @if (item.Store_Rating == 1)
+                                            {
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                            }
+                                            else if (item.Store_Rating == 2)
+                                            {
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                            }
+                                            else if (item.Store_Rating == 3)
+                                            {
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                            }
+                                            else if (item.Store_Rating == 4)
+                                            {
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                            }
+                                            else if (item.Store_Rating == 5)
+                                            {
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="hoproduct-pricebox">
+                                        <div class="pricebox">
+                                            <del class="oldprice">&#x20B9; @Math.Round(item.Product_Mkt_Price)</del>
+                                            <span class="price">&#x20B9; @Math.Round(item.Product_Our_Price)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <!--// Single Product -->
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+    <!--// Related Product Area -->
+}
+else
+{
+    <!-- Breadcrumb Area -->
+    <div class="breadcrumb-area bg-grey">
+        <div class="container">
+            <div class="ho-breadcrumb">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/">Product Detail</li>
+                    <li>No Products Found</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--// Breadcrumb Area -->
+    <!-- Product Details Area -->
+    <div class="product-details-area bg-white ptb-30">
+        <div class="container">
+            <div class="pdetails">
+                <div class="row">
+                    <h4 style="color:red">Oops!! Product unavailable.</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+}

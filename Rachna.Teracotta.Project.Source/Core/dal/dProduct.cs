@@ -93,7 +93,15 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
-                context.Entry(Product).State = System.Data.Entity.EntityState.Modified;
+                var entity = context.Product.Where(c => c.Product_Id == Product.Product_Id).AsQueryable().FirstOrDefault();
+                if (entity == null)
+                {
+                    context.Product.Add(Product);
+                }
+                else
+                {
+                    context.Entry(entity).CurrentValues.SetValues(Product);
+                }
                 context.SaveChanges();
                 return Product;
             }

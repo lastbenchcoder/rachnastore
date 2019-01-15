@@ -55,14 +55,14 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="imgInp" ErrorMessage="Please select store logo" ValidationGroup="admin" ForeColor="Red"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
-                        <label>Is Default?</label>
+                        <label>Is Active?</label>
                         <asp:CheckBox ID="chkIsDefault" runat="server" />
-                        Is Default Logo
+                        Is Active
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-success btn-sm" ValidationGroup="admin" OnClick="btnSubmit_Click" Style="float: right" />
+                    <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-success btn-sm" ValidationGroup="admin" OnClick="btnSubmit_Click" Style="float: right" />
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -74,7 +74,7 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>All Logos</h1>
+                <h1>Logo</h1>
             </div>
             <div class="pull-right">
                 <a href="#modalApplicationLogo" class="btn btn-primary" style="margin-top: 15px" data-toggle="modal">Add New</a>
@@ -83,7 +83,11 @@
         <div class="breadcrumbs">
             <ul>
                 <li>
-                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Dashboard</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Application Content</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
@@ -91,7 +95,7 @@
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="#">All Logos</a>
+                    <a href="#">Logo</a>
                 </li>
             </ul>
             <div class="close-bread">

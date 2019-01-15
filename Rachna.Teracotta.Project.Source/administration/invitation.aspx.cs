@@ -52,7 +52,8 @@ namespace Rachna.Teracotta.Project.Source.administration
                         Invitation_CreatedDate = DateTime.Now,
                         Invitation_Status = eStatus.Active.ToString(),
                         Role = ddlRole.Text,
-                        Invitation_UpdatedDate = DateTime.Now
+                        Invitation_UpdatedDate = DateTime.Now,
+                        Send_Activity_Mail = (chkGetActivityMail.Checked) ? 1 : 0
                     };
 
                     invitations = bInvitations.Create(invitations);

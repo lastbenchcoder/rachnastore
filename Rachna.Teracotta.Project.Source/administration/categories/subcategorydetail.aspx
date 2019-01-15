@@ -77,7 +77,8 @@
                                 </div>
                             </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
-                                <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Submit" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
+                                <a href="/administration/categories/category.aspx?redirectUrl=category-administrator-home&pageId=1234HJHJKJ*7987979" class="btn btn-info">Back</a>
+                                <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
                             </div>
                         </div>
                     </div>

@@ -15,7 +15,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4>New Admin</h4>
+                    <h4>Admin</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -67,7 +67,7 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>All Administrators</h1>
+                <h1>Administrators</h1>
             </div>
             <div class="pull-right">
                 <a href="#modalAdministrator" class="btn btn-primary" style="margin-top: 15px" data-toggle="modal">Add New</a>
@@ -114,6 +114,7 @@
                                     <th>FullName</th>
                                     <th>EmailId</th>
                                     <th>Role</th>
+                                    <th>Activity Mail</th>
                                     <th>Status</th>
                                     <th class='hidden-1024'>DateCreated</th>
                                     <th class='hidden-480'>DateUpdated</th>
@@ -129,6 +130,14 @@
                                     <td><%=item.FullName %></td>
                                     <td><%=item.EmailId %></td>
                                     <td><%=item.Admin_Role %></td>
+                                    <%if (item.Send_Activity_Mail == 1)
+                                    { %>
+                                    <td>Yes</td>
+                                    <%}
+                                        else
+                                        {%>
+                                    <td>No</td>
+                                    <%} %>
                                     <%if (item.Admin_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.Active.ToString())
                                         { %>
                                     <td class='hidden-350'>

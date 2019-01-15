@@ -12,9 +12,8 @@ namespace Rachna.Teracotta.Project.Source.Models
         [Key]
         public int Defect_Id { get; set; }
         public int Administrators_Id { get; set; }
-        public int Function_Id { get; set; }
         [MaxLength(50)]
-        public string FunctionalityDefectCode { get; set; }
+        public string DefectCode { get; set; }
         [MaxLength(200)]
         public string Title { get; set; }
         public string Description { get; set; }
@@ -27,7 +26,6 @@ namespace Rachna.Teracotta.Project.Source.Models
         [NotMapped]
         public string ErrorMessage { get; internal set; }
 
-        public Functionality Functionality { get; set; }
         public Administrators Administrators { get; set; }
         public ICollection<FunctionalDefectStory> FunctionalDefectStory { get; set; }
         [NotMapped]

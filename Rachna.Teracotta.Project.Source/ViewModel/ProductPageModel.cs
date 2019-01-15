@@ -1,4 +1,5 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
@@ -54,53 +55,71 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
         public ProductPageModel GetProductPageData(int product_id)
         {
             ProductPageModel prdModel = new ProductPageModel();
-
+            bool status = true;
             using (var ctx = new RachnaDBContext())
             {
                 CartModel _cartMdl = new CartModel();
                 prdModel.Carts = _cartMdl.GetCarts();
-                prdModel.Product = ctx.Product.Where(m => m.Product_Id == product_id).FirstOrDefault();
-                if (prdModel.Product.Product_Status == eProductStatus.Published.ToString())
+                prdModel.Product = bProduct.List().Where(m => m.Product_Id == product_id).FirstOrDefault();
+
+                if (prdModel.Product.SubCategory.SubCategory_Status != eStatus.Active.ToString())
                 {
-                    prdModel.Product.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == prdModel.Product.Product_Id).ToList();
-                    prdModel.Product.SubCategory = ctx.SubCategory.Where(m => m.SubCategory_Id == prdModel.Product.SubCategory_Id).FirstOrDefault();
-
-                    prdModel.RelatedProducts = ctx.Product.Where(m => m.Product_Id != prdModel.Product.Product_Id && m.Product_Status == eProductStatus.Published.ToString()).Take(4).ToList();
-                    foreach (var item in prdModel.RelatedProducts)
+                    status = false;
+                }
+                else
+                {
+                    Categories categories = bCategory.List()
+                        .Where(m => m.Category_Status == eStatus.InActive.ToString()
+                        && m.Category_Id == prdModel.Product.SubCategory.Category_Id).FirstOrDefault();
+                    if (categories != null)
                     {
-                        item.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
+                        status = false;
                     }
-
-                    prdModel.ProductFeatures = ctx.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.Best.ToString()).ToList();
-                    foreach (var item in prdModel.ProductFeatures)
+                }
+                if (status)
+                {
+                    if (prdModel.Product.Product_Status == eProductStatus.Published.ToString())
                     {
-                        item.Product = ctx.Product.Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
-                        item.Product.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
-                    }
+                        prdModel.Product.ProductBanner = bProduct.ListProductBanner().Where(m => m.Product_Id == prdModel.Product.Product_Id).ToList();
+                        prdModel.Product.SubCategory = bSubCategory.List().Where(m => m.SubCategory_Id == prdModel.Product.SubCategory_Id).FirstOrDefault();
 
-                    prdModel.ProductFeatures2 = ctx.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.OurChoice.ToString()).ToList();
-                    foreach (var item in prdModel.ProductFeatures2)
-                    {
-                        item.Product = ctx.Product.Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
-                        item.Product.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
-                    }
-
-                    prdModel.Categories = ctx.Category.Where(m => m.Category_Status == eStatus.Active.ToString()).ToList();
-                    foreach (var item in prdModel.Categories)
-                    {
-                        item.SubCategory = ctx.SubCategory.Where(m => m.Category_Id == item.Category_Id && item.Category_Status == eStatus.Active.ToString()).ToList();
-                    }
-
-                    prdModel.ProdComments = ctx.ProdComments.Where(m => m.Product_Id == prdModel.Product.Product_Id && m.Comment_Status == eCommentStatus.Approved.ToString()).ToList();
-                    if (HttpContext.Current.Session["UserKey"] != null)
-                    {
-                        int CustomerId = Convert.ToInt32(HttpContext.Current.Session["UserKey"].ToString());
-                        List<ProdComments> _commentsTemp = new List<ProdComments>();
-                        _commentsTemp = ctx.ProdComments.Where(m => m.Customer_Id == CustomerId).ToList();
-                        if (_commentsTemp != null)
+                        prdModel.RelatedProducts = bProduct.List().Where(m => m.Product_Id != prdModel.Product.Product_Id && m.Product_Status == eProductStatus.Published.ToString()).Take(4).ToList();
+                        foreach (var item in prdModel.RelatedProducts)
                         {
-                            prdModel.AlreadyCommentsDone = 1;
-                            prdModel.ProdComments.AddRange(_commentsTemp);
+                            item.ProductBanner = bProduct.ListProductBanner().Where(m => m.Product_Id == item.Product_Id).ToList();
+                        }
+
+                        prdModel.ProductFeatures = ctx.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.Best.ToString()).ToList();
+                        foreach (var item in prdModel.ProductFeatures)
+                        {
+                            item.Product = bProduct.List().Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
+                            item.Product.ProductBanner = bProduct.ListProductBanner().Where(m => m.Product_Id == item.Product_Id).ToList();
+                        }
+
+                        prdModel.ProductFeatures2 = ctx.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.OurChoice.ToString()).ToList();
+                        foreach (var item in prdModel.ProductFeatures2)
+                        {
+                            item.Product = bProduct.List().Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
+                            item.Product.ProductBanner = bProduct.ListProductBanner().Where(m => m.Product_Id == item.Product_Id).ToList();
+                        }
+
+                        prdModel.Categories = bCategory.List().Where(m => m.Category_Status == eStatus.Active.ToString()).ToList();
+                        foreach (var item in prdModel.Categories)
+                        {
+                            item.SubCategory = bSubCategory.List().Where(m => m.Category_Id == item.Category_Id && item.Category_Status == eStatus.Active.ToString()).ToList();
+                        }
+
+                        prdModel.ProdComments = ctx.ProdComments.Where(m => m.Product_Id == prdModel.Product.Product_Id && m.Comment_Status == eCommentStatus.Approved.ToString()).ToList();
+                        if (HttpContext.Current.Session["UserKey"] != null)
+                        {
+                            int CustomerId = Convert.ToInt32(HttpContext.Current.Session["UserKey"].ToString());
+                            List<ProdComments> _commentsTemp = new List<ProdComments>();
+                            _commentsTemp = ctx.ProdComments.Where(m => m.Customer_Id == CustomerId).ToList();
+                            if (_commentsTemp != null)
+                            {
+                                prdModel.AlreadyCommentsDone = 1;
+                                prdModel.ProdComments.AddRange(_commentsTemp);
+                            }
                         }
                     }
                 }
@@ -116,34 +135,34 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
             {
                 CartModel _cartMdl = new CartModel();
                 prdModel.Carts = _cartMdl.GetCarts();
-                prdModel.Product = ctx.Product.Where(m => m.Product_Id == product_id).FirstOrDefault();
-                prdModel.Product.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == prdModel.Product.Product_Id).ToList();
-                prdModel.Product.SubCategory = ctx.SubCategory.Where(m => m.SubCategory_Id == prdModel.Product.SubCategory_Id).FirstOrDefault();
+                prdModel.Product = bProduct.List().Where(m => m.Product_Id == product_id).FirstOrDefault();
+                prdModel.Product.ProductBanner = bProduct.ListProductBanner().Where(m => m.Product_Id == prdModel.Product.Product_Id).ToList();
+                prdModel.Product.SubCategory = bSubCategory.List().Where(m => m.SubCategory_Id == prdModel.Product.SubCategory_Id).FirstOrDefault();
 
-                prdModel.RelatedProducts = ctx.Product.Where(m => m.Product_Id != prdModel.Product.Product_Id).Take(4).ToList();
+                prdModel.RelatedProducts = bProduct.List().Where(m => m.Product_Id != prdModel.Product.Product_Id).Take(4).ToList();
                 foreach (var item in prdModel.RelatedProducts)
                 {
-                    item.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
+                    item.ProductBanner = bProduct.ListProductBanner().Where(m => m.Product_Id == item.Product_Id).ToList();
                 }
 
                 prdModel.ProductFeatures = ctx.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.Best.ToString()).ToList();
                 foreach (var item in prdModel.ProductFeatures)
                 {
-                    item.Product = ctx.Product.Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
-                    item.Product.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
+                    item.Product = bProduct.List().Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
+                    item.Product.ProductBanner = bProduct.ListProductBanner().Where(m => m.Product_Id == item.Product_Id).ToList();
                 }
 
                 prdModel.ProductFeatures2 = ctx.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.OurChoice.ToString()).ToList();
                 foreach (var item in prdModel.ProductFeatures2)
                 {
-                    item.Product = ctx.Product.Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
-                    item.Product.ProductBanner = ctx.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
+                    item.Product = bProduct.List().Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
+                    item.Product.ProductBanner = bProduct.ListProductBanner().Where(m => m.Product_Id == item.Product_Id).ToList();
                 }
 
-                prdModel.Categories = ctx.Category.Where(m => m.Category_Status == eStatus.Active.ToString()).ToList();
+                prdModel.Categories = bCategory.List().Where(m => m.Category_Status == eStatus.Active.ToString()).ToList();
                 foreach (var item in prdModel.Categories)
                 {
-                    item.SubCategory = ctx.SubCategory.Where(m => m.Category_Id == item.Category_Id && item.Category_Status == eStatus.Active.ToString()).ToList();
+                    item.SubCategory = bSubCategory.List().Where(m => m.Category_Id == item.Category_Id && item.Category_Status == eStatus.Active.ToString()).ToList();
                 }
 
                 prdModel.ProdComments = ctx.ProdComments.Where(m => m.Product_Id == prdModel.Product.Product_Id).ToList();

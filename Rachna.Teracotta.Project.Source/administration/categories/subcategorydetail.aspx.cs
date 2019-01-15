@@ -42,6 +42,12 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
                         hdnCurrentSubCatCatId.Value = _subCategory.Category_Id.ToString();
                         lblBcTitle.Text = _subCategory.SubCategory_Title;
                         chkIsActive.Checked = (_subCategory.SubCategory_Status == eStatus.Active.ToString()) ? true : false;
+
+                        if(_subCategory.Category.Category_Status==eStatus.InActive.ToString())
+                        {
+                            btnSubmit.Enabled = false;
+                            btnSubmit.Text = "Cannot Submit Category Deactivated";
+                        }
                     }
                     else
                     {

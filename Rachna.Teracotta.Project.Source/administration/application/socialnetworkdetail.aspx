@@ -12,7 +12,11 @@
         <div class="breadcrumbs">
             <ul>
                 <li>
-                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Dashboard</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                 <li>
+                    <a href="#">Application Content</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
@@ -83,15 +87,17 @@
                                     </script>
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtFirstName" class="control-label col-sm-2">&nbsp;</label>
+                                    <label for="txtFirstName" class="control-label col-sm-2">Is Active?</label>
                                     <div class="col-sm-10">
                                         <asp:CheckBox ID="chkIsDefault" runat="server" />
-                                        Is Active?
+                                        Is Active
                                     </div>
                                 </div>
                             </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
-                                <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Submit" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
+                                <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
+                                 <a href="/administration/application/socialnetwork.aspx?redirectUrl=category-administrator-home&pageId=1234HJHJKJ*7987979"
+                                    class="btn btn-default">Cancel</a>
                             </div>
                         </div>
                     </div>

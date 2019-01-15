@@ -41,7 +41,7 @@
 </div>
 <!--// Categories Area -->
 <!-- Deal Of The Day Area -->
-@if (homePageModel._dealoftheday.Count > 0)
+@if (homePageModel._dealoftheday != null && homePageModel._dealoftheday.Count > 0)
 {
     if (homePageModel._dealoftheday.Where(m => m.Deal_Starts_From.Date >= DateTime.Now.Date).ToList().Count > 0)
     {

@@ -6,13 +6,17 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>Category Detail</h1>
+                <h1>Meta Information Detail</h1>
             </div>
         </div>
         <div class="breadcrumbs">
             <ul>
                 <li>
-                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Dashboard</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Application Content</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
@@ -81,8 +85,10 @@
                                 </div>
                             </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
-                                <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Save Changes" class="btn btn-primary" 
+                                <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-primary"
                                     ValidationGroup="admin" OnClick="btnSubmit_Click" />
+                                <a href="/administration/application/MetaInformation.aspx?redirectUrl=category-administrator-home&pageId=1234HJHJKJ*7987979"
+                                    class="btn btn-default">Cancel</a>
                             </div>
                         </div>
                     </div>

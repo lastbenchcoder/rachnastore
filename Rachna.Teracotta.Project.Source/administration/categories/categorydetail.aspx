@@ -60,7 +60,8 @@
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">&nbsp;</label>
                                 <div class="col-sm-10">
-                                    <asp:Image ID="imgArticle" runat="server" ClientIDMode="Static" Width="50px" Height="50px" class="form-control" />
+                                    <asp:Image ID="imgArticle" runat="server" ClientIDMode="Static" Width="50px" Height="50px" class="form-control" 
+                                        src="../../content/noimage.png"/>
                                     <label></label>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" Display="None"
                                         ErrorMessage="Invalid Image File Format, Should be .jpg, .JPG, .gif, .GIF, .PNG, .png, .jpeg !.."
@@ -96,13 +97,14 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2">Is Active?</label>
                                 <div class="col-sm-10">
-                                    <asp:CheckBox ID="chkIsActive" runat="server" />
+                                    <asp:CheckBox ID="chkIsActive" runat="server" ClientIDMode="Static" />
                                     Active
                                 </div>
                             </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
-                                <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Submit" class="btn btn-primary"
-                                    ValidationGroup="category" OnClientClick="if (!CategoryUpdateConfirmation()) return false;"  OnClick="btnSubmit_Click" />
+                                <a href="/administration/categories/category.aspx?redirectUrl=category-administrator-home&pageId=1234HJHJKJ*7987979" class="btn btn-info">Back</a>
+                                <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary"
+                                    ValidationGroup="category" OnClick="btnSubmit_Click" />
                             </div>
                         </div>
                     </div>
@@ -110,9 +112,4 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        function CategoryUpdateConfirmation() {
-            return confirm("Are you sure you want to deactivate this category? By deactivating this Category will deactivate the SubCategory and Product and also Product Features and Carts will be deleted.");
-        }
-    </script>
 </asp:Content>

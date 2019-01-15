@@ -65,7 +65,8 @@ namespace Rachna.Teracotta.Project.Source.account
                     Admin_UpdatedDate = DateTime.Now,
                     Admin_Login_Attempt = 0,
                     Store_Id = _invit.Store_Id,
-                    Admin_Role = _invit.Role
+                    Admin_Role = _invit.Role,
+                    Send_Activity_Mail=_invit.Send_Activity_Mail
                 };
 
                 Administrators = bAdministrator.Create(Administrators);

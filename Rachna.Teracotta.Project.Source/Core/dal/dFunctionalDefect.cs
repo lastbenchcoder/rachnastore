@@ -23,7 +23,7 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
                 if (context.FunctionalDefect.ToList().Count > 0)
                     maxDefectId = context.FunctionalDefect.Max(m => m.Defect_Id);
                 maxDefectId = (context.FunctionalDefect.ToList().Count > 0) ? (maxDefectId + 1) : maxDefectId;
-                FunctionalDefect.FunctionalityDefectCode = "RT" + maxDefectId + "FUNDEFCODE" + (maxDefectId + 1);
+                FunctionalDefect.DefectCode = "RT" + maxDefectId + "FUNDEFCODE" + (maxDefectId + 1);
                 context.FunctionalDefect.Add(FunctionalDefect);
                 context.SaveChanges();
                 return FunctionalDefect;
@@ -35,12 +35,36 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
             }
         }
 
+        internal FunctionalDefectStory CreateDefectStory(FunctionalDefectStory functionalDefectStory)
+        {
+            try
+            {
+                int maxDefectId = 1;
+                if (context.FunctionalDefectStory.ToList().Count > 0)
+                    maxDefectId = context.FunctionalDefectStory.Max(m => m.FunctionalDefectStory_Id);
+                maxDefectId = (context.FunctionalDefectStory.ToList().Count > 0) ? (maxDefectId + 1) : maxDefectId;
+                functionalDefectStory.FunDefectStryCode = "RT" + maxDefectId + "FUNSTRDEFCODE" + (maxDefectId + 1);
+                context.FunctionalDefectStory.Add(functionalDefectStory);
+                context.SaveChanges();
+                return functionalDefectStory;
+            }
+            catch (Exception ex)
+            {
+                functionalDefectStory.ErrorMessage = ex.Message;
+                return functionalDefectStory;
+            }
+        }
+
         internal List<FunctionalDefect> List()
         {
             List<FunctionalDefect> FunctionalDefect = new List<FunctionalDefect>();
             try
             {
                 FunctionalDefect = context.FunctionalDefect.Include("Administrators").ToList();
+                foreach(var item in FunctionalDefect)
+                {
+                    item.Resolver = context.Administrator.Where(m => m.Administrators_Id == item.Resolver_Id).FirstOrDefault();
+                }
                 return FunctionalDefect;
             }
             catch (Exception ex)

@@ -30,6 +30,8 @@ namespace Rachna.Teracotta.Project.Source.Models
         public DateTime Invitation_CreatedDate { get; set; }
         [Column("dateupdated")]
         public DateTime Invitation_UpdatedDate { get; set; }
+        [Column("activity_mail")]
+        public int Send_Activity_Mail { get; set; }
         [NotMapped]
         public string ErrorMessage { get; set; }
 

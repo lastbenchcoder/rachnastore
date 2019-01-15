@@ -5,13 +5,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <%        
         List<Rachna.Teracotta.Project.Source.Models.ContactOwner> ContactOwner = null;
-        ContactOwner = Rachna.Teracotta.Project.Source.Core.bal.bContactOwner.List();        
+        ContactOwner = Rachna.Teracotta.Project.Source.Core.bal.bContactOwner.List();
     %>
 
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>All ContactOwner</h1>
+                <h1>Contact Information</h1>
             </div>
             <div class="pull-right">
                 <a href="/administration/application/newcontact.aspx?redId=7654765465456456SGGDSDGDGGGGGGGGGGGGGGGGG89709709&pageId=1234" class="btn btn-primary" style="margin-top: 15px" data-toggle="modal">Add New</a>
@@ -24,11 +24,15 @@
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
+                    <a href="#">Application Content</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
                     <a href="#">Application</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="#">All ContactOwner</a>
+                    <a href="#">Contact Information</a>
                 </li>
             </ul>
             <div class="close-bread">
@@ -47,7 +51,7 @@
                     <div class="box-title">
                         <h3>
                             <i class="fa fa-table"></i>
-                            ContactOwner
+                            Contact Information
                         </h3>
                     </div>
                     <div class="box-content nopadding">
@@ -58,7 +62,7 @@
                                     <th>Address</th>
                                     <th>Other Detail</th>
                                     <th>Created By</th>
-                                     <th>Can Submit Request?</th>
+                                    <th>Can Submit Request?</th>
                                     <th>Status</th>
                                     <th>Edit</th>
                                 </tr>
@@ -81,7 +85,7 @@
                                     <td>
                                         <%=item.Administrators.FullName %>
                                     </td>
-                                     <%if (item.Contact_Query_Submission == "Y")
+                                    <%if (item.Contact_Query_Submission == "Y")
                                         { %>
                                     <td class='hidden-350'>
                                         <span>Yes</span>

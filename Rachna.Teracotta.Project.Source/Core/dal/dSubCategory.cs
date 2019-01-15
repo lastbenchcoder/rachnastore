@@ -54,7 +54,15 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
-                context.Entry(SubCategories).State = System.Data.Entity.EntityState.Modified;
+                var entity = context.SubCategory.Where(c => c.SubCategory_Id == SubCategories.SubCategory_Id).AsQueryable().FirstOrDefault();
+                if (entity == null)
+                {
+                    context.SubCategory.Add(SubCategories);
+                }
+                else
+                {
+                    context.Entry(entity).CurrentValues.SetValues(SubCategories);
+                }
                 context.SaveChanges();
                 return SubCategories;
             }

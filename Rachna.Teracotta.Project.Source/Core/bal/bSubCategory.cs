@@ -40,10 +40,10 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
                 string mailBody = MailHelper.ActivityMail("Sub Category", "SubCategory Updation done on " + SubCategory.SubCategory_Title +
                     "( " + SubCategory.SubCategory_Id + "  and " + SubCategory.SubCategoryCode + " ) successfully.",
                     SubCategory.Administrators_Id, DateTime.Now.ToString());
-               
+
 
                 MailHelper.SendEmail(MailHelper.EmailToSend(), "SubCategory Updation", mailBody, "Rachna Teracotta : Activity Admin");
-            }
+            }           
             return _dSubCategory.Update(SubCategory);
         }
 

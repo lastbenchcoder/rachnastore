@@ -25,10 +25,19 @@ namespace Rachna.Teracotta.Project.Source.administration.product
                     string id = Request["Productid"].ToString();
 
                     hdnProductId.Value = id;
-                    List<SubCategories> _subCategoryList = bSubCategory.List().Where(m => m.SubCategory_Status == eStatus.Active.ToString()).ToList();
-                    foreach (var item in _subCategoryList)
+                    List<Categories> _CategoryList = bCategory.List().Where(m => m.Category_Status == eStatus.Active.ToString()).ToList();
+                    foreach (var item1 in _CategoryList)
                     {
-                        ddlCategory.Items.Add(new ListItem { Text = item.SubCategory_Title + "(" + item.Category.Category_Title + ")", Value = item.SubCategory_Id.ToString() });
+                        List<SubCategories> _subCategoryList = bSubCategory.List().Where(m => m.Category_Id == item1.Category_Id &&
+                        m.SubCategory_Status == eStatus.Active.ToString()).ToList();
+                        foreach (var item in _subCategoryList)
+                        {
+                            ddlCategory.Items.Add(new ListItem
+                            {
+                                Text = item.SubCategory_Title + "(" + item.Category.Category_Title + ")",
+                                Value = item.SubCategory_Id.ToString()
+                            });
+                        }
                     }
                     Product Product = bProduct.List().Where(m => m.Product_Id == Convert.ToInt32(id)).FirstOrDefault();
                     txtTitle.Text = Product.Product_Title;

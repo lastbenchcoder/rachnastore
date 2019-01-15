@@ -14,36 +14,36 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4>Add New Application MetaInformation</h4>
+                    <h4>Meta Information</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Title</label>
                         <asp:TextBox ID="txtTitle" runat="server" class="form-control"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ForeColor="Red" runat="server" 
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ForeColor="Red" runat="server"
                             ErrorMessage="Enter Title for MetaInformation" ControlToValidate="txtTitle" ValidationGroup="admin"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
                         <asp:TextBox ID="txtDescription" TextMode="MultiLine" runat="server" class="form-control"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ForeColor="Red" runat="server" 
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ForeColor="Red" runat="server"
                             ErrorMessage="Enter Description for MetaInformation" ControlToValidate="txtDescription" ValidationGroup="admin"></asp:RequiredFieldValidator>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <label>Keywords</label>
                         <asp:TextBox ID="txtKeywords" TextMode="MultiLine" runat="server" class="form-control"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server" 
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server"
                             ErrorMessage="Enter Keywords for MetaInformation" ControlToValidate="txtKeywords" ValidationGroup="admin"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
-                        <label>Is Default?</label>
+                        <label>Is Active?</label>
                         <asp:CheckBox ID="chkIsDefault" runat="server" />
-                        Is Default MetaInformation
+                        Is Active
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-success btn-sm" ValidationGroup="admin" OnClick="btnSubmit_Click" Style="float: right" />
+                    <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-success btn-sm" ValidationGroup="admin" OnClick="btnSubmit_Click" Style="float: right" />
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -55,7 +55,7 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>All MetaInformations</h1>
+                <h1>Meta Informations</h1>
             </div>
             <div class="pull-right">
                 <a href="#modalApplicationMetaInformation" class="btn btn-primary" style="margin-top: 15px" data-toggle="modal">Add New</a>
@@ -64,7 +64,7 @@
         <div class="breadcrumbs">
             <ul>
                 <li>
-                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Dashboard</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
@@ -72,7 +72,11 @@
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="#">All MetaInformations</a>
+                    <a href="#">Application Content</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Meta Informations</a>
                 </li>
             </ul>
             <div class="close-bread">
@@ -91,7 +95,7 @@
                     <div class="box-title">
                         <h3>
                             <i class="fa fa-table"></i>
-                            MetaInformation
+                            Meta Information
                         </h3>
                     </div>
                     <div class="box-content nopadding">

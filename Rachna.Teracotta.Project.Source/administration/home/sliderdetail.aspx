@@ -16,7 +16,7 @@
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="#">Content</a>
+                    <a href="#">Application Content</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
@@ -84,11 +84,9 @@
                                 </div>
                             </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
-                                <asp:Button ID="btnDelete" runat="server" Style="float: right" Text="Delete" class="btn btn-primary" OnClick="btnDelete_Click" />
-                                &nbsp;&nbsp;&nbsp;
-                                <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Submit" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
-                                &nbsp;&nbsp;&nbsp;
-                                <a href="/administration/home/slider.aspx?redirecturl=admin-slider-rachna-teracotta" class="btn btn-info">Go Back to list</a>
+                                <a href="/administration/home/slider.aspx?redirecturl=admin-slider-rachna-teracotta" class="btn btn-default">Back</a>
+                                <asp:Button ID="btnDelete" runat="server" Text="Delete" class="btn btn-primary" OnClick="btnDelete_Click" />
+                                <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
                             </div>
                         </div>
                     </div>

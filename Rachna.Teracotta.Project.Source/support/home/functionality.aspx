@@ -20,15 +20,15 @@
         <div class="breadcrumbs">
             <ul>
                 <li>
-                    <a href="/support/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <a href="/support/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Dashboard</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Support</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
                     <a href="#">Functionality</a>
-                    <i class="fa fa-angle-right"></i>
-                </li>
-                <li>
-                    <a href="#">All Functionality</a>
                 </li>
             </ul>
             <div class="close-bread">

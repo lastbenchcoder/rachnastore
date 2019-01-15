@@ -12,7 +12,7 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>All Categories</h1>
+                <h1>Categories</h1>
             </div>
         </div>
         <div class="breadcrumbs">
@@ -44,7 +44,7 @@
                 <div class="box box-bordered">
                     <div class="box-title">
                         <h3>
-                            <i class="fa fa-th-list"></i>New Category</h3>
+                            <i class="fa fa-th-list"></i>Category</h3>
                     </div>
                     <div class="box-content nopadding">
                         <div class='form-horizontal form-striped'>
@@ -60,7 +60,8 @@
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">&nbsp;</label>
                                 <div class="col-sm-10">
-                                    <asp:Image ID="imgArticle" runat="server" ClientIDMode="Static" Width="50px" Height="50px" class="form-control" />
+                                    <asp:Image ID="imgArticle" runat="server" ClientIDMode="Static" Width="50px" Height="50px" class="form-control" 
+                                        src="../../content/noimage.png"/>
                                     <label></label>
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" Display="None"
                                         ErrorMessage="Invalid Image File Format, Should be .jpg, .JPG, .gif, .GIF, .PNG, .png, .jpeg !.."
@@ -91,7 +92,7 @@
                                 </div>
                             </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
-                                <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary" ValidationGroup="category" OnClick="btnSubmit_Click" />
+                                <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="category" OnClick="btnSubmit_Click" />
                             </div>
                         </div>
                     </div>

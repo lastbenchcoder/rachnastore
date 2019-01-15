@@ -12,34 +12,25 @@
         <div class="breadcrumbs">
             <ul>
                 <li>
-                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Dashboard</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="/administration/store.aspx?redirecturl=admin-store-rachna-teracotta">Content</a>
+                    <a href="#">Application Content</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="/administration/store.aspx?redirecturl=admin-store-rachna-teracotta">Featured Products</a>
+                    <a href="#">Home Page Section</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Featured Products</a>
                 </li>
             </ul>
             <div class="close-bread">
                 <a href="#">
                     <i class="fa fa-times"></i>
                 </a>
-            </div>
-        </div>
-        <div class="row margin-top">
-            <div class="col-sm-12">
-                <div class="alert alert-info">
-                    <h4>Quick Information:</h4>
-                    <ol>
-                        <li>In this section, you can add only 5 products for specific feature.</li>
-                        <li>Please delete existing items to add new items to the section.</li>
-                        <li>Entered Product Should be in Published Status.</li>
-                        <li>Product will be assigned to specific feature, No single product should be allowed to multiple feature.</li>
-                    </ol>
-                </div>
             </div>
         </div>
         <asp:Panel ID="pnlErrorMessage" class="page-header" runat="server" Visible="false" Style="margin-top: 10px">
@@ -125,7 +116,7 @@
                     <div class="box-title">
                         <h3>
                             <i class="fa fa-table"></i>
-                            All Featured Products
+                            Featured Products
                         </h3>
                     </div>
                     <div class="box-content nopadding">

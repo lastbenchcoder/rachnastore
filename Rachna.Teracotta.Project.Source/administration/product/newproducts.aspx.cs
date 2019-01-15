@@ -19,10 +19,16 @@ namespace Rachna.Teracotta.Project.Source.administration.product
         protected void Page_Load(object sender, EventArgs e)
         {
             this.Title = ConfigurationSettings.AppSettings["AppName"].ToString() + " : New Product";
-            List<SubCategories> _subCategoryList = bSubCategory.List().Where(m => m.SubCategory_Status == eStatus.Active.ToString()).ToList();
-            foreach (var item in _subCategoryList)
+            List<Categories> _CategoryList = bCategory.List().Where(m => m.Category_Status == eStatus.Active.ToString()).ToList();
+            foreach (var item1 in _CategoryList)
             {
-                ddlCategory.Items.Add(new ListItem { Text = item.SubCategory_Title + "(" + item.Category.Category_Title + ")", Value = item.SubCategory_Id.ToString() });
+                List<SubCategories> _subCategoryList = bSubCategory.List().Where(m => m.Category_Id == item1.Category_Id &&
+                m.SubCategory_Status == eStatus.Active.ToString()).ToList();
+                foreach (var item in _subCategoryList)
+                {
+                    ddlCategory.Items.Add(new ListItem { Text = item.SubCategory_Title + "(" + item.Category.Category_Title + ")",
+                        Value = item.SubCategory_Id.ToString() });
+                }
             }
         }
 
@@ -58,7 +64,7 @@ namespace Rachna.Teracotta.Project.Source.administration.product
 
             bProduct.Create(Product);
 
-            if (!string.IsNullOrEmpty(Product.ErrorMessage))
+            if (string.IsNullOrEmpty(Product.ErrorMessage))
             {
                 ProductHelper.CreateProductFlow(Product.Product_Id, Product.Product_Title, _admin.Administrators_Id, _admin.FullName, "New Product Created and Pending for Review", Product.Product_Status);
 

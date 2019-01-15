@@ -11,6 +11,8 @@ namespace Rachna.Teracotta.Project.Source.Models
     {
         [Key]
         public int FunctionalDefectStory_Id { get; set; }
+        [MaxLength(50)]
+        public string FunDefectStryCode { get; set; }
         public int Defect_Id { get; set; }
         public int Administrators_Id { get; set; }
         [MaxLength(200)]

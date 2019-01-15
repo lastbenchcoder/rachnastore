@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/Home.Master" AutoEventWireup="true" CodeBehind="contactdetail.aspx.cs" Inherits="Rachna.Teracotta.Project.Source.administration.application.contactdetail" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -12,6 +13,10 @@
             <ul>
                 <li>
                     <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Application Content</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
@@ -143,16 +148,18 @@
                                     Is Default Contact Detail
                                 </div>
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">&nbsp;</label>
                                 <div class="col-sm-10">
                                     <asp:CheckBox ID="chkSubmitRequest" runat="server" />
-                                   Customer Can Submit Request
+                                    Customer Can Submit Request
                                 </div>
                             </div>
                         </div>
                         <div class="form-actions col-sm-offset-2 col-sm-10">
-                            <asp:Button ID="btnSubmit" runat="server" Style="float: right" Text="Save Changes" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
+                            <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
+                            <a href="/administration/application/Contact.aspx?redirectUrl=ContactOwner-administrator-home&pageId=1234HJHJKJ*7987979"
+                                class="btn btn-default">Cancel</a>
                         </div>
                     </div>
                 </div>

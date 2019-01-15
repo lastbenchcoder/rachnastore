@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>Product Banner</h1>
+                <h1>Banner</h1>
                 <asp:HiddenField ID="hdnProductId" runat="server" />
                 <asp:HiddenField ID="hdnProdId" runat="server" />
             </div>
@@ -31,7 +31,7 @@
                         <asp:Label ID="lblBcTitle" runat="server"></asp:Label></a>
                     <i class="fa fa-angle-right"></i>
                 </li>
-                <li>Product Banners
+                <li>Banners
                 </li>
             </ul>
             <div class="close-bread">
@@ -51,7 +51,7 @@
                         <div class="box-title">
                             <h3>
                                 <i class="fa fa-table"></i>
-                                Upload Product Banners
+                                Upload Banners
                             </h3>
                         </div>
                         <div class="box-content nopadding">
@@ -103,7 +103,7 @@
                     <div class="box-title">
                         <h3>
                             <i class="fa fa-table"></i>
-                            All Banners
+                            Banners
                         </h3>
                     </div>
                     <div class="box-content nopadding">

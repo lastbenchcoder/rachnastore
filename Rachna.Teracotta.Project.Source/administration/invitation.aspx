@@ -5,17 +5,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <%
-        List<Rachna.Teracotta.Project.Source.Models.Invitations> Invitations = null;        
+        List<Rachna.Teracotta.Project.Source.Models.Invitations> Invitations = null;
         Invitations = Rachna.Teracotta.Project.Source.Core.bal.bInvitations.List();
     %>
 
-        <!--Modal-->
+    <!--Modal-->
     <div class="modal fade" id="modalInvitation">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4>New Invitation</h4>
+                    <h4>Invitation</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -37,10 +37,14 @@
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ForeColor="Red" runat="server" ErrorMessage="Select Role" InitialValue="Select.." ControlToValidate="ddlRole" ValidationGroup="admin"></asp:RequiredFieldValidator>
                     </div>
+                    <div class="form-group">
+                        <label>Get Activity Mail</label>
+                        <asp:CheckBox runat="server" ID="chkGetActivityMail"></asp:CheckBox>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-success btn-sm" ValidationGroup="admin" OnClick="btnSubmit_Click" Style="float: right" />
+                    <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-success btn-sm" ValidationGroup="admin" OnClick="btnSubmit_Click" Style="float: right" />
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -52,7 +56,7 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>All Invitation</h1>
+                <h1>Invitation</h1>
             </div>
             <div class="pull-right">
                 <a href="#modalInvitation" class="btn btn-primary" style="margin-top: 15px" data-toggle="modal">Add New</a>
@@ -98,6 +102,7 @@
                                     <th>Code</th>
                                     <th>EmailId</th>
                                     <th>Role</th>
+                                    <th>Activity Mail</th>
                                     <th>Status</th>
                                     <th>Registration Link</th>
                                     <th class='hidden-1024'>DateCreated</th>
@@ -110,6 +115,14 @@
                                     <td><%=item.Invitation_Code %></td>
                                     <td><%=item.Invitation_EmailId %></td>
                                     <td><%=item.Role %></td>
+                                    <%if (item.Send_Activity_Mail == 1)
+                                        { %>
+                                    <td>Yes</td>
+                                    <%}
+                                        else
+                                        {%>
+                                    <td>No</td>
+                                    <%} %>
                                     <%if (item.Invitation_Status == Rachna.Teracotta.Project.Source.Entity.eStatus.InActive.ToString())
                                         { %>
                                     <td class='hidden-350'>

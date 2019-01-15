@@ -12,7 +12,7 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>Advertisement Area</h1>
+                <h1>Advertisement</h1>
                 <asp:HiddenField ID="hdnProductId" runat="server" />
                 <asp:HiddenField ID="hdnProdId" runat="server" />
             </div>
@@ -20,16 +20,19 @@
         <div class="breadcrumbs">
             <ul>
                 <li>
-                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Dashboard</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+               <li>
+                    <a href="#">Application Content</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="#">Content</a>
+                    <a href="#">Home Page Section</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="#">Advertisement Area</a>
-                    <i class="fa fa-angle-right"></i>
+                    <a href="#">Advertisement</a>
                 </li>
             </ul>
             <div class="close-bread">
@@ -48,7 +51,7 @@
                     <div class="box-title">
                         <h3>
                             <i class="fa fa-table"></i>
-                            Advertisement Area
+                            Advertisement
                         </h3>
                     </div>
                     <div class="box-content nopadding">
@@ -69,7 +72,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2">Advertisement Banner</label>
+                            <label class="control-label col-sm-2">Banner</label>
                             <div class="col-sm-10">
                                 <asp:Image ID="imgProduct" runat="server" ClientIDMode="Static" Width="50px" Height="50px" class="form-control" />
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Image !.." ControlToValidate="imgInp" ForeColor="Red" ValidationExpression="^.+(.jpg|.JPG|.gif|.GIF|.PNG|.png)$" ValidationGroup="admin"></asp:RegularExpressionValidator>
@@ -106,7 +109,7 @@
                     <div class="box-title">
                         <h3>
                             <i class="fa fa-table"></i>
-                            All Advertisements
+                            Advertisement
                         </h3>
                     </div>
                     <div class="box-content nopadding">

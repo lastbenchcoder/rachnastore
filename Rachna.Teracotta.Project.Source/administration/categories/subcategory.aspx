@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>All Sub Categories</h1>
+                <h1>Sub Categories</h1>
             </div>
         </div>
         <div class="breadcrumbs">
@@ -64,7 +64,7 @@
                         </div>
                         <div class="form-group col-lg-3" style="margin-top: 32px">
                             <label>&nbsp;</label>
-                             <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
+                             <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
                             <label>&nbsp;</label>
                         </div>
                     </div>

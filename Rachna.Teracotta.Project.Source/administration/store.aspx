@@ -14,7 +14,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4>New Store</h4>
+                    <h4>Store</h4>
                 </div>
                 <div class="modal-body">
 
@@ -59,7 +59,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-success btn-sm" ValidationGroup="admin" OnClick="btnSubmit_Click" />
+                    <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-success btn-sm" ValidationGroup="admin" OnClick="btnSubmit_Click" />
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -71,7 +71,7 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>All Store Information</h1>
+                <h1>Store</h1>
             </div>
             <div class="pull-right">
                 <a href="#modalStores" class="btn btn-primary" style="margin-top: 15px" data-toggle="modal">Add New</a>
@@ -107,7 +107,7 @@
                     <div class="box-title">
                         <h3>
                             <i class="fa fa-table"></i>
-                            Store Information
+                            Store
                         </h3>
                     </div>
                     <div class="box-content nopadding">

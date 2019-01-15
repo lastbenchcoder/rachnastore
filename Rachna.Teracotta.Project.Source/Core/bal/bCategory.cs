@@ -34,8 +34,16 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         }
 
         public static Categories Update(Categories Category)
-        {
+        {            
             dCategory _dCategory = new dCategory();
+            if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
+            {
+                string mailBody = MailHelper.ActivityMail("Sub Category", "Category Updation done on " + Category.Category_Title +
+                    "( " + Category.Category_Id + "  and " + Category.CategoryCode + " ) successfully.",
+                    Category.Administrators_Id, DateTime.Now.ToString());
+
+                MailHelper.SendEmail(MailHelper.EmailToSend(), "Category Updation ", mailBody, "Rachna Teracotta : Activity Admin");
+            }
             return _dCategory.Update(Category);
         }
 

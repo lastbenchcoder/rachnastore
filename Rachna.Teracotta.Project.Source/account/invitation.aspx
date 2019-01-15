@@ -27,14 +27,18 @@
             <div class="email controls">
                 <asp:TextBox ID="txtPassword" runat="server" placeholder="New Password" TextMode="Password" class="form-control input-sm bounceIn animation-delay2"></asp:TextBox><br />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Display="None" runat="server" ErrorMessage="Enter New Password" ControlToValidate="txtPassword" ForeColor="Red" ValidationGroup="login"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ControlToValidate="txtPassword" runat="server" Display="None" ValidationGroup="login" ID="RegularExpressionValidator3" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$" ErrorMessage="Password must contain: Minimum 8 characters atleast 1 Alphabet and 1 Number" ForeColor="Red"></asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="Regex5" runat="server" ControlToValidate="txtPassword"
+                ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" Display="None"
+                ErrorMessage="Password must contain: Minimum 8 characters atleast 1 UpperCase Alphabet, 1 LowerCase Alphabet, 1 Number and 1 Special Character" ForeColor="Red" />
             </div>
         </div>
         <div class="form-group">
             <div class="email controls">
                 <asp:TextBox ID="txtConfirmPassword" runat="server" placeholder="Confirm Password" TextMode="Password" class="form-control input-sm bounceIn animation-delay2"></asp:TextBox><br />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Enter Confirm Password" ControlToValidate="txtConfirmPassword" ForeColor="Red" ValidationGroup="login"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator Display="None" ControlToValidate="txtConfirmPassword" ValidationGroup="login" ID="RegularExpressionValidator1" runat="server" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$" ErrorMessage="Password must contain: Minimum 8 characters atleast 1 Alphabet and 1 Number" ForeColor="Red"></asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPassword"
+                ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" Display="None"
+                ErrorMessage="Password must contain: Minimum 8 characters atleast 1 UpperCase Alphabet, 1 LowerCase Alphabet, 1 Number and 1 Special Character" ForeColor="Red" />
                 <asp:CompareValidator ID="CompareValidator1" Display="None" runat="server" ErrorMessage="Password does not match" ControlToCompare="txtPassword" ControlToValidate="txtConfirmPassword" ForeColor="Red" ValidationGroup="login"></asp:CompareValidator>
             </div>
         </div>

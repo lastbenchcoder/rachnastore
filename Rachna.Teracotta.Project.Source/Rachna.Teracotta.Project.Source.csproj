@@ -1123,6 +1123,7 @@
     <Content Include="Scripts\messi.min.css" />
     <Content Include="Scripts\messi.min.js" />
     <Content Include="support\home\default.aspx" />
+    <Content Include="support\home\defect.aspx" />
     <Content Include="support\home\functionality.aspx" />
     <Content Include="support\home\functionalitydetail.aspx" />
     <Content Include="support\login.aspx" />
@@ -2050,6 +2051,13 @@
     <Compile Include="support\home\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="support\home\defect.aspx.cs">
+      <DependentUpon>defect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="support\home\defect.aspx.designer.cs">
+      <DependentUpon>defect.aspx</DependentUpon>
+    </Compile>
     <Compile Include="support\home\functionality.aspx.cs">
       <DependentUpon>functionality.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2169,14 +2177,14 @@
     <Content Include="Views\home\offers.cshtml" />
     <Content Include="Views\home\page.cshtml" />
     <Content Include="Views\product\productoffline.cshtml" />
-    <Content Include="Web.config">
+    <Content Include="Web_Prd.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <Content Include="Web_Prd.Debug.config">
+      <DependentUpon>Web_Prd.config</DependentUpon>
     </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <Content Include="Web_Prd.Release.config">
+      <DependentUpon>Web_Prd.config</DependentUpon>
     </Content>
     <Content Include="Views\Shared\themeglobal2\_header.cshtml" />
     <Content Include="Views\Shared\_layout2.cshtml" />
@@ -2189,14 +2197,14 @@
     <Content Include="support\Account.Master" />
     <Content Include="support\home\Home.Master" />
     <Content Include="support\Message.Master" />
-    <Content Include="Web_Old.config">
+    <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web_Old.Debug.config">
-      <DependentUpon>Web_Old.config</DependentUpon>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Web_Old.Release.config">
-      <DependentUpon>Web_Old.config</DependentUpon>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

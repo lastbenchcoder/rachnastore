@@ -39,7 +39,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
                 foreach (var item in emailList)
                 {
                     mailMessage.To.Add(new MailAddress(item));
-                }               
+                }
                 mailMessage.IsBodyHtml = true;
                 mailMessage.Subject = Subject;
                 mailMessage.Body = BodyMessage;
@@ -248,7 +248,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
                 + "<div>"
              + "Dear Admin,<br />"
              + "<br />"
-             + "New Defect Added to the aplication.<br />"
+             + "New Ticket Created" + FunctionalDefect.DefectCode + ".<br />"
              + "<h4>" + FunctionalDefect.Title + "</h4>"
              + "Click below link to read full functionality detail.<br />"
              + "<br />"
@@ -278,7 +278,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
             + "</div>";
             return result;
         }
-        public static string ActivityMail(string type, string description,int adminId, string dateofactivity)
+        public static string ActivityMail(string type, string description, int adminId, string dateofactivity)
         {
             string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
                + "<div>"
@@ -291,7 +291,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
             + "<b>Description :</b> " + description
             + "<br />"
             + "<b>Date Of Activity :</b> " + dateofactivity
-            + "<br />" 
+            + "<br />"
             + "<br />"
             + "<b>Created/Updated By(Admin ID) :</b> " + adminId
             + "<br /><br />"

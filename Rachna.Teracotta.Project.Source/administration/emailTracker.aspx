@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
-                <h1>All Invitation</h1>
+                <h1>Activity Email</h1>
             </div>
             <div class="pull-right">
                 <a href="#modalInvitation" class="btn btn-primary" style="margin-top: 15px" data-toggle="modal">Add New</a>
@@ -20,15 +20,15 @@
         <div class="breadcrumbs">
             <ul>
                 <li>
-                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Dashboard</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                 <li>
+                    <a href="#">Application Content</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="#">Content</a>
-                    <i class="fa fa-angle-right"></i>
-                </li>
-                <li>
-                    <a href="#">Email Tracker</a>
+                    <a href="#">Activity Email</a>
                 </li>
             </ul>
             <div class="close-bread">
@@ -47,7 +47,7 @@
                     <div class="box-title">
                         <h3>
                             <i class="fa fa-table"></i>
-                            Email Tracker
+                            Activity Email
                         </h3>
                     </div>
                     <div class="box-content nopadding">
