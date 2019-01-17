@@ -30,7 +30,7 @@
                         </a>
                     </li>
                     <li class='lightred'>
-                        <a href="/support/home/functionaldefect.aspx?redirecturl=admin-defect-manager-rachna-teracotta">
+                        <a href="/support/home/defect.aspx?redirecturl=admin-defect-manager-rachna-teracotta">
                             <i class="fa fa-comment"></i>
                             <div class="details">
                                 <span class="big"><%=FunctionalDefect.Count %></span>

@@ -117,7 +117,8 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement
                     {
                         if (_productOrder.Order_Status == 
                             eOrderStatus.Approved.ToString() && 
-                            ddlSorderStatus.Text == eOrderStatus.Placed.ToString())
+                            ddlSorderStatus.Text == eOrderStatus.Placed.ToString() ||
+                            ddlSorderStatus.Text == eOrderStatus.Approved.ToString())
                         {
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "Order", "new Messi('update failed because, order status is lower then current.', { title: 'Failed!! ' });", true);
                         }
@@ -131,16 +132,19 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement
                         }
                         else if (_productOrder.Order_Status == eOrderStatus.Shipped.ToString() && 
                             (ddlSorderStatus.Text == eOrderStatus.Placed.ToString() || 
-                            ddlSorderStatus.Text == eOrderStatus.Approved.ToString()))
+                            ddlSorderStatus.Text == eOrderStatus.Approved.ToString() || 
+                            ddlSorderStatus.Text == eOrderStatus.Packed.ToString() ||
+                            ddlSorderStatus.Text == eOrderStatus.Shipped.ToString()))
                         {
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "Order", "new Messi('update failed because, order status is lower then current.', { title: 'Failed!! ' });", true);
                         }                        
-                        else if (ddlSorderStatus.Text == eOrderStatus.Placed.ToString() || 
+                        else if (_productOrder.Order_Status == eOrderStatus.Delevery.ToString() && 
+                            (ddlSorderStatus.Text == eOrderStatus.Placed.ToString() || 
                             ddlSorderStatus.Text == eOrderStatus.Approved.ToString() || 
                             ddlSorderStatus.Text == eOrderStatus.Packed.ToString() || 
-                            ddlSorderStatus.Text == eOrderStatus.Shipped.ToString())
+                            ddlSorderStatus.Text == eOrderStatus.Shipped.ToString()))
                         {
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "Order", "new Messi('update failed because, order status is lower then current.', { title: 'Failed!! ' });", true);
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "Order", "alert('update failed because, order status is lower then current');", true);
                         }
                         else
                         {

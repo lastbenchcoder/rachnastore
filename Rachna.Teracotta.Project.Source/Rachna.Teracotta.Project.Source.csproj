@@ -1124,6 +1124,7 @@
     <Content Include="Scripts\messi.min.js" />
     <Content Include="support\home\default.aspx" />
     <Content Include="support\home\defect.aspx" />
+    <Content Include="support\home\defectdetail.aspx" />
     <Content Include="support\home\functionality.aspx" />
     <Content Include="support\home\functionalitydetail.aspx" />
     <Content Include="support\login.aspx" />
@@ -2057,6 +2058,13 @@
     </Compile>
     <Compile Include="support\home\defect.aspx.designer.cs">
       <DependentUpon>defect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="support\home\defectdetail.aspx.cs">
+      <DependentUpon>defectdetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="support\home\defectdetail.aspx.designer.cs">
+      <DependentUpon>defectdetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="support\home\functionality.aspx.cs">
       <DependentUpon>functionality.aspx</DependentUpon>

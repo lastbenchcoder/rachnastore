@@ -79,7 +79,7 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
             List<ProductBanners> ProductBanner = new List<ProductBanners>();
             try
             {
-                ProductBanner = context.ProductBanner.Include("Product").ToList();
+                ProductBanner = context.ProductBanner.ToList();
                 return ProductBanner;
             }
             catch (Exception ex)

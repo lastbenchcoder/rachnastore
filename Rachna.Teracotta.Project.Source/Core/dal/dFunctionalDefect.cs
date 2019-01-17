@@ -35,6 +35,25 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
             }
         }
 
+        internal List<FunctionalDefectStory> ListStory(int defectid)
+        {
+            List<FunctionalDefectStory> FunctionalDefectStory = new List<FunctionalDefectStory>();
+            try
+            {
+                FunctionalDefectStory = context.FunctionalDefectStory.Include("Administrators").Where(m=>m.Defect_Id== defectid).ToList();
+                foreach (var item in FunctionalDefectStory)
+                {
+                    item.Resolver = context.Administrator.Where(m => m.Administrators_Id == item.Resolver_Id).FirstOrDefault();
+                }
+                return FunctionalDefectStory;
+            }
+            catch (Exception ex)
+            {
+                FunctionalDefectStory[0].ErrorMessage = ex.Message;
+                return FunctionalDefectStory;
+            }
+        }
+
         internal FunctionalDefectStory CreateDefectStory(FunctionalDefectStory functionalDefectStory)
         {
             try
@@ -60,7 +79,7 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
             List<FunctionalDefect> FunctionalDefect = new List<FunctionalDefect>();
             try
             {
-                FunctionalDefect = context.FunctionalDefect.Include("Administrators").ToList();
+                FunctionalDefect = context.FunctionalDefect.Include("FunctionalDefectStory").Include("Administrators").ToList();
                 foreach(var item in FunctionalDefect)
                 {
                     item.Resolver = context.Administrator.Where(m => m.Administrators_Id == item.Resolver_Id).FirstOrDefault();

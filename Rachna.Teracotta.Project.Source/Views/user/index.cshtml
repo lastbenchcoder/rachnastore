@@ -88,29 +88,24 @@
                                 <td>
                                     @if (item.Products.Product_Has_Size)
                                     {
-                                        <select name="size" prdId="@item.Product_Id" class="form-control" id="selSize" style="width:300px">
-                                            @{
-                                                string[] values = item.Products.Product_Size.Split(',');
-                                                for (int i = 0; i < values.Length; i++)
-                                                {
-                                                    <option>@values[i].Trim()</option>
-                                                }
-                                            }
-                                        </select>
-                                        <script type="text/javascript">
-                                                    $(function () {
-                                                        $("#selSize").val(@item.Cart_Size).attr("selected", "selected");
-                                                    });
+                                        string[] values = item.Products.Product_Size.Split(',');
 
-                                                    $('#selSize').on('change', function (e) {
-                                                        window.location = '/user/updateqty?id=' + $(this).attr("prdId") + "&qty=0&size=" + $(this).val();
-                                                    });
-                                        </script>
+                                        Html.DropDownList("selSize", values.Select(m => new SelectListItem { Text = m, Value = m }));
+
                                     }
                                     else
                                     {
                                         <h1>NA</h1>
                                     }
+                                    <script type="text/javascript">
+                                    $(function() {
+                                    $("#selSize").val(@item.Cart_Size).attr("selected", "selected");
+                                    });
+
+                                    $('#selSize').on('change', function(e) {
+                                    window.location = '/user/updateqty?id=' + $(this).attr("prdId") + "&qty=0&size=" + $(this).val();
+                                    });
+                                    </script>
                                 </td>
                                 <td>
                                     <span class="total-price">@Math.Round(item.Cart_Qty * item.Product_Price)</span>

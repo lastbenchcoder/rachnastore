@@ -25,6 +25,12 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
             return _dFunctionalDefect.List();
         }
 
+        public static List<FunctionalDefectStory> ListStory(int defectid)
+        {
+            dFunctionalDefect _dFunctionalDefect = new dFunctionalDefect();
+            return _dFunctionalDefect.ListStory(defectid);
+        }
+
         public static FunctionalDefect Update(FunctionalDefect FunctionalDefect)
         {
             dFunctionalDefect _dFunctionalDefect = new dFunctionalDefect();
