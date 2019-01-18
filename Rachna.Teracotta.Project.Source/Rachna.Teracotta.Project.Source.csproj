@@ -2185,15 +2185,6 @@
     <Content Include="Views\home\offers.cshtml" />
     <Content Include="Views\home\page.cshtml" />
     <Content Include="Views\product\productoffline.cshtml" />
-    <Content Include="Web_Prd.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web_Prd.Debug.config">
-      <DependentUpon>Web_Prd.config</DependentUpon>
-    </Content>
-    <Content Include="Web_Prd.Release.config">
-      <DependentUpon>Web_Prd.config</DependentUpon>
-    </Content>
     <Content Include="Views\Shared\themeglobal2\_header.cshtml" />
     <Content Include="Views\Shared\_layout2.cshtml" />
     <Content Include="Views\home\index.cshtml" />
@@ -2214,6 +2205,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Web_Old.config" />
+    <Content Include="Web_Old.Debug.config" />
+    <Content Include="Web_Old.Release.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\ar\" />

@@ -309,8 +309,7 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement
                 hdnAvailableSize.Value = _product.Product_Size;
                 hdnOrderId.Value = _RequestList.Order_Id.ToString();
                 hdnProductId.Value = _RequestList.Product_Id.ToString();
-                txtSize.Text = (_RequestList.Order_Status != eOrderStatus.Rejected.ToString() &&
-                    _RequestList.Order_Status != eOrderStatus.Cancelled.ToString()) ? _RequestList.Order_Size.ToString() : "No Size";
+                txtSize.Text = (_RequestList.Order_Size!=null) ? _RequestList.Order_Size.ToString() : "No Size";
                 hdnCustId.Value = _RequestList.Customer_Id.ToString();
                 lblOrder_Delivery.Text = "Delivery expected by " + _RequestList.Order_Delievery_Date.ToString("D");
                 ddlSorderStatus.SelectedValue = _RequestList.Order_Status;
