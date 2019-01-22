@@ -64,9 +64,16 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
-                context.Entry(Logo).State = System.Data.Entity.EntityState.Modified;
+                var entity = context.Logo.Where(c => c.Logo_Id == Logo.Logo_Id).AsQueryable().FirstOrDefault();
+                if (entity == null)
+                {
+                    context.Logo.Add(Logo);
+                }
+                else
+                {
+                    context.Entry(entity).CurrentValues.SetValues(Logo);
+                }
                 context.SaveChanges();
-                UpdateAllInactive(Logo.Logo_Id);
                 return Logo;
             }
             catch (Exception ex)

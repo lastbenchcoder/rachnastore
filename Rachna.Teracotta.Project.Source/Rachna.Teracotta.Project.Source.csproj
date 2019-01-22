@@ -762,8 +762,11 @@
     <Content Include="Content\stars.png" />
     <Content Include="Content\favicon.png" />
     <Content Include="EmailTemplates\Invitation.html" />
+    <Content Include="helpfiles\dbfiles\Administrators_Trigger.sql" />
     <Content Include="helpfiles\dbfiles\category_Trigger.sql" />
     <Content Include="helpfiles\dbfiles\elmah.sql" />
+    <Content Include="helpfiles\dbfiles\Invitations_Trigger.sql" />
+    <Content Include="helpfiles\dbfiles\RemoveCustomer.txt" />
     <Content Include="helpfiles\dbfiles\store_Trigger.sql" />
     <Content Include="helpfiles\dbfiles\subcategory_audit.sql" />
     <Content Include="account\invitation.aspx" />
@@ -1853,6 +1856,7 @@
     <Compile Include="Controllers\homeController.cs" />
     <Compile Include="Controllers\productController.cs" />
     <Compile Include="Controllers\userController.cs" />
+    <Compile Include="Core\bal\bCustomer.cs" />
     <Compile Include="Core\bal\bFunctionalDefect.cs" />
     <Compile Include="Core\bal\bFunctionality.cs" />
     <Compile Include="Core\bal\bProduct.cs" />
@@ -1868,6 +1872,7 @@
     <Compile Include="Core\bal\bLogo.cs" />
     <Compile Include="Core\dal\dAds.cs" />
     <Compile Include="Core\dal\dAdministrator.cs" />
+    <Compile Include="Core\dal\dCustomer.cs" />
     <Compile Include="Core\dal\dFunctionalDefect.cs" />
     <Compile Include="Core\dal\dFunctionality.cs" />
     <Compile Include="Core\dal\dProduct.cs" />

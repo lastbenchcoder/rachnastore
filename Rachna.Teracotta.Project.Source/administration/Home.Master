@@ -82,6 +82,8 @@
         <%: Scripts.Render("~/bundles/global") %>
         <%: Scripts.Render("~/bundles/globalhead") %>
     </asp:PlaceHolder>--%>
+    <link href="~/Scripts/messi.min.css" rel="stylesheet" />
+    <script src="../../Scripts/messi.min.js"></script>
 </head>
 <body data-layout-sidebar="fixed" data-layout-topbar="fixed">
     <%--    <%: Scripts.Render("~/bundles/global") %>

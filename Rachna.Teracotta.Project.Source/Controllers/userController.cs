@@ -1,4 +1,5 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
 using Rachna.Teracotta.Project.Source.Helper;
 
@@ -48,7 +49,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
         }
         public ActionResult LoginUser(Customers _customer)
         {
-            Customers _cust = context.Customer.Where(m => m.Customers_EmailId == _customer.Customers_EmailId && m.Customers_Password == _customer.Customers_Password && m.Customers_Status == eStatus.Active.ToString()).FirstOrDefault();
+            Customers _cust = bCustomer.List().Where(m => m.Customers_EmailId == _customer.Customers_EmailId && m.Customers_Password == _customer.Customers_Password && m.Customers_Status == eStatus.Active.ToString()).FirstOrDefault();
             if (_cust != null)
             {
                 string ipAddress = IpAddress.GetLocalIPAddress();
@@ -72,7 +73,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
         }
         public ActionResult SignUp(Customers _customer)
         {
-            Customers _cust = context.Customer.Where(m => m.Customers_EmailId == _customer.Customers_EmailId && m.Customers_Phone == _customer.Customers_Phone).FirstOrDefault();
+            Customers _cust = bCustomer.List().Where(m => m.Customers_EmailId == _customer.Customers_EmailId && m.Customers_Phone == _customer.Customers_Phone).FirstOrDefault();
             if (_cust == null)
             {
                 Customers Customer = new Customers()
@@ -91,13 +92,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                     CustomerType = eCustomerType.regular.ToString()
                 };
 
-                int maxBnrAdminId = 1;
-                if (context.Customer.ToList().Count > 0)
-                    maxBnrAdminId = context.Customer.Max(m => m.Customer_Id);
-                maxBnrAdminId = (maxBnrAdminId == 1 && context.Customer.ToList().Count > 0) ? (maxBnrAdminId + 1) : maxBnrAdminId;
-                Customer.CustomerCode = "CUSRACH" + maxBnrAdminId + "TERA" + (maxBnrAdminId + 1);
-                context.Customer.Add(Customer);
-                context.SaveChanges();
+                Customer = bCustomer.Create(Customer);
 
                 if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
                 {
@@ -162,7 +157,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
         }
         public ActionResult SubmitAsGuest(Customers _customer, CustomerAddress _address)
         {
-            Customers cust = context.Customer.Where(m => m.Customers_EmailId == _customer.Customers_EmailId || m.Customers_Phone == _customer.Customers_Phone).FirstOrDefault();
+            Customers cust = bCustomer.List().Where(m => m.Customers_EmailId == _customer.Customers_EmailId || m.Customers_Phone == _customer.Customers_Phone).FirstOrDefault();
             if (cust == null)
             {
                 Customers Customer = new Customers()
@@ -181,13 +176,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                     CustomerType = eCustomerType.guest.ToString()
                 };
 
-                int maxBnrAdminId = 1;
-                if (context.Customer.ToList().Count > 0)
-                    maxBnrAdminId = context.Customer.Max(m => m.Customer_Id);
-                maxBnrAdminId = (maxBnrAdminId == 1 && context.Customer.ToList().Count > 0) ? (maxBnrAdminId + 1) : maxBnrAdminId;
-                Customer.CustomerCode = "CUSRACH" + maxBnrAdminId + "TERA" + (maxBnrAdminId + 1);
-                context.Customer.Add(Customer);
-                context.SaveChanges();
+                Customer = bCustomer.Create(Customer);
 
                 if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
                 {
@@ -212,13 +201,8 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                     CustomerAddress_Status = _address.CustomerAddress_Status
                 };
 
-                int maxBnrCusAdrAdminId = 1;
-                if (context.CustomerAddres.ToList().Count > 0)
-                    maxBnrCusAdrAdminId = context.CustomerAddres.Max(m => m.CustomerAddress_Id);
-                maxBnrCusAdrAdminId = (maxBnrCusAdrAdminId == 1 && context.CustomerAddres.ToList().Count > 0) ? (maxBnrCusAdrAdminId + 1) : maxBnrCusAdrAdminId;
-                CustomerAddres.CustomerAddress_Code = "CUSADRRACH" + maxBnrCusAdrAdminId + "TERA" + (maxBnrCusAdrAdminId + 1);
-                context.CustomerAddres.Add(CustomerAddres);
-                context.SaveChanges();
+                CustomerAddres = bCustomer.CreateAddress(CustomerAddres);
+
                 Carts _carts = _mcartmdl.GetCarts().Where(m => m.Ip_Address == IpAddress.GetLocalIPAddress() && m.Cart_Status == eCartStatus.Temp.ToString()).FirstOrDefault();
                 Session["UserKey"] = Customer.Customer_Id.ToString();
                 if (_carts != null)
@@ -248,7 +232,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
         public ActionResult AddAddress(CustomerAddress _address)
         {
             int CusId = Convert.ToInt32(Session["UserKey"]);
-            Customers _customer = context.Customer.Where(m => m.Customer_Id == CusId).FirstOrDefault();
+            Customers _customer = bCustomer.List().Where(m => m.Customer_Id == CusId).FirstOrDefault();
 
             CustomerAddress CustomerAddres = new CustomerAddress()
             {
@@ -265,23 +249,16 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                 CustomerAddress_Status = eStatus.Active.ToString()
             };
 
-            int maxBnrCusAdrAdminId = 1;
-            if (context.CustomerAddres.ToList().Count > 0)
-                maxBnrCusAdrAdminId = context.CustomerAddres.Max(m => m.CustomerAddress_Id);
-            maxBnrCusAdrAdminId = (maxBnrCusAdrAdminId == 1 && context.CustomerAddres.ToList().Count > 0) ? (maxBnrCusAdrAdminId + 1) : maxBnrCusAdrAdminId;
-            CustomerAddres.CustomerAddress_Code = "CUSADRRACH" + maxBnrCusAdrAdminId + "TERA" + (maxBnrCusAdrAdminId + 1);
-            context.CustomerAddres.Add(CustomerAddres);
-            context.SaveChanges();
+            CustomerAddres = bCustomer.CreateAddress(CustomerAddres);
 
             return Redirect("/user/account");
         }
         public ActionResult UpdatePassword(string password)
         {
-            Customers _customer = context.Customer.Where(m => m.Customer_Id == Convert.ToInt32(Session["UserKey"])).FirstOrDefault();
+            Customers _customer = bCustomer.List().Where(m => m.Customer_Id == Convert.ToInt32(Session["UserKey"])).FirstOrDefault();
             _customer.Customers_Password = password;
 
-            context.Entry(_customer).State = System.Data.Entity.EntityState.Modified;
-            context.SaveChanges();
+            bCustomer.Update(_customer);
 
             TempData["Message"] = "Success!! password updated successfully.";
             return Redirect("/user/account");
@@ -289,7 +266,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
         public ActionResult SubmitOrder(string addressId, string paymentType)
         {
             int custId = Convert.ToInt32(Session["UserKey"]);
-            Customers _cust = context.Customer.Where(m => m.Customer_Id == custId).FirstOrDefault();
+            Customers _cust = bCustomer.List().Where(m => m.Customer_Id == custId).FirstOrDefault();
             int custAdrId = Convert.ToInt32(addressId);
             int selPaymentType = Convert.ToInt32(paymentType);
             List<Carts> _cart = _mcartmdl.GetCarts().Where(m => m.Customer_Id == custId && m.Cart_Status == eCartStatus.Open.ToString()).ToList();
@@ -381,7 +358,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
         }
         public ActionResult VerifyEmail(string VerificationId)
         {
-            Customers _cust = context.Customer.Where(m => m.CustomerCode == VerificationId).FirstOrDefault();
+            Customers _cust = bCustomer.List().Where(m => m.CustomerCode == VerificationId).FirstOrDefault();
             if (_cust != null)
             {
                 if (_cust.IsEmailVerified != 1)
@@ -407,7 +384,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
         {
             string _res = string.Empty;
             int cusId = Convert.ToInt32(Session["UserKey"]);
-            Customers _cust = context.Customer.Where(m => m.Customer_Id == cusId).FirstOrDefault();
+            Customers _cust = bCustomer.List().Where(m => m.Customer_Id == cusId).FirstOrDefault();
             int ordId = Convert.ToInt32(orderid);
             Order _order = context.Orders.Where(m => m.Order_Id == ordId).FirstOrDefault();
 
@@ -447,7 +424,7 @@ namespace Rachna.Teracotta.Project.Source.Controllers
             int prdId = Convert.ToInt32(ProductId);
             int cusId = Convert.ToInt32(CustomerId);
             Product Product = context.Product.Include("ProductBanner").Where(m => m.Product_Id == prdId).FirstOrDefault();
-            Customers Customers = context.Customer.Where(m => m.Customer_Id == cusId).FirstOrDefault();
+            Customers Customers = bCustomer.List().Where(m => m.Customer_Id == cusId).FirstOrDefault();
             ProdComments Comments = new ProdComments()
             {
                 Customer_Id = Customers.Customer_Id,

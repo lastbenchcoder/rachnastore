@@ -34,7 +34,7 @@ namespace Rachna.Teracotta.Project.Source.Core.bal
         }
 
         public static Categories Update(Categories Category)
-        {            
+        {
             dCategory _dCategory = new dCategory();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["IsEmailEnable"]))
             {

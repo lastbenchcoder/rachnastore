@@ -13,6 +13,24 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement {
     public partial class orders {
         
         /// <summary>
+        /// hdnProductId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnProductId;
+        
+        /// <summary>
+        /// hdnProdId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnProdId;
+        
+        /// <summary>
         /// ddlStore control.
         /// </summary>
         /// <remarks>
@@ -67,15 +85,6 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// btnExport control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExport;
-        
-        /// <summary>
         /// grdStoreOrders control.
         /// </summary>
         /// <remarks>
@@ -83,5 +92,14 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdStoreOrders;
+        
+        /// <summary>
+        /// btnExport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnExport;
     }
 }

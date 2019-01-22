@@ -1,0 +1,6 @@
+select * from tbl_customer
+delete from tbl_order_delivery
+delete from tbl_order_history
+delete from tbl_order
+delete from tbl_customer_address
+delete from tbl_customer where CustomerCode in ('CUSRACH2TERA3','CUSRACH2TERA3','CUSRACH3TERA4')

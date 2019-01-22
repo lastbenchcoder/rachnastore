@@ -13,6 +13,69 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement {
     public partial class vorderdetail {
         
         /// <summary>
+        /// lblBcTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBcTitle;
+        
+        /// <summary>
+        /// pnlErrorMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlErrorMessage;
+        
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+        
+        /// <summary>
+        /// hdnAdminId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnAdminId;
+        
+        /// <summary>
+        /// btnEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEdit;
+        
+        /// <summary>
+        /// btnGoBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGoBack;
+        
+        /// <summary>
+        /// imgProductBanner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgProductBanner;
+        
+        /// <summary>
         /// lblProduct_Title control.
         /// </summary>
         /// <remarks>
@@ -58,15 +121,6 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement {
         protected global::System.Web.UI.WebControls.HiddenField hdnCustId;
         
         /// <summary>
-        /// imgProductBanner control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProductBanner;
-        
-        /// <summary>
         /// lblOrder_Size control.
         /// </summary>
         /// <remarks>
@@ -74,6 +128,24 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOrder_Size;
+        
+        /// <summary>
+        /// lblOrderId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOrderId;
+        
+        /// <summary>
+        /// lblOrderCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOrderCode;
         
         /// <summary>
         /// lblProduct_Price control.
@@ -103,15 +175,6 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement {
         protected global::System.Web.UI.WebControls.Label lblOrder_Price;
         
         /// <summary>
-        /// lblPaymentMode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPaymentMode;
-        
-        /// <summary>
         /// lblOrder_Status control.
         /// </summary>
         /// <remarks>
@@ -128,6 +191,15 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOrder_Delivery;
+        
+        /// <summary>
+        /// lblPaymentMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPaymentMode;
         
         /// <summary>
         /// lblCustomerName control.
@@ -227,23 +299,5 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOrderDetail;
-        
-        /// <summary>
-        /// btnGoBack control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGoBack;
-        
-        /// <summary>
-        /// btnEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEdit;
     }
 }

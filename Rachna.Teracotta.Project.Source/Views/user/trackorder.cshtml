@@ -42,8 +42,9 @@
                                     {
                                         <div class="order-status-timeline-completion c2"></div>
                                     }
-                                    else if (_orders.Order_Status == Rachna.Teracotta.Project.Source.Entity.eOrderStatus.Shipped.ToString() && 
-                                        _orders.Order_Status == Rachna.Teracotta.Project.Source.Entity.eOrderStatus.Delevery.ToString())
+                                    else if (_orders.Order_Status == Rachna.Teracotta.Project.Source.Entity.eOrderStatus.Shipped.ToString() ||
+                                        _orders.Order_Status == Rachna.Teracotta.Project.Source.Entity.eOrderStatus.Delevery.ToString() ||
+                                        _orders.Order_Status == Rachna.Teracotta.Project.Source.Entity.eOrderDeliveryStatus.OutForDelivery.ToString())
                                     {
                                         <div class="order-status-timeline-completion c3"></div>
                                     }

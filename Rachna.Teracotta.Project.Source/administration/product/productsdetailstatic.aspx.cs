@@ -203,22 +203,23 @@ namespace Rachna.Teracotta.Project.Source.administration.product
                     lblStore.Text = _prd.Store.Store_Name;
 
                     btnApprove.Visible = false;
-                    if (_prd.Product_Status == eProductStatus.Rejected.ToString())
-                    {
-                        btnRejectModel.Visible = false;
-                    }
+                    btnRejectModel.Visible = false;
+
+                    if (_prd.Product_Status != eProductStatus.Rejected.ToString())
+                        btnRejectModel.Visible = true;
+
                     if (_prd.Product_Status == eProductStatus.Published.ToString())
                     {
                         btnApprove.Visible = false;
                     }
                     else
                     {
-                        if (_admin.Admin_Role == eRole.Super.ToString())
+                        if (_admin.Admin_Role == eRole.Super.ToString() || _admin.Admin_Role == eRole.Developer.ToString())
                         {
                             btnApprove.Visible = true;
                         }
 
-                        if (eProductStatus.ReviewPending.ToString() == _prd.Product_Status)
+                        if (eProductStatus.ReviewPending.ToString() == _prd.Product_Status || eProductStatus.Rejected.ToString() == _prd.Product_Status)
                             btnApprove.Text = "Complete Review";
                         if (eProductStatus.ReviewCompleted.ToString() == _prd.Product_Status)
                             btnApprove.Text = "Approve";

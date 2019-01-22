@@ -68,7 +68,15 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
-                context.Entry(administrators).State = System.Data.Entity.EntityState.Modified;
+                var entity = context.Administrator.Where(c => c.Administrators_Id == administrators.Administrators_Id).AsQueryable().FirstOrDefault();
+                if (entity == null)
+                {
+                    context.Administrator.Add(administrators);
+                }
+                else
+                {
+                    context.Entry(entity).CurrentValues.SetValues(administrators);
+                }
                 context.SaveChanges();
                 return administrators;
             }

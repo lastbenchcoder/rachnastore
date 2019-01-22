@@ -117,8 +117,8 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement
                     {
                         if (_productOrder.Order_Status == 
                             eOrderStatus.Approved.ToString() && 
-                            ddlSorderStatus.Text == eOrderStatus.Placed.ToString() ||
-                            ddlSorderStatus.Text == eOrderStatus.Approved.ToString())
+                            (ddlSorderStatus.Text == eOrderStatus.Placed.ToString() ||
+                            ddlSorderStatus.Text == eOrderStatus.Approved.ToString()))
                         {
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "Order", "new Messi('update failed because, order status is lower then current.', { title: 'Failed!! ' });", true);
                         }
@@ -256,6 +256,8 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement
                 _customer = ctx.Customer.ToList().Where(m => m.Customer_Id == _RequestList.Customer_Id).FirstOrDefault();
                 _product = ctx.Product.ToList().Where(m => m.Product_Id == _RequestList.Product_Id).FirstOrDefault();
                 lblProduct_Title.Text = _RequestList.Product_Title + "( Product Id : " + _RequestList.Product_Id + " )";
+                lblOrderId.Text = _RequestList.Order_Id.ToString();
+                lblOrderCode.Text = _RequestList.Order_Code;
                 imgProductBanner.ImageUrl = "../../" + _RequestList.Product_Banner;
                 lblProduct_Price.Text = _RequestList.Product_Price.ToString();
 

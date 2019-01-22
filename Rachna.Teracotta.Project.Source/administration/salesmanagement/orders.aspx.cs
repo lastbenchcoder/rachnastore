@@ -39,6 +39,12 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement
                     ddlStatus.Items.Add(new ListItem(sts.ToString()));
                 }
 
+                Array dstatus = Enum.GetValues(typeof(eOrderDeliveryStatus));
+                foreach (eOrderDeliveryStatus dsts in dstatus)
+                {
+                    ddlStatus.Items.Add(new ListItem(dsts.ToString()));
+                }
+
                 using (var ctx = new RachnaDBContext())
                 {
                     _RequestList = ctx.Orders.ToList();
