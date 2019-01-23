@@ -7,7 +7,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container-fluid">
+     <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
                 <h1>Update Product</h1>
@@ -20,7 +20,7 @@
         <div class="breadcrumbs">
             <ul>
                 <li>
-                    <a href="/adminvendor/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
@@ -28,11 +28,11 @@
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="/adminvendor/product/products.aspx?redirecturl=admin-Product-rachna-teracotta">Manage Products</a>
+                    <a href="/administration/product/products.aspx?redirecturl=admin-Product-rachna-teracotta">Manage Products</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="/adminvendor/product/products.aspx?redirecturl=admin-Product-rachna-teracotta">View All Products</a>
+                    <a href="/administration/product/products.aspx?redirecturl=admin-Product-rachna-teracotta">View All Products</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
@@ -49,7 +49,7 @@
         </div>
         <asp:Panel ID="pnlErrorMessage" class="page-header" runat="server" Visible="false" Style="margin-top: 10px">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <asp:Label ID="Label1" runat="server"></asp:Label>
+            <asp:Label ID="lblMessage" runat="server"></asp:Label>
         </asp:Panel>
         <div class="row margin-top">
             <div class="col-sm-12">
@@ -228,7 +228,7 @@
                                 </div>
                             </div>
                             <div class="form-actions col-sm-offset-2 col-sm-10">
-                                <a href="/adminvendor/product/productsdetailstatic.aspx?Productid=<%=hdnProductId.Value %>" class="btn btn-primary hidden-print">Cancel</a>
+                                <a href="/administration/product/productsdetailstatic.aspx?Productid=<%=hdnProductId.Value %>" class="btn btn-primary hidden-print">Cancel</a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                                 <asp:Button ID="Button1" runat="server" Text="Submit" class="btn btn-success hidden-print"
                                     ValidationGroup="admin" OnClientClick="if (!ProductUpdateConfirmation()) return false;" OnClick="btnProceedToSubmit_Click" />
@@ -241,7 +241,7 @@
     </div>
     <script type="text/javascript">
         function ProductUpdateConfirmation() {
-            return confirm("Are you sure you want to update this product? By updating this product, it will set status to Review Pending and also Items in Top Eight Product, Product Features and Carts will be deleted.");
+            return confirm("Are you sure you want to update this product? By updating Title, Description and Specification product, it will set status to Review Pending and also Items in Top Eight Product, Product Features and Carts will be deleted.");
         }
     </script>
 </asp:Content>

@@ -5,7 +5,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container-fluid">
+   <div class="container-fluid">
         <div class="page-header">
             <div class="pull-left">
                 <h1>New Product</h1>
@@ -14,7 +14,7 @@
         <div class="breadcrumbs">
             <ul>
                 <li>
-                    <a href="/adminvendor/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
+                    <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Home</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
@@ -22,11 +22,11 @@
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="/adminvendor/categories/category.aspx?redirectUrl=category-administrator-home&pageId=1234HJHJKJ*7987979">Manage Products</a>
+                    <a href="/administration/categories/category.aspx?redirectUrl=category-administrator-home&pageId=1234HJHJKJ*7987979">Manage Products</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="/adminvendor/categories/category.aspx?redirectUrl=category-administrator-home&pageId=1234HJHJKJ*7987979">Add New Product</a>
+                    <a href="/administration/categories/category.aspx?redirectUrl=category-administrator-home&pageId=1234HJHJKJ*7987979">Add New Product</a>
                 </li>
             </ul>
             <div class="close-bread">
@@ -207,7 +207,7 @@
                                 <asp:Button ID="btnProceedToSubmit" runat="server" Text="Submit" class="btn btn-success hidden-print"
                                     ValidationGroup="admin" OnClick="btnProceedToSubmit_Click" />
                                 &nbsp;&nbsp;
-                                <a href="/adminvendor/product/products.aspx?redirecturl=admin-Product-rachna-teracotta" class="btn btn-primary">Cancel</a>
+                                <a href="/administration/product/products.aspx?redirecturl=admin-Product-rachna-teracotta" class="btn btn-primary">Cancel</a>
                             </div>
                         </div>
                     </div>

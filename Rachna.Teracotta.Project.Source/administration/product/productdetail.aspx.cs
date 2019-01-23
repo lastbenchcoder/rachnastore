@@ -111,7 +111,7 @@ namespace Rachna.Teracotta.Project.Source.administration.product
 
             bProduct.Update(Product);
 
-            if (Product.ErrorMessage != null)
+            if (string.IsNullOrEmpty(Product.ErrorMessage))
             {
                 ProductHelper.CreateProductFlow(Product.Product_Id, Product.Product_Title, _admin.Administrators_Id, _admin.FullName, "Product Updated and set to Review Pending Status", Product.Product_Status);
                 bProduct.DeleteTopEight(Product.Product_Id);

@@ -1,4 +1,5 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
 using Rachna.Teracotta.Project.Source.Helper;
 
@@ -15,11 +16,6 @@ namespace Rachna.Teracotta.Project.Source.adminvendor.product
 {
     public partial class productsdetail : System.Web.UI.Page
     {
-        private RachnaDBContext context;
-        public productsdetail()
-        {
-            context = new RachnaDBContext();
-        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["Productid"] != null)
@@ -29,12 +25,21 @@ namespace Rachna.Teracotta.Project.Source.adminvendor.product
                     string id = Request["Productid"].ToString();
 
                     hdnProductId.Value = id;
-                    List<SubCategories> _subCategoryList = context.SubCategory.Include("Category").Where(m => m.SubCategory_Status == eStatus.Active.ToString()).ToList();
-                    foreach (var item in _subCategoryList)
+                    List<Categories> _CategoryList = bCategory.List().Where(m => m.Category_Status == eStatus.Active.ToString()).ToList();
+                    foreach (var item1 in _CategoryList)
                     {
-                        ddlCategory.Items.Add(new ListItem { Text = item.SubCategory_Title + "(" + item.Category.Category_Title + ")", Value = item.SubCategory_Id.ToString() });
+                        List<SubCategories> _subCategoryList = bSubCategory.List().Where(m => m.Category_Id == item1.Category_Id &&
+                        m.SubCategory_Status == eStatus.Active.ToString()).ToList();
+                        foreach (var item in _subCategoryList)
+                        {
+                            ddlCategory.Items.Add(new ListItem
+                            {
+                                Text = item.SubCategory_Title + "(" + item.Category.Category_Title + ")",
+                                Value = item.SubCategory_Id.ToString()
+                            });
+                        }
                     }
-                    Product Product = context.Product.ToList().Where(m => m.Product_Id == Convert.ToInt32(id)).FirstOrDefault();
+                    Product Product = bProduct.List().Where(m => m.Product_Id == Convert.ToInt32(id)).FirstOrDefault();
                     txtTitle.Text = Product.Product_Title;
                     ddlCategory.SelectedValue = Product.SubCategory_Id.ToString();
                     lblStatus.Text = Product.Product_Status;
@@ -75,15 +80,19 @@ namespace Rachna.Teracotta.Project.Source.adminvendor.product
         protected void btnProceedToSubmit_Click(object sender, EventArgs e)
         {
             int AdminId = Convert.ToInt32(Session[ConfigurationSettings.AppSettings["VendorSession"].ToString()].ToString());
-            Administrators _admin = context.Administrator.ToList().Where(m => m.Administrators_Id == AdminId).FirstOrDefault();
+            Administrators _admin = bAdministrator.List().ToList().Where(m => m.Administrators_Id == AdminId).FirstOrDefault();
 
             int prdId = Convert.ToInt32(hdnProductId.Value);
-            Product Product = context.Product.ToList().Where(m => m.Product_Id == prdId).FirstOrDefault();
+            Product Product = bProduct.List().ToList().Where(m => m.Product_Id == prdId).FirstOrDefault();
 
             Product.Store_Id = _admin.Store_Id;
-            Product.Product_Title = txtTitle.Text;
-            Product.Product_Description = txtDescription.Content;
-            Product.Product_Specification = txtSpecification.Content;
+            if (Product.Product_Title != txtTitle.Text || Product.Product_Description != txtDescription.Content || Product.Product_Specification != txtSpecification.Content)
+            {
+                Product.Product_Title = txtTitle.Text;
+                Product.Product_Description = txtDescription.Content;
+                Product.Product_Specification = txtSpecification.Content;
+                Product.Product_Status = eProductStatus.ReviewPending.ToString();
+            }
             Product.Administrators_Id = _admin.Administrators_Id;
             Product.Product_Qty = Convert.ToInt32(txtQuantity.Text);
             Product.Product_Qty_Alert = Convert.ToInt32(txtAlert.Text);
@@ -98,18 +107,25 @@ namespace Rachna.Teracotta.Project.Source.adminvendor.product
             Product.SubCategory_Id = Convert.ToInt32(ddlCategory.SelectedValue);
             Product.Product_Discount = Convert.ToDecimal(txtDiscount.Text);
             Product.Product_UpdatedDate = DateTime.Now;
-            Product.Product_Status = eProductStatus.ReviewPending.ToString();
             Product.Store_Rating = (txtRating.Text != "") ? Convert.ToInt32(txtRating.Text) : 1;
 
-            context.Entry(Product).State = System.Data.Entity.EntityState.Modified;
-            context.SaveChanges();
+            bProduct.Update(Product);
 
-            ProductHelper.CreateProductFlow(Product.Product_Id, Product.Product_Title, _admin.Administrators_Id, _admin.FullName, "Product Updated and set to Review Pending Status", Product.Product_Status);
-            DeleteTopEight(Product.Product_Id);
-            DeleteProductFeature(Product.Product_Id);
-            DeleteCart(Product.Product_Id);
-            Response.Redirect("/adminvendor/product/productsdetailstatic.aspx?SavePrdId=2000&Productid=" + Product.Product_Id);
-
+            if (string.IsNullOrEmpty(Product.ErrorMessage))
+            {
+                ProductHelper.CreateProductFlow(Product.Product_Id, Product.Product_Title, _admin.Administrators_Id, _admin.FullName, "Product Updated and set to Review Pending Status", Product.Product_Status);
+                bProduct.DeleteTopEight(Product.Product_Id);
+                bProduct.DeleteProductFeature(Product.Product_Id);
+                bProduct.DeleteCart(Product.Product_Id);
+                Response.Redirect("/adminvendor/product/productsdetailstatic.aspx?SavePrdId=2000&Productid=" + Product.Product_Id);
+            }
+            else
+            {
+                pnlErrorMessage.Attributes.Remove("class");
+                pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
+                pnlErrorMessage.Visible = true;
+                lblMessage.Text = "Product cannot be updated. " + Product.ErrorMessage;
+            }
         }
 
         protected void btnSearchPrdHome_Click(object sender, EventArgs e)
@@ -147,41 +163,6 @@ namespace Rachna.Teracotta.Project.Source.adminvendor.product
             else
             {
                 pnlSize.Visible = false;
-            }
-        }
-
-        private void DeleteTopEight(int id)
-        {
-            ProductEight ProductEight = context.ProductEights.Where(m => m.Product_Id == id).FirstOrDefault();
-            if (ProductEight != null)
-            {
-                context.Entry(ProductEight).State = System.Data.Entity.EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-        private void DeleteProductFeature(int id)
-        {
-            ProductFeatures ProductFeatures = context.ProductFeature.Where(m => m.Product_Id == id).FirstOrDefault();
-            if (ProductFeatures != null)
-            {
-                context.Entry(ProductFeatures).State = System.Data.Entity.EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-        private void DeleteCart(int id)
-        {
-            List<Carts> Carts = context.Cart.Where(m => m.Product_Id == id && m.Cart_Status == eCartStatus.Temp.ToString()).ToList();
-            if (Carts.Count > 0)
-            {
-                foreach (var item in Carts)
-                {
-                    Carts Cart = context.Cart.Where(m => m.Cart_Id == item.Cart_Id).FirstOrDefault();
-                    if (Cart != null)
-                    {
-                        context.Entry(Cart).State = System.Data.Entity.EntityState.Deleted;
-                        context.SaveChanges();
-                    }
-                }
             }
         }
     }

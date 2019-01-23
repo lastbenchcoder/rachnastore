@@ -12,44 +12,28 @@
     <link rel="icon" href="~/content/favicon.png" type="image/x-icon" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="~/content/admin/css/bootstrap.min.css">
-    <!-- jQuery UI -->
-    <link rel="stylesheet" href="~/content/admin/css/plugins/jquery-ui/jquery-ui.min.css">
-    <!-- dataTables -->
-    <link rel="stylesheet" href="~/content/admin/css/plugins/datatable/TableTools.css">
-    <!-- chosen -->
-    <link rel="stylesheet" href="~/content/admin/css/plugins/chosen/chosen.css">
-    <!-- Theme CSS -->
-    <link rel="stylesheet" href="~/content/admin/css/style.css">
-    <!-- Color CSS -->
-    <link rel="stylesheet" href="~/content/admin/css/themes.css">
 
-    <!-- jQuery -->
+    <link rel="stylesheet" href="~/content/admin/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/content/admin/css/plugins/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/content/admin/css/plugins/datatable/TableTools.css">
+    <link rel="stylesheet" href="~/content/admin/css/plugins/chosen/chosen.css">
+    <link rel="stylesheet" href="~/content/admin/css/style.css">
+    <link rel="stylesheet" href="~/content/admin/css/themes.css">
+    <link href="~/Scripts/messi.min.css" rel="stylesheet" />
+
     <script src="../../content/admin/js/jquery.min.js"></script>
-    <!-- Nice Scroll -->
     <script src="../../content/admin/js//plugins/nicescroll/jquery.nicescroll.min.js"></script>
-    <!-- imagesLoaded -->
     <script src="../../content/admin/js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
-    <!-- jQuery UI -->
     <script src="../../content/admin/js/plugins/jquery-ui/jquery-ui.js"></script>
-    <!-- slimScroll -->
     <script src="../../content/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <!-- Bootstrap -->
     <script src="../../content/admin/js/bootstrap.min.js"></script>
-    <!-- Bootbox -->
     <script src="../../content/admin/js/plugins/bootbox/jquery.bootbox.js"></script>
-    <!-- Bootbox -->
     <script src="../../content/admin/js/plugins/form/jquery.form.min.js"></script>
-    <!-- Validation -->
     <script src="../../content/admin/js/plugins/validation/jquery.validate.min.js"></script>
     <script src="../../content/admin/js/plugins/validation/additional-methods.min.js"></script>
-    <!-- Form -->
     <script src="../../content/admin/js/plugins/form/jquery.form.min.js"></script>
-    <!-- Wizard -->
     <script src="../../content/admin/js/plugins/wizard/jquery.form.wizard.min.js"></script>
     <script src="../../content/admin/js/plugins/mockjax/jquery.mockjax.js"></script>
-    <!-- New DataTables -->
     <script src="../../content/admin/js/plugins/momentjs/jquery.moment.min.js"></script>
     <script src="../../content/admin/js/plugins/momentjs/moment-range.min.js"></script>
     <script src="../../content/admin/js/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -57,37 +41,12 @@
     <script src="../../content/admin/js/plugins/datatables/extensions/dataTables.colReorder.min.js"></script>
     <script src="../../content/admin/js/plugins/datatables/extensions/dataTables.colVis.min.js"></script>
     <script src="../../content/admin/js/plugins/datatables/extensions/dataTables.scroller.min.js"></script>
-    <!-- Theme framework -->
     <script src="../../content/admin/js/eakroko.min.js"></script>
-    <!-- Theme scripts -->
     <script src="../../content/admin/js/application.min.js"></script>
-    <!-- Just for demonstration -->
     <script src="../../content/admin/js/demonstration.min.js"></script>
-
-    <!--[if lte IE 9]>
-		<script src="../../content/admin/js/plugins/placeholder/jquery.placeholder.min.js"></script>
-		<script>
-			$(document).ready(function() {
-				$('input, textarea').placeholder();
-			});
-		</script>
-	<![endif]-->
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="img/favicon.html" />
-    <!-- Apple devices Homescreen icon -->
-    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png" />
-
-    <%--    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/global") %>
-        <%: Scripts.Render("~/bundles/globalhead") %>
-    </asp:PlaceHolder>--%>
-    <link href="~/Scripts/messi.min.css" rel="stylesheet" />
     <script src="../../Scripts/messi.min.js"></script>
 </head>
 <body data-layout-sidebar="fixed" data-layout-topbar="fixed">
-    <%--    <%: Scripts.Render("~/bundles/global") %>
-    <%: Scripts.Render("~/bundles/globalhead") %>--%>
     <form id="form1" runat="server">
         <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ToolkitScriptManager>
         <%
