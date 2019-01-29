@@ -4,8 +4,10 @@ using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using System.Web;
 
 namespace Rachna.Teracotta.Project.Source.Helper
 {
@@ -62,31 +64,13 @@ namespace Rachna.Teracotta.Project.Source.Helper
         }
         public static string PasswordResetLink(string host)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
-                + "<div>"
-             + "Dear User,<br />"
-             + "<br />"
-             + "Thanks for submitting the request, Please find your reset password link.<br />"
-             + "<br />"
-             + "<a href='" + host + "'>Click here to reset the password</a>"
-             + "<br />"
-             + "<br />"
-             + "Thanks,<br />"
-             + "Rachna Teracotta Admin"
-             + "</div>";
+            string result = File.ReadAllText(HttpContext.Current.Server.MapPath("~/EmailTemplates/password_reset.html"));
+            result = result.Replace("{PasswordResetLink}", host);
             return result;
         }
         public static string PasswordResetSuccess()
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
-                + "<div>"
-             + "Dear User,<br />"
-             + "<br />"
-             + "Thanks for submitting the request, Your password has been updated successfully.<br />"
-             + "<br />"
-             + "Thanks,<br />"
-             + "Rachna Teracotta Admin"
-             + "</div>";
+            string result = File.ReadAllText(HttpContext.Current.Server.MapPath("~/EmailTemplates/password_reset_success.html"));
             return result;
         }
         public static string EmailSubscribe()
@@ -122,18 +106,8 @@ namespace Rachna.Teracotta.Project.Source.Helper
         }
         public static string InvitationLink(string host)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
-                + "<div>"
-             + "Dear User,<br />"
-             + "<br />"
-             + " .<br />"
-             + "<br />"
-             + "<a href='" + host + "'>Click here to complete for your registration</a>"
-             + "<br />"
-             + "<br />"
-             + "Thanks,<br />"
-             + "Rachna Teracotta Admin"
-             + "</div>";
+            string result = File.ReadAllText(HttpContext.Current.Server.MapPath("~/EmailTemplates/Invitation.html"));
+            result = result.Replace("{RegistrationLink}", host);
             return result;
         }
         public static string RequestRaised()
@@ -280,24 +254,12 @@ namespace Rachna.Teracotta.Project.Source.Helper
         }
         public static string ActivityMail(string type, string description, int adminId, string dateofactivity)
         {
-            string result = "<div style='float:right;'><img src='" + DomainUrl + "content/logo.png' width='200'></div>"
-               + "<div>"
-            + "Dear Administrator,<br />"
-            + "<br />"
-            + "Following Activity has been done, In administration department.<br />"
-            + "<br />"
-            + "<b>Type :</b> " + type
-            + "<br />"
-            + "<b>Description :</b> " + description
-            + "<br />"
-            + "<b>Date Of Activity :</b> " + dateofactivity
-            + "<br />"
-            + "<br />"
-            + "<b>Created/Updated By(Admin ID) :</b> " + adminId
-            + "<br /><br />"
-            + "Thanks,<br />"
-            + "Rachna Teracotta Admin"
-            + "</div>";
+            Administrators Administrator = bAdministrator.List().Where(m => m.Administrators_Id == adminId).FirstOrDefault();
+            string result = File.ReadAllText(HttpContext.Current.Server.MapPath("~/EmailTemplates/admin_activity_email.html"));
+            result = result.Replace("{RequestType}", type);
+            result = result.Replace("{RequestDescription}", description);
+            result = result.Replace("{RequestDateOfActivity}", dateofactivity);
+            result = result.Replace("{RequestAdministrator}", Administrator.FullName+"("+ Administrator.EmailId + ")");
             return result;
         }
 

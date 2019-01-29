@@ -761,6 +761,9 @@
     <Content Include="Content\noimage.png" />
     <Content Include="Content\stars.png" />
     <Content Include="Content\favicon.png" />
+    <Content Include="EmailTemplates\admin_activity_email.html" />
+    <Content Include="EmailTemplates\password_reset_success.html" />
+    <Content Include="EmailTemplates\password_reset.html" />
     <Content Include="EmailTemplates\Invitation.html" />
     <Content Include="helpfiles\dbfiles\Administrators_Trigger.sql" />
     <Content Include="helpfiles\dbfiles\category_Trigger.sql" />
