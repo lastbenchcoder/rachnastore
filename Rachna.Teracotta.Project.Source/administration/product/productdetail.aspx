@@ -231,7 +231,7 @@
                                 <a href="/administration/product/productsdetailstatic.aspx?Productid=<%=hdnProductId.Value %>" class="btn btn-primary hidden-print">Cancel</a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                                 <asp:Button ID="Button1" runat="server" Text="Submit" class="btn btn-success hidden-print"
-                                    ValidationGroup="admin" OnClientClick="if (!ProductUpdateConfirmation()) return false;" OnClick="btnProceedToSubmit_Click" />
+                                    ValidationGroup="admin" OnClick="btnProceedToSubmit_Click" />
                             </div>
                         </div>
                     </div>
@@ -239,9 +239,4 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        function ProductUpdateConfirmation() {
-            return confirm("Are you sure you want to update this product? By updating Title, Description and Specification product, it will set status to Review Pending and also Items in Top Eight Product, Product Features and Carts will be deleted.");
-        }
-    </script>
 </asp:Content>
