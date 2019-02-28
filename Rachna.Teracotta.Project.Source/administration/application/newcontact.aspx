@@ -24,7 +24,7 @@
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="/administration/application/Contact.aspx?redirectUrl=ContactOwner-administrator-home&pageId=1234HJHJKJ*7987979">Contact Information</a>
+                    <a href="/administration/pages/Contact.aspx?redirectUrl=ContactOwner-administrator-home&pageId=1234HJHJKJ*7987979">Contact Information</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>New Contact Information
@@ -154,7 +154,7 @@
                         </div>
                         <div class="form-actions col-sm-offset-2 col-sm-10">
                             <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="admin" OnClick="btnSubmit_Click" />
-                            <a href="/administration/application/Contact.aspx?redirectUrl=ContactOwner-administrator-home&pageId=1234HJHJKJ*7987979"
+                            <a href="/administration/pages/Contact.aspx?redirectUrl=ContactOwner-administrator-home&pageId=1234HJHJKJ*7987979"
                                 class="btn btn-default">Cancel</a>
                         </div>
                     </div>

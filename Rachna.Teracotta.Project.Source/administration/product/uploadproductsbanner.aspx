@@ -19,7 +19,7 @@
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="#">Catalot</a>
+                    <a href="#">Catalog</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>

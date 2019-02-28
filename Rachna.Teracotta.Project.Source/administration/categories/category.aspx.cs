@@ -44,7 +44,7 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
                     {
                         Category_Title = txtCategory.Text,
                         Administrators_Id = adminId,
-                        Category_Photo = "files/category/" + "Category_" + imgInp.FileName,
+                        Category_Photo = (imgInp.HasFile) ? "files/category/" + "Category_" + imgInp.FileName : "content/noimage.png",
                         Category_CreatedDate = DateTime.Now,
                         Category_UpdatedDate = DateTime.Now,
                         Category_Status = eStatus.Active.ToString()
@@ -53,7 +53,7 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
                     Categories = bCategory.Create(Categories);
                     ActivityHelper.Create("New Category", "New Category Created On " + DateTime.Now.ToString("D") + " Successfully and Title is " + Categories.Category_Title + ".", adminId);
 
-                    if (Categories.Category_Id != null || Categories.Category_Id != 0)
+                    if ((Categories.Category_Id != null || Categories.Category_Id != 0) && imgInp.HasFile)
                     {
                         Upload();
                     }
