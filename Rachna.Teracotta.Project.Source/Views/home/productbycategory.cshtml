@@ -69,7 +69,7 @@
                             <button data-view="grid"><i class="ion ion-ios-keypad"></i></button>
                             <button class="is-active" data-view="list"><i class="ion ion-ios-list"></i></button>
                         </div>
-                        <span class="shop-filters-viewitemcount">There Are Products by Category</span>
+                        <span class="shop-filters-viewitemcount">There Are <label id="lblProductCount"></label> Products by Category</span>
                         <div class="shop-filters-sortby">
                             <b>Sort By:</b>
                             <div class="select-sortby">
@@ -139,12 +139,12 @@
                                             </div>
                                             <div class="hoproduct-pricebox">
                                                 <div class="pricebox">
-                                                    <del class="oldprice">&#x20B9;${TotalPrice}</del>
+                                                    <del class="oldprice">&#x20B9;${OldPrice}</del>
                                                     <span class="price">&#x20B9;${TotalPrice}</span>
                                                 </div>
                                             </div>
                                             <p class="hoproduct-content-description">
-                                                ${Description}
+                                                {{html Description}}
                                             </p>
                                         </div>
                                     </article>
@@ -408,8 +408,8 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        debugger;
         $(".hrfRachnaSubCatId").click(function () {
-            debugger;
             $("#hdSubCategory").val("");
             var subcatid = $(this).attr("catId");            
             $.ajax({
@@ -418,8 +418,8 @@
                 data: { id: subcatid, min_price: $('.range-slider-leftlabel').text(), max_price: $('.range-slider-rightlabel').text(), filter: "NA", category: '' },
                 cache: false,
                 success: function (result) {
-                    debugger;
                     $("#RachnaContainer").html('');
+                    $("#lblProductCount").text(result.length);
                     $("#RachnaTemplate").tmpl(result).appendTo("#RachnaContainer");
                     $("#hdSubCategory").val(subcatid);
                 }
@@ -427,7 +427,6 @@
         });
 
         if ($("#hdSubCategory").val() != "") {
-            debugger;
             var category = $("#hdCategory").val();
             if (category == "") {
                 category = '0';
@@ -438,7 +437,6 @@
                 data: { id: $("#hdSubCategory").val(), min_price: $('.range-slider-leftlabel').text(), max_price: $('.range-slider-rightlabel').text(), filter: "NA", category: category },
                 cache: false,
                 success: function (result) {
-                    debugger;
                     $("#RachnaContainer").html('');
                     $("#RachnaTemplate").tmpl(result).appendTo("#RachnaContainer");
                 }
@@ -446,14 +444,12 @@
         }
 
         $(".btnFilterProducts").click(function () {
-            debugger;
             $.ajax({
                 type: 'GET',
                 url: '/home/GetProductsBySubCatId',
                 data: { id: $("#hdSubCategory").val(), min_price: $('.range-slider-leftlabel').text(), max_price: $('.range-slider-rightlabel').text(), filter: "NA", category: '' },
                 cache: false,
                 success: function (result) {
-                    debugger;
                     $("#RachnaContainer").html('');
                     $("#RachnaTemplate").tmpl(result).appendTo("#RachnaContainer");
                 }
@@ -462,7 +458,6 @@
     });
 
     $(".liSortProduct li").click(function () {
-        debugger;
         value = this.id;
         $.ajax({
             type: 'GET',
@@ -470,7 +465,6 @@
             data: { id: $("#hdSubCategory").val(), min_price: $('.range-slider-leftlabel').text(), max_price: $('.range-slider-rightlabel').text(), filter: value, category: '' },
             cache: false,
             success: function (result) {
-                debugger;
                 $("#RachnaContainer").html('');
                 $("#RachnaTemplate").tmpl(result).appendTo("#RachnaContainer");
             }

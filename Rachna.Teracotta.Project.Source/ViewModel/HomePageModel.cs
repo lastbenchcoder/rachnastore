@@ -69,58 +69,48 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
                     subCategories.AddRange(subCategoriesTemp);
                 }
 
-                foreach (var item113 in subCategories)
+                _HomePage._dealoftheday = context.DealOfTheDay.Include("Product").ToList();
+                if (_HomePage._dealoftheday.Count > 0)
                 {
-                    List<Product> productsTemp = new List<Product>();
-                    productsTemp = bProduct.List().Where(m => m.Product_Status == eProductStatus.Published.ToString() && m.SubCategory.SubCategory_Id == item113.SubCategory_Id).ToList();
-                    products.AddRange(productsTemp);
+                    foreach (var item in _HomePage._dealoftheday)
+                    {
+                        item.Product.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
+                        item.Product.ProdComments = context.ProdComments.Where(m => m.Product_Id == item.Product_Id).ToList();
+                    }
+                }
+                _HomePage._ads = context.Advertisement.ToList();
+                _HomePage._prdeight = context.ProductEights.Include("Product").ToList();
+                foreach (var item in _HomePage._prdeight)
+                {
+                    item.Product.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
                 }
 
-                foreach (var item114 in products)
+                _HomePage._featureOurChoice = context.ProductFeature.Include("Product")
+                .ToList().Where(m => m.Product_Feature_Type == eProductFeature.OurChoice.ToString()).ToList();
+                foreach (var item in _HomePage._featureOurChoice)
                 {
-                    _HomePage._dealoftheday = context.DealOfTheDay.Include("Product").Where(m=>m.Product_Id==item114.Product_Id).ToList();
-                    if (_HomePage._dealoftheday.Count > 0)
-                    {
-                        foreach (var item in _HomePage._dealoftheday)
-                        {
-                            item.Product.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
-                            item.Product.ProdComments = context.ProdComments.Where(m => m.Product_Id == item.Product_Id).ToList();
-                        }
-                    }
-                    _HomePage._ads = context.Advertisement.ToList();
-                    _HomePage._prdeight = context.ProductEights.Include("Product").Where(m => m.Product_Id == item114.Product_Id).ToList();
-                    foreach (var item in _HomePage._prdeight)
-                    {
-                        item.Product.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
-                    }
+                    item.Product.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
+                }
 
-                    _HomePage._featureOurChoice = context.ProductFeature.Include("Product")
-                    .ToList().Where(m => m.Product_Feature_Type == eProductFeature.OurChoice.ToString() && m.Product_Id == item114.Product_Id).ToList();
-                    foreach (var item in _HomePage._featureOurChoice)
-                    {
-                        item.Product.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
-                    }
+                _HomePage._featureBest = context.ProductFeature.Include("Product")
+                    .ToList().Where(m => m.Product_Feature_Type == eProductFeature.Best.ToString()).ToList();
+                foreach (var item in _HomePage._featureBest)
+                {
+                    item.Product.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
+                }
 
-                    _HomePage._featureBest = context.ProductFeature.Include("Product")
-                        .ToList().Where(m => m.Product_Feature_Type == eProductFeature.Best.ToString() && m.Product_Id == item114.Product_Id).ToList();
-                    foreach (var item in _HomePage._featureBest)
-                    {
-                        item.Product.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
-                    }
+                _HomePage._featureHot = context.ProductFeature.Include("Product")
+                    .ToList().Where(m => m.Product_Feature_Type == eProductFeature.Hot.ToString()).ToList();
+                foreach (var item in _HomePage._featureHot)
+                {
+                    item.Product.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
+                }
 
-                    _HomePage._featureHot = context.ProductFeature.Include("Product")
-                        .ToList().Where(m => m.Product_Feature_Type == eProductFeature.Hot.ToString() && m.Product_Id == item114.Product_Id).ToList();
-                    foreach (var item in _HomePage._featureHot)
-                    {
-                        item.Product.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
-                    }
-
-                    _HomePage._recentAddition = context.Product.OrderByDescending(m=>m.Product_CreatedDate)
-                        .Where(m => m.Product_Status == eProductStatus.Published.ToString() && m.Product_Id == item114.Product_Id).Take(10).ToList();
-                    foreach (var item in _HomePage._recentAddition)
-                    {
-                        item.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
-                    }
+                _HomePage._recentAddition = context.Product.OrderByDescending(m => m.Product_CreatedDate)
+                    .Where(m => m.Product_Status == eProductStatus.Published.ToString()).Take(10).ToList();
+                foreach (var item in _HomePage._recentAddition)
+                {
+                    item.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();
                 }
 
                 _HomePage._stores = context.Store.ToList().Where(m => m.Store_Status == eStatus.Active.ToString()).ToList();

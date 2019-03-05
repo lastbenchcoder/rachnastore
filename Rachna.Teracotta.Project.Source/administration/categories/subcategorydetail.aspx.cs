@@ -43,7 +43,7 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
                         lblBcTitle.Text = _subCategory.SubCategory_Title;
                         chkIsActive.Checked = (_subCategory.SubCategory_Status == eStatus.Active.ToString()) ? true : false;
 
-                        if(_subCategory.Category.Category_Status==eStatus.InActive.ToString())
+                        if (_subCategory.Category.Category_Status == eStatus.InActive.ToString())
                         {
                             btnSubmit.Enabled = false;
                             btnSubmit.Text = "Cannot Submit Category Deactivated";
@@ -78,7 +78,24 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
                     SubCategories.Category_Id = Convert.ToInt32(ddlCategory.SelectedValue);
                     SubCategories.SubCategory_Status = (chkIsActive.Checked) ? eStatus.Active.ToString() : eStatus.InActive.ToString();
 
-                    bSubCategory.Update(SubCategories);
+                    SubCategories = bSubCategory.Update(SubCategories);
+
+                    if (string.IsNullOrEmpty(SubCategories.ErrorMessage) && SubCategories.SubCategory_Status == eStatus.InActive.ToString())
+                    {
+                        List<Product> products = new List<Product>();
+                        products = bProduct.List().Where(m => m.Product_Status == eProductStatus.Published.ToString() && m.SubCategory.SubCategory_Id == SubCategories.SubCategory_Id).ToList();
+
+                        foreach (var item in products)
+                        {
+                            item.Product_Status = eProductStatus.ReviewPending.ToString();
+                            bProduct.Update(item);
+                            ProductHelper.CreateProductFlow(item.Product_Id, item.Product_Title, adminId, "System", "Sub Category In Active : Product Updated and set to Review Pending Status", item.Product_Status);
+                            bProduct.DeleteTopEight(item.Product_Id);
+                            bProduct.DeleteProductFeature(item.Product_Id);
+                            bProduct.DeleteCart(item.Product_Id);
+                        }
+                    }
+
                     ActivityHelper.Create("Update Sub Category", "Sub Category Updated On " + DateTime.Now.ToString("D") + " Successfully and Title is " + SubCategories.SubCategory_Title + ".", adminId);
 
                     Response.Redirect("/administration/categories/subcategory.aspx?id=2000&redirecturl=admin-category-RachnaTeracotta");
@@ -96,7 +113,7 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
                 pnlErrorMessage.Attributes.Remove("class");
                 pnlErrorMessage.Attributes["class"] = "alert alert-danger alert-dismissable";
                 pnlErrorMessage.Visible = true;
-                lblMessage.Text = "Oops!! "+ ex.Message.ToString();
+                lblMessage.Text = "Oops!! " + ex.Message.ToString();
             }
         }
     }

@@ -119,7 +119,7 @@
                                         }
                                         else
                                         {
-                                            <button type="button" class="ho-button" onclick="window.location.href('/user/');"  disabled>
+                                            <button type="button" class="ho-button" onclick="window.location.href('/user/');" disabled>
                                                 <i class="lnr lnr-cart"></i>
                                                 <span>Go to Cart</span>
                                             </button>
@@ -127,7 +127,7 @@
                                     }
                                     else
                                     {
-                                        <button type="submit" class="ho-button"  disabled>
+                                        <button type="submit" class="ho-button" disabled>
                                             <i class="lnr lnr-cart"></i>
                                             <span>Add to cart</span>
                                         </button>
@@ -412,8 +412,14 @@
                         <article class="hoproduct">
                             <div class="hoproduct-image">
                                 <a class="hoproduct-thumb" href="/product/productoffline?id=@item.Product_Id&title=@item.Product_Title">
-                                    <img class="hoproduct-frontimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
-                                    <img class="hoproduct-backimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
+                                    @if (item.ProductBanner.Count > 1)
+                                    {
+                                        <img class="hoproduct-backimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image" />
+                                    }
+                                    else
+                                    {
+                                        <img class="hoproduct-backimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image" />
+                                    }
                                 </a>
                                 <ul class="hoproduct-flags">
                                     <li class="flag-pack">New</li>

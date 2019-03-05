@@ -69,7 +69,31 @@ namespace Rachna.Teracotta.Project.Source.administration.categories
                         Upload(Categories.Category_Id);
                     }
 
-                    bCategory.Update(Categories);
+                    Categories = bCategory.Update(Categories);
+
+                    if (string.IsNullOrEmpty(Categories.ErrorMessage) && Categories.Category_Status==eStatus.InActive.ToString())
+                    {
+                        List<SubCategories> subCategories = new List<SubCategories>();
+                        List<Product> products = new List<Product>();
+                        subCategories = bSubCategory.List().Where(m => m.Category_Id == Categories.Category_Id && m.SubCategory_Status == eStatus.Active.ToString()).ToList();
+                        foreach (var item113 in subCategories)
+                        {
+                            List<Product> productsTemp = new List<Product>();
+                            productsTemp = bProduct.List().Where(m => m.Product_Status == eProductStatus.Published.ToString() && m.SubCategory.SubCategory_Id == item113.SubCategory_Id).ToList();
+                            products.AddRange(productsTemp);
+                        }
+
+                        foreach(var item in products)
+                        {
+                            item.Product_Status = eProductStatus.ReviewPending.ToString();
+                            bProduct.Update(item);
+                            ProductHelper.CreateProductFlow(item.Product_Id, item.Product_Title, adminId, "System", "Category In Active : Product Updated and set to Review Pending Status", item.Product_Status);
+                            bProduct.DeleteTopEight(item.Product_Id);
+                            bProduct.DeleteProductFeature(item.Product_Id);
+                            bProduct.DeleteCart(item.Product_Id);
+                        }
+                    }
+
                     ActivityHelper.Create("Update Category", "New Category Updated On " + DateTime.Now.ToString("D") + " Successfully and Title is " + Categories.Category_Title + ".", adminId);
 
                     Response.Redirect("/administration/categories/category.aspx?id=2000&redirecturl=admin-category-RachnaTeracotta");

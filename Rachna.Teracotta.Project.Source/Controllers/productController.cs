@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Rachna.Teracotta.Project.Source.Controllers
 {
+    [OutputCache(Duration = 60)]
     public class productController : Controller
     {
         // GET: product

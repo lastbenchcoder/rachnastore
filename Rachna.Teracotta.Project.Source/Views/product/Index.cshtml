@@ -410,8 +410,15 @@
                             <article class="hoproduct">
                                 <div class="hoproduct-image">
                                     <a class="hoproduct-thumb" href="/product/index?id=@item.Product_Id&title=@item.Product_Title">
-                                        <img class="hoproduct-frontimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
-                                        <img class="hoproduct-backimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image">
+                                        <img class="hoproduct-frontimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image" />
+                                        @if (item.ProductBanner.Count > 1)
+                                        {
+                                            <img class="hoproduct-backimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo" alt="product image" />
+                                        }
+                                        else
+                                        {
+                                            <img class="hoproduct-backimage" src="../../@item.ProductBanner.Where(m => m.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo" alt="product image" />
+                                        }
                                     </a>
                                     <ul class="hoproduct-flags">
                                         <li class="flag-pack">New</li>

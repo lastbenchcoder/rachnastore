@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Rachna.Teracotta.Project.Source.Controllers
 {
+    [OutputCache(Duration = 60)]
     public class homeController : Controller
     {
         // GET: home
@@ -42,7 +43,9 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                         Title = item.Product_Title,
                         Description = (item.Product_Description.Length > 500) ? item.Product_Description.Substring(0, 500) + "..." : item.Product_Description,
                         Banner1 = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
-                        Banner2 = item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Banner2 = (item.ProductBanner.Count > 1) ?
+                            item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString() :
+                            item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
                         OldPrice = item.Product_Mkt_Price,
                         TotalPrice = item.Product_Our_Price,
                         DiscountPrice = item.Product_Discount,
@@ -129,7 +132,9 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                         Title = item.Product_Title,
                         Description = (item.Product_Description.Length > 500) ? item.Product_Description.Substring(0, 500) + "..." : item.Product_Description,
                         Banner1 = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
-                        Banner2 = item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Banner2 = (item.ProductBanner.Count > 1) ?
+                            item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString() :
+                            item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
                         OldPrice = item.Product_Mkt_Price,
                         TotalPrice = item.Product_Our_Price,
                         DiscountPrice = item.Product_Discount,
@@ -197,7 +202,9 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                         Title = item.Product_Title,
                         Description = (item.Product_Description.Length > 500) ? item.Product_Description.Substring(0, 500) + "..." : item.Product_Description,
                         Banner1 = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
-                        Banner2 = item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Banner2 = (item.ProductBanner.Count > 1) ?
+                            item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString() :
+                            item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
                         OldPrice = item.Product_Mkt_Price,
                         TotalPrice = item.Product_Our_Price,
                         DiscountPrice = item.Product_Discount,
@@ -253,7 +260,9 @@ namespace Rachna.Teracotta.Project.Source.Controllers
                         Title = item.Product_Title,
                         Description = (item.Product_Description.Length > 500) ? item.Product_Description.Substring(0, 500) + "..." : item.Product_Description,
                         Banner1 = item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
-                        Banner2 = item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString(),
+                        Banner2 = (item.ProductBanner.Count > 1) ?
+                            item.ProductBanner.Where(x => x.Product_Banner_Default != 1).FirstOrDefault().Product_Banner_Photo.ToString() :
+                            item.ProductBanner.Where(x => x.Product_Banner_Default == 1).FirstOrDefault().Product_Banner_Photo.ToString(),
                         OldPrice = item.Product_Mkt_Price,
                         TotalPrice = item.Product_Our_Price,
                         DiscountPrice = item.Product_Discount,
