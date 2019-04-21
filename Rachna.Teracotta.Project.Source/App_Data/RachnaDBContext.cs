@@ -16,6 +16,18 @@ namespace Rachna.Teracotta.Project.Source.App_Data
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<RachnaDBContext, Migrations.Configuration>("RachnaConnectionString"));
         }
 
+        public DbSet<Stores> Store { get; set; }
+        public DbSet<Stores_Audit> Stores_Audit { get; set; }
+
+        public DbSet<Invitations> Invitation { get; set; }
+        public DbSet<Invitations_Audit> Invitations_Audit { get; set; }
+
+        public DbSet<Administrators> Administrator { get; set; }
+        public DbSet<Administrators_Audit> Administrator_Audit { get; set; }
+        public DbSet<AdminChatting> AdminChatting { get; set; }
+        public DbSet<AdminChatting_Audit> AdminChatting_Audit { get; set; }
+        public DbSet<AdminActivity> AdminActivity { get; set; }
+
         public DbSet<UnderConstrunction> UnderConstrunction { get; set; }
         public DbSet<UnderConstrunction_Audit> UnderConstrunction_Audit { get; set; }
 
@@ -30,15 +42,6 @@ namespace Rachna.Teracotta.Project.Source.App_Data
 
         public DbSet<ContactOwner> ContactOwner { get; set; }
         public DbSet<ContactOwner_Audit> ContactOwner_Audit { get; set; }
-
-        public DbSet<Stores> Store { get; set; }
-        public DbSet<Stores_Audit> Stores_Audit { get; set; }
-
-        public DbSet<Invitations> Invitation { get; set; }
-        public DbSet<Invitations_Audit> Invitations_Audit { get; set; }
-
-        public DbSet<Administrators> Administrator { get; set; }
-        public DbSet<Administrators_Audit> Administrator_Audit { get; set; }
 
         public DbSet<Categories> Category { get; set; }
         public DbSet<Categories_Audit> Categories_Audit { get; set; }
@@ -128,10 +131,7 @@ namespace Rachna.Teracotta.Project.Source.App_Data
         public DbSet<RMenu_Audit> RMenu_Audit { get; set; }
 
         public DbSet<DealOfTheDay> DealOfTheDay { get; set; }
-        public DbSet<DealOfTheDay_Audit> DealOfTheDay_Audit { get; set; }
-
-        public DbSet<AdminChatting> AdminChatting { get; set; }
-        public DbSet<AdminActivity> AdminActivity { get; set; }
+        public DbSet<DealOfTheDay_Audit> DealOfTheDay_Audit { get; set; }              
 
         public DbSet<CustomerRequest> CustomerRequest { get; set; }
 
@@ -158,12 +158,6 @@ namespace Rachna.Teracotta.Project.Source.App_Data
 
             modelBuilder.Entity<Invitations>().ToTable("tbl_invitation");
             modelBuilder.Entity<Invitations_Audit>().ToTable("tbl_invitation_audit");
-
-            modelBuilder.Entity<Administrators>().ToTable("tbl_admin");
-            modelBuilder.Entity<Administrators_Audit>().ToTable("tbl_admin_audit");
-
-            modelBuilder.Entity<Categories>().ToTable("tbl_category");
-            modelBuilder.Entity<Categories_Audit>().ToTable("tbl_category_audit");
 
             modelBuilder.Entity<SubCategories>().ToTable("tbl_subcategory");
             modelBuilder.Entity<SubCategories_Audit>().ToTable("tbl_subcategory_audit");
@@ -192,17 +186,11 @@ namespace Rachna.Teracotta.Project.Source.App_Data
             modelBuilder.Entity<Sliders>().ToTable("tbl_slider");
             modelBuilder.Entity<Sliders_Audit>().ToTable("tbl_slider_audit");
 
-            modelBuilder.Entity<Ads>().ToTable("tbl_ads");
-            modelBuilder.Entity<Ads_Audit>().ToTable("tbl_ads_audit");
-
             modelBuilder.Entity<Customers>().ToTable("tbl_customer");
             modelBuilder.Entity<Customers_Audit>().ToTable("tbl_customer_audit");
 
             modelBuilder.Entity<CustomerAddress>().ToTable("tbl_customer_address");
             modelBuilder.Entity<CustomerAddress_Audit>().ToTable("tbl_customer_address_audit");
-
-            modelBuilder.Entity<Carts>().ToTable("tbl_cart");
-            modelBuilder.Entity<Carts_Audit>().ToTable("tbl_cart_audit");
 
             modelBuilder.Entity<Order>().ToTable("tbl_order");
             modelBuilder.Entity<Order_Audit>().ToTable("tbl_order_audit");
@@ -254,10 +242,6 @@ namespace Rachna.Teracotta.Project.Source.App_Data
 
             modelBuilder.Entity<DealOfTheDay>().ToTable("tbl_deal_of_the_day");
             modelBuilder.Entity<DealOfTheDay_Audit>().ToTable("tbl_deal_of_the_day_audit");
-
-            modelBuilder.Entity<AdminChatting>().ToTable("tbl_admin_chat");
-
-            modelBuilder.Entity<AdminActivity>().ToTable("tbl_admin_activity");
 
             modelBuilder.Entity<CustomerRequest>().ToTable("tbl_customer_request");
 

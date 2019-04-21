@@ -23,7 +23,7 @@
                     <a href="/administration/default.aspx?redirectUrl=default-administrator-home&pageId=1234HJHJKJ*7987979">Dashboard</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
-               <li>
+                <li>
                     <a href="#">Application Content</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
@@ -58,25 +58,30 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2">Advertisement Type</label>
                             <div class="col-sm-10">
-                                <asp:DropDownList ID="ddlAddType" runat="server" class="form-control input-sm">
+                                <asp:DropDownList ID="ddlAddType" runat="server" class="form-control input-sm" Width="50%">
                                     <asp:ListItem>Select..</asp:ListItem>
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ForeColor="Red" runat="server" ErrorMessage="Select Add Type" InitialValue="Select.." ControlToValidate="ddlAddType" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ForeColor="Red" runat="server"
+                                    ErrorMessage="Select Add Type" InitialValue="Select.." ControlToValidate="ddlAddType"
+                                    ValidationGroup="admin"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Redirect URL</label>
                             <div class="col-sm-10">
-                                <asp:TextBox ID="txtImageUrl" runat="server" class="form-control input-sm" Width="90%"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server" ErrorMessage="Enter Redirect Url" ControlToValidate="txtImageUrl" ValidationGroup="admin"></asp:RequiredFieldValidator>
+                                <asp:TextBox ID="txtImageUrl" runat="server" class="form-control input-sm" Width="50%"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server"
+                                    ErrorMessage="Enter Redirect Url" ControlToValidate="txtImageUrl" ValidationGroup="admin"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Banner</label>
                             <div class="col-sm-10">
                                 <asp:Image ID="imgProduct" runat="server" ClientIDMode="Static" Width="50px" Height="50px" class="form-control" />
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Image !.." ControlToValidate="imgInp" ForeColor="Red" ValidationExpression="^.+(.jpg|.JPG|.gif|.GIF|.PNG|.png)$" ValidationGroup="admin"></asp:RegularExpressionValidator>
-                                <asp:FileUpload ID="imgInp" runat="server" ClientIDMode="Static" class="form-control input-sm" />
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Image !.."
+                                    ControlToValidate="imgInp" ForeColor="Red" ValidationExpression="^.+(.jpg|.JPG|.gif|.GIF|.PNG|.png)$"
+                                    ValidationGroup="admin"></asp:RegularExpressionValidator>
+                                <asp:FileUpload ID="imgInp" runat="server" ClientIDMode="Static" class="form-control input-sm" Width="50%" />
                                 <label></label>
                                 <script type="text/javascript">
                                     function readURL(input) {
@@ -95,11 +100,12 @@
                                         readURL(this);
                                     });
                                 </script>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="imgInp" ErrorMessage="Please select banner" ValidationGroup="admin" ForeColor="Red"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="imgInp"
+                                    ErrorMessage="Please select banner" ValidationGroup="admin" ForeColor="Red"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="form-actions col-sm-offset-2 col-sm-10">
-                            <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-success hidden-print" OnClick="btnSubmit_Click" />
+                            <asp:Button ID="btnSubmit" runat="server" Text="Save" class="btn btn-success hidden-print" ValidationGroup="admin" OnClick="btnSubmit_Click" />
                         </div>
                     </div>
                 </div>
@@ -113,15 +119,18 @@
                         </h3>
                     </div>
                     <div class="box-content nopadding">
-                        <table class="table table-hover table-nomargin table-bordered dataTable">
+                        <table class="table table-hover table-nomargin table-bordered dataTable dataTable-tools">
                             <thead>
                                 <tr>
                                     <th></th>
+                                    <th>UniqueID</th>
+                                    <th>Code</th>
                                     <th>Type</th>
                                     <th>Redirect URL</th>
+                                    <th>Created By</th>
                                     <th>CreatedDate</th>
                                     <th>UpdatedDate</th>
-                                    <th>Edit Detail</th>
+                                    <th><i class="fa fa-edit fa-lg"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -133,8 +142,11 @@
                                     <td>
                                         <img src="../../<%=item.Ads_Banner_Or_Source %>" style="height: 50px; width: 50px" />
                                     </td>
+                                    <td><%=item.Ads_Id %></td>
+                                    <td><%=item.AdsCode %></td>
                                     <td><%=item.Ads_Type %></td>
                                     <td><%=item.Ads_RedirectUrl %></td>
+                                    <td><%=item.Administrators.FullName %></td>
                                     <td><%=item.Ads_CreatedDate.ToString("D") %></td>
                                     <td><%=item.Ads_UpdatedDate.ToString("D") %></td>
                                     <td><a href="/administration/home/advertisementdetail.aspx?adsId=<%=item.Ads_Id %>"><i class="fa fa-edit fa-lg"></i></a></td>

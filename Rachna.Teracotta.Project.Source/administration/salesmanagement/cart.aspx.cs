@@ -1,16 +1,12 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
-using Rachna.Teracotta.Project.Source.Helper;
-
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -19,17 +15,12 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement
     public partial class cart : System.Web.UI.Page
     {
         List<Carts> _RequestList;
-        private RachnaDBContext context;
-        public cart()
-        {
-            context = new RachnaDBContext();
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                List<Stores> Stores = context.Store.Where(m => m.Store_Status == eStatus.Active.ToString()).ToList();
+                List<Stores> Stores = bStores.List().Where(m => m.Store_Status == eStatus.Active.ToString()).ToList();
                 foreach (var item in Stores)
                 {
                     ddlStore.Items.Add(new ListItem { Text = item.Store_Name, Value = item.Store_Id.ToString() });
@@ -40,8 +31,8 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement
                 {
                     ddlStatus.Items.Add(new ListItem(sts.ToString()));
                 }
-                _RequestList = context.Cart.ToList();
-                if (_RequestList == null)
+                _RequestList = bCarts.List();
+                if (_RequestList == null || _RequestList.Count == 0)
                 {
                     btnExport.Visible = false;
                 }
@@ -61,19 +52,19 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement
 
             if (txtEndDate.Text != "" && txtStartDate.Text != "" && ddlStatus.Text != "Select..")
             {
-                _RequestList = context.Cart.ToList().Where(m => m.Store_Id == storeId && m.Cart_Status == ddlStatus.Text && (m.DateCreated >= Convert.ToDateTime(txtStartDate.Text) && m.DateCreated <= Convert.ToDateTime(txtEndDate.Text))).ToList();
+                _RequestList = bCarts.List().Where(m => m.Store_Id == storeId && m.Cart_Status == ddlStatus.Text && (m.DateCreated >= Convert.ToDateTime(txtStartDate.Text) && m.DateCreated <= Convert.ToDateTime(txtEndDate.Text))).ToList();
             }
             else if (txtEndDate.Text != "" && txtStartDate.Text != "")
             {
-                _RequestList = context.Cart.ToList().Where(m => m.Store_Id == storeId && (m.DateCreated >= Convert.ToDateTime(txtStartDate.Text) && m.DateCreated <= Convert.ToDateTime(txtEndDate.Text))).ToList();
+                _RequestList = bCarts.List().Where(m => m.Store_Id == storeId && (m.DateCreated >= Convert.ToDateTime(txtStartDate.Text) && m.DateCreated <= Convert.ToDateTime(txtEndDate.Text))).ToList();
             }
             else if (ddlStatus.Text != "Select..")
             {
-                _RequestList = context.Cart.ToList().Where(m => m.Store_Id == storeId && m.Cart_Status == ddlStatus.Text).ToList();
+                _RequestList = bCarts.List().Where(m => m.Store_Id == storeId && m.Cart_Status == ddlStatus.Text).ToList();
             }
             else
             {
-                _RequestList = context.Cart.ToList().Where(m => m.Store_Id == storeId).ToList();
+                _RequestList = bCarts.List().Where(m => m.Store_Id == storeId).ToList();
             }
 
             if (_RequestList != null)
@@ -108,7 +99,7 @@ namespace Rachna.Teracotta.Project.Source.administration.salesmanagement
                 {
                     using (var ctx = new RachnaDBContext())
                     {
-                        _RequestList = context.Cart.ToList();
+                        _RequestList = bCarts.List();
                         if (_RequestList == null)
                         {
                             btnExport.Visible = false;

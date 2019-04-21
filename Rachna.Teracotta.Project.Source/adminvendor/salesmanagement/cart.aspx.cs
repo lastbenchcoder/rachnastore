@@ -20,11 +20,6 @@ namespace Rachna.Teracotta.Project.Source.adminvendor.salesmanagement
     public partial class cart : System.Web.UI.Page
     {
         List<Carts> _RequestList;
-        private RachnaDBContext context;
-        public cart()
-        {
-            context = new RachnaDBContext();
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,8 +30,8 @@ namespace Rachna.Teracotta.Project.Source.adminvendor.salesmanagement
                 {
                     ddlStatus.Items.Add(new ListItem(sts.ToString()));
                 }
-                _RequestList = context.Cart.ToList();
-                if (_RequestList == null)
+                _RequestList = bCarts.List();
+                if (_RequestList == null || _RequestList.Count == 0)
                 {
                     btnExport.Visible = false;
                 }
@@ -58,19 +53,19 @@ namespace Rachna.Teracotta.Project.Source.adminvendor.salesmanagement
 
             if (txtEndDate.Text != "" && txtStartDate.Text != "" && ddlStatus.Text != "Select..")
             {
-                _RequestList = context.Cart.ToList().Where(m => m.Store_Id == storeId && m.Cart_Status == ddlStatus.Text && (m.DateCreated >= Convert.ToDateTime(txtStartDate.Text) && m.DateCreated <= Convert.ToDateTime(txtEndDate.Text))).ToList();
+                _RequestList = bCarts.List().Where(m => m.Store_Id == storeId && m.Cart_Status == ddlStatus.Text && (m.DateCreated >= Convert.ToDateTime(txtStartDate.Text) && m.DateCreated <= Convert.ToDateTime(txtEndDate.Text))).ToList();
             }
             else if (txtEndDate.Text != "" && txtStartDate.Text != "")
             {
-                _RequestList = context.Cart.ToList().Where(m => m.Store_Id == storeId && (m.DateCreated >= Convert.ToDateTime(txtStartDate.Text) && m.DateCreated <= Convert.ToDateTime(txtEndDate.Text))).ToList();
+                _RequestList = bCarts.List().Where(m => m.Store_Id == storeId && (m.DateCreated >= Convert.ToDateTime(txtStartDate.Text) && m.DateCreated <= Convert.ToDateTime(txtEndDate.Text))).ToList();
             }
             else if (ddlStatus.Text != "Select..")
             {
-                _RequestList = context.Cart.ToList().Where(m => m.Store_Id == storeId && m.Cart_Status == ddlStatus.Text).ToList();
+                _RequestList = bCarts.List().Where(m => m.Store_Id == storeId && m.Cart_Status == ddlStatus.Text).ToList();
             }
             else
             {
-                _RequestList = context.Cart.ToList().Where(m => m.Store_Id == storeId).ToList();
+                _RequestList = bCarts.List().Where(m => m.Store_Id == storeId).ToList();
             }
 
             if (_RequestList != null)
@@ -108,7 +103,7 @@ namespace Rachna.Teracotta.Project.Source.adminvendor.salesmanagement
                         Administrators _Administrator = null;
                         _Administrator = bAdministrator.List().Where(m => m.Administrators_Id == Convert.ToInt32(Session[ConfigurationSettings.AppSettings["VendorSession"].ToString()].ToString())).FirstOrDefault();
                         int storeId = _Administrator.Store_Id;
-                        _RequestList = context.Cart.Where(m=>m.Store_Id==storeId).ToList();
+                        _RequestList = bCarts.List().Where(m=>m.Store_Id==storeId).ToList();
                         if (_RequestList == null)
                         {
                             btnExport.Visible = false;

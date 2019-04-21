@@ -51,7 +51,7 @@
                             <asp:HiddenField ID="HiddenField1" runat="server" />
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">Title</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-6">
                                     <asp:TextBox ID="txtCategory" runat="server" class="form-control input-sm" placeholder="Enter Category"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red" runat="server"
                                         ErrorMessage="Enter Category title" ControlToValidate="txtCategory" ValidationGroup="category"></asp:RequiredFieldValidator>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtFirstName" class="control-label col-sm-2">&nbsp;</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-6">
                                     <asp:Image ID="imgArticle" runat="server" ClientIDMode="Static" Width="50px" Height="50px" class="form-control" 
                                         src="../../content/noimage.png"/>
                                     <label></label>
