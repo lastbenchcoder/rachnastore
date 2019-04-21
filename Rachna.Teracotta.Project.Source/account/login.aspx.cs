@@ -65,7 +65,7 @@ namespace Rachna.Teracotta.Project.Source.account
                     pnlErrorMessage.Visible = true;
                     lblErrorMessage.Text = "Oops!!! Cannot login to your account, becaues your account is locked. Please raise request to unlock your account.";
                 }
-                else if (_admin.Password != txtPassword.Text && _admin.Admin_Login_Attempt < 5)
+                else if (PasswordProtect.Decrypt(_admin.Password) != txtPassword.Text && _admin.Admin_Login_Attempt < 5)
                 {
                     _admin.Admin_Login_Attempt = (_admin.Admin_Login_Attempt + 1);
                     if (_admin.Admin_Login_Attempt == 5)

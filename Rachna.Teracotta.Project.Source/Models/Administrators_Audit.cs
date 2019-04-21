@@ -32,7 +32,7 @@ namespace Rachna.Teracotta.Project.Source.Models
         [Column("emailid")]
         public string EmailId { get; set; }
 
-        [MaxLength(15)]
+        [MaxLength(50)]
         [Column("phone")]
         public string Phone { get; set; }
 
@@ -44,7 +44,7 @@ namespace Rachna.Teracotta.Project.Source.Models
         [Column("photo")]
         public string Photo { get; set; }
 
-        [MaxLength(15)]
+        [MaxLength(50)]
         [Column("password")]
         public string Password { get; set; }
 

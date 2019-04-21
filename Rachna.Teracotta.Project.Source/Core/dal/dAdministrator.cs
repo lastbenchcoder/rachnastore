@@ -1,4 +1,5 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Helper;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
                     maxAdministratorsId = context.Administrator.Max(m => m.Administrators_Id);
                 maxAdministratorsId = (maxAdministratorsId > 0) ? (maxAdministratorsId + 1) : 1;
                 administrators.AdminCode = "RT" + maxAdministratorsId + "ADMCODE" + (maxAdministratorsId + 1);
+
+                administrators.Password = PasswordProtect.Encrypt(administrators.Password);
                 context.Administrator.Add(administrators);
                 context.SaveChanges();
                 return administrators;
@@ -68,6 +71,7 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
+                administrators.Password = PasswordProtect.Encrypt(administrators.Password);
                 var entity = context.Administrator.Where(c => c.Administrators_Id == administrators.Administrators_Id).AsQueryable().FirstOrDefault();
                 if (entity == null)
                 {
@@ -77,6 +81,7 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
                 {
                     context.Entry(entity).CurrentValues.SetValues(administrators);
                 }
+                
                 context.SaveChanges();
                 return administrators;
             }

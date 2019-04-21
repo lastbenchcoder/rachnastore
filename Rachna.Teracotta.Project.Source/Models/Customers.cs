@@ -25,7 +25,7 @@ namespace Rachna.Teracotta.Project.Source.Models
         public string Customers_Description { get; set; }
         [MaxLength(450)]
         public string Customers_Photo { get; set; }
-        [MaxLength(15)]
+        [MaxLength(50)]
         public string Customers_Password { get; set; }
         [MaxLength(15)]
         public string Customers_Status { get; set; }

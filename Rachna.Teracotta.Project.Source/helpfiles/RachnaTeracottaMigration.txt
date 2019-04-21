@@ -183,3 +183,5 @@ GO
                     // /TESTERS/Default6.aspx
                     //string host = HttpContext.Current.Request.Url.Host;
                     // localhost
+Password Protect:
+https://www.aspsnippets.com/Articles/Encrypt-and-Decrypt-Username-or-Password-stored-in-database-in-ASPNet-using-C-and-VBNet.aspx

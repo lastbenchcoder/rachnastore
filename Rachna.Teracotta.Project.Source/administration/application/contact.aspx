@@ -55,7 +55,7 @@
                         </h3>
                     </div>
                     <div class="box-content nopadding">
-                        <table class="table table-hover table-nomargin table-bordered dataTable">
+                        <table class="table table-hover table-nomargin table-bordered dataTable dataTable-tools">
                             <thead>
                                 <tr>
                                     <th>Title</th>

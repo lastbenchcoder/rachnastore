@@ -150,9 +150,6 @@ namespace Rachna.Teracotta.Project.Source.App_Data
             modelBuilder.Entity<MetaInformation>().ToTable("tbl_meta_info");
             modelBuilder.Entity<MetaInformation_Audit>().ToTable("tbl_meta_info_audit");
 
-            modelBuilder.Entity<ContactOwner>().ToTable("tbl_contactus");
-            modelBuilder.Entity<ContactOwner_Audit>().ToTable("tbl_contactus_audit");
-
             modelBuilder.Entity<Stores>().ToTable("tbl_store");
             modelBuilder.Entity<Stores_Audit>().ToTable("tbl_store_audit");
 

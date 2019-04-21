@@ -8,6 +8,7 @@ namespace Rachna.Teracotta.Project.Source.Migrations
     using System.Linq;
     using System.Configuration;
     using Rachna.Teracotta.Project.Source.App_Data;
+    using Rachna.Teracotta.Project.Source.Helper;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Rachna.Teracotta.Project.Source.App_Data.RachnaDBContext>
     {
@@ -69,7 +70,7 @@ namespace Rachna.Teracotta.Project.Source.Migrations
                            Phone = "9999999999",
                            Description = "rachnateracotta admin description should be here",
                            Photo = "content/noimage.png",
-                           Password = "Admin@123",
+                           Password = PasswordProtect.Encrypt("Admin@123"),
                            Admin_Status = eStatus.Active.ToString(),
                            Admin_Role = eRole.Super.ToString(),
                            Admin_CreatedDate = DateTime.Now,
@@ -92,7 +93,7 @@ namespace Rachna.Teracotta.Project.Source.Migrations
                                 Customers_Phone = "5656789098",
                                 Customers_Description = "Rachna Guest",
                                 Customers_Login_Attempt = 0,
-                                Customers_Password = "Aadmin@123",
+                                Customers_Password = PasswordProtect.Encrypt("Aadmin@123"),
                                 Customers_Photo = "content/noimage.png",
                                 IsEmailVerified = 1,
                                 Customers_CreatedDate = DateTime.Now,

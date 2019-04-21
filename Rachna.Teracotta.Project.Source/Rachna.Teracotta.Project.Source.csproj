@@ -659,7 +659,6 @@
     <Content Include="EmailTemplates\password_reset_success.html" />
     <Content Include="EmailTemplates\password_reset.html" />
     <Content Include="EmailTemplates\Invitation.html" />
-    <Content Include="helpfiles\admin_trigger.sql" />
     <Content Include="helpfiles\dbfiles\Administrators_Trigger.sql" />
     <Content Include="helpfiles\dbfiles\category_Trigger.sql" />
     <Content Include="helpfiles\dbfiles\elmah.sql" />
@@ -1818,6 +1817,7 @@
     <Compile Include="Helper\ImageHandler.cs" />
     <Compile Include="Helper\IpAddress.cs" />
     <Compile Include="Helper\MailHelper.cs" />
+    <Compile Include="Helper\PasswordProtect.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="account\invitation.aspx.cs">
       <DependentUpon>invitation.aspx</DependentUpon>

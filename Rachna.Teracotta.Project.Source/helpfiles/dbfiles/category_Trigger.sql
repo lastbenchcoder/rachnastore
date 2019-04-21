@@ -1,4 +1,4 @@
-CREATE TRIGGER [dbo].[trigger_category_audit] ON [dbo].[tbl_category] FOR INSERT, UPDATE, DELETE
+ALTER TRIGGER [dbo].[trigger_category_audit] ON [dbo].[tbl_category] FOR INSERT, UPDATE, DELETE
 AS
 SET NOCOUNT ON;
 INSERT tbl_category_audit(category_id,category_code,title,banner,admin_id,datecreated,dateupdated,status,mode)
