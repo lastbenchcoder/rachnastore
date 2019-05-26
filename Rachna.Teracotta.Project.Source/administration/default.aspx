@@ -16,6 +16,15 @@
             </div>
             <div class="pull-right">
                 <ul class="stats">
+                     <li class='magenta'>
+                        <a href="/administration/appstatus.aspx?redirecturl=admin-status-front-end-rachna-teracotta">
+                            <i class="fa fa-area-chart"></i>
+                            <div class="details">
+                                <span class="big"><%=_bdashboard.ApplicationCompletionStatus().ToString()%>%</span>
+                                <span>Upload Completed</span>
+                            </div>
+                        </a>
+                    </li>
                     <li class='satgreen'>
                         <a href="/administration/store.aspx?redirecturl=admin-store-rachna-teracotta">
                             <i class="fa fa-briefcase"></i>
@@ -40,15 +49,6 @@
                             <div class="details">
                                 <span class="big"><%=_admin.TotalAdministrator %></span>
                                 <span>Administrators</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class='satgreen'>
-                        <a href="/administration/salesmanagement/customers.aspx?id=jhgj657657HGH.htm">
-                            <i class="fa fa-anchor"></i>
-                            <div class="details">
-                                <span class="big"><%=_admin.TotalCustomer %></span>
-                                <span>Customer</span>
                             </div>
                         </a>
                     </li>
@@ -106,6 +106,14 @@
                             <span class="name"><%=_admin.TotalProducts %> Products</span>
                         </a>
                     </li>
+                     <li class="green">
+                        <a href="/administration/salesmanagement/customers.aspx?id=jhgj657657HGH.htm">
+                            <span>
+                                <i class="fa fa-shopping-cart"></i>
+                            </span>
+                            <span class="name"><%=_admin.TotalCustomer %> Customers</span>
+                        </a>
+                    </li>
                     <li class="lime">
                         <a href="/administration/salesmanagement/orders.aspx?id=jhgj657657HGH.htm">
                             <span>
@@ -122,7 +130,7 @@
                             <span class="name"><%=_admin.TotalItemsInCart %> Cart</span>
                         </a>
                     </li>
-                    <li class="red long">
+                    <li class="red">
                         <a href="/administration/delivery/ordersdelivery.aspx?id=jhgj657657HGH.htm">
                             <span>
                                 <i class="fa fa-bell"></i>

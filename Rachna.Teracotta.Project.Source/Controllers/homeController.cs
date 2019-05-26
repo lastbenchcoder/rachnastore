@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace Rachna.Teracotta.Project.Source.Controllers
 {
-    [OutputCache(Duration = 60)]
     public class homeController : Controller
     {
         // GET: home

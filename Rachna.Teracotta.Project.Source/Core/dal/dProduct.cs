@@ -1,4 +1,5 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
@@ -149,12 +150,12 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
 
         internal void DeleteCart(int id)
         {
-            List<Carts> Carts = context.Cart.Where(m => m.Product_Id == id && m.Cart_Status == eCartStatus.Temp.ToString()).ToList();
+            List<Carts> Carts = bCarts.List().Where(m => m.Product_Id == id && m.Cart_Status == eCartStatus.Temp.ToString()).ToList();
             if (Carts.Count > 0)
             {
                 foreach (var item in Carts)
                 {
-                    Carts Cart = context.Cart.Where(m => m.Cart_Id == item.Cart_Id).FirstOrDefault();
+                    Carts Cart = bCarts.List().Where(m => m.Cart_Id == item.Cart_Id).FirstOrDefault();
                     if (Cart != null)
                     {
                         context.Entry(Cart).State = System.Data.Entity.EntityState.Deleted;

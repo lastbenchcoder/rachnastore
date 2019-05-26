@@ -150,6 +150,7 @@
     <Content Include="administration\application\pgeundrconstdetail.aspx" />
     <Content Include="administration\application\socialnetwork.aspx" />
     <Content Include="administration\application\socialnetworkdetail.aspx" />
+    <Content Include="administration\appstatus.aspx" />
     <Content Include="administration\audit\administrator_audit.aspx" />
     <Content Include="administration\audit\category_audit.aspx" />
     <Content Include="administration\audit\invitations_audit.aspx" />
@@ -659,13 +660,15 @@
     <Content Include="EmailTemplates\password_reset_success.html" />
     <Content Include="EmailTemplates\password_reset.html" />
     <Content Include="EmailTemplates\Invitation.html" />
-    <Content Include="helpfiles\dbfiles\Administrators_Trigger.sql" />
+    <Content Include="helpfiles\dbfiles\admin_trigger.sql" />
+    <Content Include="helpfiles\dbfiles\ads_trigger.sql" />
+    <Content Include="helpfiles\dbfiles\cart_trigger.sql" />
     <Content Include="helpfiles\dbfiles\category_Trigger.sql" />
-    <Content Include="helpfiles\dbfiles\elmah.sql" />
-    <Content Include="helpfiles\dbfiles\Invitations_Trigger.sql" />
-    <Content Include="helpfiles\dbfiles\RemoveCustomer.txt" />
-    <Content Include="helpfiles\dbfiles\store_Trigger.sql" />
-    <Content Include="helpfiles\dbfiles\subcategory_audit.sql" />
+    <Content Include="helpfiles\dbfiles\contactus_trigger.sql" />
+    <Content Include="helpfiles\dbfiles\customer_address_trigger.sql" />
+    <Content Include="helpfiles\dbfiles\customer_request_trigger.sql" />
+    <Content Include="helpfiles\elmah.sql" />
+    <Content Include="helpfiles\RemoveCustomer.txt" />
     <Content Include="account\invitation.aspx" />
     <Content Include="account\forgotpassword.aspx" />
     <Content Include="Global.asax" />
@@ -1022,6 +1025,9 @@
     <Content Include="Scripts\messi.js" />
     <Content Include="Scripts\messi.min.css" />
     <Content Include="Scripts\messi.min.js" />
+    <Content Include="setup\home.aspx" />
+    <Content Include="setup\security.aspx" />
+    <Content Include="setup\defaultdata.aspx" />
     <Content Include="support\home\default.aspx" />
     <Content Include="support\home\defect.aspx" />
     <Content Include="support\home\defectdetail.aspx" />
@@ -1177,6 +1183,13 @@
     </Compile>
     <Compile Include="administration\application\socialnetworkdetail.aspx.designer.cs">
       <DependentUpon>socialnetworkdetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\appstatus.aspx.cs">
+      <DependentUpon>appstatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\appstatus.aspx.designer.cs">
+      <DependentUpon>appstatus.aspx</DependentUpon>
     </Compile>
     <Compile Include="administration\audit\administrator_audit.aspx.cs">
       <DependentUpon>administrator_audit.aspx</DependentUpon>
@@ -1859,6 +1872,7 @@
     <Compile Include="Models\Categories_Audit.cs" />
     <Compile Include="Models\ContactOwner_Audit.cs" />
     <Compile Include="Models\ContactOwner.cs" />
+    <Compile Include="Models\CustomerRequest_Audit.cs" />
     <Compile Include="Models\CustomerRequest.cs" />
     <Compile Include="Models\CustomerSearchKey_Audit.cs" />
     <Compile Include="Models\DealOfTheDay_Audit.cs" />
@@ -1943,6 +1957,34 @@
     </Compile>
     <Compile Include="account\success.aspx.designer.cs">
       <DependentUpon>success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setup\home.aspx.cs">
+      <DependentUpon>home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setup\home.aspx.designer.cs">
+      <DependentUpon>home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setup\security.aspx.cs">
+      <DependentUpon>security.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setup\security.aspx.designer.cs">
+      <DependentUpon>security.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setup\security.Master.cs">
+      <DependentUpon>security.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setup\security.Master.designer.cs">
+      <DependentUpon>security.Master</DependentUpon>
+    </Compile>
+    <Compile Include="setup\defaultdata.aspx.cs">
+      <DependentUpon>defaultdata.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setup\defaultdata.aspx.designer.cs">
+      <DependentUpon>defaultdata.aspx</DependentUpon>
     </Compile>
     <Compile Include="support\Account.Master.cs">
       <DependentUpon>Account.Master</DependentUpon>
@@ -2057,6 +2099,7 @@
     <Content Include="appfiles\frontend2\fonts\slick.ttf" />
     <Content Include="appfiles\frontend2\fonts\slick.woff" />
     <Content Include="appfiles\frontend2\fonts\slickd41d.eot" />
+    <Content Include="helpfiles\ASP.NET Validation of viewstate MAC failed" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\rachna teracotta.pubxml" />
     <Content Include="Views\home\about.cshtml" />
@@ -2114,6 +2157,7 @@
     <Content Include="Web_Old.config" />
     <Content Include="Web_Old.Debug.config" />
     <Content Include="Web_Old.Release.config" />
+    <Content Include="setup\security.Master" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\ar\" />

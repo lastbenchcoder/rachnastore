@@ -1,0 +1,75 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="security.master.cs" Inherits="Rachna.Teracotta.Project.Source.setup.security1" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- Apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Apple devices fullscreen -->
+    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <link rel="icon" href="../content/favicon.png" type="image/x-icon" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../content/admin/css/bootstrap.min.css">
+    <!-- icheck -->
+    <link rel="stylesheet" href="../content/admin/css/plugins/icheck/all.css">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="../content/admin/css/style.css">
+    <!-- Color CSS -->
+    <link rel="stylesheet" href="../content/admin/css/themes.css">
+
+
+    <!-- jQuery -->
+    <script src="../content/admin/js/jquery.min.js"></script>
+
+    <!-- Nice Scroll -->
+    <script src="../content/admin/js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
+    <!-- Validation -->
+    <script src="../content/admin/js/plugins/validation/jquery.validate.min.js"></script>
+    <script src="../content/admin/js/plugins/validation/additional-methods.min.js"></script>
+    <!-- icheck -->
+    <script src="../content/admin/js/plugins/icheck/jquery.icheck.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../content/admin/js/bootstrap.min.js"></script>
+    <script src="../content/admin/js/eakroko.js"></script>
+
+    <!--[if lte IE 9]>
+		<script src="../content/admin/js/plugins/placeholder/jquery.placeholder.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('input, textarea').placeholder();
+			});
+		</script>
+	<![endif]-->
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.html" />
+    <!-- Apple devices Homescreen icon -->
+    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png" />
+</head>
+<body class='login'>
+
+    <div class="wrapper">
+        <h1>
+            <a href="/account/login.aspx?a4rredirectUrl=login-administrator-home&pageId=1234HJHJKJ*7987979">
+                <img src="../content/logo.png" alt="" class='retina-ready'/></a>
+        </h1>
+        <div class="login-body" style="width: 638px;margin-left: -125px;text-align:center">
+            <form id="form1" runat="server">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </form>           
+        </div>
+    </div>
+</body>
+</html>
+

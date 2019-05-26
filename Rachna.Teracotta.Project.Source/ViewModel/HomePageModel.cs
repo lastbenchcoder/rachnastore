@@ -107,7 +107,7 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
                 }
 
                 _HomePage._recentAddition = context.Product.OrderByDescending(m => m.Product_CreatedDate)
-                    .Where(m => m.Product_Status == eProductStatus.Published.ToString()).Take(10).ToList();
+                    .Where(m => m.Product_Status == eProductStatus.Published.ToString()).ToList();
                 foreach (var item in _HomePage._recentAddition)
                 {
                     item.ProductBanner = context.ProductBanner.Where(m => m.Product_Id == item.Product_Id).ToList();

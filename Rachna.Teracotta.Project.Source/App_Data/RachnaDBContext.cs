@@ -134,6 +134,7 @@ namespace Rachna.Teracotta.Project.Source.App_Data
         public DbSet<DealOfTheDay_Audit> DealOfTheDay_Audit { get; set; }              
 
         public DbSet<CustomerRequest> CustomerRequest { get; set; }
+        public DbSet<CustomerRequest_Audit> CustomerRequest_Audit { get; set; }
 
         public DbSet<EmailTracker> EmailTracker { get; set; }
 
@@ -182,12 +183,6 @@ namespace Rachna.Teracotta.Project.Source.App_Data
 
             modelBuilder.Entity<Sliders>().ToTable("tbl_slider");
             modelBuilder.Entity<Sliders_Audit>().ToTable("tbl_slider_audit");
-
-            modelBuilder.Entity<Customers>().ToTable("tbl_customer");
-            modelBuilder.Entity<Customers_Audit>().ToTable("tbl_customer_audit");
-
-            modelBuilder.Entity<CustomerAddress>().ToTable("tbl_customer_address");
-            modelBuilder.Entity<CustomerAddress_Audit>().ToTable("tbl_customer_address_audit");
 
             modelBuilder.Entity<Order>().ToTable("tbl_order");
             modelBuilder.Entity<Order_Audit>().ToTable("tbl_order_audit");
@@ -239,8 +234,6 @@ namespace Rachna.Teracotta.Project.Source.App_Data
 
             modelBuilder.Entity<DealOfTheDay>().ToTable("tbl_deal_of_the_day");
             modelBuilder.Entity<DealOfTheDay_Audit>().ToTable("tbl_deal_of_the_day_audit");
-
-            modelBuilder.Entity<CustomerRequest>().ToTable("tbl_customer_request");
 
             modelBuilder.Entity<EmailTracker>().ToTable("tbl_email_tracker");
         }

@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Rachna.Teracotta.Project.Source.Models
 {
-    [Table("tbl_customer_request")]
-    public class CustomerRequest
+    [Table("tbl_customer_request_audit")]
+    public class CustomerRequest_Audit
     {
         [Key]
+        [Column("cus_req_audit_id")]
+        public int Customer_Request_Audit_Id { get; set; }
+
         [Column("cus_req_id")]
         public int Customer_Request_Id { get; set; }
 
@@ -34,5 +34,9 @@ namespace Rachna.Teracotta.Project.Source.Models
 
         [Column("dateupdated")]
         public DateTime DateUpdated { get; set; }
+
+        [MaxLength(50)]
+        [Column("mode")]
+        public string Mode { get; set; }
     }
 }

@@ -119,7 +119,7 @@
                                     <th>CreatedBy</th>
                                     <th>CreatedDate</th>
                                     <th>UpdatedDate</th>
-                                    <th>Edit</th>
+                                    <th><i class="fa fa-edit fa-lg"></i></th>
                                 </tr>
                             </thead>
                             <tbody>

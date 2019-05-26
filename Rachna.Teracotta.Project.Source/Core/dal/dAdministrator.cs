@@ -105,6 +105,7 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
                 return 404;
             }
         }
+
         internal List<AdminChatting> ListChatMessage()
         {
             List<AdminChatting> adminChatting = new List<AdminChatting>();

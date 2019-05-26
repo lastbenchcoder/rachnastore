@@ -49,12 +49,14 @@ namespace Rachna.Teracotta.Project.Source.Controllers
         }
         public ActionResult LoginUser(Customers _customer)
         {
-            Customers _cust = bCustomer.List().Where(m => m.Customers_EmailId == _customer.Customers_EmailId && m.Customers_Password == _customer.Customers_Password && m.Customers_Status == eStatus.Active.ToString()).FirstOrDefault();
+            Customers _cust = bCustomer.List().Where(m => m.Customers_EmailId == _customer.Customers_EmailId
+                                                    && PasswordProtect.Decrypt(m.Customers_Password) == _customer.Customers_Password 
+                                                    && m.Customers_Status == eStatus.Active.ToString()).FirstOrDefault();
             if (_cust != null)
             {
                 string ipAddress = IpAddress.GetLocalIPAddress();
                 Session["UserKey"] = _cust.Customer_Id.ToString();
-                Carts _carts = context.Cart.Where(m => m.Ip_Address == ipAddress && m.Cart_Status == eCartStatus.Temp.ToString()).FirstOrDefault();
+                Carts _carts = bCarts.List().Where(m => m.Ip_Address == ipAddress && m.Cart_Status == eCartStatus.Temp.ToString()).FirstOrDefault();
                 if (_carts != null)
                 {
                     TempData["SaveAfterLogin"] = 200;

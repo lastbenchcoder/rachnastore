@@ -1,4 +1,5 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
@@ -70,7 +71,7 @@ namespace Rachna.Teracotta.Project.Source.Helper
             hlprAdminDashboard.TotalProductsPendingForPublish = _products.Where(m => m.Product_Status == eProductStatus.PublishPending.ToString()).Count();
             hlprAdminDashboard.TotalProductsPublished = _products.Where(m => m.Product_Status == eProductStatus.Published.ToString()).Count();
             hlprAdminDashboard.TotalProductsRejected = _products.Where(m => m.Product_Status == eProductStatus.Rejected.ToString()).Count();
-            hlprAdminDashboard.TotalItemsInCart = context.Cart.ToList().Count();
+            hlprAdminDashboard.TotalItemsInCart = bCarts.List().ToList().Count();
             hlprAdminDashboard.TotalCustomer = context.Customer.ToList().Count();
             hlprAdminDashboard.Administrators = context.Administrator.ToList().Where(m => m.Administrators_Id == adminId).FirstOrDefault();
 
@@ -104,10 +105,64 @@ namespace Rachna.Teracotta.Project.Source.Helper
             hlprAdminDashboard.TotalProductsPendingForPublish = _products.Where(m => m.Product_Status == eProductStatus.PublishPending.ToString()).Count();
             hlprAdminDashboard.TotalProductsPublished = _products.Where(m => m.Product_Status == eProductStatus.Published.ToString()).Count();
             hlprAdminDashboard.TotalProductsRejected = _products.Where(m => m.Product_Status == eProductStatus.Rejected.ToString()).Count();
-            hlprAdminDashboard.TotalItemsInCart = context.Cart.ToList().Where(m => m.Store_Id == _admin.Store_Id).Count();
+            hlprAdminDashboard.TotalItemsInCart = bCarts.List().ToList().Where(m => m.Store_Id == _admin.Store_Id).Count();
             hlprAdminDashboard.prdQtyFlagActive = (_products.Where(m => m.Product_Qty_Alert >= m.Product_Qty && m.Store_Id == _admin.Store_Id).ToList().Count > 0) ? 1 : 0;
 
             return hlprAdminDashboard;
+        }
+
+        public int ApplicationCompletionStatus()
+        {
+            int appPercentage = 0;
+            int Meta_Info = context.MetaInformation.ToList().Count;
+            int App_Logo = context.Logo.ToList().Count;
+
+            int App_Categories = context.Category.ToList().Count;
+            int App_Slider = context.Slider.ToList().Count;
+
+            int App_Product = context.Product.ToList().Count;
+            int SocialNetwork = context.SocialNetworking.ToList().Count;
+            int DealOfTheDay = context.DealOfTheDay.ToList().Count;
+            int App_Best_Product = context.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.Best.ToString()).ToList().Count;
+            int App_Featured_Product = context.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.Featured.ToString()).ToList().Count;
+            int App_Hot_Product = context.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.Hot.ToString()).ToList().Count;
+            int App_Latest_Product = context.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.Latest.ToString()).ToList().Count;
+            int App_Top_Product = context.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.Top.ToString()).ToList().Count;
+            int App_Our_Choice_Product = context.ProductFeature.Where(m => m.Product_Feature_Type == eProductFeature.OurChoice.ToString()).ToList().Count;
+            int TopEight = context.ProductEights.ToList().Count;
+
+            if (Meta_Info > 0 && App_Logo > 0 && SocialNetwork > 0)
+            {
+                appPercentage = 30;
+                if (App_Categories > 0)
+                    appPercentage = appPercentage + 10;
+                if (App_Product > 7)
+                    appPercentage = appPercentage + 5;
+                if (TopEight > 7)
+                    appPercentage = appPercentage + 5;
+                if (DealOfTheDay > 0)
+                    appPercentage = 55;
+                if (App_Best_Product > 0)
+                    appPercentage = appPercentage + 5;
+                if (App_Featured_Product > 0)
+                    appPercentage = appPercentage + 5;
+                if (App_Hot_Product > 0)
+                    appPercentage = appPercentage + 5;
+                if (App_Top_Product > 0)
+                    appPercentage = appPercentage + 5;
+                if (App_Latest_Product > 0)
+                    appPercentage = appPercentage + 5;
+                if (App_Our_Choice_Product > 0)
+                    appPercentage = appPercentage + 10;
+                if (App_Slider > 0)
+                    appPercentage = appPercentage + 10;
+            }
+            else
+            {
+                appPercentage = 0;
+            }
+
+            return appPercentage;
         }
     }
 }

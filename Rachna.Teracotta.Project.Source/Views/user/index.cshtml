@@ -90,7 +90,10 @@
                                     {
                                         string[] values = item.Products.Product_Size.Split(',');
 
-                                        Html.DropDownList("selSize", values.Select(m => new SelectListItem { Text = m, Value = m }));
+                                        @Html.DropDownList("size",
+                                                            new SelectList(values,item.Cart_Size),
+                                                            "Select Size",
+                                                            new { @class = "form-control" })
 
                                     }
                                     else

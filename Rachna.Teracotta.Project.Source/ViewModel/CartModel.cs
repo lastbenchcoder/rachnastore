@@ -1,4 +1,5 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
+using Rachna.Teracotta.Project.Source.Core.bal;
 using Rachna.Teracotta.Project.Source.Entity;
 using Rachna.Teracotta.Project.Source.Helper;
 using Rachna.Teracotta.Project.Source.Models;
@@ -12,46 +13,54 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
 {
     public class CartModel
     {
-        private RachnaDBContext context;
-        public CartModel()
-        {
-            context = new RachnaDBContext();
-        }
         public void SaveCartToDB(Carts Cart)
         {
-            int maxBnrAdminId = 1;
-            if (context.Cart.ToList().Count > 0)
-                maxBnrAdminId = context.Cart.Max(m => m.Cart_Id);
-            maxBnrAdminId = (maxBnrAdminId == 1 && context.Cart.ToList().Count > 0) ? (maxBnrAdminId + 1) : maxBnrAdminId;
-            Cart.CartCode = "CARTRACH" + maxBnrAdminId + "TERA" + (maxBnrAdminId + 1);
-            context.Cart.Add(Cart);
-            context.SaveChanges();
+            bCarts.Create(Cart);
         }
         public void SaveCartAfterLogin()
         {
             if (HttpContext.Current.Session["UserKey"] != null)
             {
                 int custId = Convert.ToInt32(HttpContext.Current.Session["UserKey"].ToString());
-                Customers Customers = context.Customer.Include("Cart").Where(m => m.Customer_Id == custId).FirstOrDefault();
-                List<Carts> Carts = context.Cart.ToList().Where(x => x.Cart_Status == eCartStatus.Temp.ToString() && x.Ip_Address == IpAddress.GetLocalIPAddress()).ToList();
+                Customers Customers = bCustomer.List().Where(m => m.Customer_Id == custId).FirstOrDefault();
+                List<Carts> Carts = bCarts.List().ToList().Where(x => x.Cart_Status == eCartStatus.Temp.ToString() && x.Ip_Address == IpAddress.GetLocalIPAddress()).ToList();
                 List<Carts> matching = null;
                 foreach (var item in Carts)
                 {
                     matching = Customers.Cart.Where(m => m.Product_Id == item.Product_Id && m.Cart_Status == eCartStatus.Open.ToString()).ToList();
                     if (matching != null && matching.Count > 0)
                     {
-                        context.Entry(matching).State = EntityState.Deleted;
-                        context.SaveChanges();
+                        using (var context = new RachnaDBContext())
+                        {
+                            context.Entry(matching).State = EntityState.Deleted;
+                            context.SaveChanges();
+                        }
                     }
                 }
 
                 foreach (var item in Carts)
                 {
                     DeleteCart(item.Product_Id.ToString());
-                    item.Customer_Id = Customers.Customer_Id;
-                    item.Cart_Status = eCartStatus.Open.ToString();
-                    item.Customer_Name = Customers.Customers_FullName;
-                    SaveCartToDB(item);
+                    Carts ncarts = new Carts()
+                    {
+                        Cart_Price = item.Cart_Price,
+                        Cart_Qty = item.Cart_Qty,
+                        Cart_Size = item.Cart_Size,
+                        Cart_Status = eCartStatus.Open.ToString(),
+                        Cart_Total_Price = item.Cart_Total_Price,
+                        Customer_Id = Customers.Customer_Id,
+                        Customer_Name = Customers.Customers_FullName,
+                        Store_Id = item.Store_Id,
+                        Shipping_Charge = item.Shipping_Charge,
+                        DateCreated = item.DateCreated,
+                        DateUpdated = DateTime.Now,
+                        Ip_Address = item.Ip_Address,
+                        Product_Title = item.Product_Title,
+                        Product_Price = item.Product_Price,
+                        Product_Id = item.Product_Id,
+                        Product_Banner = item.Product_Banner
+                    };
+                    SaveCartToDB(ncarts);
                 }
             }
         }
@@ -59,13 +68,13 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
         public void AddToCart(string id, string qty, string size)
         {
             int prdId = Convert.ToInt32(id);
-            Product _product = context.Product.Include("ProductBanner").Where(m => m.Product_Id == prdId).FirstOrDefault();
+            Product _product = bProduct.List().Where(m => m.Product_Id == prdId).FirstOrDefault();
 
             if (HttpContext.Current.Session["UserKey"] != null)
             {
                 int custId = Convert.ToInt32(HttpContext.Current.Session["UserKey"].ToString());
-                Carts _carts = context.Cart.Include("Customer").ToList().Where(m => m.Customer_Id == custId && m.Product_Id == Convert.ToInt32(id) && m.Cart_Status == eCartStatus.Open.ToString()).FirstOrDefault();
-                Customers _customer = context.Customer.Where(m => m.Customer_Id == custId).FirstOrDefault();
+                Carts _carts = bCarts.List().ToList().Where(m => m.Customer_Id == custId && m.Product_Id == Convert.ToInt32(id) && m.Cart_Status == eCartStatus.Open.ToString()).FirstOrDefault();
+                Customers _customer = bCustomer.List().Where(m => m.Customer_Id == custId).FirstOrDefault();
                 Carts _cart = new Carts();
                 _cart.Customer_Id = 000;
                 _cart.Product_Id = Convert.ToInt32(id);
@@ -89,8 +98,8 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
             }
             else
             {
-                Carts _carts = context.Cart.Include("Customer").ToList().Where(m => m.Ip_Address == IpAddress.GetLocalIPAddress() && m.Product_Id == Convert.ToInt32(id) && m.Cart_Status == eCartStatus.Temp.ToString()).FirstOrDefault();
-                Customers _customer = context.Customer.Where(m => m.Customer_Id == 1).FirstOrDefault();
+                Carts _carts = bCarts.List().ToList().Where(m => m.Ip_Address == IpAddress.GetLocalIPAddress() && m.Product_Id == Convert.ToInt32(id) && m.Cart_Status == eCartStatus.Temp.ToString()).FirstOrDefault();
+                Customers _customer = bCustomer.List().Where(m => m.Customer_Id == 1).FirstOrDefault();
                 Carts _cart = new Carts();
                 _cart.Customer_Id = 000;
                 _cart.Product_Id = Convert.ToInt32(id);
@@ -118,13 +127,13 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
         public void UpdateCart(string id, string qty, string size)
         {
             int prdId = Convert.ToInt32(id);
-            Product _product = context.Product.Include("ProductBanner").Where(m => m.Product_Id == prdId).FirstOrDefault();
+            Product _product = bProduct.List().Where(m => m.Product_Id == prdId).FirstOrDefault();
 
             if (HttpContext.Current.Session["UserKey"] != null)
             {
                 int custId = Convert.ToInt32(HttpContext.Current.Session["UserKey"].ToString());
-                Customers _customer = context.Customer.Where(m => m.Customer_Id == custId).FirstOrDefault();
-                Carts _cart = context.Cart.Include("Customer").ToList().Where(m => m.Customer_Id == _customer.Customer_Id && m.Product_Id == prdId && m.Cart_Status == eCartStatus.Open.ToString()).FirstOrDefault();
+                Customers _customer = bCustomer.List().Where(m => m.Customer_Id == custId).FirstOrDefault();
+                Carts _cart = bCarts.List().ToList().Where(m => m.Customer_Id == _customer.Customer_Id && m.Product_Id == prdId && m.Cart_Status == eCartStatus.Open.ToString()).FirstOrDefault();
                 _cart.Cart_Qty = qty!="0"?Convert.ToInt32(qty):_cart.Cart_Qty;
                 _cart.Cart_Size = size != "0" ? size : _cart.Cart_Size;
                 _cart.Cart_Price = (Convert.ToInt32(qty) * _product.Product_Our_Price);
@@ -134,7 +143,7 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
             }
             else
             {
-                Carts _cart = context.Cart.Include("Customer").ToList().Where(m => m.Ip_Address == IpAddress.GetLocalIPAddress() && m.Product_Id == prdId && m.Cart_Status == eCartStatus.Temp.ToString()).FirstOrDefault();
+                Carts _cart = bCarts.List().ToList().Where(m => m.Ip_Address == IpAddress.GetLocalIPAddress() && m.Product_Id == prdId && m.Cart_Status == eCartStatus.Temp.ToString()).FirstOrDefault();
                 _cart.Cart_Qty = qty != "0" ? Convert.ToInt32(qty) : _cart.Cart_Qty;
                 _cart.Cart_Size = size != "0" ? size : _cart.Cart_Size;
                 _cart.Cart_Price = (Convert.ToInt32(qty) * _product.Product_Our_Price);
@@ -150,29 +159,38 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
             if (HttpContext.Current.Session["UserKey"] != null)
             {
                 int custId = Convert.ToInt32(HttpContext.Current.Session["UserKey"].ToString());
-                Customers _customer = context.Customer.Where(m => m.Customer_Id == custId).FirstOrDefault();
-                Carts _cart = context.Cart.Include("Customer").ToList().Where(m => m.Product_Id == prdId && (m.Cart_Status == eCartStatus.Open.ToString() || m.Cart_Status == eCartStatus.Temp.ToString())).FirstOrDefault();
+                Customers _customer = bCustomer.List().Where(m => m.Customer_Id == custId).FirstOrDefault();
+                Carts _cart = bCarts.List().ToList().Where(m => m.Product_Id == prdId && (m.Cart_Status == eCartStatus.Open.ToString() || m.Cart_Status == eCartStatus.Temp.ToString())).FirstOrDefault();
                 if (_cart != null)
                 {
-                    context.Entry(_cart).State = EntityState.Deleted;
-                    context.SaveChanges();
+                    using (var context = new RachnaDBContext())
+                    {
+                        context.Entry(_cart).State = EntityState.Deleted;
+                        context.SaveChanges();
+                    }
                 }
             }
             else
             {
-                Carts _cart = context.Cart.ToList().Where(m => m.Product_Id == prdId && (m.Cart_Status == eCartStatus.Open.ToString() || m.Cart_Status == eCartStatus.Temp.ToString()) && m.Ip_Address == IpAddress.GetLocalIPAddress()).FirstOrDefault();
+                Carts _cart = bCarts.List().ToList().Where(m => m.Product_Id == prdId && (m.Cart_Status == eCartStatus.Open.ToString() || m.Cart_Status == eCartStatus.Temp.ToString()) && m.Ip_Address == IpAddress.GetLocalIPAddress()).FirstOrDefault();
                 if (_cart != null)
                 {
-                    context.Entry(_cart).State = EntityState.Deleted;
-                    context.SaveChanges();
+                    using (var context = new RachnaDBContext())
+                    {
+                        context.Entry(_cart).State = EntityState.Deleted;
+                        context.SaveChanges();
+                    }
                 }
             }
         }
 
         public void DeleteCartByCartId(Carts _cart)
         {
-            context.Entry(_cart).State = EntityState.Deleted;
-            context.SaveChanges();
+            using (var context = new RachnaDBContext())
+            {
+                context.Entry(_cart).State = EntityState.Deleted;
+                context.SaveChanges();
+            }
         }
 
         public List<Carts> GetCarts()
@@ -181,17 +199,17 @@ namespace Rachna.Teracotta.Project.Source.ViewModel
             if (HttpContext.Current.Session["UserKey"] != null)
             {
                 int cusId = Convert.ToInt32(HttpContext.Current.Session["UserKey"]);
-                _carts = context.Cart.Include("Customer").ToList().Where(m => m.Customer_Id == cusId && m.Cart_Status == eCartStatus.Open.ToString()).ToList();
+                _carts = bCarts.List().ToList().Where(m => m.Customer_Id == cusId && m.Cart_Status == eCartStatus.Open.ToString()).ToList();
             }
             else
             {
-                _carts = context.Cart.ToList().ToList().Where(x => x.Cart_Status == eCartStatus.Temp.ToString() && x.Ip_Address == IpAddress.GetLocalIPAddress()).ToList();
+                _carts = bCarts.List().ToList().ToList().Where(x => x.Cart_Status == eCartStatus.Temp.ToString() && x.Ip_Address == IpAddress.GetLocalIPAddress()).ToList();
             }
             if (_carts != null)
             {
                 foreach (var item in _carts)
                 {
-                    item.Products = context.Product.ToList().Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
+                    item.Products = bProduct.List().Where(m => m.Product_Id == item.Product_Id).FirstOrDefault();
                 }
             }
             return _carts;

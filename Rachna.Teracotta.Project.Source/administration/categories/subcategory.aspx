@@ -79,7 +79,7 @@
                         </h3>
                     </div>
                     <div class="box-content nopadding">
-                        <table class="table table-hover table-nomargin table-bordered dataTable">
+                        <table class="table table-hover table-nomargin table-bordered dataTable dataTable-tools">
                             <thead>
                                 <tr>
                                     <th>SubCategoryCode</th>
@@ -89,7 +89,7 @@
                                     <th>CreatedBy</th>
                                     <th>CreatedDate</th>
                                     <th>UpdatedDate</th>
-                                    <th>Edit</th>
+                                    <th><i class="fa fa-edit fa-lg"></i></th>
                                 </tr>
                             </thead>
                             <tbody>

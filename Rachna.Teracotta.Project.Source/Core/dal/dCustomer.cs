@@ -1,5 +1,6 @@
 ﻿using Rachna.Teracotta.Project.Source.App_Data;
 using Rachna.Teracotta.Project.Source.Entity;
+using Rachna.Teracotta.Project.Source.Helper;
 using Rachna.Teracotta.Project.Source.Models;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,9 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
                 if (context.Customer.ToList().Count > 0)
                     maxCustomersId = context.Customer.Max(m => m.Customer_Id);
                 maxCustomersId = (context.Customer.ToList().Count > 0) ? (maxCustomersId + 1) : maxCustomersId;
-                Customers.CustomerCode = "RT" + maxCustomersId + "CUSTCODE" + (maxCustomersId + 1);                
+                Customers.CustomerCode = "RT" + maxCustomersId + "CUSTCODE" + (maxCustomersId + 1);
+
+                Customers.Customers_Password = PasswordProtect.Encrypt(Customers.Customers_Password);
                 context.Customer.Add(Customers);
                 context.SaveChanges();
                 return Customers;
@@ -90,6 +93,7 @@ namespace Rachna.Teracotta.Project.Source.Core.dal
         {
             try
             {
+                Customers.Customers_Password = PasswordProtect.Encrypt(Customers.Customers_Password);
                 var entity = context.Customer.Where(c => c.Customer_Id == Customers.Customer_Id).AsQueryable().FirstOrDefault();
                 if (entity == null)
                 {
